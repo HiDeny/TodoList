@@ -1,0 +1,19 @@
+html {
+    font-family: Helvetica;
+    font-size: 16px;
+}
+
+.todoCard {
+    display: flex;
+    background-color: bisque;
+    width: 20rem;
+}
+
+.list > ul {
+    list-style: none;
+}
+
+.done {
+    text-decoration: line-through;
+    color: gray;
+}
