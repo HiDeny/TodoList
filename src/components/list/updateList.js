@@ -1,16 +1,14 @@
-function addTodoToList(todo, list) {
-	list.todos.push(todo);
+function addTodoList(todo, list) {
+	list.todosArr.unshift(todo);
 
 	return list;
 }
 
-function markedDoneTodo(list) {
-    const activeList = list.listUl;
-    const finishedTodo = activeList.map(todo => {
-        todo.classList;
-    });
+function removeTodoList(todo, list) {
 
-    return finishedTodo;
+    list.todosArr.splice(todo, 1);
+   
+    return todo;
 }
 
-export { addTodoToList, markedDoneTodo };
+export { addTodoList, removeTodoList };

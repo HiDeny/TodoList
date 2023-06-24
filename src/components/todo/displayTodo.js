@@ -1,7 +1,8 @@
 import { updateDone } from './updateTodo';
 
-export default function displayTodo(todo) {
+function displayTodo(todo) {
 	const todoLi = document.createElement('li');
+	todoLi.setAttribute('id', todo.title);
 
 	const todoCard = document.createElement('div');
 	todoCard.className = 'todoCard';
@@ -9,7 +10,8 @@ export default function displayTodo(todo) {
 	// Done
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
-	checkBox.onclick = (e) => {
+	checkBox.className = 'todoCheck';
+	checkBox.onclick = () => {
 		updateDone(todo);
 		todoLi.classList.toggle('done');
 		title.classList.toggle('done');
@@ -18,35 +20,42 @@ export default function displayTodo(todo) {
 	todoCard.append(checkBox);
 
 	// Title
-	const title = document.createElement('h3');
+	const title = document.createElement('p');
 	title.className = 'todoTitle';
 	title.textContent = todo.title;
 	todoCard.append(title);
 
 	// Description
-    if (todo.desc) {
-        const desc = document.createElement('p');
-        desc.className = 'todoDescription';
-        desc.textContent = todo.desc;
-        todoCard.append(desc);
-    }
+	if (todo.desc) {
+		const desc = document.createElement('p');
+		desc.className = 'todoDescription';
+		desc.textContent = todo.desc;
+		todoCard.append(desc);
+	}
 
 	// Due Date
-    if (todo.dueDate) {
-        const dueDate = document.createElement('p');
-        dueDate.className = 'todoDueDate';
-        dueDate.textContent = todo.dueDate;
-        todoCard.append(dueDate);
-    }
+	if (todo.dueDate) {
+		const dueDate = document.createElement('p');
+		dueDate.className = 'todoDueDate';
+		dueDate.textContent = todo.dueDate;
+		todoCard.append(dueDate);
+	}
 
 	// Priority
-    if (todo.priority) {
-        const priority = document.createElement('p');
-        priority.className = 'todoPriority';
-        priority.textContent = todo.priority;
-        todoCard.append(priority);
-    }
+	if (todo.priority) {
+		const priority = document.createElement('p');
+		priority.className = 'todoPriority';
+		priority.textContent = todo.priority;
+		todoCard.append(priority);
+	}
 
 	todoLi.append(todoCard);
 	return todoLi;
 }
+
+function removeDisplayTodo(todo) {
+	const todoToRemove = document.querySelector(`#${todo.title}`);
+	todoToRemove.remove();
+}
+
+export { displayTodo, removeDisplayTodo };

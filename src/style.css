@@ -1,19 +1,94 @@
+* {
+    border: 1px solid grey;
+}
+
 html {
     font-family: Helvetica;
     font-size: 16px;
 }
 
+p {
+    margin: 0;
+}
+
+.mainTitle {
+    text-align: center;
+}
+
+.container {
+    /* text-align: center; */
+}
+
+/* INPUT */
+
+.inputTask {
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+/* TODO */
+
 .todoCard {
     display: flex;
     background-color: bisque;
-    width: 20rem;
-}
-
-.list > ul {
-    list-style: none;
+    justify-content: space-evenly;
+    padding: 5px 5px;
+    border-radius: 20px;
 }
 
 .done {
     text-decoration: line-through;
     color: gray;
 }
+
+/* LIST */
+
+.list > ul {
+    list-style: none;
+}
+
+.titleList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: 25%;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+  
+
+#Inbox {
+    height: 15rem;
+}
+
+.InboxUl {
+    height: 75%;
+    margin: auto;
+    padding: 0;
+    display: grid;
+    width: 200px;
+    grid-auto-rows: 40px;
+    overflow: scroll;
+}
+
+#Completed {
+    height: 15rem;
+    overflow: scroll;
+}
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+  
+    

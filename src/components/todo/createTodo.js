@@ -1,6 +1,5 @@
+export default function createTodo(title, dueDate, priority, desc) {
+	const done = false;
 
-export default function createTodo(title, desc, dueDate, priority) {
-    const done = false;
-
-    return {title, desc, dueDate, priority, done}
+	return { title, dueDate, priority, desc, done };
 }
