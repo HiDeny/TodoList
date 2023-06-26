@@ -5,7 +5,7 @@ function addTodoList(todo, list) {
 }
 
 function removeTodoList(todo, list) {
-    list.todosArr.splice(todo, 1);
+    list.todosArr.splice(list.todosArr.indexOf(todo), 1);
 }
 
 function moveTodoToDiffList(todo, orgList, newList) {

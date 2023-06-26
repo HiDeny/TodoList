@@ -46,12 +46,11 @@ export default function generalController() {
 		const oldList = document.querySelector('.InboxUl');
 
 		const newTodo = createTodo(taskTitleInput.value);
-	
+
 		addTodoList(newTodo, inbox);
 
 		oldList.replaceWith(createListUl(inbox));
 
-		
 		taskTitleInput.value = '';
 	});
 
@@ -60,15 +59,16 @@ export default function generalController() {
 		list.todosArr.forEach((todo) => {
 			const currentTodo = displayTodo(todo);
 			currentTodo.checkBox.addEventListener('click', () => {
+
 				updateDone(todo);
-				console.log(todo);
 				moveTodoToDiffList(todo, inbox, completedTodos);
-				const oldListOrg = document.querySelector('.InboxUl');
-				oldListOrg.replaceWith(createListUl(inbox));
+				currentTodo.todoLi.style.display = 'none';
+				console.log(currentTodo.todoLi);
+				console.log(inbox.todosArr);
 
 				const oldList = document.querySelector('.CompletedUl');
 				oldList.replaceWith(createCompletedUl());
-			})
+			});
 			display.listUl.appendChild(currentTodo.todoLi);
 		});
 
@@ -79,7 +79,7 @@ export default function generalController() {
 		const display = displayList(completedTodos);
 		completedTodos.todosArr.forEach((todo) => {
 			const currentTodo = displayTodo(todo);
-			if ( todo.done === true ) {
+			if (todo.done === true) {
 				currentTodo.title.classList.add('done');
 				currentTodo.checkBox.toggleAttribute('checked');
 			}
@@ -98,16 +98,6 @@ export default function generalController() {
 	container.appendChild(displayInbox.listDiv);
 
 	createListUl(inbox, displayInbox);
-
-	
-
-	const checkBtn = document.createElement('button');
-	checkBtn.textContent = 'Check!';
-	checkBtn.addEventListener('click', () => {
-		checkDoneTodos(inbox, completedTodos);
-	});
-
-	container.appendChild(checkBtn);
 
 	// Completed - list
 	const completedTodos = createList('Completed', 'completed todos');
