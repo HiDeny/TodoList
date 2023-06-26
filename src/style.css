@@ -1,5 +1,5 @@
 * {
-    border: 1px solid grey;
+    /* border: 1px solid grey; */
 }
 
 html {
@@ -63,7 +63,8 @@ p {
     height: 15rem;
 }
 
-.InboxUl {
+.InboxUl, 
+.CompletedUl {
     height: 75%;
     margin: auto;
     padding: 0;

@@ -2,16 +2,16 @@ export default function displayList(list) {
 	const listDiv = document.createElement('div');
 
 	listDiv.className = 'list';
-	listDiv.setAttribute('id', list.name);
+	listDiv.setAttribute('id', list.title);
 
-	const listName = document.createElement('p');
-	listName.className = 'titleList';
-	listName.textContent = list.name;
+	const listTitle = document.createElement('p');
+	listTitle.className = 'titleList';
+	listTitle.textContent = list.title;
 
-	listDiv.append(listName);
+	listDiv.append(listTitle);
 
 	const listUl = document.createElement('ul');
-	listUl.className = `${list.name}Ul`;
+	listUl.className = `${list.title}Ul`;
 
 	listDiv.append(listUl);
 

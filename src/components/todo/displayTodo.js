@@ -12,9 +12,7 @@ function displayTodo(todo) {
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheck';
 	checkBox.onclick = () => {
-		updateDone(todo);
-		todoLi.classList.toggle('done');
-		title.classList.toggle('done');
+
 	};
 
 	todoCard.append(checkBox);
@@ -50,7 +48,7 @@ function displayTodo(todo) {
 	}
 
 	todoLi.append(todoCard);
-	return todoLi;
+	return { todoLi, checkBox, title };
 }
 
 function removeDisplayTodo(todo) {
