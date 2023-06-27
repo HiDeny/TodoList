@@ -11,7 +11,7 @@ import {
 
 import createTodo from '../components/todo/createTodo';
 import { updateDone } from '../components/todo/updateTodo';
-import { displayTodo, removeDisplayTodo } from '../components/todo/displayTodo';
+import { displayTodo, todoForm } from '../components/todo/displayTodo';
 
 export default function generalController() {
 	// Title
@@ -31,27 +31,29 @@ export default function generalController() {
 	const inputTask = document.createElement('div');
 	inputTask.className = 'inputTask';
 
-	const taskTitleInput = document.createElement('input');
-	taskTitleInput.setAttribute('id', 'taskTitleInputInput');
-	taskTitleInput.setAttribute('type', 'text');
-	taskTitleInput.setAttribute('placeholder', 'Title....');
+	// const taskTitleInput = document.createElement('input');
+	// taskTitleInput.setAttribute('id', 'taskTitleInputInput');
+	// taskTitleInput.setAttribute('type', 'text');
+	// taskTitleInput.setAttribute('placeholder', 'Title....');
 
-	inputTask.appendChild(taskTitleInput);
+	// inputTask.appendChild(taskTitleInput);
 
 	// Add button - Task
 	const addButton = document.createElement('button');
 	addButton.classList.add('addBtn');
 	addButton.textContent = 'Add';
 	addButton.addEventListener('click', () => {
+		const newTask = todoForm().newTodoForm;
+		inputTask.appendChild(newTask);
+
+		console.log(newTask);
+
 		const oldList = document.querySelector('.InboxUl');
 
-		const newTodo = createTodo(taskTitleInput.value);
-
-		addTodoList(newTodo, inbox);
+		addTodoList(newTask, inbox);
 
 		oldList.replaceWith(createListUl(inbox));
 
-		taskTitleInput.value = '';
 	});
 
 	const createListUl = (list) => {
@@ -63,8 +65,6 @@ export default function generalController() {
 				updateDone(todo);
 				moveTodoToDiffList(todo, inbox, completedTodos);
 				currentTodo.todoLi.style.display = 'none';
-				console.log(currentTodo.todoLi);
-				console.log(inbox.todosArr);
 
 				const oldList = document.querySelector('.CompletedUl');
 				oldList.replaceWith(createCompletedUl());
@@ -106,4 +106,5 @@ export default function generalController() {
 	createListUl(completedTodos, displayCompletedTodos);
 
 	container.appendChild(displayCompletedTodos.listDiv);
+
 }

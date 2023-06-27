@@ -22,12 +22,61 @@ p {
 /* INPUT */
 
 .inputTask {
-    height: 2rem;
-    display: flex;
-    justify-content: center;
+    /* display: flex; */
+    /* justify-content: center; */
+    margin: auto;
 }
 
 /* TODO */
+
+#todoForm {
+    display: grid;
+    grid-auto-rows: 70px;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 400px;
+    margin: auto;
+    padding: 10px;
+    background-color: gray;
+}
+
+.fromTitle {
+    grid-column: 1 / span 3;
+}
+
+  
+#formDesc {
+  grid-column: 1 / spend 2;
+}
+
+#formTitle {
+    width: 100%;
+  }
+  
+.fromDesc {
+  grid-column: 1 / span 3;
+}
+  
+.fromPriority {
+  grid-column: 3;
+}
+  
+.confirmBtn {
+    grid-column: 2;
+    height: 50%;
+}
+  
+#priority {
+    width: 100%;
+}
+ 
+  
+#formDesc {
+    width: 100%;
+    padding: 0;
+}
+  
+
+
 
 .todoCard {
     display: flex;
@@ -93,3 +142,14 @@ p {
 
   
     
+
+
+
+  
+ 
+  
+  
+  
+
+
+
