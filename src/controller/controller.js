@@ -31,30 +31,26 @@ export default function generalController() {
 	const inputTask = document.createElement('div');
 	inputTask.className = 'inputTask';
 
-	// const taskTitleInput = document.createElement('input');
-	// taskTitleInput.setAttribute('id', 'taskTitleInputInput');
-	// taskTitleInput.setAttribute('type', 'text');
-	// taskTitleInput.setAttribute('placeholder', 'Title....');
-
-	// inputTask.appendChild(taskTitleInput);
-
 	// Add button - Task
 	const addButton = document.createElement('button');
 	addButton.classList.add('addBtn');
 	addButton.textContent = 'Add';
 	addButton.addEventListener('click', () => {
-		const newTask = todoForm().newTodoForm;
+		const newTask = todoForm(updateList);
 		inputTask.appendChild(newTask);
 
 		console.log(newTask);
+	});
 
+	function updateList (newTodo) {
 		const oldList = document.querySelector('.InboxUl');
 
-		addTodoList(newTask, inbox);
+		addTodoList(newTodo, inbox);
 
 		oldList.replaceWith(createListUl(inbox));
+	}
 
-	});
+	
 
 	const createListUl = (list) => {
 		const display = displayList(list);
@@ -63,7 +59,7 @@ export default function generalController() {
 			currentTodo.checkBox.addEventListener('click', () => {
 
 				updateDone(todo);
-				moveTodoToDiffList(todo, inbox, completedTodos);
+				moveTodoToDiffList(todo, list, completedTodos);
 				currentTodo.todoLi.style.display = 'none';
 
 				const oldList = document.querySelector('.CompletedUl');
@@ -80,7 +76,7 @@ export default function generalController() {
 		completedTodos.todosArr.forEach((todo) => {
 			const currentTodo = displayTodo(todo);
 			if (todo.done === true) {
-				currentTodo.title.classList.add('done');
+				currentTodo.todoLi.classList.add('done');
 				currentTodo.checkBox.toggleAttribute('checked');
 			}
 			display.listUl.appendChild(currentTodo.todoLi);

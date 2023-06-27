@@ -12,7 +12,6 @@ function displayTodo(todo) {
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheck';
-	checkBox.onclick = () => {};
 
 	todoCard.append(checkBox);
 
@@ -50,8 +49,7 @@ function displayTodo(todo) {
 	return { todoLi, checkBox, title };
 }
 
-function todoForm() {
-	let newTodo;
+function todoForm(callback) {
 
 	const newTodoForm = document.createElement('form');
 	newTodoForm.setAttribute('id', 'todoForm');
@@ -64,9 +62,10 @@ function todoForm() {
 		const dueDate = newTodoForm.elements['formDate'].value;
 		const priority = newTodoForm.elements['formPriority'].value;
 
-		newTodo = createTodo(title, description, dueDate, priority);
+		const newTodo = createTodo(title, description, dueDate, priority);
 		
-		console.log(newTodo);
+		callback(newTodo);
+		newTodoForm.style.display = 'none';
 	});
 
 	// Id
@@ -76,7 +75,6 @@ function todoForm() {
 	const formTitleLabel = document.createElement('label');
 	formTitleLabel.className = 'fromTitle';
 	formTitleLabel.setAttribute('for', 'fromTitle');
-	formTitleLabel.textContent = 'Title:';
 
 	const formTitle = document.createElement('input');
 	formTitle.setAttribute('required', true);
@@ -93,7 +91,6 @@ function todoForm() {
 	const formDescLabel = document.createElement('label');
 	formDescLabel.className = 'fromDesc';
 	formDescLabel.setAttribute('for', 'formDesc');
-	formDescLabel.textContent = 'Description...';
 
 	const formDesc = document.createElement('textarea');
 	formDesc.setAttribute('id', 'formDesc');
@@ -156,7 +153,7 @@ function todoForm() {
 
 	newTodoForm.append(confirmBtn);
 
-	return { newTodoForm, newTodo };
+	return newTodoForm;
 }
 
 export { displayTodo, todoForm };

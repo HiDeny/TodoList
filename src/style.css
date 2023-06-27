@@ -22,38 +22,45 @@ p {
 /* INPUT */
 
 .inputTask {
-    /* display: flex; */
-    /* justify-content: center; */
-    margin: auto;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 /* TODO */
 
 #todoForm {
+    position: absolute;
+    top: 40px;
     display: grid;
-    grid-auto-rows: 70px;
+    grid-template-rows: 1fr 1fr 1fr 1fr 50px;
     grid-template-columns: 1fr 1fr 1fr;
     width: 400px;
     margin: auto;
     padding: 10px;
     background-color: gray;
+    border-radius: 20px;
 }
 
 .fromTitle {
     grid-column: 1 / span 3;
+    grid-row: 1
 }
 
-  
-#formDesc {
-  grid-column: 1 / spend 2;
-}
 
 #formTitle {
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    height: 60%;
+    border-radius: 20px;
+    padding: 0px 10px;
   }
   
 .fromDesc {
   grid-column: 1 / span 3;
+  grid-row: 2 / span 2;
 }
   
 .fromPriority {
@@ -71,22 +78,59 @@ p {
  
   
 #formDesc {
-    width: 100%;
-    padding: 0;
+    grid-column: 1 / spend 2;
+    width: 90%;
+    margin: auto;
+    height: 60%;
+    border-radius: 20px;
+    padding: 5px 10px;
 }
   
+.confirmBtn {
+    grid-column: 3;
+    grid-row: 5;
+    align-self: end;
+}
 
 
 
 .todoCard {
-    display: flex;
+    display: grid;
+    width: 300px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    margin: auto;
     background-color: bisque;
-    justify-content: space-evenly;
     padding: 5px 5px;
     border-radius: 20px;
 }
 
-.done {
+.todoCheck {
+    grid-row: 1 / span 4;
+    align-self: center;
+}
+  
+.todoTitle {
+  grid-column: 2 / span 4;
+
+}
+  
+.todoDescription {
+  grid-column: 2 / span 4;
+  grid-row: 2 / span 2;
+}
+  
+.todoDueDate {
+  grid-column: 2;
+  grid-row: 4;
+}
+
+.todoPriority {
+  grid-column: 5;
+  grid-row: 4;
+}
+
+.done > * {
     text-decoration: line-through;
     color: gray;
 }
@@ -118,7 +162,7 @@ p {
     margin: auto;
     padding: 0;
     display: grid;
-    width: 200px;
+    width: 70%;
     grid-auto-rows: 40px;
     overflow: scroll;
 }
@@ -140,16 +184,16 @@ p {
   
 
 
-  
-    
 
 
 
   
- 
   
   
   
 
-
-
+  
+  /* Inline #3 | file:///Users/hidenny/CODE/TheOdinProject/repos/TodoList/dist/index.html */
+  
+  
+  
