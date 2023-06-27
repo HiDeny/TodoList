@@ -7,11 +7,13 @@ import {
 	addTodoList,
 	removeTodoList,
 	moveTodoToDiffList,
+	moveFinishedTodo,
 } from '../components/list/updateList';
 
 import createTodo from '../components/todo/createTodo';
 import { updateDone } from '../components/todo/updateTodo';
 import { displayTodo, todoForm } from '../components/todo/displayTodo';
+import { check } from 'prettier';
 
 export default function generalController() {
 	// Title
@@ -36,40 +38,84 @@ export default function generalController() {
 	addButton.classList.add('addBtn');
 	addButton.textContent = 'Add';
 	addButton.addEventListener('click', () => {
-		const newTask = todoForm(updateList);
-		inputTask.appendChild(newTask);
+		const activeForm = document.querySelector('#todoForm');
 
-		console.log(newTask);
+		if (!activeForm) {
+			const newTaskForm = todoForm(updateList);
+			inputTask.appendChild(newTaskForm);
+		}
 	});
 
-	function updateList (newTodo) {
-		const oldList = document.querySelector('.InboxUl');
+	function updateList(newTodo) {
+		const oldList = document.querySelector('.inboxUl');
+		console.log(oldList);
 
 		addTodoList(newTodo, inbox);
 
-		oldList.replaceWith(createListUl(inbox));
+		const newList = createListComponent(inbox);
+		console.log(newList);
+		const test = document.createElement('p');
+		test.textContent = 'Shit';
+		oldList.replaceWith(newList.listUl);
 	}
 
-	
-
-	const createListUl = (list) => {
+	const createListComponent = (list) => {
 		const display = displayList(list);
+
+		display.listUl = CheckArr(list);
+		console.log(display.listUl);
+
+		display.listDivCompleted = CheckCompleted(list);
+		// console.log(CheckCompleted(list));
+
+		// console.log(display);
+		return display;
+	};
+
+	function CheckArr(list) {
+		const display = displayList(list);
+
 		list.todosArr.forEach((todo) => {
 			const currentTodo = displayTodo(todo);
 			currentTodo.checkBox.addEventListener('click', () => {
-
 				updateDone(todo);
-				moveTodoToDiffList(todo, list, completedTodos);
+				moveFinishedTodo(list);
 				currentTodo.todoLi.style.display = 'none';
 
-				const oldList = document.querySelector('.CompletedUl');
-				oldList.replaceWith(createCompletedUl());
+				// const oldList = document.querySelector(`#${list.title}`);
+				// oldList.replaceWith(createListComponent(list));
 			});
+			// console.log(currentTodo);
+			// console.log(currentTodo.todoLi);
+			// console.log(display.listUl);
+
 			display.listUl.appendChild(currentTodo.todoLi);
 		});
 
+
+		// console.log(display.listUl);
 		return display.listUl;
-	};
+	}
+
+	function CheckCompleted(list) {
+		const display = displayList(list);
+
+		list.completedTodos.forEach((todo) => {
+			// console.log('2');
+			const currentTodo = displayTodo(todo);
+			currentTodo.classList.add('done');
+			currentTodo.checkBox.addEventListener('click', () => {
+				updateDone(todo);
+				moveFinishedTodo(list);
+				currentTodo.todoLi.style.display = 'none';
+
+			});
+
+			display.listUlCompleted.appendChild(currentTodo.todoLi);
+		});
+
+		return display.listUlCompleted;
+	}
 
 	const createCompletedUl = () => {
 		const display = displayList(completedTodos);
@@ -89,18 +135,17 @@ export default function generalController() {
 	container.appendChild(inputTask);
 
 	// Inbox - list
-	const inbox = createList('Inbox', 'default list');
+	const inbox = createList('inbox', 'default list');
 	const displayInbox = displayList(inbox);
 	container.appendChild(displayInbox.listDiv);
 
-	createListUl(inbox, displayInbox);
+	// createListComponent(inbox, displayInbox);
 
 	// Completed - list
-	const completedTodos = createList('Completed', 'completed todos');
-	const displayCompletedTodos = displayList(completedTodos);
+	// const completedTodos = createList('Completed', 'completed todos');
+	// const displayCompletedTodos = displayList(completedTodos);
 
-	createListUl(completedTodos, displayCompletedTodos);
+	// createListComponent(completedTodos, displayCompletedTodos);
 
-	container.appendChild(displayCompletedTodos.listDiv);
-
+	// container.appendChild(displayCompletedTodos.listDiv);
 }

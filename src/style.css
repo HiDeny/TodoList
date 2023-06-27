@@ -163,8 +163,8 @@ p {
     padding: 0;
     display: grid;
     width: 70%;
-    grid-auto-rows: 40px;
     overflow: scroll;
+    gap: 5px;
 }
 
 #Completed {
@@ -178,7 +178,25 @@ p {
 
 
 
-
+.inboxUl {
+    background: pink;
+  }
+  
+  #inboxCompleted {
+    background: lightblue;
+  }
+  
+  #inbox {
+    height: 80vh;
+    background: aquamarine;
+    display: grid;
+    grid-template-rows: 50px 1fr 1fr;
+  }
+  
+  .list > ul {
+    margin: 0;
+  }
+  
   
 
   

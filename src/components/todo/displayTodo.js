@@ -65,7 +65,7 @@ function todoForm(callback) {
 		const newTodo = createTodo(title, description, dueDate, priority);
 		
 		callback(newTodo);
-		newTodoForm.style.display = 'none';
+		newTodoForm.remove();
 	});
 
 	// Id
