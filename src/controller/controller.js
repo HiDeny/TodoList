@@ -52,19 +52,17 @@ export default function generalController() {
 	}
 
 	function CheckArr(list) {
+		// console.log(list);
+		// console.log(list.completedTodos);
 		const display = displayList(list);
-		// console.log(display);
 		list.todosArr.forEach((todo) => {
+			// console.log(todo);
 			const currentTodo = displayTodo(todo);
-			// console.log(currentTodo.checkBox);
 			currentTodo.checkBox.addEventListener('click', () => {
-				updateDone(todo);
+				todo.done = true;
 				moveFinishedTodo(list);
 				CheckCompleted(list);
 				currentTodo.todoLi.remove();
-
-				console.log(list.todosArr);
-				console.log(list.completedTodos);
 			});
 
 			display.listUl.appendChild(currentTodo.todoLi);
@@ -75,15 +73,16 @@ export default function generalController() {
 	}
 
 	function CheckCompleted(list) {
+		// console.log(list);
+		// console.log(list.completedTodos);
 		const display = displayList(list);
-		console.log(list.completedTodos);
 		list.completedTodos.forEach((todo) => {
+			// console.log(todo);
 			const currentTodo = displayTodo(todo);
-			console.log(currentTodo);
 			currentTodo.todoLi.classList.add('done');
 			currentTodo.checkBox.setAttribute('checked', true);
 			currentTodo.checkBox.addEventListener('click', () => {
-				updateDone(todo);
+				todo.done = false;
 				undoFinishedTodo(list);
 				CheckArr(list);
 				currentTodo.todoLi.remove();
