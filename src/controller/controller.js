@@ -52,14 +52,11 @@ export default function generalController() {
 	}
 
 	function CheckArr(list) {
-		// console.log(list);
-		// console.log(list.completedTodos);
 		const display = displayList(list);
 		list.todosArr.forEach((todo) => {
-			// console.log(todo);
 			const currentTodo = displayTodo(todo);
 			currentTodo.checkBox.addEventListener('click', () => {
-				todo.done = true;
+				updateDone(todo);
 				moveFinishedTodo(list);
 				CheckCompleted(list);
 				currentTodo.todoLi.remove();
@@ -73,16 +70,13 @@ export default function generalController() {
 	}
 
 	function CheckCompleted(list) {
-		// console.log(list);
-		// console.log(list.completedTodos);
 		const display = displayList(list);
 		list.completedTodos.forEach((todo) => {
-			// console.log(todo);
 			const currentTodo = displayTodo(todo);
 			currentTodo.todoLi.classList.add('done');
 			currentTodo.checkBox.setAttribute('checked', true);
 			currentTodo.checkBox.addEventListener('click', () => {
-				todo.done = false;
+				updateDone(todo);
 				undoFinishedTodo(list);
 				CheckArr(list);
 				currentTodo.todoLi.remove();

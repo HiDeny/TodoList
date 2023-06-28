@@ -1,6 +1,8 @@
 import createTodo from './createTodo';
 import { updateDone } from './updateTodo';
 
+import format from 'date-fns/format';
+
 function displayTodo(todo) {
 	const todoLi = document.createElement('li');
 	todoLi.setAttribute('id', todo.title);
@@ -16,27 +18,56 @@ function displayTodo(todo) {
 	todoCard.append(checkBox);
 
 	// Title
-	const title = document.createElement('p');
+	const title = document.createElement('input');
+	title.setAttribute('type', 'text');
+	title.setAttribute('value', todo.title);
 	title.className = 'todoTitle';
-	title.textContent = todo.title;
+	title.addEventListener('input', (event) => {
+		const newTitle = event.target.value;
+		todo.title = newTitle;
+	})
+
 	todoCard.append(title);
+	
 
 	// Description
-	if (todo.desc) {
-		const desc = document.createElement('p');
-		desc.className = 'todoDescription';
-		desc.textContent = todo.desc;
-		todoCard.append(desc);
-	}
+	const desc = document.createElement('textarea');
+	desc.className = 'todoDescription';
+	desc.textContent = todo.desc;
+	desc.addEventListener('input', (event) => {
+		const newDesc = event.target.value;
+		todo.desc = newDesc;
+	})
+	
+	todoCard.append(desc);
 
 	// Due Date
-	if (todo.dueDate) {
-		const dueDate = document.createElement('p');
-		dueDate.className = 'todoDueDate';
-		dueDate.textContent = todo.dueDate;
-		todoCard.append(dueDate);
-	}
+	const dueDate = document.createElement('p');
+	dueDate.className = 'todoDueDate';
+	dueDate.textContent = todo.dueDate;
+	dueDate.addEventListener('click', () => {
+		const calendar = document.createElement('input');
+		calendar.className = 'todoCalendar';
+		calendar.setAttribute('type', 'date');
+		calendar.setAttribute('value', todo.dueDate);
+		
+		dueDate.append(calendar);
+		// const newDate = event.target.value;
+		// console.log(new Date(newDate));
+		// console.log(format(new Date(event.target.value), 'dd/MMM'));
+		// todo.dueDate = newDate; 
+	})
 
+
+	// dueDate.addEventListener('input', (event) => {
+	// 	const newDate = event.target.value;
+	// 	console.log(new Date(newDate));
+	// 	console.log(format(new Date(event.target.value), 'dd/MMM'));
+	// 	todo.dueDate = newDate; 
+	// })
+	
+	todoCard.append(dueDate);
+	
 	// Priority
 	if (todo.priority) {
 		const priority = document.createElement('p');

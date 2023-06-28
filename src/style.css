@@ -105,6 +105,13 @@ p {
     border-radius: 20px;
 }
 
+.todoTitle,
+.todoDueDate,
+.todoDescription {
+  background: transparent;
+  border: 0;
+}
+
 .todoCheck {
     grid-row: 1 / span 4;
     align-self: center;
@@ -130,9 +137,10 @@ p {
   grid-row: 4;
 }
 
-.done > * {
-    text-decoration: line-through;
-    color: gray;
+.done > .todoCard > * {
+  color: #8080807d;
+  text-decoration: line-through;
+  color: gray;
 }
 
 /* LIST */
@@ -180,18 +188,5 @@ p {
   display: grid;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-  
   
   
