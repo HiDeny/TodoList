@@ -8,12 +8,11 @@ import {
 	removeTodoList,
 	moveTodoToDiffList,
 	moveFinishedTodo,
+	undoFinishedTodo,
 } from '../components/list/updateList';
 
-import createTodo from '../components/todo/createTodo';
 import { updateDone } from '../components/todo/updateTodo';
 import { displayTodo, todoForm } from '../components/todo/displayTodo';
-import { check } from 'prettier';
 
 export default function generalController() {
 	// Title
@@ -41,95 +40,61 @@ export default function generalController() {
 		const activeForm = document.querySelector('#todoForm');
 
 		if (!activeForm) {
-			const newTaskForm = todoForm(updateList);
+			const newTaskForm = todoForm(formReturn);
 			inputTask.appendChild(newTaskForm);
 		}
 	});
 
-	function updateList(newTodo) {
-		const oldList = document.querySelector('.inboxUl');
-		console.log(oldList);
-
+	function formReturn(newTodo) {
 		addTodoList(newTodo, inbox);
 
-		const newList = createListComponent(inbox);
-		console.log(newList);
-		const test = document.createElement('p');
-		test.textContent = 'Shit';
-		oldList.replaceWith(newList.listUl);
+		CheckArr(inbox);
 	}
-
-	const createListComponent = (list) => {
-		const display = displayList(list);
-
-		display.listUl = CheckArr(list);
-		console.log(display.listUl);
-
-		display.listDivCompleted = CheckCompleted(list);
-		// console.log(CheckCompleted(list));
-
-		// console.log(display);
-		return display;
-	};
 
 	function CheckArr(list) {
 		const display = displayList(list);
-
+		// console.log(display);
 		list.todosArr.forEach((todo) => {
 			const currentTodo = displayTodo(todo);
+			// console.log(currentTodo.checkBox);
 			currentTodo.checkBox.addEventListener('click', () => {
 				updateDone(todo);
 				moveFinishedTodo(list);
-				currentTodo.todoLi.style.display = 'none';
+				CheckCompleted(list);
+				currentTodo.todoLi.remove();
 
-				// const oldList = document.querySelector(`#${list.title}`);
-				// oldList.replaceWith(createListComponent(list));
+				console.log(list.todosArr);
+				console.log(list.completedTodos);
 			});
-			// console.log(currentTodo);
-			// console.log(currentTodo.todoLi);
-			// console.log(display.listUl);
 
 			display.listUl.appendChild(currentTodo.todoLi);
 		});
 
-
-		// console.log(display.listUl);
-		return display.listUl;
+		const oldUl = document.querySelector('.inboxUl');
+		oldUl.replaceWith(display.listUl);
 	}
 
 	function CheckCompleted(list) {
 		const display = displayList(list);
-
+		console.log(list.completedTodos);
 		list.completedTodos.forEach((todo) => {
-			// console.log('2');
 			const currentTodo = displayTodo(todo);
-			currentTodo.classList.add('done');
+			console.log(currentTodo);
+			currentTodo.todoLi.classList.add('done');
+			currentTodo.checkBox.setAttribute('checked', true);
 			currentTodo.checkBox.addEventListener('click', () => {
 				updateDone(todo);
-				moveFinishedTodo(list);
-				currentTodo.todoLi.style.display = 'none';
-
+				undoFinishedTodo(list);
+				CheckArr(list);
+				currentTodo.todoLi.remove();
 			});
 
 			display.listUlCompleted.appendChild(currentTodo.todoLi);
 		});
 
-		return display.listUlCompleted;
+		const oldUlCompleted = document.querySelector('.inboxUlCompleted');
+		oldUlCompleted.replaceWith(display.listUlCompleted);
 	}
-
-	const createCompletedUl = () => {
-		const display = displayList(completedTodos);
-		completedTodos.todosArr.forEach((todo) => {
-			const currentTodo = displayTodo(todo);
-			if (todo.done === true) {
-				currentTodo.todoLi.classList.add('done');
-				currentTodo.checkBox.toggleAttribute('checked');
-			}
-			display.listUl.appendChild(currentTodo.todoLi);
-		});
-
-		return display.listUl;
-	};
 
 	inputTask.append(addButton);
 	container.appendChild(inputTask);
@@ -137,15 +102,5 @@ export default function generalController() {
 	// Inbox - list
 	const inbox = createList('inbox', 'default list');
 	const displayInbox = displayList(inbox);
-	container.appendChild(displayInbox.listDiv);
-
-	// createListComponent(inbox, displayInbox);
-
-	// Completed - list
-	// const completedTodos = createList('Completed', 'completed todos');
-	// const displayCompletedTodos = displayList(completedTodos);
-
-	// createListComponent(completedTodos, displayCompletedTodos);
-
-	// container.appendChild(displayCompletedTodos.listDiv);
+	container.appendChild(displayInbox.completeList);
 }

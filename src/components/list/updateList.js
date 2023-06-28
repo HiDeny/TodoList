@@ -11,17 +11,28 @@ function moveTodoToDiffList(todo, orgList, newList) {
 	removeTodoList(todo, orgList);
 }
 
-function moveFinishedTodo( list ) {
+function moveFinishedTodo(list) {
 	list.todosArr.forEach((todo) => {
 		if (todo.done === true) {
 			list.completedTodos.unshift(todo);
 			list.todosArr.splice(list.todosArr.indexOf(todo), 1);
 		}
-        if (todo.done === false) {
+	});
+}
+
+function undoFinishedTodo(list) {
+	list.completedTodos.forEach((todo) => {
+		if (todo.done === false) {
 			list.todosArr.unshift(todo);
 			list.completedTodos.splice(list.todosArr.indexOf(todo), 1);
 		}
 	});
 }
 
-export { addTodoList, removeTodoList, moveFinishedTodo, moveTodoToDiffList };
+export {
+	addTodoList,
+	removeTodoList,
+	moveFinishedTodo,
+	undoFinishedTodo,
+	moveTodoToDiffList,
+};

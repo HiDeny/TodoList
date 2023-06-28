@@ -1,8 +1,11 @@
 export default function displayList(list) {
-	
+	const completeList = document.createElement('div');
+	completeList.className = 'list';
+	completeList.setAttribute('id', list.title);
+
+	// Tasks
 	const listDiv = document.createElement('div');
-	listDiv.className = 'list';
-	listDiv.setAttribute('id', list.title);
+	listDiv.className = 'listTodos';
 
 	const listTitle = document.createElement('p');
 	listTitle.className = 'titleList';
@@ -13,11 +16,16 @@ export default function displayList(list) {
 	listUl.className = `${list.title}Ul`;
 
 	listDiv.append(listUl);
+	completeList.append(listDiv);
 
 	// Completed
 	const listDivCompleted = document.createElement('div');
 	listDivCompleted.className = 'listCompleted';
-	listDivCompleted.setAttribute('id', `${list.title}Completed`);
+
+	const listTitleCompleted = document.createElement('p');
+	listTitleCompleted.className = 'titleList';
+	listTitleCompleted.textContent = 'Completed';
+	listDivCompleted.append(listTitleCompleted);
 
 	const listUlCompleted = document.createElement('ul');
 	listUlCompleted.className = `${list.title}UlCompleted`;
@@ -25,7 +33,7 @@ export default function displayList(list) {
 	listDivCompleted.append(listUlCompleted)
 
 
-	listDiv.append(listDivCompleted)
+	completeList.append(listDivCompleted)
 
-	return { listDiv, listUl, listDivCompleted, listUlCompleted };
+	return { completeList, listUl, listUlCompleted, list};
 }
