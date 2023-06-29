@@ -2,6 +2,8 @@ import createTodo from './createTodo';
 import { updateDone } from './updateTodo';
 
 import format from 'date-fns/format';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
 function displayTodo(todo) {
 	const todoLi = document.createElement('li');
@@ -25,10 +27,9 @@ function displayTodo(todo) {
 	title.addEventListener('input', (event) => {
 		const newTitle = event.target.value;
 		todo.title = newTitle;
-	})
+	});
 
 	todoCard.append(title);
-	
 
 	// Description
 	const desc = document.createElement('textarea');
@@ -37,37 +38,29 @@ function displayTodo(todo) {
 	desc.addEventListener('input', (event) => {
 		const newDesc = event.target.value;
 		todo.desc = newDesc;
-	})
-	
+	});
+
 	todoCard.append(desc);
 
 	// Due Date
-	const dueDate = document.createElement('p');
-	dueDate.className = 'todoDueDate';
-	dueDate.textContent = todo.dueDate;
-	dueDate.addEventListener('click', () => {
-		const calendar = document.createElement('input');
-		calendar.className = 'todoCalendar';
-		calendar.setAttribute('type', 'date');
-		calendar.setAttribute('value', todo.dueDate);
+	const dueDate = document.createElement('input');
+	dueDate.setAttribute('type', 'text');
+	dueDate.setAttribute('value', todo.dueDate);
+	dueDate.classList.add('flatpickr')
+	dueDate.classList.add('todoDueDate')
+	flatpickr(dueDate, {
+		minDate: 'today',
+		dateFormat: 'j M',
+	});
+	dueDate.addEventListener('input', (event) => {
+		const newDate = event.target.value;
+		console.log(newDate);
+		todo.dueDate = newDate;
 		
-		dueDate.append(calendar);
-		// const newDate = event.target.value;
-		// console.log(new Date(newDate));
-		// console.log(format(new Date(event.target.value), 'dd/MMM'));
-		// todo.dueDate = newDate; 
-	})
+	});
 
-
-	// dueDate.addEventListener('input', (event) => {
-	// 	const newDate = event.target.value;
-	// 	console.log(new Date(newDate));
-	// 	console.log(format(new Date(event.target.value), 'dd/MMM'));
-	// 	todo.dueDate = newDate; 
-	// })
-	
 	todoCard.append(dueDate);
-	
+
 	// Priority
 	if (todo.priority) {
 		const priority = document.createElement('p');
@@ -81,7 +74,6 @@ function displayTodo(todo) {
 }
 
 function todoForm(callback) {
-
 	const newTodoForm = document.createElement('form');
 	newTodoForm.setAttribute('id', 'todoForm');
 	newTodoForm.setAttribute('method', 'post');
@@ -94,7 +86,7 @@ function todoForm(callback) {
 		const priority = newTodoForm.elements['formPriority'].value;
 
 		const newTodo = createTodo(title, description, dueDate, priority);
-		
+
 		callback(newTodo);
 		newTodoForm.remove();
 	});
@@ -140,11 +132,16 @@ function todoForm(callback) {
 	const formDate = document.createElement('input');
 	formDate.setAttribute('id', 'formDate');
 	formDate.setAttribute('name', 'formDate');
-	formDate.setAttribute('type', 'date');
+	formDate.setAttribute('type', 'text');
+	formDate.setAttribute('placeholder', 'Date');
 
 	formDateLabel.append(formDate);
 	newTodoForm.append(formDateLabel);
 
+	flatpickr(formDate, {
+		minDate: 'today',
+		dateFormat: 'd M y',
+	});
 	// List/Project
 	// Select / Datalist element, populated with all lists and projects available
 
@@ -159,17 +156,17 @@ function todoForm(callback) {
 	formPriority.setAttribute('name', 'formPriority');
 
 	const lowPriority = document.createElement('option');
-	lowPriority.setAttribute('value', 'low');
+	lowPriority.setAttribute('value', 'Low');
 	lowPriority.textContent = 'Low';
 	formPriority.append(lowPriority);
 
 	const mediumPriority = document.createElement('option');
-	mediumPriority.setAttribute('value', 'medium');
+	mediumPriority.setAttribute('value', 'Medium');
 	mediumPriority.textContent = 'Medium';
 	formPriority.append(mediumPriority);
 
 	const highPriority = document.createElement('option');
-	highPriority.setAttribute('value', 'high');
+	highPriority.setAttribute('value', 'High');
 	highPriority.textContent = 'High';
 	formPriority.append(highPriority);
 

@@ -62,14 +62,26 @@ p {
   grid-column: 1 / span 3;
   grid-row: 2 / span 2;
 }
+
+textarea {
+  resize: none;
+  overflow: scroll;
+}
   
 .fromPriority {
   grid-column: 3;
 }
+
+#formDate {
+  width: 100%;
+  text-align: center;
+}
   
 .confirmBtn {
-    grid-column: 2;
     height: 50%;
+    grid-column: 3;
+    grid-row: 5;
+    align-self: end;
 }
   
 #priority {
@@ -84,12 +96,6 @@ p {
     height: 60%;
     border-radius: 20px;
     padding: 5px 10px;
-}
-  
-.confirmBtn {
-    grid-column: 3;
-    grid-row: 5;
-    align-self: end;
 }
 
 
@@ -112,6 +118,13 @@ p {
   border: 0;
 }
 
+.todoDescription,
+.todoDueDate,
+.todoPriority {
+  font-size: 0.8rem;
+}
+
+
 .todoCheck {
     grid-row: 1 / span 4;
     align-self: center;
@@ -130,11 +143,13 @@ p {
 .todoDueDate {
   grid-column: 2;
   grid-row: 4;
+  width: 100%;
 }
 
 .todoPriority {
   grid-column: 5;
   grid-row: 4;
+  align-self: end;
 }
 
 .done > .todoCard > * {
@@ -190,3 +205,13 @@ p {
 
   
   
+
+
+
+
+
+
+
+
+
+
