@@ -1,16 +1,26 @@
-import createTodo from './createTodo';
-import { updateDone } from './updateTodo';
-
 import format from 'date-fns/format';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-function displayTodo(todo) {
+export default function displayTodo(todo) {
 	const todoLi = document.createElement('li');
 	todoLi.setAttribute('id', todo.title);
 
+
+
 	const todoCard = document.createElement('div');
 	todoCard.className = 'todoCard';
+
+	// Cancel BTN
+	const cancelBtn = document.createElement('button');
+	cancelBtn.classList = 'deleteTodo';
+    cancelBtn.textContent = 'x';
+    cancelBtn.addEventListener('click', () => {
+		// Remove todo from array
+		todoCard.remove()
+	});
+    
+    todoCard.append(cancelBtn);
 
 	// Done
 	const checkBox = document.createElement('input');
@@ -35,6 +45,7 @@ function displayTodo(todo) {
 	const desc = document.createElement('textarea');
 	desc.className = 'todoDescription';
 	desc.textContent = todo.desc;
+	desc.setAttribute('placeholder', 'Description...')
 	desc.addEventListener('input', (event) => {
 		const newDesc = event.target.value;
 		todo.desc = newDesc;
@@ -45,6 +56,7 @@ function displayTodo(todo) {
 	// Due Date
 	const dueDate = document.createElement('input');
 	dueDate.setAttribute('type', 'text');
+	dueDate.setAttribute('placeholder', 'Date');
 	dueDate.setAttribute('value', todo.dueDate);
 	dueDate.classList.add('flatpickr')
 	dueDate.classList.add('todoDueDate')
@@ -73,115 +85,5 @@ function displayTodo(todo) {
 	return { todoLi, checkBox, title };
 }
 
-function todoForm(callback) {
-	const newTodoForm = document.createElement('form');
-	newTodoForm.setAttribute('id', 'todoForm');
-	newTodoForm.setAttribute('method', 'post');
-	newTodoForm.setAttribute('target', '_self');
-	newTodoForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-		const title = newTodoForm.elements['formTitle'].value;
-		const description = newTodoForm.elements['formDesc'].value;
-		const dueDate = newTodoForm.elements['formDate'].value;
-		const priority = newTodoForm.elements['formPriority'].value;
 
-		const newTodo = createTodo(title, description, dueDate, priority);
 
-		callback(newTodo);
-		newTodoForm.remove();
-	});
-
-	// Id
-	// input - hidden ?
-
-	// Title
-	const formTitleLabel = document.createElement('label');
-	formTitleLabel.className = 'fromTitle';
-	formTitleLabel.setAttribute('for', 'fromTitle');
-
-	const formTitle = document.createElement('input');
-	formTitle.setAttribute('required', true);
-	formTitle.setAttribute('autofocus', true);
-	formTitle.setAttribute('id', 'formTitle');
-	formTitle.setAttribute('name', 'formTitle');
-	formTitle.setAttribute('type', 'text');
-	formTitle.setAttribute('placeholder', 'Title...');
-
-	formTitleLabel.append(formTitle);
-	newTodoForm.append(formTitleLabel);
-
-	// Description
-	const formDescLabel = document.createElement('label');
-	formDescLabel.className = 'fromDesc';
-	formDescLabel.setAttribute('for', 'formDesc');
-
-	const formDesc = document.createElement('textarea');
-	formDesc.setAttribute('id', 'formDesc');
-	formDesc.setAttribute('name', 'formDesc');
-	formDesc.setAttribute('placeholder', 'Description...');
-
-	formDescLabel.append(formDesc);
-	newTodoForm.append(formDescLabel);
-
-	// Due Date
-	const formDateLabel = document.createElement('label');
-	formDateLabel.className = 'fromDate';
-	formDateLabel.setAttribute('for', 'fromDate');
-	formDateLabel.textContent = 'Due Date:';
-
-	const formDate = document.createElement('input');
-	formDate.setAttribute('id', 'formDate');
-	formDate.setAttribute('name', 'formDate');
-	formDate.setAttribute('type', 'text');
-	formDate.setAttribute('placeholder', 'Date');
-
-	formDateLabel.append(formDate);
-	newTodoForm.append(formDateLabel);
-
-	flatpickr(formDate, {
-		minDate: 'today',
-		dateFormat: 'd M y',
-	});
-	// List/Project
-	// Select / Datalist element, populated with all lists and projects available
-
-	// Priority
-	const formPriorityLabel = document.createElement('label');
-	formPriorityLabel.className = 'fromPriority';
-	formPriorityLabel.setAttribute('for', 'fromTitle');
-	formPriorityLabel.textContent = 'Priority:';
-
-	const formPriority = document.createElement('select');
-	formPriority.setAttribute('id', 'formPriority');
-	formPriority.setAttribute('name', 'formPriority');
-
-	const lowPriority = document.createElement('option');
-	lowPriority.setAttribute('value', 'Low');
-	lowPriority.textContent = 'Low';
-	formPriority.append(lowPriority);
-
-	const mediumPriority = document.createElement('option');
-	mediumPriority.setAttribute('value', 'Medium');
-	mediumPriority.textContent = 'Medium';
-	formPriority.append(mediumPriority);
-
-	const highPriority = document.createElement('option');
-	highPriority.setAttribute('value', 'High');
-	highPriority.textContent = 'High';
-	formPriority.append(highPriority);
-
-	formPriorityLabel.append(formPriority);
-	newTodoForm.append(formPriorityLabel);
-
-	// Submit button
-	const confirmBtn = document.createElement('button');
-	confirmBtn.className = 'confirmBtn';
-	confirmBtn.setAttribute('type', 'submit');
-	confirmBtn.textContent = 'Add!';
-
-	newTodoForm.append(confirmBtn);
-
-	return newTodoForm;
-}
-
-export { displayTodo, todoForm };

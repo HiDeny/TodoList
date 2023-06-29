@@ -1,7 +1,7 @@
 import '../style.css';
 import 'normalize.css';
 
-import createList from '../components/list/createList.js';
+import { createList } from '../components/list/createList.js';
 import displayList from '../components/list/displayList';
 import {
 	addTodoList,
@@ -12,7 +12,8 @@ import {
 } from '../components/list/updateList';
 
 import { updateDone } from '../components/todo/updateTodo';
-import { displayTodo, todoForm } from '../components/todo/displayTodo';
+import todoForm from '../components/todo/todoForm';
+import displayTodo from '../components/todo/displayTodo';
 
 export default function generalController() {
 	// Title
@@ -24,32 +25,38 @@ export default function generalController() {
 
 	// Container
 	const container = document.createElement('div');
-	container.classList.add('container');
+	container.className = 'container';
 
 	document.body.appendChild(container);
 
-	// Input - Task
-	const inputTask = document.createElement('div');
-	inputTask.className = 'inputTask';
-
-	// Add button - Task
-	const addButton = document.createElement('button');
-	addButton.classList.add('addBtn');
-	addButton.textContent = 'Add';
-	addButton.addEventListener('click', () => {
+	// Add Todo Btn
+	const addTodoBtn = document.createElement('button');
+	addTodoBtn.classList.add('addTodoBtn');
+	addTodoBtn.textContent = '+';
+	addTodoBtn.addEventListener('click', () => {
 		const activeForm = document.querySelector('#todoForm');
 
 		if (!activeForm) {
 			const newTaskForm = todoForm(formReturn);
-			inputTask.appendChild(newTaskForm);
+			container.appendChild(newTaskForm);
 		}
 	});
+
+	document.body.appendChild(addTodoBtn);
 
 	function formReturn(newTodo) {
 		addTodoList(newTodo, inbox);
 
 		CheckArr(inbox);
 	}
+
+	//* List stuff
+
+	// Inbox - list
+	const inbox = createList('inbox', 'default list');
+	const displayInbox = displayList(inbox);
+	container.appendChild(displayInbox.completeList);
+
 
 	function CheckArr(list) {
 		const display = displayList(list);
@@ -89,11 +96,6 @@ export default function generalController() {
 		oldUlCompleted.replaceWith(display.listUlCompleted);
 	}
 
-	inputTask.append(addButton);
-	container.appendChild(inputTask);
 
-	// Inbox - list
-	const inbox = createList('inbox', 'default list');
-	const displayInbox = displayList(inbox);
-	container.appendChild(displayInbox.completeList);
+
 }

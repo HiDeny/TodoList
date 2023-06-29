@@ -13,8 +13,6 @@ function moveTodoToDiffList(todo, orgList, newList) {
 
 function moveFinishedTodo(list) {
 	list.todosArr.forEach((todo) => {
-		// console.log(list);
-		console.log(todo);
 		if (todo.done === true) {
 			list.completedTodos.unshift(todo);
 			list.todosArr.splice(list.todosArr.indexOf(todo), 1);
@@ -24,8 +22,6 @@ function moveFinishedTodo(list) {
 
 function undoFinishedTodo(list) {
 	list.completedTodos.forEach((todo) => {
-		console.log(list);
-		console.log(todo);
 		if (todo.done === false) {
 			list.todosArr.unshift(todo);
 			list.completedTodos.splice(list.completedTodos.indexOf(todo), 1);

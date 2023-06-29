@@ -1,12 +1,17 @@
 import createTodo from '../todo/createTodo';
 
-export default function createList(title) {
+function createList(title) {
 	const todosArr = [];
 	const completedTodos = [];
 
+	listsArr.push(title);
 
 	return { title, todosArr, completedTodos };
 }
+
+const listsArr = [];
+
+export { createList, listsArr };
 
 //* Todo - Incomplete tasks
 //* Complete - Complete tasks
