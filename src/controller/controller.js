@@ -13,7 +13,7 @@ import {
 
 import { updateDone } from '../components/todo/updateTodo';
 import todoForm from '../components/todo/todoForm';
-import displayTodo from '../components/todo/displayTodo';
+import { displayTodo, displayTodoEdit } from '../components/todo/displayTodo';
 
 export default function generalController() {
 	// Title
@@ -57,7 +57,6 @@ export default function generalController() {
 	const displayInbox = displayList(inbox);
 	container.appendChild(displayInbox.completeList);
 
-
 	function CheckArr(list) {
 		const display = displayList(list);
 		list.todosArr.forEach((todo) => {
@@ -95,7 +94,4 @@ export default function generalController() {
 		const oldUlCompleted = document.querySelector('.inboxUlCompleted');
 		oldUlCompleted.replaceWith(display.listUlCompleted);
 	}
-
-
-
 }
