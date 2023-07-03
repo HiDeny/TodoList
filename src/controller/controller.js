@@ -2,7 +2,7 @@ import '../style.css';
 import 'normalize.css';
 
 import { createList } from '../components/list/createList.js';
-import displayList from '../components/list/displayList';
+import { displayFreshList, refreshList } from '../components/list/displayList';
 import {
 	addTodoList,
 	removeTodoList,
@@ -46,52 +46,60 @@ export default function generalController() {
 
 	function formReturn(newTodo) {
 		addTodoList(newTodo, inbox);
-
-		CheckArr(inbox);
+		console.log(newTodo);
+		refreshList(inbox);
 	}
 
 	//* List stuff
 
 	// Inbox - list
 	const inbox = createList('inbox', 'default list');
-	const displayInbox = displayList(inbox);
+	const displayInbox = displayFreshList(inbox);
 	container.appendChild(displayInbox.completeList);
 
-	function CheckArr(list) {
-		const display = displayList(list);
-		list.todosArr.forEach((todo) => {
-			const currentTodo = displayTodo(todo);
-			currentTodo.checkBox.addEventListener('click', () => {
-				updateDone(todo);
-				moveFinishedTodo(list);
-				CheckCompleted(list);
-				currentTodo.todoLi.remove();
-			});
+	// function CheckArr(list) {
+	// 	const display = displayFreshList(list).listUl;
+	// 	list.todosArr.forEach((todo) => {
+	// 		todo.list = list;
+	// 		// todo.listIndex = list.todosArr.indexOf(todo);
+	// 		console.log(list.todosArr.indexOf(todo));
+	// 		console.log(todo.list);
+	// 		console.log(todo.listIndex);
+	// 		const currentTodo = displayTodo(todo);
+	// 		currentTodo.checkBox.addEventListener('click', () => {
+	// 			// updateDone(todo);
+	// 			// moveFinishedTodo(list);
+	// 			console.log('test1');
+	// 			CheckCompleted(list);
+	// 			// currentTodo.todoLi.remove();
+	// 		});
 
-			display.listUl.appendChild(currentTodo.todoLi);
-		});
+	// 		display.appendChild(currentTodo.todoLi);
+	// 	});
 
-		const oldUl = document.querySelector('.inboxUl');
-		oldUl.replaceWith(display.listUl);
-	}
+	// 	const oldUl = document.querySelector('.inboxUl');
+	// 	oldUl.replaceWith(display);
+	// }
 
-	function CheckCompleted(list) {
-		const display = displayList(list);
-		list.completedTodos.forEach((todo) => {
-			const currentTodo = displayTodo(todo);
-			currentTodo.todoLi.classList.add('done');
-			currentTodo.checkBox.setAttribute('checked', true);
-			currentTodo.checkBox.addEventListener('click', () => {
-				updateDone(todo);
-				undoFinishedTodo(list);
-				CheckArr(list);
-				currentTodo.todoLi.remove();
-			});
+	// function CheckCompleted(list) {
+	// 	const display = displayFreshList(list);
+	// 	list.completedTodos.forEach((todo) => {
+	// 		console.log('test2');
+	// 		const currentTodo = displayTodo(todo);
+	// 		currentTodo.todoLi.classList.add('done');
+	// 		currentTodo.checkBox.setAttribute('checked', true);
+	// 		currentTodo.checkBox.addEventListener('click', () => {
+	// 			// updateDone(todo);
+	// 			// undoFinishedTodo(list);
+	// 			CheckArr(list);
+	// 			console.log('test3');
+	// 			// currentTodo.todoLi.remove();
+	// 		});
 
-			display.listUlCompleted.appendChild(currentTodo.todoLi);
-		});
+	// 		display.listUlCompleted.appendChild(currentTodo.todoLi);
+	// 	});
 
-		const oldUlCompleted = document.querySelector('.inboxUlCompleted');
-		oldUlCompleted.replaceWith(display.listUlCompleted);
-	}
+	// 	const oldUlCompleted = document.querySelector('.inboxUlCompleted');
+	// 	oldUlCompleted.replaceWith(display.listUlCompleted);
+	// }
 }

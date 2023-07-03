@@ -1,4 +1,5 @@
 function addTodoList(todo, list) {
+	todo.list = list;
 	list.todosArr.unshift(todo);
 }
 
@@ -29,10 +30,20 @@ function undoFinishedTodo(list) {
 	});
 }
 
+function replaceOldTodo(todo, newTodo) {
+	const currentList = todo.list
+	const todoIndex = currentList.todosArr.indexOf(todo);
+	console.log(todo.list);
+
+	currentList.todosArr.splice(todoIndex, 1, newTodo);
+	console.log(todo.list);
+}
+
 export {
 	addTodoList,
 	removeTodoList,
 	moveFinishedTodo,
 	undoFinishedTodo,
 	moveTodoToDiffList,
+	replaceOldTodo
 };

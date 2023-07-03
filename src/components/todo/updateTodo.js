@@ -5,19 +5,19 @@ function updateDone(todo) {
     return todo;
 }
 
-function updateTitle (todo, newTitle) {
+function updateTitle (newTitle) {
     todo.title = newTitle;
 }
 
-function updateDesc (todo, newDesc) {
+function updateDesc (newDesc) {
     todo.desc = newDesc;
 }
 
-function updateDate (todo, newDate) {
+function updateDate (newDate) {
     todo.dueDate = newDate;
 }
 
-function updatePriority (todo, newPriority) {
+function updatePriority (newPriority) {
     todo.priority = newPriority;
 }
 
