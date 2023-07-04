@@ -8,7 +8,6 @@ export default function todoForm(callback) {
 	newTodoForm.setAttribute('id', 'todoForm');
 	newTodoForm.setAttribute('tabindex', '1');
 	newTodoForm.setAttribute('method', 'post');
-	newTodoForm.setAttribute('target', '_self');
 	newTodoForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleSubmit(callback, newTodoForm);
@@ -38,7 +37,6 @@ export default function todoForm(callback) {
 
 	const formTitle = document.createElement('input');
 	formTitle.setAttribute('required', true);
-	formTitle.focus();
 	formTitle.setAttribute('id', 'formTitle');
 	formTitle.setAttribute('name', 'formTitle');
 	formTitle.setAttribute('type', 'text');
@@ -149,6 +147,7 @@ function handleEscapeKey(div) {
 }
 
 function handleSubmit(callback, formDiv) {
+	// const title = formDiv.elements['formTitle'].value ? formDiv.elements['formTitle'].value : 'New Task...';
 	const title = formDiv.elements['formTitle'].value;
 	const description = formDiv.elements['formDesc'].value;
 	const dueDate = formDiv.elements['formDate'].value;

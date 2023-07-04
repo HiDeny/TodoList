@@ -72,8 +72,6 @@ body {
   top: 10px;
   font-size: 0.8rem;
   border-radius: 20px;
-  border: 0;
-  background: transparent;
   color: white;
 }
 
@@ -239,7 +237,9 @@ textarea {
 
 .todoTitleEdit,
 .todoDueDateEdit,
-.todoDescriptionEdit {
+.todoDescriptionEdit,
+.todoPriorityEdit,
+.cancelForm {
   background: transparent;
   border: 0;
 }
@@ -279,6 +279,7 @@ textarea {
   align-self: end;
 }
 
+
 .done > .todoCard > * {
   color: #8080807d;
   text-decoration: line-through;
@@ -311,15 +312,19 @@ textarea {
 .inboxUl,
 .inboxUlCompleted {
   list-style: none;
+
   background: pink;
   width: 90%;
   min-height: 80%;
-  display: grid;
-  grid-auto-rows: 80px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   margin: auto;
   padding: 0;
+
   overflow: scroll;
-  gap: 5px;
 }
 
 
@@ -348,7 +353,4 @@ textarea {
   justify-self: center;
 }
 
-/* Inline #3 | file:///Users/hidenny/CODE/TheOdinProject/repos/TodoList/dist/index.html */
 
-.formDate {
-}

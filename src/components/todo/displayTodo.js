@@ -5,7 +5,6 @@ import { updateDone } from './updateTodo';
 import {
 	replaceOldTodo,
 	moveFinishedTodo,
-	CheckCompleted,
 	undoFinishedTodo,
 } from '../list/updateList';
 
@@ -37,7 +36,6 @@ function displayTodo(todo) {
 	if (todo.done) {
 		checkBox.setAttribute('checked', true);
 		todoLi.classList.add('done');
-		TODO
 	}
 	checkBox.addEventListener('click', () => {
 		handleCheckboxClick(todo);
@@ -48,7 +46,7 @@ function displayTodo(todo) {
 
 	// Title
 	const title = document.createElement('p');
-	title.textContent = todo.title;
+	title.textContent = todo.title ? todo.title : 'New Task ...';
 	title.className = 'todoTitle';
 
 	todoCard.append(title);
@@ -58,8 +56,6 @@ function displayTodo(todo) {
 	dueDate.className = 'todoDate';
 
 	const dueDateToCheck = new Date(todo.dueDate);
-	console.log(dueDateToCheck);
-	console.log(isToday(dueDateToCheck));
 	if (isToday(dueDateToCheck)) {
 		dueDate.textContent = 'Today';
 	} else if (isTomorrow(dueDateToCheck)) {
@@ -86,12 +82,12 @@ function displayTodo(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
-		console.log(event.target.className);
+		// console.log(event.target.className);
 		if (event.target.className === 'todoCheck') {
 			return;
 		}
 		const todoCardEdit = displayTodoEdit(todo);
-		console.log(todoCardEdit);
+		// console.log(todoCardEdit);
 		todoLi.replaceWith(todoCardEdit);
 		todoCardEdit.focus();
 	});
@@ -129,7 +125,7 @@ function displayTodoEdit(todo) {
 		todoLi.classList.add('done');
 	}
 	checkBox.addEventListener('click', () => {
-		handleCheckboxClick(updatedTodo)
+		handleCheckboxClick(updatedTodo);
 		todoLi.remove();
 	});
 
@@ -137,9 +133,10 @@ function displayTodoEdit(todo) {
 
 	// Title
 	const title = document.createElement('input');
-	title.setAttribute('type', 'text');
-	title.value = updatedTodo.title;
 	title.className = 'todoTitleEdit';
+	title.setAttribute('type', 'text');
+	title.setAttribute('placeholder', 'New Task ...');
+	title.value = updatedTodo.title;
 	title.addEventListener('input', (event) => {
 		const newTitle = event.target.value;
 		updatedTodo.title = newTitle;
@@ -207,18 +204,39 @@ function displayTodoEdit(todo) {
 	todoLi.append(todoCardEdit);
 
 	// Change back to todo form
-	todoCardEdit.addEventListener('blur', () => {
-		const todoCard = displayTodo(updatedTodo).todoLi;
-		todoLi.replaceWith(todoCard);
+	document.addEventListener('click', (event) => {
+		const outOfFocus = todoCardEdit.contains(event.target);
+		console.log(event.target === todoCardEdit);
 
-		replaceOldTodo(todo, updatedTodo);
-
-		console.log(todoCard);
+		if(todoCardEdit && outOfFocus){
+			console.log('TestCase');
+			console.log(todoCardEdit);
+			handleClickChangeMode(updatedTodo, todo, todoLi);
+		}
 	});
 
-	// todoCardEdit.focus();
+
+	// todoCardEdit.addEventListener('focusout', (event) => {
+	// 	const relatedTarget = event.relatedTarget;
+	// 	const outOfFocus = todoCardEdit.contains(relatedTarget);
+	// 	console.log(outOfFocus);
+
+	// 	const todoCard = displayTodo(updatedTodo).todoLi;
+	// 	todoLi.replaceWith(todoCard);
+
+	// 	replaceOldTodo(todo, updatedTodo);
+	// });
 
 	return todoLi;
+}
+
+
+function handleClickChangeMode (updatedTodo, todo, todoLi) {
+
+	const todoCard = displayTodo(updatedTodo).todoLi;
+	todoLi.replaceWith(todoCard);
+
+	replaceOldTodo(todo, updatedTodo);
 }
 
 function handleCheckboxClick(todo) {

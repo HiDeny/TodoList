@@ -31,12 +31,15 @@ function undoFinishedTodo(list) {
 }
 
 function replaceOldTodo(todo, newTodo) {
-	const currentList = todo.list
-	const todoIndex = currentList.todosArr.indexOf(todo);
-	console.log(todo.list);
+	const currentList = todo.list;
 
-	currentList.todosArr.splice(todoIndex, 1, newTodo);
-	console.log(todo.list);
+	if (!todo.done) {
+		const todoIndex = currentList.todosArr.indexOf(todo);
+		currentList.todosArr.splice(todoIndex, 1, newTodo);
+	} else {
+		const todoIndex = currentList.completedTodos.indexOf(todo);
+		currentList.completedTodos.splice(todoIndex, 1, newTodo);
+	}
 }
 
 export {
@@ -45,5 +48,5 @@ export {
 	moveFinishedTodo,
 	undoFinishedTodo,
 	moveTodoToDiffList,
-	replaceOldTodo
+	replaceOldTodo,
 };
