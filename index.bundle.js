@@ -434,11 +434,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, `* {
-    /* border: 1px solid grey; */
-}
-
-html {
+___CSS_LOADER_EXPORT___.push([module.id, `html {
     font-family: Helvetica;
     font-size: 16px;
 }
@@ -543,6 +539,8 @@ textarea {
 
 .formDate {
   grid-area: 4 / 1;
+  align-self: center;
+  justify-content: center;
 }
 
 #formDate {
@@ -551,7 +549,10 @@ textarea {
  
 .formPriority {
   grid-area: 4 / 3;
+  align-self: center;
+  justify-self: center;
 }
+
 
 #priority {
   width: 100%;
@@ -561,7 +562,7 @@ textarea {
   color: gray;
 }
 
-.confirmBtn {
+.submitButton {
   height: 1.5rem;
   width: 5rem;
   border-radius: 20px;
@@ -770,27 +771,7 @@ textarea {
   background: aquamarine;
   display: grid;
 }
-
-
-
-
-
-#formDate {
-
-}
-
-.formDate {
-  align-self: center;
-  justify-content: center;
-}
-
-.formPriority {
-  align-self: center;
-  justify-self: center;
-}
-
-
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n    /* border: 1px solid grey; */\n}\n\nhtml {\n    font-family: Helvetica;\n    font-size: 16px;\n}\n\np {\n    margin: 0;\n}\n\nbody {\n  position: relative;\n}\n\n.container {\n  position: relative;\n}\n\n.mainTitle {\n    text-align: center;\n}\n\n/* Add TODO BTN */\n\n.addTodoBtn {\n  position: absolute;\n  left: 50%;\n  top: 15%;\n  transform: translate(-50%, -50%);\n  border: white 0.2px solid;\n  background: lightcoral;\n  width: 40px;\n  height: 40px;\n  border-radius: 30px;\n  font-size: 1.5rem;\n  margin: 0;\n  padding: 0;\n  color: white;\n}\n\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n  z-index: 1;\n  position: absolute;\n  top: 30%;\n  left: 50%;\n  transform: translate(-50%,-50%);\n\n  display: grid;\n  grid-template-rows: repeat(5, 2.5rem);\n  grid-template-columns: 1fr 1fr 1fr;\n  \n  background-color: gray;\n  width: 400px;\n  margin: auto;\n  padding: 19px;\n  border-radius: 20px;\n\n  \n}\n\n.cancelForm {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  font-size: 0.8rem;\n  border-radius: 20px;\n  color: white;\n}\n\n.formTitle {\n    grid-area: 1 / 1 / 1 / 4;\n}\n\n#formTitle {\n    width: 90%;\n    margin: auto;\n    height: 60%;\n    border-radius: 20px;\n    padding: 0px 10px;\n}\n\n\n.formNotes {\n  grid-area: 2 / 1 / 4 / 4;\n}\n  \n#formNotes {\n  width: 90%;\n  margin: auto;\n  height: 60%;\n  border-radius: 20px;\n  padding: 5px 10px;\n}\n\ntextarea {\n  resize: none;\n  overflow: scroll;\n}\n\n.formDate {\n  grid-area: 4 / 1;\n}\n\n#formDate {\n  width: 6rem;\n}\n \n.formPriority {\n  grid-area: 4 / 3;\n}\n\n#priority {\n  width: 100%;\n}\n\n.placeholderPri {\n  color: gray;\n}\n\n.confirmBtn {\n  height: 1.5rem;\n  width: 5rem;\n  border-radius: 20px;\n\n  grid-area: 5 / 3;\n  \n  align-self: center;\n  justify-self: center;\n}\n  \n\n#formTitle, \n#formNotes, \n#formDate, \n#formPriority {\n  border-radius: 5px;\n  padding: 3px 10px;\n}\n\n\n/* TODO CARD */\n\n.high {\n  border-bottom: 5px solid red;\n}\n\n.medium {\n  border-bottom: 5px solid orange;\n}\n\n.low {\n  border-bottom: 5px solid lightblue;\n}\n\n.todoCard {\n  position: relative;\n  \n  display: grid;\n  grid-template-rows: 1fr 15px;\n  grid-template-columns: 30px 1fr;\n  column-gap: 10px;\n  \n  width: 300px;\n  margin: auto;\n  padding: 10px 10px;\n  border-radius: 20px;\n  background-color: bisque;\n}\n\n.deleteTodoEdit {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n  font-size: 0.5rem;\n}\n\n.todoCheck {\n  margin-left: 10px;\n}\n\n.todoDate {\n  font-size: 0.7rem;\n  color: gray;\n  align-self: end;\n}\n\n.deleteTodo {\n  position: absolute;\n  font-size: 0.6rem;\n  background: transparent;\n  border: 0;\n  top: 30%;\n  right: 5px;\n}\n\n\n\n\n.todoCheck {\n  /* margin-left: 10px; */\n  grid-area: 1 / 1 / 3 / 2;\n  justify-self: center;\n}\n\n\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n    position: relative;\n    \n    display: grid;\n    grid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;\n    grid-template-rows: 1fr 1fr 1fr 1fr;\n    \n    width: 300px;\n    margin: auto;\n    padding: 5px 5px;\n    border-radius: 20px;\n    background-color: bisque;\n}\n\n.deleteTodoEdit {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n  font-size: 0.5rem;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit,\n.cancelForm {\n  background: transparent;\n  border: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n  font-size: 0.8rem;\n}\n\n\n.todoCheckEdit {\n    grid-row: 1 / span 4;\n    align-self: flex-start;\n    margin-top: 10%;\n}\n  \n.todoTitleEdit {\n  grid-column: 2 / span 4;\n\n}\n  \n.todoNotesEdit {\n  grid-column: 2 / span 4;\n  grid-row: 2 / span 2;\n}\n  \n.todoDueDateEdit {\n  grid-column: 2;\n  grid-row: 4;\n  width: 100%;\n}\n\n.todoPriorityEdit {\n  grid-column: 5;\n  grid-row: 4;\n  align-self: end;\n}\n\n\n.done > .todoCard > * {\n  color: #8080807d;\n  text-decoration: line-through;\n  color: gray;\n}\n\n/* LIST */\n\n.list > ul {\n    list-style: none;\n    margin: 0;\n}\n\n.titleList {\n    display: flex;\n    text-transform: uppercase;\n    justify-content: center;\n    align-items: center;\n    margin: 0;\n    height: 40px;\n    font-size: 1.5rem;\n    font-weight: bold;\n}\n\n\n#inboxCompleted {\n  background: lightblue;\n}\n\n.inboxUl,\n.inboxUlCompleted {\n  list-style: none;\n\n  background: pink;\n  width: 90%;\n  min-height: 80%;\n\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n\n  margin: auto;\n  padding: 0;\n\n  overflow: scroll;\n}\n\n\n#inbox {\n  grid-template-columns: 1fr 1fr;\n  height: 80vh;\n  background: aquamarine;\n  display: grid;\n}\n\n\n\n\n\n#formDate {\n\n}\n\n.formDate {\n  align-self: center;\n  justify-content: center;\n}\n\n.formPriority {\n  align-self: center;\n  justify-self: center;\n}\n\n\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["html {\n    font-family: Helvetica;\n    font-size: 16px;\n}\n\np {\n    margin: 0;\n}\n\nbody {\n  position: relative;\n}\n\n.container {\n  position: relative;\n}\n\n.mainTitle {\n    text-align: center;\n}\n\n/* Add TODO BTN */\n\n.addTodoBtn {\n  position: absolute;\n  left: 50%;\n  top: 15%;\n  transform: translate(-50%, -50%);\n  border: white 0.2px solid;\n  background: lightcoral;\n  width: 40px;\n  height: 40px;\n  border-radius: 30px;\n  font-size: 1.5rem;\n  margin: 0;\n  padding: 0;\n  color: white;\n}\n\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n  z-index: 1;\n  position: absolute;\n  top: 30%;\n  left: 50%;\n  transform: translate(-50%,-50%);\n\n  display: grid;\n  grid-template-rows: repeat(5, 2.5rem);\n  grid-template-columns: 1fr 1fr 1fr;\n  \n  background-color: gray;\n  width: 400px;\n  margin: auto;\n  padding: 19px;\n  border-radius: 20px;\n\n  \n}\n\n.cancelForm {\n  position: absolute;\n  right: 10px;\n  top: 10px;\n  font-size: 0.8rem;\n  border-radius: 20px;\n  color: white;\n}\n\n.formTitle {\n    grid-area: 1 / 1 / 1 / 4;\n}\n\n#formTitle {\n    width: 90%;\n    margin: auto;\n    height: 60%;\n    border-radius: 20px;\n    padding: 0px 10px;\n}\n\n\n.formNotes {\n  grid-area: 2 / 1 / 4 / 4;\n}\n  \n#formNotes {\n  width: 90%;\n  margin: auto;\n  height: 60%;\n  border-radius: 20px;\n  padding: 5px 10px;\n}\n\ntextarea {\n  resize: none;\n  overflow: scroll;\n}\n\n.formDate {\n  grid-area: 4 / 1;\n  align-self: center;\n  justify-content: center;\n}\n\n#formDate {\n  width: 6rem;\n}\n \n.formPriority {\n  grid-area: 4 / 3;\n  align-self: center;\n  justify-self: center;\n}\n\n\n#priority {\n  width: 100%;\n}\n\n.placeholderPri {\n  color: gray;\n}\n\n.submitButton {\n  height: 1.5rem;\n  width: 5rem;\n  border-radius: 20px;\n\n  grid-area: 5 / 3;\n  \n  align-self: center;\n  justify-self: center;\n}\n  \n\n#formTitle, \n#formNotes, \n#formDate, \n#formPriority {\n  border-radius: 5px;\n  padding: 3px 10px;\n}\n\n\n/* TODO CARD */\n\n.high {\n  border-bottom: 5px solid red;\n}\n\n.medium {\n  border-bottom: 5px solid orange;\n}\n\n.low {\n  border-bottom: 5px solid lightblue;\n}\n\n.todoCard {\n  position: relative;\n  \n  display: grid;\n  grid-template-rows: 1fr 15px;\n  grid-template-columns: 30px 1fr;\n  column-gap: 10px;\n  \n  width: 300px;\n  margin: auto;\n  padding: 10px 10px;\n  border-radius: 20px;\n  background-color: bisque;\n}\n\n.deleteTodoEdit {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n  font-size: 0.5rem;\n}\n\n.todoCheck {\n  margin-left: 10px;\n}\n\n.todoDate {\n  font-size: 0.7rem;\n  color: gray;\n  align-self: end;\n}\n\n.deleteTodo {\n  position: absolute;\n  font-size: 0.6rem;\n  background: transparent;\n  border: 0;\n  top: 30%;\n  right: 5px;\n}\n\n\n\n\n.todoCheck {\n  /* margin-left: 10px; */\n  grid-area: 1 / 1 / 3 / 2;\n  justify-self: center;\n}\n\n\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n    position: relative;\n    \n    display: grid;\n    grid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;\n    grid-template-rows: 1fr 1fr 1fr 1fr;\n    \n    width: 300px;\n    margin: auto;\n    padding: 5px 5px;\n    border-radius: 20px;\n    background-color: bisque;\n}\n\n.deleteTodoEdit {\n  position: absolute;\n  right: 5px;\n  top: 5px;\n  font-size: 0.5rem;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit,\n.cancelForm {\n  background: transparent;\n  border: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n  font-size: 0.8rem;\n}\n\n\n.todoCheckEdit {\n    grid-row: 1 / span 4;\n    align-self: flex-start;\n    margin-top: 10%;\n}\n  \n.todoTitleEdit {\n  grid-column: 2 / span 4;\n\n}\n  \n.todoNotesEdit {\n  grid-column: 2 / span 4;\n  grid-row: 2 / span 2;\n}\n  \n.todoDueDateEdit {\n  grid-column: 2;\n  grid-row: 4;\n  width: 100%;\n}\n\n.todoPriorityEdit {\n  grid-column: 5;\n  grid-row: 4;\n  align-self: end;\n}\n\n\n.done > .todoCard > * {\n  color: #8080807d;\n  text-decoration: line-through;\n  color: gray;\n}\n\n/* LIST */\n\n.list > ul {\n    list-style: none;\n    margin: 0;\n}\n\n.titleList {\n    display: flex;\n    text-transform: uppercase;\n    justify-content: center;\n    align-items: center;\n    margin: 0;\n    height: 40px;\n    font-size: 1.5rem;\n    font-weight: bold;\n}\n\n\n#inboxCompleted {\n  background: lightblue;\n}\n\n.inboxUl,\n.inboxUlCompleted {\n  list-style: none;\n\n  background: pink;\n  width: 90%;\n  min-height: 80%;\n\n  display: flex;\n  flex-direction: column;\n  gap: 10px;\n\n  margin: auto;\n  padding: 0;\n\n  overflow: scroll;\n}\n\n\n#inbox {\n  grid-template-columns: 1fr 1fr;\n  height: 80vh;\n  background: aquamarine;\n  display: grid;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7341,8 +7322,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isThisYear/index.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
 /* harmony import */ var _updateTodo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateTodo.js */ "./src/components/todo/updateTodo.js");
-/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
-/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+
+
 
 
 
@@ -7352,7 +7335,7 @@ function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
 
 	const todoCard = createTodoCard(todo, todoLi);
-	todoLi.append(todoCard)
+	todoLi.append(todoCard);
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
@@ -7366,13 +7349,11 @@ function displayTodoCard(todo) {
 		todoCardEdit.focus();
 	});
 
-	return todoLi ;
+	return todoLi;
 }
 
 function createTodoCard(todo, todoLi) {
-	const todoCard = document.createElement('div');
-	todoCard.setAttribute('tabindex', '0');
-	todoCard.className = 'todoCard';
+	const todoCard = createCard();
 
 	const cancelButton = createCancelButton(todoCard);
 	todoCard.append(cancelButton);
@@ -7387,6 +7368,14 @@ function createTodoCard(todo, todoLi) {
 	todoCard.append(dueDate);
 
 	checkPriority(todo, todoCard);
+
+	return todoCard;
+}
+
+function createCard() {
+	const todoCard = document.createElement('div');
+	todoCard.setAttribute('tabindex', '0');
+	todoCard.className = 'todoCard';
 
 	return todoCard;
 }
@@ -7458,16 +7447,14 @@ function checkPriority(todo, todoCard) {
 function handleCheckboxClick(todo) {
 	if (todo.done === false) {
 		todo.done = true;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.moveFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.moveFinishedTodo)(todo.list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.undoFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshList)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.undoFinishedTodo)(todo.list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(todo.list);
 	}
 }
-
-
 
 
 
@@ -7493,36 +7480,67 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function todoForm(callback) {
-	const newTodoForm = document.createElement('form');
-	newTodoForm.setAttribute('id', 'todoForm');
-	newTodoForm.setAttribute('tabindex', '1');
-	newTodoForm.setAttribute('method', 'post');
-	newTodoForm.addEventListener('submit', (e) => {
+	const todoForm = createTodoForm();
+	console.log(todoForm);
+	todoForm.addEventListener('submit', (e) => {
 		e.preventDefault();
-		handleSubmit(callback, newTodoForm);
+		handleSubmit(callback, todoForm);
 	});
 
-	// Id
-	// input - hidden ?
-	// Cancel btn
-	const cancelBtn = document.createElement('button');
-	cancelBtn.classList = 'cancelForm';
-	cancelBtn.textContent = 'x';
-	cancelBtn.addEventListener('click', () => {
-		newTodoForm.remove();
+	//? Id input - hidden ?
+
+	const cancelButtonForm = createCancelButtonForm(todoForm, callback);
+	todoForm.append(cancelButtonForm);
+
+	const titleForm = createTitleForm();
+	todoForm.append(titleForm);
+
+	const notesForm = createNotesForm();
+	todoForm.append(notesForm);
+
+	const dueDateForm = createDateForm();
+	todoForm.append(dueDateForm);
+
+	//? Lists Select / Datalist element, populated with all lists and projects available
+	// const listsFrom = createListsForm(listsArr);
+	// todoForm.append(listsFrom);
+
+	const priorityForm = createPriorityForm();
+	todoForm.append(priorityForm);
+
+	const submitButton = createSubmitButton();
+	todoForm.append(submitButton);
+
+	return todoForm;
+}
+
+function createTodoForm() {
+	const todoForm = document.createElement('form');
+	todoForm.setAttribute('id', 'todoForm');
+	todoForm.setAttribute('tabindex', '1');
+	todoForm.setAttribute('method', 'post');
+
+	return todoForm;
+}
+
+function createCancelButtonForm(form, callback) {
+	const cancelButton = document.createElement('button');
+	cancelButton.classList = 'cancelForm';
+	cancelButton.textContent = 'x';
+	cancelButton.addEventListener('click', () => {
+		form.remove();
 	});
 
-	newTodoForm.addEventListener('keydown', () => {
-		handleEscapeKey(newTodoForm);
-		handleEnterKey(callback, newTodoForm);
+	form.addEventListener('keydown', () => {
+		handleEscapeKey(form);
+		handleEnterKey(callback, form);
 	});
 
-	newTodoForm.append(cancelBtn);
+	return cancelButton;
+}
 
-	// Title
-	const formTitleLabel = document.createElement('label');
-	formTitleLabel.className = 'formTitle';
-	formTitleLabel.setAttribute('for', 'formTitle');
+function createTitleForm() {
+	const formTitleLabel = createLabel('formTitle');
 
 	const formTitle = document.createElement('input');
 	formTitle.setAttribute('required', true);
@@ -7532,12 +7550,11 @@ function todoForm(callback) {
 	formTitle.setAttribute('placeholder', 'Title...');
 
 	formTitleLabel.append(formTitle);
-	newTodoForm.append(formTitleLabel);
+	return formTitleLabel;
+}
 
-	// Notes
-	const formNotesLabel = document.createElement('label');
-	formNotesLabel.className = 'formNotes';
-	formNotesLabel.setAttribute('for', 'formNotes');
+function createNotesForm() {
+	const formNotesLabel = createLabel('formNotes');
 
 	const formNotes = document.createElement('textarea');
 	formNotes.setAttribute('id', 'formNotes');
@@ -7545,13 +7562,11 @@ function todoForm(callback) {
 	formNotes.setAttribute('placeholder', 'Notes');
 
 	formNotesLabel.append(formNotes);
-	newTodoForm.append(formNotesLabel);
+	return formNotesLabel;
+}
 
-	// Due Date
-	const formDateLabel = document.createElement('label');
-	formDateLabel.className = 'formDate';
-	formDateLabel.setAttribute('for', 'formDate');
-	// formDateLabel.textContent = 'Due Date:';
+function createDateForm() {
+	const formDateLabel = createLabel('formDate');
 
 	const formDate = document.createElement('input');
 	formDate.setAttribute('id', 'formDate');
@@ -7559,28 +7574,41 @@ function todoForm(callback) {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
-	formDateLabel.append(formDate);
-	newTodoForm.append(formDateLabel);
-
 	(0,flatpickr__WEBPACK_IMPORTED_MODULE_1__["default"])(formDate, {
 		minDate: 'today',
 		dateFormat: 'd M y',
 	});
-	// List/Project
-	// Select / Datalist element, populated with all lists and projects available
-	const formListOptionsLabel = document.createElement('label');
-	formListOptionsLabel.className = 'formLists';
-	formListOptionsLabel.setAttribute('for', 'formLists');
-	formListOptionsLabel.textContent = 'List:';
 
-	// Priority
-	const formPriorityLabel = document.createElement('label');
-	formPriorityLabel.className = 'formPriority';
-	formPriorityLabel.setAttribute('for', 'formPriority');
+	formDateLabel.append(formDate);
+	return formDateLabel;
+}
+
+function createListsForm(listsArr) {
+	const formListsLabel = createLabel('formLists');
+
+	const formLists = document.createElement('select');
+	formLists.setAttribute('id', 'formLists');
+	formLists.setAttribute('name', 'formLists');
+	formLists.className = 'formLists';
+
+	listsArr.forEach((list) => {
+		const optionElement = document.createElement('option');
+		optionElement.setAttribute('value', list);
+		optionElement.textContent = list.title;
+		formLists.append(optionElement);
+	});
+
+	formListsLabel.append(formLists);
+	return formListsLabel;
+}
+
+function createPriorityForm() {
+	const formPriorityLabel = createLabel('formPriority');
 
 	const formPriority = document.createElement('select');
 	formPriority.setAttribute('id', 'formPriority');
 	formPriority.setAttribute('name', 'formPriority');
+	formPriority.className = 'formPriority';
 
 	const placeholderPriority = document.createElement('option');
 	placeholderPriority.className = 'placeholderPri';
@@ -7591,33 +7619,47 @@ function todoForm(callback) {
 	placeholderPriority.textContent = 'Priority';
 	formPriority.append(placeholderPriority);
 
-	const lowPriority = document.createElement('option');
-	lowPriority.setAttribute('value', 'Low');
-	lowPriority.textContent = 'Low';
-	formPriority.append(lowPriority);
+	const priorityOptions = ['High', 'Medium', 'Low'];
 
-	const mediumPriority = document.createElement('option');
-	mediumPriority.setAttribute('value', 'Medium');
-	mediumPriority.textContent = 'Medium';
-	formPriority.append(mediumPriority);
-
-	const highPriority = document.createElement('option');
-	highPriority.setAttribute('value', 'High');
-	highPriority.textContent = 'High';
-	formPriority.append(highPriority);
+	priorityOptions.forEach((option) => {
+		const optionElement = document.createElement('option');
+		optionElement.setAttribute('value', option);
+		optionElement.textContent = option;
+		formPriority.append(optionElement);
+	});
 
 	formPriorityLabel.append(formPriority);
-	newTodoForm.append(formPriorityLabel);
+	return formPriorityLabel;
+}
 
-	// Submit button
-	const confirmBtn = document.createElement('button');
-	confirmBtn.className = 'confirmBtn';
-	confirmBtn.setAttribute('type', 'submit');
-	confirmBtn.textContent = 'Add!';
+function createSubmitButton(form, callback) {
+	const submitButton = document.createElement('button');
+	submitButton.className = 'submitButton';
+	submitButton.setAttribute('type', 'submit');
+	submitButton.textContent = 'Add!';
 
-	newTodoForm.append(confirmBtn);
+	return submitButton;
+}
 
-	return newTodoForm;
+function createLabel(name) {
+	const label = document.createElement('label');
+	label.className = name;
+	label.setAttribute('for', name);
+
+	return label;
+}
+
+function handleSubmit(callback, formDiv) {
+	const title = formDiv.elements['formTitle'].value;
+	const notes = formDiv.elements['formNotes'].value;
+	const dueDate = formDiv.elements['formDate'].value;
+	const priority = formDiv.elements['formPriority'].value;
+	console.log(priority);
+
+	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority);
+
+	callback(newTodo);
+	formDiv.remove();
 }
 
 function handleEnterKey(callback, div) {
@@ -7632,19 +7674,6 @@ function handleEscapeKey(div) {
 		div.remove();
 		div.removeEventListener('keydown', handleEscapeKey);
 	}
-}
-
-function handleSubmit(callback, formDiv) {
-	// const title = formDiv.elements['formTitle'].value ? formDiv.elements['formTitle'].value : 'New Task...';
-	const title = formDiv.elements['formTitle'].value;
-	const notes = formDiv.elements['formNotes'].value;
-	const dueDate = formDiv.elements['formDate'].value;
-	const priority = formDiv.elements['formPriority'].value;
-
-	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority);
-
-	callback(newTodo);
-	formDiv.remove();
 }
 
 
@@ -7663,8 +7692,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 /* harmony import */ var _displayTodo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./displayTodo.js */ "./src/components/todo/displayTodo.js");
-/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
-/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
 
 
 
@@ -7681,16 +7710,14 @@ function createTodoEditMode(todo) {
 
 	todoEditCard.addEventListener('blur', () => {
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(updatedTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.replaceOldTodo)(todo, updatedTodo);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, updatedTodo);
 	});
 
 	return todoLi;
 }
 
 function createTodoEditCard(todo, todoLi) {
-	const todoCardEdit = document.createElement('div');
-	todoCardEdit.setAttribute('tabindex', '1');
-	todoCardEdit.className = 'todoCardEdit';
+	const todoCardEdit = createTodoCardEdit();
 
 	const cancelButton = createCancelButton(todoCardEdit);
 	todoCardEdit.append(cancelButton);
@@ -7710,7 +7737,15 @@ function createTodoEditCard(todo, todoLi) {
 	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
 
-    return todoCardEdit;
+	return todoCardEdit;
+}
+
+function createTodoCardEdit() {
+	const todoCardEdit = document.createElement('div');
+	todoCardEdit.setAttribute('tabindex', '1');
+	todoCardEdit.className = 'todoCardEdit';
+
+	return todoCardEdit;
 }
 
 function createCancelButton(todoEditCard) {
@@ -7787,16 +7822,12 @@ function createPrioritySelector(todo) {
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
 
-	const priorityOptions = [
-		{ value: 'Low', text: 'Low' },
-		{ value: 'Medium', text: 'Medium' },
-		{ value: 'High', text: 'High' },
-	];
+	const priorityOptions = ['High', 'Medium', 'Low'];
 
 	priorityOptions.forEach((option) => {
 		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', option.value);
-		optionElement.textContent = option.text;
+		optionElement.setAttribute('value', option);
+		optionElement.textContent = option;
 		editPriority.append(optionElement);
 	});
 
@@ -7806,18 +7837,18 @@ function createPrioritySelector(todo) {
 		todo.priority = event.target.value;
 	});
 
-    return editPriority;
+	return editPriority;
 }
 
 function handleCheckboxClick(todo) {
 	if (todo.done === false) {
 		todo.done = true;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.moveFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.moveFinishedTodo)(todo.list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.undoFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshList)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.undoFinishedTodo)(todo.list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(todo.list);
 	}
 }
 
@@ -7841,11 +7872,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/list/createList.js */ "./src/components/list/createList.js");
 /* harmony import */ var _components_list_displayList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/list/displayList */ "./src/components/list/displayList.js");
 /* harmony import */ var _components_list_updateList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/list/updateList */ "./src/components/list/updateList.js");
-/* harmony import */ var _components_todo_updateTodo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/todo/updateTodo */ "./src/components/todo/updateTodo.js");
-/* harmony import */ var _components_todo_todoForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/todo/todoForm */ "./src/components/todo/todoForm.js");
-/* harmony import */ var _components_todo_displayTodo__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/todo/displayTodo */ "./src/components/todo/displayTodo.js");
-
-
+/* harmony import */ var _components_todo_todoForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/todo/todoForm */ "./src/components/todo/todoForm.js");
 
 
 
@@ -7856,10 +7883,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function generalController() {
-	// document.addEventListener('click', (e) => {
-	// 	console.log(e.target);
-	// });
-
 	// Title
 	const title = document.createElement('h1');
 	title.className = 'mainTitle';
@@ -7882,7 +7905,7 @@ function generalController() {
 		const activeForm = document.querySelector('#todoForm');
 
 		if (!activeForm) {
-			const newTaskForm = (0,_components_todo_todoForm__WEBPACK_IMPORTED_MODULE_6__["default"])(formReturn);
+			const newTaskForm = (0,_components_todo_todoForm__WEBPACK_IMPORTED_MODULE_5__["default"])(formReturn);
 			container.appendChild(newTaskForm);
 			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
 			titleInput.focus();
