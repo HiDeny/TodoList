@@ -3,75 +3,11 @@ import { createTodoEditMode } from './updateTodo.js';
 import { moveFinishedTodo, undoFinishedTodo } from '../list/updateList';
 import { refreshList, refreshCompleted } from '../list/displayList';
 
-function displayTodo(todo) {
+function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
-	todoLi.setAttribute('id', todo.title);
 
-	const todoCard = document.createElement('div');
-	todoCard.setAttribute('tabindex', '0');
-	todoCard.className = 'todoCard';
-
-	// Cancel BTN
-	const cancelBtn = document.createElement('button');
-	cancelBtn.classList = 'deleteTodo';
-	cancelBtn.textContent = 'x';
-	cancelBtn.addEventListener('click', () => {
-		// Remove todo from array
-		todoCard.remove();
-	});
-
-	todoCard.append(cancelBtn);
-
-	// Done
-	const checkBox = document.createElement('input');
-	checkBox.setAttribute('type', 'checkbox');
-	checkBox.className = 'todoCheck';
-	if (todo.done) {
-		checkBox.setAttribute('checked', true);
-		todoLi.classList.add('done');
-	}
-	checkBox.addEventListener('click', () => {
-		handleCheckboxClick(todo);
-		todoLi.remove();
-	});
-
-	todoCard.append(checkBox);
-
-	// Title
-	const title = document.createElement('p');
-	title.textContent = todo.title ? todo.title : 'New Task ...';
-	title.className = 'todoTitle';
-
-	todoCard.append(title);
-
-	// Due Date
-	const dueDate = document.createElement('p');
-	dueDate.className = 'todoDate';
-
-	const dueDateToCheck = new Date(todo.dueDate);
-	if (isToday(dueDateToCheck)) {
-		dueDate.textContent = 'Today';
-	} else if (isTomorrow(dueDateToCheck)) {
-		dueDate.textContent = 'Tomorrow';
-	} else if (isThisYear(dueDateToCheck)) {
-		const formattedDate = format(dueDateToCheck, 'dd MMM');
-		dueDate.textContent = formattedDate;
-	} else {
-		dueDate.textContent = todo.dueDate;
-	}
-
-	todoCard.append(dueDate);
-
-	// Priority
-	if (todo.priority === 'High') {
-		todoCard.classList.add('high');
-	} else if (todo.priority === 'Medium') {
-		todoCard.classList.add('medium');
-	} else if (todo.priority === 'Low') {
-		todoCard.classList.add('low');
-	}
-
-	todoLi.append(todoCard);
+	const todoCard = createTodoCard(todo, todoLi);
+	todoLi.append(todoCard)
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
@@ -85,7 +21,93 @@ function displayTodo(todo) {
 		todoCardEdit.focus();
 	});
 
-	return { todoLi, checkBox, title };
+	return todoLi ;
+}
+
+function createTodoCard(todo, todoLi) {
+	const todoCard = document.createElement('div');
+	todoCard.setAttribute('tabindex', '0');
+	todoCard.className = 'todoCard';
+
+	const cancelButton = createCancelButton(todoCard);
+	todoCard.append(cancelButton);
+
+	const checkBox = createCheckBox(todo, todoLi);
+	todoCard.append(checkBox);
+
+	const title = createTitle(todo);
+	todoCard.append(title);
+
+	const dueDate = createDueDate(todo);
+	todoCard.append(dueDate);
+
+	checkPriority(todo, todoCard);
+
+	return todoCard;
+}
+
+function createCancelButton(todoCard) {
+	const cancelButton = document.createElement('button');
+	cancelButton.classList = 'deleteTodo';
+	cancelButton.textContent = 'x';
+	cancelButton.addEventListener('click', () => {
+		todoCard.remove();
+	});
+
+	return cancelButton;
+}
+
+function createCheckBox(todo, todoLi) {
+	const checkBox = document.createElement('input');
+	checkBox.setAttribute('type', 'checkbox');
+	checkBox.className = 'todoCheck';
+	if (todo.done) {
+		checkBox.setAttribute('checked', true);
+		todoLi.classList.add('done');
+	}
+	checkBox.addEventListener('click', () => {
+		handleCheckboxClick(todo);
+		todoLi.remove();
+	});
+
+	return checkBox;
+}
+
+function createTitle(todo) {
+	const title = document.createElement('p');
+	title.textContent = todo.title ? todo.title : 'New Task ...';
+	title.className = 'todoTitle';
+
+	return title;
+}
+
+function createDueDate(todo) {
+	const dueDate = document.createElement('p');
+	dueDate.className = 'todoDate';
+
+	const dateToCheck = new Date(todo.dueDate);
+	if (isToday(dateToCheck)) {
+		dueDate.textContent = 'Today';
+	} else if (isTomorrow(dateToCheck)) {
+		dueDate.textContent = 'Tomorrow';
+	} else if (isThisYear(dateToCheck)) {
+		const formattedDate = format(dateToCheck, 'dd MMM');
+		dueDate.textContent = formattedDate;
+	} else {
+		dueDate.textContent = todo.dueDate;
+	}
+
+	return dueDate;
+}
+
+function checkPriority(todo, todoCard) {
+	if (todo.priority === 'High') {
+		todoCard.classList.add('high');
+	} else if (todo.priority === 'Medium') {
+		todoCard.classList.add('medium');
+	} else if (todo.priority === 'Low') {
+		todoCard.classList.add('low');
+	}
 }
 
 function handleCheckboxClick(todo) {
@@ -100,4 +122,6 @@ function handleCheckboxClick(todo) {
 	}
 }
 
-export { displayTodo };
+
+
+export { displayTodoCard };

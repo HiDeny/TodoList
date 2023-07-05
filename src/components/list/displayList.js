@@ -1,4 +1,4 @@
-import { displayTodo } from '../todo/displayTodo';
+import { displayTodoCard } from '../todo/displayTodo';
 
 function displayFreshList(list) {
 	const completeList = document.createElement('div');
@@ -45,7 +45,7 @@ function refreshList(list) {
 	console.log(newListUl);
 	list.todosArr.forEach((todo) => {
 		//? todo.listIndex = list.todosArr.indexOf(todo);
-		const currentTodo = displayTodo(todo);
+		const currentTodo = displayTodoCard(todo);
 		newListUl.appendChild(currentTodo.todoLi);
 	});
 
@@ -57,7 +57,7 @@ function refreshCompleted(list) {
 	console.log(list);
 	const newCompletedListUl = displayFreshList(list).listUlCompleted;
 	list.completedTodos.forEach((todo) => {
-		const currentTodo = displayTodo(todo);
+		const currentTodo = displayTodoCard(todo);
 		newCompletedListUl.appendChild(currentTodo.todoLi);
 	});
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);

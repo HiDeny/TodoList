@@ -1,6 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import { displayTodo } from './displayTodo.js';
+import { displayTodoCard } from './displayTodo.js';
 import {
 	replaceOldTodo,
 	moveFinishedTodo,
@@ -12,13 +12,12 @@ function createTodoEditMode(todo) {
 	const updatedTodo = todo;
 
 	const todoLi = document.createElement('li');
-	todoLi.setAttribute('id', updatedTodo.title);
 
 	const todoEditCard = createTodoEditCard(updatedTodo, todoLi);
 	todoLi.append(todoEditCard);
 
 	todoEditCard.addEventListener('blur', () => {
-		const todoCard = displayTodo(updatedTodo).todoLi;
+		const todoCard = displayTodoCard(updatedTodo).todoLi;
 		todoLi.replaceWith(todoCard);
 		replaceOldTodo(todo, updatedTodo);
 	});
@@ -147,13 +146,6 @@ function createPrioritySelector(todo) {
 
     return editPriority;
 }
-
-// function handleClickChangeMode(updatedTodo, todo, todoLi) {
-// 	const todoCard = displayTodo(updatedTodo).todoLi;
-// 	todoLi.replaceWith(todoCard);
-
-// 	replaceOldTodo(todo, updatedTodo);
-// }
 
 function handleCheckboxClick(todo) {
 	if (todo.done === false) {

@@ -7218,7 +7218,7 @@ function refreshList(list) {
 	console.log(newListUl);
 	list.todosArr.forEach((todo) => {
 		//? todo.listIndex = list.todosArr.indexOf(todo);
-		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodo)(todo);
+		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo);
 		newListUl.appendChild(currentTodo.todoLi);
 	});
 
@@ -7230,7 +7230,7 @@ function refreshCompleted(list) {
 	console.log(list);
 	const newCompletedListUl = displayFreshList(list).listUlCompleted;
 	list.completedTodos.forEach((todo) => {
-		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodo)(todo);
+		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo);
 		newCompletedListUl.appendChild(currentTodo.todoLi);
 	});
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
@@ -7340,7 +7340,7 @@ function createTodo(
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   displayTodo: () => (/* binding */ displayTodo)
+/* harmony export */   displayTodoCard: () => (/* binding */ displayTodoCard)
 /* harmony export */ });
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
 /* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isTomorrow/index.js");
@@ -7354,75 +7354,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function displayTodo(todo) {
+function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
-	todoLi.setAttribute('id', todo.title);
 
-	const todoCard = document.createElement('div');
-	todoCard.setAttribute('tabindex', '0');
-	todoCard.className = 'todoCard';
-
-	// Cancel BTN
-	const cancelBtn = document.createElement('button');
-	cancelBtn.classList = 'deleteTodo';
-	cancelBtn.textContent = 'x';
-	cancelBtn.addEventListener('click', () => {
-		// Remove todo from array
-		todoCard.remove();
-	});
-
-	todoCard.append(cancelBtn);
-
-	// Done
-	const checkBox = document.createElement('input');
-	checkBox.setAttribute('type', 'checkbox');
-	checkBox.className = 'todoCheck';
-	if (todo.done) {
-		checkBox.setAttribute('checked', true);
-		todoLi.classList.add('done');
-	}
-	checkBox.addEventListener('click', () => {
-		handleCheckboxClick(todo);
-		todoLi.remove();
-	});
-
-	todoCard.append(checkBox);
-
-	// Title
-	const title = document.createElement('p');
-	title.textContent = todo.title ? todo.title : 'New Task ...';
-	title.className = 'todoTitle';
-
-	todoCard.append(title);
-
-	// Due Date
-	const dueDate = document.createElement('p');
-	dueDate.className = 'todoDate';
-
-	const dueDateToCheck = new Date(todo.dueDate);
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dueDateToCheck)) {
-		dueDate.textContent = 'Today';
-	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dueDateToCheck)) {
-		dueDate.textContent = 'Tomorrow';
-	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dueDateToCheck)) {
-		const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dueDateToCheck, 'dd MMM');
-		dueDate.textContent = formattedDate;
-	} else {
-		dueDate.textContent = todo.dueDate;
-	}
-
-	todoCard.append(dueDate);
-
-	// Priority
-	if (todo.priority === 'High') {
-		todoCard.classList.add('high');
-	} else if (todo.priority === 'Medium') {
-		todoCard.classList.add('medium');
-	} else if (todo.priority === 'Low') {
-		todoCard.classList.add('low');
-	}
-
-	todoLi.append(todoCard);
+	const todoCard = createTodoCard(todo, todoLi);
+	todoLi.append(todoCard)
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
@@ -7436,7 +7372,93 @@ function displayTodo(todo) {
 		todoCardEdit.focus();
 	});
 
-	return { todoLi, checkBox, title };
+	return todoLi ;
+}
+
+function createTodoCard(todo, todoLi) {
+	const todoCard = document.createElement('div');
+	todoCard.setAttribute('tabindex', '0');
+	todoCard.className = 'todoCard';
+
+	const cancelButton = createCancelButton(todoCard);
+	todoCard.append(cancelButton);
+
+	const checkBox = createCheckBox(todo, todoLi);
+	todoCard.append(checkBox);
+
+	const title = createTitle(todo);
+	todoCard.append(title);
+
+	const dueDate = createDueDate(todo);
+	todoCard.append(dueDate);
+
+	checkPriority(todo, todoCard);
+
+	return todoCard;
+}
+
+function createCancelButton(todoCard) {
+	const cancelButton = document.createElement('button');
+	cancelButton.classList = 'deleteTodo';
+	cancelButton.textContent = 'x';
+	cancelButton.addEventListener('click', () => {
+		todoCard.remove();
+	});
+
+	return cancelButton;
+}
+
+function createCheckBox(todo, todoLi) {
+	const checkBox = document.createElement('input');
+	checkBox.setAttribute('type', 'checkbox');
+	checkBox.className = 'todoCheck';
+	if (todo.done) {
+		checkBox.setAttribute('checked', true);
+		todoLi.classList.add('done');
+	}
+	checkBox.addEventListener('click', () => {
+		handleCheckboxClick(todo);
+		todoLi.remove();
+	});
+
+	return checkBox;
+}
+
+function createTitle(todo) {
+	const title = document.createElement('p');
+	title.textContent = todo.title ? todo.title : 'New Task ...';
+	title.className = 'todoTitle';
+
+	return title;
+}
+
+function createDueDate(todo) {
+	const dueDate = document.createElement('p');
+	dueDate.className = 'todoDate';
+
+	const dateToCheck = new Date(todo.dueDate);
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateToCheck)) {
+		dueDate.textContent = 'Today';
+	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateToCheck)) {
+		dueDate.textContent = 'Tomorrow';
+	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dateToCheck)) {
+		const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck, 'dd MMM');
+		dueDate.textContent = formattedDate;
+	} else {
+		dueDate.textContent = todo.dueDate;
+	}
+
+	return dueDate;
+}
+
+function checkPriority(todo, todoCard) {
+	if (todo.priority === 'High') {
+		todoCard.classList.add('high');
+	} else if (todo.priority === 'Medium') {
+		todoCard.classList.add('medium');
+	} else if (todo.priority === 'Low') {
+		todoCard.classList.add('low');
+	}
 }
 
 function handleCheckboxClick(todo) {
@@ -7450,6 +7472,8 @@ function handleCheckboxClick(todo) {
 		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshList)(todo.list);
 	}
 }
+
+
 
 
 
@@ -7657,13 +7681,12 @@ function createTodoEditMode(todo) {
 	const updatedTodo = todo;
 
 	const todoLi = document.createElement('li');
-	todoLi.setAttribute('id', updatedTodo.title);
 
 	const todoEditCard = createTodoEditCard(updatedTodo, todoLi);
 	todoLi.append(todoEditCard);
 
 	todoEditCard.addEventListener('blur', () => {
-		const todoCard = (0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodo)(updatedTodo).todoLi;
+		const todoCard = (0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(updatedTodo).todoLi;
 		todoLi.replaceWith(todoCard);
 		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.replaceOldTodo)(todo, updatedTodo);
 	});
@@ -7792,13 +7815,6 @@ function createPrioritySelector(todo) {
 
     return editPriority;
 }
-
-// function handleClickChangeMode(updatedTodo, todo, todoLi) {
-// 	const todoCard = displayTodo(updatedTodo).todoLi;
-// 	todoLi.replaceWith(todoCard);
-
-// 	replaceOldTodo(todo, updatedTodo);
-// }
 
 function handleCheckboxClick(todo) {
 	if (todo.done === false) {

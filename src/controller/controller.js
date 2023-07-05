@@ -13,7 +13,7 @@ import {
 
 import { updateDone } from '../components/todo/updateTodo';
 import todoForm from '../components/todo/todoForm';
-import { displayTodo, displayTodoEdit } from '../components/todo/displayTodo';
+import { displayTodoCard } from '../components/todo/displayTodo';
 
 export default function generalController() {
 	// document.addEventListener('click', (e) => {
