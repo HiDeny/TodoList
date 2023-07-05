@@ -1,7 +1,3 @@
-* {
-    /* border: 1px solid grey; */
-}
-
 html {
     font-family: Helvetica;
     font-size: 16px;
@@ -107,6 +103,8 @@ textarea {
 
 .formDate {
   grid-area: 4 / 1;
+  align-self: center;
+  justify-content: center;
 }
 
 #formDate {
@@ -115,7 +113,10 @@ textarea {
  
 .formPriority {
   grid-area: 4 / 3;
+  align-self: center;
+  justify-self: center;
 }
+
 
 #priority {
   width: 100%;
@@ -125,7 +126,7 @@ textarea {
   color: gray;
 }
 
-.confirmBtn {
+.submitButton {
   height: 1.5rem;
   width: 5rem;
   border-radius: 20px;
@@ -334,23 +335,3 @@ textarea {
   background: aquamarine;
   display: grid;
 }
-
-
-
-
-
-#formDate {
-
-}
-
-.formDate {
-  align-self: center;
-  justify-content: center;
-}
-
-.formPriority {
-  align-self: center;
-  justify-self: center;
-}
-
-

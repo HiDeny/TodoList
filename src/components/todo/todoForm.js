@@ -4,36 +4,67 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 export default function todoForm(callback) {
-	const newTodoForm = document.createElement('form');
-	newTodoForm.setAttribute('id', 'todoForm');
-	newTodoForm.setAttribute('tabindex', '1');
-	newTodoForm.setAttribute('method', 'post');
-	newTodoForm.addEventListener('submit', (e) => {
+	const todoForm = createTodoForm();
+	console.log(todoForm);
+	todoForm.addEventListener('submit', (e) => {
 		e.preventDefault();
-		handleSubmit(callback, newTodoForm);
+		handleSubmit(callback, todoForm);
 	});
 
-	// Id
-	// input - hidden ?
-	// Cancel btn
-	const cancelBtn = document.createElement('button');
-	cancelBtn.classList = 'cancelForm';
-	cancelBtn.textContent = 'x';
-	cancelBtn.addEventListener('click', () => {
-		newTodoForm.remove();
+	//? Id input - hidden ?
+
+	const cancelButtonForm = createCancelButtonForm(todoForm, callback);
+	todoForm.append(cancelButtonForm);
+
+	const titleForm = createTitleForm();
+	todoForm.append(titleForm);
+
+	const notesForm = createNotesForm();
+	todoForm.append(notesForm);
+
+	const dueDateForm = createDateForm();
+	todoForm.append(dueDateForm);
+
+	//? Lists Select / Datalist element, populated with all lists and projects available
+	// const listsFrom = createListsForm(listsArr);
+	// todoForm.append(listsFrom);
+
+	const priorityForm = createPriorityForm();
+	todoForm.append(priorityForm);
+
+	const submitButton = createSubmitButton();
+	todoForm.append(submitButton);
+
+	return todoForm;
+}
+
+function createTodoForm() {
+	const todoForm = document.createElement('form');
+	todoForm.setAttribute('id', 'todoForm');
+	todoForm.setAttribute('tabindex', '1');
+	todoForm.setAttribute('method', 'post');
+
+	return todoForm;
+}
+
+function createCancelButtonForm(form, callback) {
+	const cancelButton = document.createElement('button');
+	cancelButton.classList = 'cancelForm';
+	cancelButton.textContent = 'x';
+	cancelButton.addEventListener('click', () => {
+		form.remove();
 	});
 
-	newTodoForm.addEventListener('keydown', () => {
-		handleEscapeKey(newTodoForm);
-		handleEnterKey(callback, newTodoForm);
+	form.addEventListener('keydown', () => {
+		handleEscapeKey(form);
+		handleEnterKey(callback, form);
 	});
 
-	newTodoForm.append(cancelBtn);
+	return cancelButton;
+}
 
-	// Title
-	const formTitleLabel = document.createElement('label');
-	formTitleLabel.className = 'formTitle';
-	formTitleLabel.setAttribute('for', 'formTitle');
+function createTitleForm() {
+	const formTitleLabel = createLabel('formTitle');
 
 	const formTitle = document.createElement('input');
 	formTitle.setAttribute('required', true);
@@ -43,12 +74,11 @@ export default function todoForm(callback) {
 	formTitle.setAttribute('placeholder', 'Title...');
 
 	formTitleLabel.append(formTitle);
-	newTodoForm.append(formTitleLabel);
+	return formTitleLabel;
+}
 
-	// Notes
-	const formNotesLabel = document.createElement('label');
-	formNotesLabel.className = 'formNotes';
-	formNotesLabel.setAttribute('for', 'formNotes');
+function createNotesForm() {
+	const formNotesLabel = createLabel('formNotes');
 
 	const formNotes = document.createElement('textarea');
 	formNotes.setAttribute('id', 'formNotes');
@@ -56,13 +86,11 @@ export default function todoForm(callback) {
 	formNotes.setAttribute('placeholder', 'Notes');
 
 	formNotesLabel.append(formNotes);
-	newTodoForm.append(formNotesLabel);
+	return formNotesLabel;
+}
 
-	// Due Date
-	const formDateLabel = document.createElement('label');
-	formDateLabel.className = 'formDate';
-	formDateLabel.setAttribute('for', 'formDate');
-	// formDateLabel.textContent = 'Due Date:';
+function createDateForm() {
+	const formDateLabel = createLabel('formDate');
 
 	const formDate = document.createElement('input');
 	formDate.setAttribute('id', 'formDate');
@@ -70,28 +98,41 @@ export default function todoForm(callback) {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
-	formDateLabel.append(formDate);
-	newTodoForm.append(formDateLabel);
-
 	flatpickr(formDate, {
 		minDate: 'today',
 		dateFormat: 'd M y',
 	});
-	// List/Project
-	// Select / Datalist element, populated with all lists and projects available
-	const formListOptionsLabel = document.createElement('label');
-	formListOptionsLabel.className = 'formLists';
-	formListOptionsLabel.setAttribute('for', 'formLists');
-	formListOptionsLabel.textContent = 'List:';
 
-	// Priority
-	const formPriorityLabel = document.createElement('label');
-	formPriorityLabel.className = 'formPriority';
-	formPriorityLabel.setAttribute('for', 'formPriority');
+	formDateLabel.append(formDate);
+	return formDateLabel;
+}
+
+function createListsForm(listsArr) {
+	const formListsLabel = createLabel('formLists');
+
+	const formLists = document.createElement('select');
+	formLists.setAttribute('id', 'formLists');
+	formLists.setAttribute('name', 'formLists');
+	formLists.className = 'formLists';
+
+	listsArr.forEach((list) => {
+		const optionElement = document.createElement('option');
+		optionElement.setAttribute('value', list);
+		optionElement.textContent = list.title;
+		formLists.append(optionElement);
+	});
+
+	formListsLabel.append(formLists);
+	return formListsLabel;
+}
+
+function createPriorityForm() {
+	const formPriorityLabel = createLabel('formPriority');
 
 	const formPriority = document.createElement('select');
 	formPriority.setAttribute('id', 'formPriority');
 	formPriority.setAttribute('name', 'formPriority');
+	formPriority.className = 'formPriority';
 
 	const placeholderPriority = document.createElement('option');
 	placeholderPriority.className = 'placeholderPri';
@@ -102,33 +143,47 @@ export default function todoForm(callback) {
 	placeholderPriority.textContent = 'Priority';
 	formPriority.append(placeholderPriority);
 
-	const lowPriority = document.createElement('option');
-	lowPriority.setAttribute('value', 'Low');
-	lowPriority.textContent = 'Low';
-	formPriority.append(lowPriority);
+	const priorityOptions = ['High', 'Medium', 'Low'];
 
-	const mediumPriority = document.createElement('option');
-	mediumPriority.setAttribute('value', 'Medium');
-	mediumPriority.textContent = 'Medium';
-	formPriority.append(mediumPriority);
-
-	const highPriority = document.createElement('option');
-	highPriority.setAttribute('value', 'High');
-	highPriority.textContent = 'High';
-	formPriority.append(highPriority);
+	priorityOptions.forEach((option) => {
+		const optionElement = document.createElement('option');
+		optionElement.setAttribute('value', option);
+		optionElement.textContent = option;
+		formPriority.append(optionElement);
+	});
 
 	formPriorityLabel.append(formPriority);
-	newTodoForm.append(formPriorityLabel);
+	return formPriorityLabel;
+}
 
-	// Submit button
-	const confirmBtn = document.createElement('button');
-	confirmBtn.className = 'confirmBtn';
-	confirmBtn.setAttribute('type', 'submit');
-	confirmBtn.textContent = 'Add!';
+function createSubmitButton(form, callback) {
+	const submitButton = document.createElement('button');
+	submitButton.className = 'submitButton';
+	submitButton.setAttribute('type', 'submit');
+	submitButton.textContent = 'Add!';
 
-	newTodoForm.append(confirmBtn);
+	return submitButton;
+}
 
-	return newTodoForm;
+function createLabel(name) {
+	const label = document.createElement('label');
+	label.className = name;
+	label.setAttribute('for', name);
+
+	return label;
+}
+
+function handleSubmit(callback, formDiv) {
+	const title = formDiv.elements['formTitle'].value;
+	const notes = formDiv.elements['formNotes'].value;
+	const dueDate = formDiv.elements['formDate'].value;
+	const priority = formDiv.elements['formPriority'].value;
+	console.log(priority);
+
+	const newTodo = createTodo(title, notes, dueDate, priority);
+
+	callback(newTodo);
+	formDiv.remove();
 }
 
 function handleEnterKey(callback, div) {
@@ -143,17 +198,4 @@ function handleEscapeKey(div) {
 		div.remove();
 		div.removeEventListener('keydown', handleEscapeKey);
 	}
-}
-
-function handleSubmit(callback, formDiv) {
-	// const title = formDiv.elements['formTitle'].value ? formDiv.elements['formTitle'].value : 'New Task...';
-	const title = formDiv.elements['formTitle'].value;
-	const notes = formDiv.elements['formNotes'].value;
-	const dueDate = formDiv.elements['formDate'].value;
-	const priority = formDiv.elements['formPriority'].value;
-
-	const newTodo = createTodo(title, notes, dueDate, priority);
-
-	callback(newTodo);
-	formDiv.remove();
 }

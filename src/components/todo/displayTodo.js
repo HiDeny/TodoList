@@ -1,13 +1,15 @@
 import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
+
 import { createTodoEditMode } from './updateTodo.js';
-import { moveFinishedTodo, undoFinishedTodo } from '../list/updateList';
+
 import { refreshList, refreshCompleted } from '../list/displayList';
+import { moveFinishedTodo, undoFinishedTodo } from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
 
 	const todoCard = createTodoCard(todo, todoLi);
-	todoLi.append(todoCard)
+	todoLi.append(todoCard);
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
@@ -21,13 +23,11 @@ function displayTodoCard(todo) {
 		todoCardEdit.focus();
 	});
 
-	return todoLi ;
+	return todoLi;
 }
 
 function createTodoCard(todo, todoLi) {
-	const todoCard = document.createElement('div');
-	todoCard.setAttribute('tabindex', '0');
-	todoCard.className = 'todoCard';
+	const todoCard = createCard();
 
 	const cancelButton = createCancelButton(todoCard);
 	todoCard.append(cancelButton);
@@ -42,6 +42,14 @@ function createTodoCard(todo, todoLi) {
 	todoCard.append(dueDate);
 
 	checkPriority(todo, todoCard);
+
+	return todoCard;
+}
+
+function createCard() {
+	const todoCard = document.createElement('div');
+	todoCard.setAttribute('tabindex', '0');
+	todoCard.className = 'todoCard';
 
 	return todoCard;
 }
@@ -121,7 +129,5 @@ function handleCheckboxClick(todo) {
 		refreshList(todo.list);
 	}
 }
-
-
 
 export { displayTodoCard };

@@ -1,12 +1,12 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { displayTodoCard } from './displayTodo.js';
+import { refreshList, refreshCompleted } from '../list/displayList';
 import {
 	replaceOldTodo,
 	moveFinishedTodo,
 	undoFinishedTodo,
 } from '../list/updateList';
-import { refreshList, refreshCompleted } from '../list/displayList';
 
 function createTodoEditMode(todo) {
 	const updatedTodo = todo;
@@ -25,9 +25,7 @@ function createTodoEditMode(todo) {
 }
 
 function createTodoEditCard(todo, todoLi) {
-	const todoCardEdit = document.createElement('div');
-	todoCardEdit.setAttribute('tabindex', '1');
-	todoCardEdit.className = 'todoCardEdit';
+	const todoCardEdit = createTodoCardEdit();
 
 	const cancelButton = createCancelButton(todoCardEdit);
 	todoCardEdit.append(cancelButton);
@@ -47,7 +45,15 @@ function createTodoEditCard(todo, todoLi) {
 	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
 
-    return todoCardEdit;
+	return todoCardEdit;
+}
+
+function createTodoCardEdit() {
+	const todoCardEdit = document.createElement('div');
+	todoCardEdit.setAttribute('tabindex', '1');
+	todoCardEdit.className = 'todoCardEdit';
+
+	return todoCardEdit;
 }
 
 function createCancelButton(todoEditCard) {
@@ -124,16 +130,12 @@ function createPrioritySelector(todo) {
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
 
-	const priorityOptions = [
-		{ value: 'Low', text: 'Low' },
-		{ value: 'Medium', text: 'Medium' },
-		{ value: 'High', text: 'High' },
-	];
+	const priorityOptions = ['High', 'Medium', 'Low'];
 
 	priorityOptions.forEach((option) => {
 		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', option.value);
-		optionElement.textContent = option.text;
+		optionElement.setAttribute('value', option);
+		optionElement.textContent = option;
 		editPriority.append(optionElement);
 	});
 
@@ -143,7 +145,7 @@ function createPrioritySelector(todo) {
 		todo.priority = event.target.value;
 	});
 
-    return editPriority;
+	return editPriority;
 }
 
 function handleCheckboxClick(todo) {
