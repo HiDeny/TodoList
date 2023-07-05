@@ -16,10 +16,10 @@ import todoForm from '../components/todo/todoForm';
 import { displayTodo, displayTodoEdit } from '../components/todo/displayTodo';
 
 export default function generalController() {
-	document.addEventListener('click', (e) => {
-		console.log(e.target);
-	})
-	
+	// document.addEventListener('click', (e) => {
+	// 	console.log(e.target);
+	// });
+
 	// Title
 	const title = document.createElement('h1');
 	title.className = 'mainTitle';
@@ -45,7 +45,7 @@ export default function generalController() {
 			const newTaskForm = todoForm(formReturn);
 			container.appendChild(newTaskForm);
 			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-			titleInput.focus()
+			titleInput.focus();
 		}
 	});
 

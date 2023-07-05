@@ -1,5 +1,3 @@
-import generalController from "./controller/controller";
-
-
+import generalController from './controller/controller';
 
 generalController();

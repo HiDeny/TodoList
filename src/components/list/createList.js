@@ -1,5 +1,3 @@
-import createTodo from '../todo/createTodo';
-
 function createList(title) {
 	const todosArr = [];
 	const completedTodos = [];
@@ -12,6 +10,3 @@ function createList(title) {
 const listsArr = [];
 
 export { createList, listsArr };
-
-//* Todo - Incomplete tasks
-//* Complete - Complete tasks

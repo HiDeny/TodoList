@@ -88,11 +88,11 @@ body {
 }
 
 
-.formDesc {
+.formNotes {
   grid-area: 2 / 1 / 4 / 4;
 }
   
-#formDesc {
+#formNotes {
   width: 90%;
   margin: auto;
   height: 60%;
@@ -138,7 +138,7 @@ textarea {
   
 
 #formTitle, 
-#formDesc, 
+#formNotes, 
 #formDate, 
 #formPriority {
   border-radius: 5px;
@@ -237,14 +237,14 @@ textarea {
 
 .todoTitleEdit,
 .todoDueDateEdit,
-.todoDescriptionEdit,
+.todoNotesEdit,
 .todoPriorityEdit,
 .cancelForm {
   background: transparent;
   border: 0;
 }
 
-.todoDescriptionEdit,
+.todoNotesEdit,
 .todoDueDateEdit,
 .todoPriorityEdit {
   font-size: 0.8rem;
@@ -262,7 +262,7 @@ textarea {
 
 }
   
-.todoDescriptionEdit {
+.todoNotesEdit {
   grid-column: 2 / span 4;
   grid-row: 2 / span 2;
 }

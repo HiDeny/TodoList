@@ -45,18 +45,18 @@ export default function todoForm(callback) {
 	formTitleLabel.append(formTitle);
 	newTodoForm.append(formTitleLabel);
 
-	// Description
-	const formDescLabel = document.createElement('label');
-	formDescLabel.className = 'formDesc';
-	formDescLabel.setAttribute('for', 'formDesc');
+	// Notes
+	const formNotesLabel = document.createElement('label');
+	formNotesLabel.className = 'formNotes';
+	formNotesLabel.setAttribute('for', 'formNotes');
 
-	const formDesc = document.createElement('textarea');
-	formDesc.setAttribute('id', 'formDesc');
-	formDesc.setAttribute('name', 'formDesc');
-	formDesc.setAttribute('placeholder', 'Description...');
+	const formNotes = document.createElement('textarea');
+	formNotes.setAttribute('id', 'formNotes');
+	formNotes.setAttribute('name', 'formNotes');
+	formNotes.setAttribute('placeholder', 'Notes');
 
-	formDescLabel.append(formDesc);
-	newTodoForm.append(formDescLabel);
+	formNotesLabel.append(formNotes);
+	newTodoForm.append(formNotesLabel);
 
 	// Due Date
 	const formDateLabel = document.createElement('label');
@@ -94,14 +94,13 @@ export default function todoForm(callback) {
 	formPriority.setAttribute('name', 'formPriority');
 
 	const placeholderPriority = document.createElement('option');
-	placeholderPriority.className = 'placeholderPri'
+	placeholderPriority.className = 'placeholderPri';
 	placeholderPriority.setAttribute('value', '');
 	placeholderPriority.setAttribute('selected', true);
 	placeholderPriority.setAttribute('disabled', true);
 	placeholderPriority.setAttribute('hidden', true);
 	placeholderPriority.textContent = 'Priority';
 	formPriority.append(placeholderPriority);
-
 
 	const lowPriority = document.createElement('option');
 	lowPriority.setAttribute('value', 'Low');
@@ -135,7 +134,7 @@ export default function todoForm(callback) {
 function handleEnterKey(callback, div) {
 	if (event.code === 'Enter') {
 		handleSubmit(callback, div);
-        div.removeEventListener('keydown', handleEnterKey)
+		div.removeEventListener('keydown', handleEnterKey);
 	}
 }
 
@@ -149,11 +148,11 @@ function handleEscapeKey(div) {
 function handleSubmit(callback, formDiv) {
 	// const title = formDiv.elements['formTitle'].value ? formDiv.elements['formTitle'].value : 'New Task...';
 	const title = formDiv.elements['formTitle'].value;
-	const description = formDiv.elements['formDesc'].value;
+	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
 
-	const newTodo = createTodo(title, description, dueDate, priority);
+	const newTodo = createTodo(title, notes, dueDate, priority);
 
 	callback(newTodo);
 	formDiv.remove();

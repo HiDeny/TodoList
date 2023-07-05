@@ -1,4 +1,4 @@
-import { displayTodo } from "../todo/displayTodo";
+import { displayTodo } from '../todo/displayTodo';
 
 function displayFreshList(list) {
 	const completeList = document.createElement('div');
@@ -48,11 +48,10 @@ function refreshList(list) {
 		const currentTodo = displayTodo(todo);
 		newListUl.appendChild(currentTodo.todoLi);
 	});
-	
+
 	const oldUl = document.querySelector(`.${list.title}Ul`);
 	oldUl.replaceWith(newListUl);
 }
-
 
 function refreshCompleted(list) {
 	console.log(list);
@@ -64,6 +63,5 @@ function refreshCompleted(list) {
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
 	oldUlCompleted.replaceWith(newCompletedListUl);
 }
-
 
 export { displayFreshList, refreshList, refreshCompleted };
