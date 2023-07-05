@@ -40,13 +40,9 @@ function displayFreshList(list) {
 }
 
 function refreshList(list) {
-	console.log(list);
 	const newListUl = displayFreshList(list).listUl;
-	console.log(newListUl);
 	list.todosArr.forEach((todo) => {
-		//? todo.listIndex = list.todosArr.indexOf(todo);
-		const currentTodo = displayTodoCard(todo);
-		newListUl.appendChild(currentTodo.todoLi);
+		newListUl.appendChild(displayTodoCard(todo));
 	});
 
 	const oldUl = document.querySelector(`.${list.title}Ul`);
@@ -54,11 +50,9 @@ function refreshList(list) {
 }
 
 function refreshCompleted(list) {
-	console.log(list);
 	const newCompletedListUl = displayFreshList(list).listUlCompleted;
 	list.completedTodos.forEach((todo) => {
-		const currentTodo = displayTodoCard(todo);
-		newCompletedListUl.appendChild(currentTodo.todoLi);
+		newCompletedListUl.appendChild(displayTodoCard(todo));
 	});
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
 	oldUlCompleted.replaceWith(newCompletedListUl);

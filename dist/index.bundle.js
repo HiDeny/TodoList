@@ -7213,13 +7213,9 @@ function displayFreshList(list) {
 }
 
 function refreshList(list) {
-	console.log(list);
 	const newListUl = displayFreshList(list).listUl;
-	console.log(newListUl);
 	list.todosArr.forEach((todo) => {
-		//? todo.listIndex = list.todosArr.indexOf(todo);
-		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo);
-		newListUl.appendChild(currentTodo.todoLi);
+		newListUl.appendChild((0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo));
 	});
 
 	const oldUl = document.querySelector(`.${list.title}Ul`);
@@ -7227,11 +7223,9 @@ function refreshList(list) {
 }
 
 function refreshCompleted(list) {
-	console.log(list);
 	const newCompletedListUl = displayFreshList(list).listUlCompleted;
 	list.completedTodos.forEach((todo) => {
-		const currentTodo = (0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo);
-		newCompletedListUl.appendChild(currentTodo.todoLi);
+		newCompletedListUl.appendChild((0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo));
 	});
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
 	oldUlCompleted.replaceWith(newCompletedListUl);
@@ -7686,8 +7680,7 @@ function createTodoEditMode(todo) {
 	todoLi.append(todoEditCard);
 
 	todoEditCard.addEventListener('blur', () => {
-		const todoCard = (0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(updatedTodo).todoLi;
-		todoLi.replaceWith(todoCard);
+		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(updatedTodo));
 		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.replaceOldTodo)(todo, updatedTodo);
 	});
 

@@ -17,8 +17,7 @@ function createTodoEditMode(todo) {
 	todoLi.append(todoEditCard);
 
 	todoEditCard.addEventListener('blur', () => {
-		const todoCard = displayTodoCard(updatedTodo).todoLi;
-		todoLi.replaceWith(todoCard);
+		todoLi.replaceWith(displayTodoCard(updatedTodo));
 		replaceOldTodo(todo, updatedTodo);
 	});
 
