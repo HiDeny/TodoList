@@ -8,6 +8,7 @@ import { addTodoList } from '../components/list/updateList';
 import todoForm from '../components/todo/todoForm';
 
 export default function generalController() {
+
 	// Title
 	const title = document.createElement('h1');
 	title.className = 'mainTitle';

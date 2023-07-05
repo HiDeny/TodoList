@@ -7305,6 +7305,8 @@ function createTodo(
 }
 
 
+
+
 /***/ }),
 
 /***/ "./src/components/todo/displayTodo.js":
@@ -7481,11 +7483,6 @@ __webpack_require__.r(__webpack_exports__);
 
 function todoForm(callback) {
 	const todoForm = createTodoForm();
-	console.log(todoForm);
-	todoForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-		handleSubmit(callback, todoForm);
-	});
 
 	//? Id input - hidden ?
 
@@ -7511,6 +7508,16 @@ function todoForm(callback) {
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
 
+	todoForm.addEventListener('submit', (e) => {
+		e.preventDefault();
+		handleSubmit(callback, todoForm);
+	});
+
+	todoForm.addEventListener('keydown', (event) => {
+		handleEnterKey(event, todoForm, callback);
+		handleEscapeKey(event, todoForm);
+	});
+
 	return todoForm;
 }
 
@@ -7523,17 +7530,12 @@ function createTodoForm() {
 	return todoForm;
 }
 
-function createCancelButtonForm(form, callback) {
+function createCancelButtonForm(form) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
 		form.remove();
-	});
-
-	form.addEventListener('keydown', () => {
-		handleEscapeKey(form);
-		handleEnterKey(callback, form);
 	});
 
 	return cancelButton;
@@ -7662,14 +7664,14 @@ function handleSubmit(callback, formDiv) {
 	formDiv.remove();
 }
 
-function handleEnterKey(callback, div) {
+function handleEnterKey(event, div, callback) {
 	if (event.code === 'Enter') {
 		handleSubmit(callback, div);
 		div.removeEventListener('keydown', handleEnterKey);
 	}
 }
 
-function handleEscapeKey(div) {
+function handleEscapeKey(event, div) {
 	if (event.code === 'Escape') {
 		div.remove();
 		div.removeEventListener('keydown', handleEscapeKey);
@@ -7701,16 +7703,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function createTodoEditMode(todo) {
-	const updatedTodo = todo;
+	const editedTodo = Object.assign({}, todo);
 
 	const todoLi = document.createElement('li');
 
-	const todoEditCard = createTodoEditCard(updatedTodo, todoLi);
+	const todoEditCard = createTodoEditCard(editedTodo, todoLi);
 	todoLi.append(todoEditCard);
 
-	todoEditCard.addEventListener('blur', () => {
-		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(updatedTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, updatedTodo);
+	todoEditCard.addEventListener('keydown', (event) => {
+		handleEnterKey(event, todoLi, editedTodo, todo);
+		// handleEscapeKey(event, todoForm);
 	});
 
 	return todoLi;
@@ -7852,6 +7854,24 @@ function handleCheckboxClick(todo) {
 	}
 }
 
+function handleEnterKey(event, todoLi, editedTodo, todo) {
+	if (event.code === 'Enter' && !event.shiftKey) {
+		document.activeElement.blur();
+		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+	}
+}
+function handleMouseLeave(event, todoLi, editedTodo, todo) {
+	todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
+	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+}
+
+function handleEscapeKey(event, todoLi, todo) {
+	if (event.code === 'Escape') {
+		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(todo));
+	}
+}
+
 
 
 
@@ -7883,6 +7903,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function generalController() {
+
 	// Title
 	const title = document.createElement('h1');
 	title.className = 'mainTitle';

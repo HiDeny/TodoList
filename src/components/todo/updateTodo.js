@@ -9,16 +9,16 @@ import {
 } from '../list/updateList';
 
 function createTodoEditMode(todo) {
-	const updatedTodo = todo;
+	const editedTodo = Object.assign({}, todo);
 
 	const todoLi = document.createElement('li');
 
-	const todoEditCard = createTodoEditCard(updatedTodo, todoLi);
+	const todoEditCard = createTodoEditCard(editedTodo, todoLi);
 	todoLi.append(todoEditCard);
 
-	todoEditCard.addEventListener('blur', () => {
-		todoLi.replaceWith(displayTodoCard(updatedTodo));
-		replaceOldTodo(todo, updatedTodo);
+	todoEditCard.addEventListener('keydown', (event) => {
+		handleEnterKey(event, todoLi, editedTodo, todo);
+		// handleEscapeKey(event, todoForm);
 	});
 
 	return todoLi;
@@ -157,6 +157,24 @@ function handleCheckboxClick(todo) {
 		todo.done = false;
 		undoFinishedTodo(todo.list);
 		refreshList(todo.list);
+	}
+}
+
+function handleEnterKey(event, todoLi, editedTodo, todo) {
+	if (event.code === 'Enter' && !event.shiftKey) {
+		document.activeElement.blur();
+		todoLi.replaceWith(displayTodoCard(editedTodo));
+		replaceOldTodo(todo, editedTodo);
+	}
+}
+function handleMouseLeave(event, todoLi, editedTodo, todo) {
+	todoLi.replaceWith(displayTodoCard(editedTodo));
+	replaceOldTodo(todo, editedTodo);
+}
+
+function handleEscapeKey(event, todoLi, todo) {
+	if (event.code === 'Escape') {
+		todoLi.replaceWith(displayTodoCard(todo));
 	}
 }
 

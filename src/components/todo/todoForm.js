@@ -5,11 +5,6 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 export default function todoForm(callback) {
 	const todoForm = createTodoForm();
-	console.log(todoForm);
-	todoForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-		handleSubmit(callback, todoForm);
-	});
 
 	//? Id input - hidden ?
 
@@ -35,6 +30,16 @@ export default function todoForm(callback) {
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
 
+	todoForm.addEventListener('submit', (e) => {
+		e.preventDefault();
+		handleSubmit(callback, todoForm);
+	});
+
+	todoForm.addEventListener('keydown', (event) => {
+		handleEnterKey(event, todoForm, callback);
+		handleEscapeKey(event, todoForm);
+	});
+
 	return todoForm;
 }
 
@@ -47,17 +52,12 @@ function createTodoForm() {
 	return todoForm;
 }
 
-function createCancelButtonForm(form, callback) {
+function createCancelButtonForm(form) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
 		form.remove();
-	});
-
-	form.addEventListener('keydown', () => {
-		handleEscapeKey(form);
-		handleEnterKey(callback, form);
 	});
 
 	return cancelButton;
@@ -186,14 +186,14 @@ function handleSubmit(callback, formDiv) {
 	formDiv.remove();
 }
 
-function handleEnterKey(callback, div) {
+function handleEnterKey(event, div, callback) {
 	if (event.code === 'Enter') {
 		handleSubmit(callback, div);
 		div.removeEventListener('keydown', handleEnterKey);
 	}
 }
 
-function handleEscapeKey(div) {
+function handleEscapeKey(event, div) {
 	if (event.code === 'Escape') {
 		div.remove();
 		div.removeEventListener('keydown', handleEscapeKey);
