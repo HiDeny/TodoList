@@ -7238,7 +7238,7 @@ function addTodoList(todo, list) {
 }
 
 function removeTodoList(todo, list) {
-	list.todosArr.splice(list.todosArr.indexOf(todo), 1);
+	list.splice(list.indexOf(todo), 1);
 }
 
 function moveTodoToDiffList(todo, orgList, newList) {
@@ -7341,23 +7341,24 @@ function displayTodoCard(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
-		// console.log(event.target.className);
-		if (event.target.className === 'todoCheck') {
+		console.log(event.target);
+		if (event.target.className === 'todoCheck' || event.target.className === 'deleteTodo') {
 			return;
 		}
 		const todoCardEdit = (0,_updateTodo_js__WEBPACK_IMPORTED_MODULE_0__.createTodoEditMode)(todo);
-		// console.log(todoCardEdit);
 		todoLi.replaceWith(todoCardEdit);
 		todoCardEdit.focus();
 	});
 
+	
+	removeFlatpickrDiv();
 	return todoLi;
 }
 
 function createTodoCard(todo, todoLi) {
 	const todoCard = createCard();
 
-	const cancelButton = createCancelButton(todoCard);
+	const cancelButton = createCancelButton(todoCard, todo);
 	todoCard.append(cancelButton);
 
 	const checkBox = createCheckBox(todo, todoLi);
@@ -7382,11 +7383,13 @@ function createCard() {
 	return todoCard;
 }
 
-function createCancelButton(todoCard) {
+function createCancelButton(todoCard, todo) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
+		handleCancelButton(todo);
+		console.log(todo.list);
 		todoCard.remove();
 	});
 
@@ -7456,6 +7459,22 @@ function handleCheckboxClick(todo) {
 		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.undoFinishedTodo)(todo.list);
 		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(todo.list);
 	}
+}
+
+function handleCancelButton(todo) {
+	if (todo.done === false) {
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.removeTodoList)(todo, todo.list.todosArr);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
+	} else if (todo.done === true) {
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.removeTodoList)(todo, todo.list.completedTodos);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
+	}
+}
+
+function removeFlatpickrDiv() {
+	const flatpickrDiv = document.querySelector('.flatpickr-calendar');
+	if(!flatpickrDiv) return;
+	flatpickrDiv.remove();
 }
 
 
@@ -7656,10 +7675,9 @@ function handleSubmit(callback, formDiv) {
 	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
-	console.log(priority);
 
 	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority);
-
+	
 	callback(newTodo);
 	formDiv.remove();
 }
@@ -7677,7 +7695,6 @@ function handleEscapeKey(event, div) {
 		div.removeEventListener('keydown', handleEscapeKey);
 	}
 }
-
 
 /***/ }),
 
@@ -7703,6 +7720,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function createTodoEditMode(todo) {
+	const originalTodo = Object.assign({}, todo);
 	const editedTodo = Object.assign({}, todo);
 
 	const todoLi = document.createElement('li');
@@ -7712,7 +7730,7 @@ function createTodoEditMode(todo) {
 
 	todoEditCard.addEventListener('keydown', (event) => {
 		handleEnterKey(event, todoLi, editedTodo, todo);
-		// handleEscapeKey(event, todoForm);
+		handleEscapeKey(event, todoLi, originalTodo, todo);
 	});
 
 	return todoLi;
@@ -7721,7 +7739,7 @@ function createTodoEditMode(todo) {
 function createTodoEditCard(todo, todoLi) {
 	const todoCardEdit = createTodoCardEdit();
 
-	const cancelButton = createCancelButton(todoCardEdit);
+	const cancelButton = createCancelButton(todoCardEdit, todo);
 	todoCardEdit.append(cancelButton);
 
 	const checkBox = createCheckBox(todo, todoLi);
@@ -7750,11 +7768,13 @@ function createTodoCardEdit() {
 	return todoCardEdit;
 }
 
-function createCancelButton(todoEditCard) {
+function createCancelButton(todoEditCard, todo) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodoEdit';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
+		handleCancelButton(todo);
+		console.log(todo.list);
 		todoEditCard.remove();
 	});
 
@@ -7843,6 +7863,7 @@ function createPrioritySelector(todo) {
 }
 
 function handleCheckboxClick(todo) {
+	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
 		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.moveFinishedTodo)(todo.list);
@@ -7854,25 +7875,38 @@ function handleCheckboxClick(todo) {
 	}
 }
 
+function handleCancelButton(todo) {
+	if (todo.done === false) {
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, todo.list.todosArr);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
+	} else if (todo.done === true) {
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, todo.list.completedTodos);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
+	}
+}
+
 function handleEnterKey(event, todoLi, editedTodo, todo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
-		document.activeElement.blur();
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
 		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+		
 	}
 }
-function handleMouseLeave(event, todoLi, editedTodo, todo) {
-	todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
-	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
-}
 
-function handleEscapeKey(event, todoLi, todo) {
+function handleEscapeKey(event, todoLi, originalTodo, todo) {
 	if (event.code === 'Escape') {
-		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(todo));
+		console.log(originalTodo === todo);
+		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(originalTodo));
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, originalTodo);
 	}
 }
 
 
+
+// function handleMouseLeave(event, todoLi, editedTodo, todo) {
+// 	todoLi.replaceWith(displayTodoCard(editedTodo));
+// 	replaceOldTodo(todo, editedTodo);
+// }
 
 
 /***/ }),
