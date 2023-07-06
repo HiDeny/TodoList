@@ -3,7 +3,7 @@ import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 import { createTodoEditMode } from './updateTodo.js';
 
 import { refreshList, refreshCompleted } from '../list/displayList';
-import { moveFinishedTodo, undoFinishedTodo } from '../list/updateList';
+import { moveFinishedTodo, undoFinishedTodo, removeTodoList } from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -13,23 +13,24 @@ function displayTodoCard(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
-		// console.log(event.target.className);
-		if (event.target.className === 'todoCheck') {
+		console.log(event.target);
+		if (event.target.className === 'todoCheck' || event.target.className === 'deleteTodo') {
 			return;
 		}
 		const todoCardEdit = createTodoEditMode(todo);
-		// console.log(todoCardEdit);
 		todoLi.replaceWith(todoCardEdit);
 		todoCardEdit.focus();
 	});
 
+	
+	removeFlatpickrDiv();
 	return todoLi;
 }
 
 function createTodoCard(todo, todoLi) {
 	const todoCard = createCard();
 
-	const cancelButton = createCancelButton(todoCard);
+	const cancelButton = createCancelButton(todoCard, todo);
 	todoCard.append(cancelButton);
 
 	const checkBox = createCheckBox(todo, todoLi);
@@ -54,11 +55,13 @@ function createCard() {
 	return todoCard;
 }
 
-function createCancelButton(todoCard) {
+function createCancelButton(todoCard, todo) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
+		handleCancelButton(todo);
+		console.log(todo.list);
 		todoCard.remove();
 	});
 
@@ -128,6 +131,22 @@ function handleCheckboxClick(todo) {
 		undoFinishedTodo(todo.list);
 		refreshList(todo.list);
 	}
+}
+
+function handleCancelButton(todo) {
+	if (todo.done === false) {
+		removeTodoList(todo, todo.list.todosArr);
+		refreshCompleted(todo.list);
+	} else if (todo.done === true) {
+		removeTodoList(todo, todo.list.completedTodos);
+		refreshCompleted(todo.list);
+	}
+}
+
+function removeFlatpickrDiv() {
+	const flatpickrDiv = document.querySelector('.flatpickr-calendar');
+	if(!flatpickrDiv) return;
+	flatpickrDiv.remove();
 }
 
 export { displayTodoCard };

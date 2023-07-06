@@ -6,9 +6,11 @@ import {
 	replaceOldTodo,
 	moveFinishedTodo,
 	undoFinishedTodo,
+	removeTodoList
 } from '../list/updateList';
 
 function createTodoEditMode(todo) {
+	const originalTodo = Object.assign({}, todo);
 	const editedTodo = Object.assign({}, todo);
 
 	const todoLi = document.createElement('li');
@@ -18,7 +20,7 @@ function createTodoEditMode(todo) {
 
 	todoEditCard.addEventListener('keydown', (event) => {
 		handleEnterKey(event, todoLi, editedTodo, todo);
-		// handleEscapeKey(event, todoForm);
+		handleEscapeKey(event, todoLi, originalTodo, todo);
 	});
 
 	return todoLi;
@@ -27,7 +29,7 @@ function createTodoEditMode(todo) {
 function createTodoEditCard(todo, todoLi) {
 	const todoCardEdit = createTodoCardEdit();
 
-	const cancelButton = createCancelButton(todoCardEdit);
+	const cancelButton = createCancelButton(todoCardEdit, todo);
 	todoCardEdit.append(cancelButton);
 
 	const checkBox = createCheckBox(todo, todoLi);
@@ -56,11 +58,13 @@ function createTodoCardEdit() {
 	return todoCardEdit;
 }
 
-function createCancelButton(todoEditCard) {
+function createCancelButton(todoEditCard, todo) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodoEdit';
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
+		handleCancelButton(todo);
+		console.log(todo.list);
 		todoEditCard.remove();
 	});
 
@@ -149,6 +153,7 @@ function createPrioritySelector(todo) {
 }
 
 function handleCheckboxClick(todo) {
+	replaceOldTodo(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
 		moveFinishedTodo(todo.list);
@@ -160,22 +165,35 @@ function handleCheckboxClick(todo) {
 	}
 }
 
-function handleEnterKey(event, todoLi, editedTodo, todo) {
-	if (event.code === 'Enter' && !event.shiftKey) {
-		document.activeElement.blur();
-		todoLi.replaceWith(displayTodoCard(editedTodo));
-		replaceOldTodo(todo, editedTodo);
+function handleCancelButton(todo) {
+	if (todo.done === false) {
+		removeTodoList(todo, todo.list.todosArr);
+		refreshCompleted(todo.list);
+	} else if (todo.done === true) {
+		removeTodoList(todo, todo.list.completedTodos);
+		refreshCompleted(todo.list);
 	}
 }
-function handleMouseLeave(event, todoLi, editedTodo, todo) {
-	todoLi.replaceWith(displayTodoCard(editedTodo));
-	replaceOldTodo(todo, editedTodo);
+
+function handleEnterKey(event, todoLi, editedTodo, todo) {
+	if (event.code === 'Enter' && !event.shiftKey) {
+		todoLi.replaceWith(displayTodoCard(editedTodo));
+		replaceOldTodo(todo, editedTodo);
+		
+	}
 }
 
-function handleEscapeKey(event, todoLi, todo) {
+function handleEscapeKey(event, todoLi, originalTodo, todo) {
 	if (event.code === 'Escape') {
-		todoLi.replaceWith(displayTodoCard(todo));
+		console.log(originalTodo === todo);
+		todoLi.replaceWith(displayTodoCard(originalTodo));
+		replaceOldTodo(todo, originalTodo);
 	}
 }
 
 export { createTodoEditMode };
+
+// function handleMouseLeave(event, todoLi, editedTodo, todo) {
+// 	todoLi.replaceWith(displayTodoCard(editedTodo));
+// 	replaceOldTodo(todo, editedTodo);
+// }

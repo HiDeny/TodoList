@@ -178,10 +178,9 @@ function handleSubmit(callback, formDiv) {
 	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
-	console.log(priority);
 
 	const newTodo = createTodo(title, notes, dueDate, priority);
-
+	
 	callback(newTodo);
 	formDiv.remove();
 }
