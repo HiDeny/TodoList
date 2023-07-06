@@ -7,20 +7,19 @@ import { addTodoList } from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
 
+import { sidebarMenu } from '../sidebar/sidedar';
+
 export default function generalController() {
+	// Header
+	const headerDiv = document.createElement('header');
+	document.body.append(headerDiv);
 
 	// Title
 	const title = document.createElement('h1');
 	title.className = 'mainTitle';
 	title.textContent = 'TodoList';
 
-	document.body.appendChild(title);
-
-	// Container
-	const container = document.createElement('div');
-	container.className = 'container';
-
-	document.body.appendChild(container);
+	headerDiv.appendChild(title);
 
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
@@ -38,13 +37,38 @@ export default function generalController() {
 		}
 	});
 
-	document.body.appendChild(addTodoBtn);
-
 	function formReturn(newTodo) {
 		addTodoList(newTodo, inbox);
 		refreshList(inbox);
 	}
 
+	headerDiv.prepend(addTodoBtn);
+
+	// Menu Button
+	const menuButton = document.createElement('button');
+	menuButton.className = 'hamburger';
+	menuButton.textContent = 'MENU';
+	menuButton.addEventListener('click', toggleSidebar);
+
+	headerDiv.append(menuButton);
+
+	// Container
+	const container = document.createElement('div');
+	container.className = 'container';
+
+	document.body.appendChild(container);
+
+	// Sidebar
+	const sidebar = sidebarMenu();
+	container.append(sidebar);
+
+	function toggleSidebar() {
+		if (sidebar.classList.contains('showSidebar')) {
+			sidebar.classList.remove('showSidebar');
+		} else {
+			sidebar.classList.add('showSidebar');
+		}
+	}
 	//* List stuff
 
 	// Inbox - list

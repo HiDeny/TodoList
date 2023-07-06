@@ -3,7 +3,11 @@ import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 import { createTodoEditMode } from './updateTodo.js';
 
 import { refreshList, refreshCompleted } from '../list/displayList';
-import { moveFinishedTodo, undoFinishedTodo, removeTodoList } from '../list/updateList';
+import {
+	moveFinishedTodo,
+	undoFinishedTodo,
+	removeTodoList,
+} from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -13,8 +17,10 @@ function displayTodoCard(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
-		console.log(event.target);
-		if (event.target.className === 'todoCheck' || event.target.className === 'deleteTodo') {
+		if (
+			event.target.className === 'todoCheck' ||
+			event.target.className === 'deleteTodo'
+		) {
 			return;
 		}
 		const todoCardEdit = createTodoEditMode(todo);
@@ -22,7 +28,6 @@ function displayTodoCard(todo) {
 		todoCardEdit.focus();
 	});
 
-	
 	removeFlatpickrDiv();
 	return todoLi;
 }
@@ -61,7 +66,6 @@ function createCancelButton(todoCard, todo) {
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
 		handleCancelButton(todo);
-		console.log(todo.list);
 		todoCard.remove();
 	});
 
@@ -145,7 +149,7 @@ function handleCancelButton(todo) {
 
 function removeFlatpickrDiv() {
 	const flatpickrDiv = document.querySelector('.flatpickr-calendar');
-	if(!flatpickrDiv) return;
+	if (!flatpickrDiv) return;
 	flatpickrDiv.remove();
 }
 

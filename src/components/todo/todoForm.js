@@ -1,4 +1,5 @@
 import createTodo from './createTodo';
+import { createList, listsArr } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -21,8 +22,8 @@ export default function todoForm(callback) {
 	todoForm.append(dueDateForm);
 
 	//? Lists Select / Datalist element, populated with all lists and projects available
-	// const listsFrom = createListsForm(listsArr);
-	// todoForm.append(listsFrom);
+	const listsFrom = createListsForm(listsArr);
+	todoForm.append(listsFrom);
 
 	const priorityForm = createPriorityForm();
 	todoForm.append(priorityForm);
@@ -108,22 +109,22 @@ function createDateForm() {
 }
 
 function createListsForm(listsArr) {
-	const formListsLabel = createLabel('formLists');
+	const formListLabel = createLabel('formList');
 
-	const formLists = document.createElement('select');
-	formLists.setAttribute('id', 'formLists');
-	formLists.setAttribute('name', 'formLists');
-	formLists.className = 'formLists';
+	const formList = document.createElement('select');
+	formList.setAttribute('id', 'formList');
+	formList.setAttribute('name', 'formList');
+	formList.className = 'formList';
 
 	listsArr.forEach((list) => {
 		const optionElement = document.createElement('option');
 		optionElement.setAttribute('value', list);
 		optionElement.textContent = list.title;
-		formLists.append(optionElement);
+		formList.append(optionElement);
 	});
 
-	formListsLabel.append(formLists);
-	return formListsLabel;
+	formListLabel.append(formList);
+	return formListLabel;
 }
 
 function createPriorityForm() {
@@ -180,7 +181,7 @@ function handleSubmit(callback, formDiv) {
 	const priority = formDiv.elements['formPriority'].value;
 
 	const newTodo = createTodo(title, notes, dueDate, priority);
-	
+
 	callback(newTodo);
 	formDiv.remove();
 }

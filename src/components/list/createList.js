@@ -2,11 +2,15 @@ function createList(title) {
 	const todosArr = [];
 	const completedTodos = [];
 
-	listsArr.push(title);
-
 	return { title, todosArr, completedTodos };
 }
 
-const listsArr = [];
+
+const inbox = createList('Inbox');
+const today = createList('Today');
+const upcoming = createList('Upcoming');
+
+
+const listsArr = [inbox, today, upcoming];
 
 export { createList, listsArr };

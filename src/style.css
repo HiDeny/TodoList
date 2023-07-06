@@ -1,6 +1,7 @@
 html {
     font-family: Helvetica;
     font-size: 16px;
+    height: 100vh;
 }
 
 p {
@@ -11,21 +12,23 @@ body {
   position: relative;
 }
 
-.container {
-  position: relative;
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mainTitle {
-    text-align: center;
+  text-align: center;
 }
 
 /* Add TODO BTN */
 
 .addTodoBtn {
-  position: absolute;
-  left: 50%;
-  top: 15%;
-  transform: translate(-50%, -50%);
+  z-index: 10;
+  position: fixed;
+  left: 30%;
+  top: 15px;
   border: white 0.2px solid;
   background: lightcoral;
   width: 40px;
@@ -35,8 +38,46 @@ body {
   margin: 0;
   padding: 0;
   color: white;
+  cursor: pointer;
 }
 
+.hamburger {
+  z-index: 10;
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  cursor: pointer;
+}
+
+
+.sidebar {
+  width: 200px;
+  height: 500px;
+  background-color: orange;
+  
+  position: fixed;
+  transition: transform 0.2s;
+  transform: translateY(-100%);
+
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 4rem;
+}
+
+.sidebarContent {
+  list-style: none;
+}
+
+.showSidebar {
+  transform: translateY(0);
+}
+
+
+.container {
+  position: relative;
+}
 
 /* TODO */
 
@@ -104,12 +145,23 @@ textarea {
 .formDate {
   grid-area: 4 / 1;
   align-self: center;
-  justify-content: center;
+  justify-self: center;
 }
 
 #formDate {
   width: 6rem;
 }
+
+.formList {
+  grid-area: 4 / 2;
+  align-self: center;
+  justify-self: center;
+}
+
+#formList {
+  width: 100%;
+}
+
  
 .formPriority {
   grid-area: 4 / 3;
@@ -140,7 +192,8 @@ textarea {
 
 #formTitle, 
 #formNotes, 
-#formDate, 
+#formDate,
+#formList, 
 #formPriority {
   border-radius: 5px;
   padding: 3px 10px;
@@ -174,6 +227,8 @@ textarea {
   padding: 10px 10px;
   border-radius: 20px;
   background-color: bisque;
+
+  cursor: pointer;
 }
 
 .deleteTodoEdit {

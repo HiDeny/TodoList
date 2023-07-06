@@ -6,7 +6,7 @@ import {
 	replaceOldTodo,
 	moveFinishedTodo,
 	undoFinishedTodo,
-	removeTodoList
+	removeTodoList,
 } from '../list/updateList';
 
 function createTodoEditMode(todo) {
@@ -64,7 +64,6 @@ function createCancelButton(todoEditCard, todo) {
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
 		handleCancelButton(todo);
-		console.log(todo.list);
 		todoEditCard.remove();
 	});
 
@@ -179,13 +178,11 @@ function handleEnterKey(event, todoLi, editedTodo, todo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
 		todoLi.replaceWith(displayTodoCard(editedTodo));
 		replaceOldTodo(todo, editedTodo);
-		
 	}
 }
 
 function handleEscapeKey(event, todoLi, originalTodo, todo) {
 	if (event.code === 'Escape') {
-		console.log(originalTodo === todo);
 		todoLi.replaceWith(displayTodoCard(originalTodo));
 		replaceOldTodo(todo, originalTodo);
 	}

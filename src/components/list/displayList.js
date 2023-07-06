@@ -25,7 +25,7 @@ function displayFreshList(list) {
 	listDivCompleted.className = 'listCompleted';
 
 	const listTitleCompleted = document.createElement('p');
-	listTitleCompleted.className = 'titleList';
+	listTitleCompleted.className = 'titleListCompleted';
 	listTitleCompleted.textContent = 'Completed';
 	listDivCompleted.append(listTitleCompleted);
 
