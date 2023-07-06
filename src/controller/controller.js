@@ -1,7 +1,7 @@
 import '../style.css';
 import 'normalize.css';
 
-import { createList } from '../components/list/createList.js';
+import { inbox, listsArr } from '../components/list/createList.js';
 import { displayFreshList, refreshList } from '../components/list/displayList';
 import { addTodoList } from '../components/list/updateList';
 
@@ -38,8 +38,13 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		addTodoList(newTodo, inbox);
-		refreshList(inbox);
+		const list = listsArr.find((list) => list.title === newTodo.list);
+		addTodoList(newTodo, list);
+
+		const visibleList = document.querySelector('.list');
+		if (visibleList.id === list.title) {
+			refreshList(list);
+		};
 	}
 
 	headerDiv.prepend(addTodoBtn);
@@ -72,7 +77,6 @@ export default function generalController() {
 	//* List stuff
 
 	// Inbox - list
-	const inbox = createList('inbox', 'default list');
 	const displayInbox = displayFreshList(inbox);
 	container.appendChild(displayInbox.completeList);
 }

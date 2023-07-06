@@ -1,6 +1,6 @@
 import { createList, listsArr } from '../components/list/createList';
 
-import { displayFreshList } from '../components/list/displayList';
+import { displayFreshList, refreshCompleted, refreshList } from '../components/list/displayList';
 
 // Sidebar
 function sidebarMenu() {
@@ -46,6 +46,8 @@ function listButtonHandleClick(list) {
 	const newList = displayFreshList(list);
 	const currentList = document.querySelector('.list');
 	currentList.replaceWith(newList.completeList);
+	refreshList(list);
+	refreshCompleted(list);
 }
 
 function createAddListButton() {

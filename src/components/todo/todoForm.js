@@ -116,8 +116,9 @@ function createListsForm(listsArr) {
 	formList.className = 'formList';
 
 	listsArr.forEach((list) => {
+		console.log(list);
 		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', list);
+		optionElement.setAttribute('value', list.title);
 		optionElement.textContent = list.title;
 		formList.append(optionElement);
 	});
@@ -178,8 +179,10 @@ function handleSubmit(callback, formDiv) {
 	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
+	const list = formDiv.elements['formList'].value;
+	console.log(list);
 
-	const newTodo = createTodo(title, notes, dueDate, priority);
+	const newTodo = createTodo(title, notes, dueDate, priority, list);
 
 	callback(newTodo);
 	formDiv.remove();

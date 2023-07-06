@@ -1,8 +1,8 @@
+import { listsArr } from "./createList";
+
 // Delete list function
 
-
 function addTodoList(todo, list) {
-	todo.list = list;
 	list.todosArr.unshift(todo);
 }
 
@@ -16,6 +16,7 @@ function moveTodoToDiffList(todo, orgList, newList) {
 }
 
 function moveFinishedTodo(list) {
+	console.log(list);
 	list.todosArr.forEach((todo) => {
 		if (todo.done === true) {
 			list.completedTodos.unshift(todo);
@@ -34,7 +35,7 @@ function undoFinishedTodo(list) {
 }
 
 function replaceOldTodo(todo, newTodo) {
-	const currentList = todo.list;
+	const currentList = listsArr.find((list) => list.title === todo.list);
 
 	if (!todo.done) {
 		const todoIndex = currentList.todosArr.indexOf(todo);

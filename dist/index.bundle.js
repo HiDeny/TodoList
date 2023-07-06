@@ -7184,6 +7184,7 @@ module.exports = styleTagTransform;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createList: () => (/* binding */ createList),
+/* harmony export */   inbox: () => (/* binding */ inbox),
 /* harmony export */   listsArr: () => (/* binding */ listsArr)
 /* harmony export */ });
 function createList(title, description) {
@@ -7261,12 +7262,13 @@ function displayFreshList(list) {
 }
 
 function refreshList(list) {
+	console.log(list);
 	const newListUl = displayFreshList(list).listUl;
 	list.todosArr.forEach((todo) => {
 		newListUl.appendChild((0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo));
 	});
 
-	const oldUl = document.querySelector(`.${list.title}Ul`);
+	const oldUl = document.querySelector('.listUl');
 	oldUl.replaceWith(newListUl);
 }
 
@@ -7275,7 +7277,7 @@ function refreshCompleted(list) {
 	list.completedTodos.forEach((todo) => {
 		newCompletedListUl.appendChild((0,_todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__.displayTodoCard)(todo));
 	});
-	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
+	const oldUlCompleted = document.querySelector('.listUlCompleted');
 	oldUlCompleted.replaceWith(newCompletedListUl);
 }
 
@@ -7303,11 +7305,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   replaceOldTodo: () => (/* binding */ replaceOldTodo),
 /* harmony export */   undoFinishedTodo: () => (/* binding */ undoFinishedTodo)
 /* harmony export */ });
+/* harmony import */ var _createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createList */ "./src/components/list/createList.js");
+
+
 // Delete list function
 
-
 function addTodoList(todo, list) {
-	todo.list = list;
 	list.todosArr.unshift(todo);
 }
 
@@ -7321,6 +7324,7 @@ function moveTodoToDiffList(todo, orgList, newList) {
 }
 
 function moveFinishedTodo(list) {
+	console.log(list);
 	list.todosArr.forEach((todo) => {
 		if (todo.done === true) {
 			list.completedTodos.unshift(todo);
@@ -7339,7 +7343,7 @@ function undoFinishedTodo(list) {
 }
 
 function replaceOldTodo(todo, newTodo) {
-	const currentList = todo.list;
+	const currentList = _createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.find((list) => list.title === todo.list);
 
 	if (!todo.done) {
 		const todoIndex = currentList.todosArr.indexOf(todo);
@@ -7391,13 +7395,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   displayTodoCard: () => (/* binding */ displayTodoCard)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isTomorrow/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isThisYear/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isTomorrow/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isThisYear/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
 /* harmony import */ var _updateTodo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./updateTodo.js */ "./src/components/todo/updateTodo.js");
-/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
-/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+/* harmony import */ var _list_createList_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/createList.js */ "./src/components/list/createList.js");
+/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+
 
 
 
@@ -7497,12 +7503,12 @@ function createDueDate(todo) {
 	dueDate.className = 'todoDate';
 
 	const dateToCheck = new Date(todo.dueDate);
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateToCheck)) {
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateToCheck)) {
 		dueDate.textContent = 'Today';
-	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateToCheck)) {
-		dueDate.textContent = 'Tomorrow';
 	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dateToCheck)) {
-		const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck, 'dd MMM');
+		dueDate.textContent = 'Tomorrow';
+	} else if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck)) {
+		const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_7__["default"])(dateToCheck, 'dd MMM');
 		dueDate.textContent = formattedDate;
 	} else {
 		dueDate.textContent = todo.dueDate;
@@ -7522,24 +7528,26 @@ function checkPriority(todo, todoCard) {
 }
 
 function handleCheckboxClick(todo) {
+	const list = _list_createList_js__WEBPACK_IMPORTED_MODULE_1__.listsArr.find((list) => list.title === todo.list);
 	if (todo.done === false) {
 		todo.done = true;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.moveFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.moveFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshCompleted)(list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.undoFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.undoFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshList)(list);
 	}
 }
 
 function handleCancelButton(todo) {
+	const list = _list_createList_js__WEBPACK_IMPORTED_MODULE_1__.listsArr.find((list) => list.title === todo.list);
 	if (todo.done === false) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.removeTodoList)(todo, todo.list.todosArr);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.removeTodoList)(todo, list.todosArr);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshCompleted)(list);
 	} else if (todo.done === true) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.removeTodoList)(todo, todo.list.completedTodos);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_3__.removeTodoList)(todo, list.completedTodos);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshCompleted)(list);
 	}
 }
 
@@ -7686,8 +7694,9 @@ function createListsForm(listsArr) {
 	formList.className = 'formList';
 
 	listsArr.forEach((list) => {
+		console.log(list);
 		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', list);
+		optionElement.setAttribute('value', list.title);
 		optionElement.textContent = list.title;
 		formList.append(optionElement);
 	});
@@ -7748,8 +7757,10 @@ function handleSubmit(callback, formDiv) {
 	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
+	const list = formDiv.elements['formList'].value;
+	console.log(list);
 
-	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority);
+	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority, list);
 
 	callback(newTodo);
 	formDiv.remove();
@@ -7785,8 +7796,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 /* harmony import */ var _displayTodo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./displayTodo.js */ "./src/components/todo/displayTodo.js");
-/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
-/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+/* harmony import */ var _list_createList_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/createList.js */ "./src/components/list/createList.js");
+/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+
 
 
 
@@ -7936,39 +7949,41 @@ function createPrioritySelector(todo) {
 }
 
 function handleCheckboxClick(todo) {
-	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, todo);
+	const list = _list_createList_js__WEBPACK_IMPORTED_MODULE_3__.listsArr.find((list) => list.title === todo.list)
+	;(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.moveFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.moveFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.undoFinishedTodo)(todo.list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.undoFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshList)(list);
 	}
 }
 
 function handleCancelButton(todo) {
+	const list = _list_createList_js__WEBPACK_IMPORTED_MODULE_3__.listsArr.find((list) => list.title === todo.list);
 	if (todo.done === false) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, todo.list.todosArr);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.removeTodoList)(todo, list.todosArr);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
 	} else if (todo.done === true) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, todo.list.completedTodos);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(todo.list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.removeTodoList)(todo, list.completedTodos);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
 	}
 }
 
 function handleEnterKey(event, todoLi, editedTodo, todo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, editedTodo);
 	}
 }
 
 function handleEscapeKey(event, todoLi, originalTodo, todo) {
 	if (event.code === 'Escape') {
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(originalTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, originalTodo);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, originalTodo);
 	}
 }
 
@@ -8039,8 +8054,13 @@ function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodoList)(newTodo, inbox);
-		(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(inbox);
+		const list = _components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.listsArr.find((list) => list.title === newTodo.list);
+		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodoList)(newTodo, list);
+
+		const visibleList = document.querySelector('.list');
+		if (visibleList.id === list.title) {
+			(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(list);
+		};
 	}
 
 	headerDiv.prepend(addTodoBtn);
@@ -8073,8 +8093,7 @@ function generalController() {
 	//* List stuff
 
 	// Inbox - list
-	const inbox = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.createList)('inbox', 'default list');
-	const displayInbox = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.displayFreshList)(inbox);
+	const displayInbox = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.displayFreshList)(_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.inbox);
 	container.appendChild(displayInbox.completeList);
 }
 
@@ -8141,6 +8160,8 @@ function listButtonHandleClick(list) {
 	const newList = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_1__.displayFreshList)(list);
 	const currentList = document.querySelector('.list');
 	currentList.replaceWith(newList.completeList);
+	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(list);
+	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshCompleted)(list);
 }
 
 function createAddListButton() {

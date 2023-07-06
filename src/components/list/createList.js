@@ -13,4 +13,4 @@ const upcoming = createList('Upcoming', 'Todos with future dates');
 
 const listsArr = [inbox, today, upcoming];
 
-export { createList, listsArr };
+export { createList, listsArr, inbox };

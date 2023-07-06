@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { displayTodoCard } from './displayTodo.js';
+import { listsArr } from '../list/createList.js';
 import { refreshList, refreshCompleted } from '../list/displayList';
 import {
 	replaceOldTodo,
@@ -152,25 +153,27 @@ function createPrioritySelector(todo) {
 }
 
 function handleCheckboxClick(todo) {
+	const list = listsArr.find((list) => list.title === todo.list)
 	replaceOldTodo(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
-		moveFinishedTodo(todo.list);
-		refreshCompleted(todo.list);
+		moveFinishedTodo(list);
+		refreshCompleted(list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		undoFinishedTodo(todo.list);
-		refreshList(todo.list);
+		undoFinishedTodo(list);
+		refreshList(list);
 	}
 }
 
 function handleCancelButton(todo) {
+	const list = listsArr.find((list) => list.title === todo.list);
 	if (todo.done === false) {
-		removeTodoList(todo, todo.list.todosArr);
-		refreshCompleted(todo.list);
+		removeTodoList(todo, list.todosArr);
+		refreshCompleted(list);
 	} else if (todo.done === true) {
-		removeTodoList(todo, todo.list.completedTodos);
-		refreshCompleted(todo.list);
+		removeTodoList(todo, list.completedTodos);
+		refreshCompleted(list);
 	}
 }
 
