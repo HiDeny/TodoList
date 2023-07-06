@@ -15,7 +15,7 @@ function displayFreshList(list) {
 	listDiv.append(listTitle);
 
 	const listUl = document.createElement('ul');
-	listUl.className = `${list.title}Ul`;
+	listUl.className = 'listUl';
 
 	listDiv.append(listUl);
 	completeList.append(listDiv);
@@ -25,12 +25,12 @@ function displayFreshList(list) {
 	listDivCompleted.className = 'listCompleted';
 
 	const listTitleCompleted = document.createElement('p');
-	listTitleCompleted.className = 'titleListCompleted';
+	listTitleCompleted.className = 'titleList';
 	listTitleCompleted.textContent = 'Completed';
 	listDivCompleted.append(listTitleCompleted);
 
 	const listUlCompleted = document.createElement('ul');
-	listUlCompleted.className = `${list.title}UlCompleted`;
+	listUlCompleted.className = 'listUlCompleted';
 
 	listDivCompleted.append(listUlCompleted);
 
@@ -57,5 +57,9 @@ function refreshCompleted(list) {
 	const oldUlCompleted = document.querySelector(`.${list.title}UlCompleted`);
 	oldUlCompleted.replaceWith(newCompletedListUl);
 }
+
+// Delete list button, double check if they want to delete the list
+
+// Sorting methods
 
 export { displayFreshList, refreshList, refreshCompleted };

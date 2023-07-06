@@ -1,14 +1,14 @@
-function createList(title) {
+function createList(title, description) {
 	const todosArr = [];
 	const completedTodos = [];
 
-	return { title, todosArr, completedTodos };
+	return { title, description, todosArr, completedTodos };
 }
 
-
-const inbox = createList('Inbox');
-const today = createList('Today');
-const upcoming = createList('Upcoming');
+// Default list
+const inbox = createList('Inbox', 'Default list');
+const today = createList('Today', 'Todos with todays date');
+const upcoming = createList('Upcoming', 'Todos with future dates');
 
 
 const listsArr = [inbox, today, upcoming];

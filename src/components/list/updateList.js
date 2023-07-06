@@ -1,3 +1,6 @@
+// Delete list function
+
+
 function addTodoList(todo, list) {
 	todo.list = list;
 	list.todosArr.unshift(todo);

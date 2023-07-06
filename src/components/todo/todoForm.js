@@ -9,7 +9,7 @@ export default function todoForm(callback) {
 
 	//? Id input - hidden ?
 
-	const cancelButtonForm = createCancelButtonForm(todoForm, callback);
+	const cancelButtonForm = createCancelButtonForm(todoForm);
 	todoForm.append(cancelButtonForm);
 
 	const titleForm = createTitleForm();
@@ -48,7 +48,7 @@ function createTodoForm() {
 	const todoForm = document.createElement('form');
 	todoForm.setAttribute('id', 'todoForm');
 	todoForm.setAttribute('tabindex', '1');
-	todoForm.setAttribute('method', 'post');
+	// todoForm.setAttribute('method', 'post');
 
 	return todoForm;
 }
@@ -68,7 +68,6 @@ function createTitleForm() {
 	const formTitleLabel = createLabel('formTitle');
 
 	const formTitle = document.createElement('input');
-	formTitle.setAttribute('required', true);
 	formTitle.setAttribute('id', 'formTitle');
 	formTitle.setAttribute('name', 'formTitle');
 	formTitle.setAttribute('type', 'text');
@@ -157,7 +156,7 @@ function createPriorityForm() {
 	return formPriorityLabel;
 }
 
-function createSubmitButton(form, callback) {
+function createSubmitButton() {
 	const submitButton = document.createElement('button');
 	submitButton.className = 'submitButton';
 	submitButton.setAttribute('type', 'submit');
