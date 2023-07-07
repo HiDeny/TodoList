@@ -11,7 +11,7 @@ function displayFreshList(list) {
 
 	const listTitle = document.createElement('p');
 	listTitle.className = 'titleList';
-	listTitle.textContent = list.title;
+	listTitle.textContent = list.title ? list.title : 'List Name';
 	listDiv.append(listTitle);
 
 	const listUl = document.createElement('ul');
@@ -40,7 +40,7 @@ function displayFreshList(list) {
 }
 
 function refreshList(list) {
-	console.log(list);
+	// console.log(list);
 	const newListUl = displayFreshList(list).listUl;
 	list.todosArr.forEach((todo) => {
 		newListUl.appendChild(displayTodoCard(todo));

@@ -19,6 +19,8 @@ function createTodoEditMode(todo) {
 	const todoEditCard = createTodoEditCard(editedTodo, todoLi);
 	todoLi.append(todoEditCard);
 
+	visualizePriority(todo, todoEditCard);
+
 	todoEditCard.addEventListener('keydown', (event) => {
 		handleEnterKey(event, todoLi, editedTodo, todo);
 		handleEscapeKey(event, todoLi, originalTodo, todo);
@@ -45,7 +47,7 @@ function createTodoEditCard(todo, todoLi) {
 	const editDate = createDueDate(todo);
 	todoCardEdit.append(editDate);
 
-	const editPriority = createPrioritySelector(todo);
+	const editPriority = createPrioritySelector(todo, todoCardEdit);
 	todoCardEdit.append(editPriority);
 
 	return todoCardEdit;
@@ -130,16 +132,18 @@ function createDueDate(todo) {
 	return editDate;
 }
 
-function createPrioritySelector(todo) {
+function createPrioritySelector(todo, todoCardEdit) {
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
 
-	const priorityOptions = ['High', 'Medium', 'Low'];
+	const priorityOptions = [
+		{ value: 'high', text: 'High' },
+		{ value: 'medium', text: 'Medium' },
+		{ value: 'low', text: 'Low' },
+	];
 
 	priorityOptions.forEach((option) => {
-		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', option);
-		optionElement.textContent = option;
+		const optionElement = new Option(option.text, option.value);
 		editPriority.append(optionElement);
 	});
 
@@ -147,13 +151,28 @@ function createPrioritySelector(todo) {
 
 	editPriority.addEventListener('input', (event) => {
 		todo.priority = event.target.value;
+		visualizePriority(todo, todoCardEdit);
 	});
 
 	return editPriority;
 }
 
+function visualizePriority(todo, todoCard) {
+	const priorityClassMap = {
+		high: 'high',
+		medium: 'medium',
+		low: 'low',
+	};
+
+	todoCard.classList.remove('high', 'medium', 'low');
+	const priorityClass = priorityClassMap[todo.priority];
+	if (priorityClass) {
+		todoCard.classList.add(priorityClass);
+	}
+}
+
 function handleCheckboxClick(todo) {
-	const list = listsArr.find((list) => list.title === todo.list)
+	const list = findCorrectList(todo);
 	replaceOldTodo(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
@@ -167,7 +186,7 @@ function handleCheckboxClick(todo) {
 }
 
 function handleCancelButton(todo) {
-	const list = listsArr.find((list) => list.title === todo.list);
+	const list = findCorrectList(todo);
 	if (todo.done === false) {
 		removeTodoList(todo, list.todosArr);
 		refreshCompleted(list);

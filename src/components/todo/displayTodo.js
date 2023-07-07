@@ -5,6 +5,7 @@ import { createTodoEditMode } from './updateTodo.js';
 import { listsArr } from '../list/createList.js';
 import { refreshList, refreshCompleted } from '../list/displayList';
 import {
+	findCorrectList,
 	moveFinishedTodo,
 	undoFinishedTodo,
 	removeTodoList,
@@ -48,7 +49,7 @@ function createTodoCard(todo, todoLi) {
 	const dueDate = createDueDate(todo);
 	todoCard.append(dueDate);
 
-	checkPriority(todo, todoCard);
+	visualizePriority(todo, todoCard);
 
 	return todoCard;
 }
@@ -116,18 +117,21 @@ function createDueDate(todo) {
 	return dueDate;
 }
 
-function checkPriority(todo, todoCard) {
-	if (todo.priority === 'High') {
-		todoCard.classList.add('high');
-	} else if (todo.priority === 'Medium') {
-		todoCard.classList.add('medium');
-	} else if (todo.priority === 'Low') {
-		todoCard.classList.add('low');
+function visualizePriority(todo, todoCard) {
+	const priorityClassMap = {
+		high: 'high',
+		medium: 'medium',
+		low: 'low',
+	};
+
+	const priorityClass = priorityClassMap[todo.priority];
+	if (priorityClass) {
+		todoCard.classList.add(priorityClass);
 	}
 }
 
 function handleCheckboxClick(todo) {
-	const list = listsArr.find((list) => list.title === todo.list);
+	const list = findCorrectList(todo);
 	if (todo.done === false) {
 		todo.done = true;
 		moveFinishedTodo(list);
@@ -140,7 +144,7 @@ function handleCheckboxClick(todo) {
 }
 
 function handleCancelButton(todo) {
-	const list = listsArr.find((list) => list.title === todo.list);
+	const list = findCorrectList(todo);
 	if (todo.done === false) {
 		removeTodoList(todo, list.todosArr);
 		refreshCompleted(list);

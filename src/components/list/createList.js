@@ -10,7 +10,7 @@ const inbox = createList('Inbox', 'Default list');
 const today = createList('Today', 'Todos with todays date');
 const upcoming = createList('Upcoming', 'Todos with future dates');
 
+const defaultListsArr = [inbox, today, upcoming];
+const listsArr = [inbox];
 
-const listsArr = [inbox, today, upcoming];
-
-export { createList, listsArr, inbox };
+export { createList, defaultListsArr, listsArr, inbox };

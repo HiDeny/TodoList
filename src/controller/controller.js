@@ -3,7 +3,7 @@ import 'normalize.css';
 
 import { inbox, listsArr } from '../components/list/createList.js';
 import { displayFreshList, refreshList } from '../components/list/displayList';
-import { addTodoList } from '../components/list/updateList';
+import { addTodoList, findCorrectList } from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
 
@@ -38,7 +38,8 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		const list = listsArr.find((list) => list.title === newTodo.list);
+		const list = findCorrectList(newTodo);
+		console.log(list);
 		addTodoList(newTodo, list);
 
 		const visibleList = document.querySelector('.list');
@@ -68,6 +69,8 @@ export default function generalController() {
 	container.append(sidebar);
 
 	function toggleSidebar() {
+		// Close on click
+
 		if (sidebar.classList.contains('showSidebar')) {
 			sidebar.classList.remove('showSidebar');
 		} else {

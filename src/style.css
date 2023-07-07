@@ -1,95 +1,216 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
-    font-family: Helvetica;
-    font-size: 16px;
-    height: 100vh;
+	font-family: Helvetica;
+	font-size: 16px;
+	height: 100vh;
 }
 
 p {
-    margin: 0;
+	margin: 0;
 }
 
 body {
-  position: relative;
+	position: relative;
+	height: 100vh;
+
+	display: grid;
+	grid-template-rows: 1fr 10fr;
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .mainTitle {
-  text-align: center;
+	text-align: center;
 }
 
 /* Add TODO BTN */
 
 .addTodoBtn {
-  z-index: 10;
-  position: fixed;
-  left: 30%;
-  top: 15px;
-  border: white 0.2px solid;
-  background: lightcoral;
-  width: 40px;
-  height: 40px;
-  border-radius: 30px;
-  font-size: 1.5rem;
-  margin: 0;
-  padding: 0;
-  color: white;
-  cursor: pointer;
+	z-index: 10;
+	position: fixed;
+	left: 30%;
+	top: 15px;
+	border: white 0.2px solid;
+	background: lightcoral;
+	width: 40px;
+	height: 40px;
+	border-radius: 30px;
+	font-size: 1.5rem;
+	margin: 0;
+	padding: 0;
+	color: white;
+	cursor: pointer;
 }
 
 .hamburger {
-  z-index: 10;
-  position: absolute;
-  left: 2rem;
-  top: 2rem;
-  cursor: pointer;
-}
+	z-index: 10;
+	position: absolute;
+	left: 2rem;
+	top: 2rem;
 
+	background: #fff;
+	padding: 5px 10px;
+	border-radius: 20px;
+	cursor: pointer;
+}
 
 .sidebar {
-  display: flex;
-  flex-direction: column;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+  gap: 30px;
 
-  width: 200px;
-  height: 500px;
-  background-color: orange;
-  
-  position: fixed;
-  transition: transform 0.2s;
-  transform: translateY(-100%);
+	width: 200px;
+	height: 100vh;
+	/* background-color: #646464e5; */
 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding-top: 4rem;
+	position: fixed;
+	transition: transform 0.3s;
+	transform: translateX(-100%);
+
+	top: 4rem;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }
+  
 
 .showSidebar {
-  transform: translateY(0);
+	transform: translateX(0);
 }
 
+.defaultLists,
+.customLists {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 
-.sidebarContent {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background: #b4b4b436;
+  backdrop-filter: blur(50px);
 
-  padding: 10px 30px;
+  border: 1px solid gray;
+  border-radius: 20px;
+  box-shadow: 5px 5px 12px 1px #80808057;
+
+	padding: 10px 30px;
+  margin: 0px 10px;
+
+  color: gray;
+}
+
+.defaultLists > .sidebarButton:last-child,
+.customLists > .sidebarButton:last-child {
+  border: 0;
 }
 
 .sidebarButton {
-  text-align: left;
-  padding: 5px 10px;
+	text-align: left;
+	padding: 5px 10px;
+	border: 0;
+	background: transparent;
+	border-bottom: solid gray 1px;
 }
 
 .container {
-  position: relative;
+	position: relative;
+}
+
+#listForm {
+	width: 100%;
+	background: #ffebc5;
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr 3fr;
+	gap: 5px;
+	border: 1px wheat solid;
+	border-radius: 10px;
+}
+
+.cancelListForm {
+	position: absolute;
+	background: transparent;
+	right: 0px;
+	border-radius: 20px;
+	font-size: 0.7rem;
+	border: 0;
+}
+
+#listTitle {
+	width: 90%;
+	background: transparent;
+	border: 0;
+	border-bottom: 1px solid #93939391;
+	padding: 5px;
+	font-size: 1rem;
+}
+
+#listDescription {
+	width: 90%;
+	background: transparent;
+	border: 0;
+	font-size: 0.8rem;
+	padding: 5px;
+}
+
+.listSubmitButton {
+	font-size: 0.8rem;
+	width: 3.5rem;
+	border-radius: 20px;
+	justify-self: center;
+	border: solid 1px gray;
+	position: absolute;
+	bottom: -30px;
+	height: 1.5rem;
+}
+
+/* LIST */
+
+.list > ul {
+	list-style: none;
+	margin: 0;
+}
+
+.titleList {
+	display: flex;
+	text-transform: uppercase;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+	height: 40px;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.listUl,
+.listUlCompleted {
+	list-style: none;
+
+	background: #ffe2e796;
+	width: 90%;
+	min-height: 80%;
+
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	margin: auto;
+	padding: 0;
+
+	overflow: scroll;
+}
+
+.list {
+	grid-template-columns: 1fr 1fr;
+	height: 100%;
+	background: #ffbf7fa3;
+	display: grid;
 }
 
 /* TODO */
@@ -97,211 +218,193 @@ header {
 /* TODO FORM */
 
 #todoForm {
-  z-index: 1;
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+	z-index: 1;
+	position: absolute;
+	top: 30%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 
-  display: grid;
-  grid-template-rows: repeat(5, 2.5rem);
-  grid-template-columns: 1fr 1fr 1fr;
-  
-  background-color: gray;
-  width: 400px;
-  margin: auto;
-  padding: 19px;
-  border-radius: 20px;
+	display: grid;
+	grid-template-rows: repeat(5, 2.5rem);
+	grid-template-columns: 1fr 1fr 1fr;
 
-  
+	background-color: gray;
+	width: 400px;
+	margin: auto;
+	padding: 19px;
+	border-radius: 20px;
 }
 
 .cancelForm {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 0.8rem;
-  border-radius: 20px;
-  color: white;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 0.8rem;
+	border-radius: 20px;
+	color: white;
 }
 
 .formTitle {
-    grid-area: 1 / 1 / 1 / 4;
+	grid-area: 1 / 1 / 1 / 4;
 }
 
 #formTitle {
-    width: 90%;
-    margin: auto;
-    height: 60%;
-    border-radius: 20px;
-    padding: 0px 10px;
+	width: 90%;
+	margin: auto;
+	height: 60%;
+	border-radius: 20px;
+	padding: 0px 10px;
 }
-
 
 .formNotes {
-  grid-area: 2 / 1 / 4 / 4;
+	grid-area: 2 / 1 / 4 / 4;
 }
-  
+
 #formNotes {
-  width: 90%;
-  margin: auto;
-  height: 60%;
-  border-radius: 20px;
-  padding: 5px 10px;
+	width: 90%;
+	margin: auto;
+	height: 60%;
+	border-radius: 20px;
+	padding: 5px 10px;
 }
 
 textarea {
-  resize: none;
-  overflow: scroll;
+	resize: none;
+	overflow: scroll;
 }
 
 .formDate {
-  grid-area: 4 / 1;
-  align-self: center;
-  justify-self: center;
+	grid-area: 4 / 1;
+	align-self: center;
+	justify-self: center;
 }
 
 #formDate {
-  width: 6rem;
+	width: 6rem;
 }
 
 .formList {
-  grid-area: 4 / 2;
-  align-self: center;
-  justify-self: center;
+	grid-area: 4 / 2;
+	align-self: center;
+	justify-self: center;
 }
 
 #formList {
-  width: 100%;
+	width: 100%;
 }
 
- 
 .formPriority {
-  grid-area: 4 / 3;
-  align-self: center;
-  justify-self: center;
+	grid-area: 4 / 3;
+	align-self: center;
+	justify-self: center;
 }
-
 
 #priority {
-  width: 100%;
+	width: 100%;
 }
 
 .placeholderPri {
-  color: gray;
+	color: gray;
 }
 
 .submitButton {
-  height: 1.5rem;
-  width: 5rem;
-  border-radius: 20px;
+	height: 1.5rem;
+	width: 5rem;
+	border-radius: 20px;
 
-  grid-area: 5 / 3;
-  
-  align-self: center;
-  justify-self: center;
+	grid-area: 5 / 3;
+
+	align-self: center;
+	justify-self: center;
 }
-  
 
-#formTitle, 
-#formNotes, 
+#formTitle,
+#formNotes,
 #formDate,
-#formList, 
+#formList,
 #formPriority {
-  border-radius: 5px;
-  padding: 3px 10px;
+	border-radius: 5px;
+	padding: 3px 10px;
 }
-
 
 /* TODO CARD */
 
-.high {
-  border-bottom: 5px solid red;
-}
-
-.medium {
-  border-bottom: 5px solid orange;
-}
-
-.low {
-  border-bottom: 5px solid lightblue;
-}
-
 .todoCard {
-  position: relative;
-  
-  display: grid;
-  grid-template-rows: 1fr 15px;
-  grid-template-columns: 30px 1fr;
-  column-gap: 10px;
-  
-  width: 300px;
-  margin: auto;
-  padding: 10px 10px;
-  border-radius: 20px;
-  background-color: bisque;
+	position: relative;
 
-  cursor: pointer;
+	display: grid;
+	grid-template-rows: 1fr 15px;
+	grid-template-columns: 30px 1fr;
+	column-gap: 10px;
+
+	width: 300px;
+	margin: auto;
+	padding: 10px 10px;
+	border-radius: 20px;
+	background-color: #e7eeff;
+	box-shadow: 3px 5px 12px 0px #00000042;
+	border-bottom: 5px solid #b2bfca;
+
+	cursor: pointer;
 }
 
 .deleteTodoEdit {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  font-size: 0.5rem;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	font-size: 0.5rem;
 }
 
 .todoCheck {
-  margin-left: 10px;
+	margin-left: 10px;
 }
 
 .todoDate {
-  font-size: 0.7rem;
-  color: gray;
-  align-self: end;
+	font-size: 0.7rem;
+	color: gray;
+	align-self: end;
 }
 
 .deleteTodo {
-  position: absolute;
-  font-size: 0.6rem;
-  background: transparent;
-  border: 0;
-  top: 30%;
-  right: 5px;
+	position: absolute;
+	font-size: 0.6rem;
+	background: transparent;
+	border: 0;
+	top: 30%;
+	right: 5px;
 }
-
-
-
 
 .todoCheck {
-  /* margin-left: 10px; */
-  grid-area: 1 / 1 / 3 / 2;
-  justify-self: center;
+	/* margin-left: 10px; */
+	grid-area: 1 / 1 / 3 / 2;
+	justify-self: center;
 }
-
-
 
 /* TODO CARD - edit */
 
 .todoCardEdit {
-    position: relative;
-    
-    display: grid;
-    grid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
-    
-    width: 300px;
-    margin: auto;
-    padding: 5px 5px;
-    border-radius: 20px;
-    background-color: bisque;
+	position: relative;
+
+	display: grid;
+	grid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr;
+
+	width: 300px;
+	margin: auto;
+	padding: 5px 5px;
+	border-radius: 20px;
+	background-color: #e7eeff;
+	box-shadow: 3px 5px 12px 0px #00000042;
+	border-bottom: 5px solid #b2bfca;
 }
 
 .deleteTodoEdit {
-  position: absolute;
-  right: 5px;
-  top: 5px;
-  font-size: 0.5rem;
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	font-size: 0.5rem;
+	background: transparent;
+	border: 0;
 }
 
 .todoTitleEdit,
@@ -309,92 +412,77 @@ textarea {
 .todoNotesEdit,
 .todoPriorityEdit,
 .cancelForm {
-  background: transparent;
-  border: 0;
+	background: transparent;
+	border: 0;
 }
 
 .todoNotesEdit,
 .todoDueDateEdit,
 .todoPriorityEdit {
-  font-size: 0.8rem;
+	font-size: 0.8rem;
 }
-
 
 .todoCheckEdit {
-    grid-row: 1 / span 4;
-    align-self: flex-start;
-    margin-top: 10%;
+	grid-row: 1 / span 4;
+	align-self: flex-start;
+	margin-top: 10%;
 }
-  
-.todoTitleEdit {
-  grid-column: 2 / span 4;
 
+.todoTitleEdit {
+	grid-column: 2 / span 4;
 }
-  
+
 .todoNotesEdit {
-  grid-column: 2 / span 4;
-  grid-row: 2 / span 2;
+	grid-column: 2 / span 4;
+	grid-row: 2 / span 2;
 }
-  
+
 .todoDueDateEdit {
-  grid-column: 2;
-  grid-row: 4;
-  width: 100%;
+	grid-column: 2;
+	grid-row: 4;
+	width: 100%;
 }
 
 .todoPriorityEdit {
-  grid-column: 5;
-  grid-row: 4;
-  align-self: end;
+	grid-column: 5;
+	grid-row: 4;
+	align-self: end;
 }
-
 
 .done > .todoCard > * {
-  color: #8080807d;
-  text-decoration: line-through;
-  color: gray;
+	color: #8080807d;
+	text-decoration: line-through;
+	color: gray;
 }
 
-/* LIST */
-
-.list > ul {
-    list-style: none;
-    margin: 0;
+/* Priority */
+.low {
+	border-bottom: 5px solid lightblue;
 }
 
-.titleList {
-    display: flex;
-    text-transform: uppercase;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: 40px;
-    font-size: 1.5rem;
-    font-weight: bold;
+.medium {
+	border-bottom: 5px solid orange;
 }
 
-.listUl,
-.listUlCompleted {
-  list-style: none;
-
-  background: pink;
-  width: 90%;
-  min-height: 80%;
-
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  margin: auto;
-  padding: 0;
-
-  overflow: scroll;
+.high {
+	border-bottom: 5px solid red;
 }
 
 
-.list {
-  grid-template-columns: 1fr 1fr;
-  height: 80vh;
-  background: aquamarine;
-  display: grid;
+.addTodoBtn {
+	z-index: 10;
+	position: fixed;
+	right: 50px;
+	bottom: 50px;
+	border: black 0.2px solid;
+	background: white;
+	width: 40px;
+	height: 40px;
+	border-radius: 30px;
+	font-size: 1.5rem;
+	margin: 0;
+	padding: 0;
+	color: white;
+	cursor: pointer;
+	color: black;
 }

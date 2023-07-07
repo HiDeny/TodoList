@@ -1,6 +1,9 @@
 import { listsArr } from "./createList";
 
 // Delete list function
+function findCorrectList(todo) {
+	return listsArr.find((list) => list.title === todo.list);
+}
 
 function addTodoList(todo, list) {
 	list.todosArr.unshift(todo);
@@ -47,6 +50,7 @@ function replaceOldTodo(todo, newTodo) {
 }
 
 export {
+	findCorrectList,
 	addTodoList,
 	removeTodoList,
 	moveFinishedTodo,

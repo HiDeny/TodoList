@@ -1,4 +1,4 @@
-import { createList, listsArr } from '../components/list/createList';
+import { createList, defaultListsArr, listsArr } from '../components/list/createList';
 
 import { displayFreshList, refreshCompleted, refreshList } from '../components/list/displayList';
 
@@ -6,8 +6,11 @@ import { displayFreshList, refreshCompleted, refreshList } from '../components/l
 function sidebarMenu() {
 	const sidebar = createSidebar();
 
-	const sidebarContent = createSidebarContent(listsArr);
-	sidebar.append(sidebarContent);
+	const defaultLists = createDefaultLists(defaultListsArr);
+	sidebar.append(defaultLists);
+
+	const customLists = createCustomLists(listsArr);
+	sidebar.append(customLists);
 
 	return sidebar;
 }
@@ -19,28 +22,49 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createSidebarContent(listsArr) {
-	const sidebarContent = document.createElement('div');
-	sidebarContent.className = 'sidebarContent';
+function createDefaultLists(defaultListsArr) {
+	const defaultLists = document.createElement('div');
+	defaultLists.className = 'defaultLists';
 
-	listsArr.forEach((list) => {
+	defaultListsArr.forEach((list) => {
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
 			listButtonHandleClick(list);
+			toggleSidebar();
 		});
-		sidebarContent.append(listButton);
+		defaultLists.append(listButton);
+	});
+
+	return defaultLists;
+}
+
+function createCustomLists(listsArr) {
+	const customLists = document.createElement('div');
+	customLists.className = 'customLists';
+
+	listsArr.forEach((list) => {
+		if(list.title === 'Inbox') return;
+		const listButton = document.createElement('button');
+		listButton.setAttribute('class', 'sidebarButton');
+		listButton.textContent = list.title;
+		listButton.addEventListener('click', () => {
+			listButtonHandleClick(list);
+			toggleSidebar();
+		});
+		customLists.append(listButton);
 	});
 
 	const addListButton = createAddListButton();
 	addListButton.addEventListener('click', () => {
 		addListButton.replaceWith(newListForm());
 	});
-	sidebarContent.append(addListButton);
+	customLists.append(addListButton);
 
-	return sidebarContent;
+	return customLists;
 }
+
 
 function listButtonHandleClick(list) {
 	const newList = displayFreshList(list);
@@ -92,7 +116,7 @@ function createListForm() {
 	listForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleSubmit(handleReturn, listForm);
-		console.log(listForm);
+		// console.log(listForm);
 	});
 
 	// listForm.addEventListener('keydown', (event) => {
@@ -117,7 +141,7 @@ function createCancelButton(form) {
 	cancelButton.textContent = 'x';
 	cancelButton.addEventListener('click', () => {
 		form.remove();
-		refreshSideBar();
+		refreshLists();
 	});
 
 	return cancelButton;
@@ -163,13 +187,25 @@ function handleSubmit(handleReturn, formDiv) {
 
 function handleReturn(newList) {
 	listsArr.push(newList);
-	refreshSideBar();
+	refreshLists();
 	displayFreshList(newList)
 }
 
-function refreshSideBar() {
-	const currentSidebar = document.querySelector('.sidebarContent');
-	currentSidebar.replaceWith(createSidebarContent(listsArr));
+function refreshLists() {
+	const currentLists = document.querySelector('.customLists');
+	currentLists.replaceWith(createCustomLists(listsArr));
+}
+
+function toggleSidebar() {
+	// close on click
+
+	const sidebar = document.querySelector('.sidebar');
+
+	if (sidebar.classList.contains('showSidebar')) {
+		sidebar.classList.remove('showSidebar');
+	} else {
+		sidebar.classList.add('showSidebar');
+	}
 }
 
 export { sidebarMenu };

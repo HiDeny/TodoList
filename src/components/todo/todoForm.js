@@ -135,21 +135,21 @@ function createPriorityForm() {
 	formPriority.setAttribute('name', 'formPriority');
 	formPriority.className = 'formPriority';
 
-	const placeholderPriority = document.createElement('option');
+	const placeholderPriority = new Option('Priority', '');
 	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.setAttribute('value', '');
-	placeholderPriority.setAttribute('selected', true);
-	placeholderPriority.setAttribute('disabled', true);
-	placeholderPriority.setAttribute('hidden', true);
-	placeholderPriority.textContent = 'Priority';
+	placeholderPriority.selected = true;
+	placeholderPriority.disabled = true;
+	placeholderPriority.hidden = true;
 	formPriority.append(placeholderPriority);
 
-	const priorityOptions = ['High', 'Medium', 'Low'];
+	const priorityOptions = [
+		{ value: 'high', text: 'High' },
+		{ value: 'medium', text: 'Medium' },
+		{ value: 'low', text: 'Low' },
+	];
 
 	priorityOptions.forEach((option) => {
-		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', option);
-		optionElement.textContent = option;
+		const optionElement = new Option(option.text, option.value);
 		formPriority.append(optionElement);
 	});
 
