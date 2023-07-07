@@ -1,7 +1,7 @@
 import '../style.css';
 import 'normalize.css';
 
-import { inbox, listsArr } from '../components/list/createList.js';
+import { inbox, defaultListsArr } from '../components/list/createList.js';
 import { displayFreshList, refreshList } from '../components/list/displayList';
 import { addTodoList, findCorrectList } from '../components/list/updateList';
 
@@ -40,7 +40,7 @@ export default function generalController() {
 	function formReturn(newTodo) {
 		const list = findCorrectList(newTodo);
 		console.log(list);
-		addTodoList(newTodo, list);
+		addTodoList(newTodo, list.todosArr);
 
 		const visibleList = document.querySelector('.list');
 		if (visibleList.id === list.title) {

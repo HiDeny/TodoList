@@ -1,5 +1,5 @@
 import createTodo from './createTodo';
-import { createList, listsArr } from '../list/createList';
+import { listsArr } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -21,8 +21,7 @@ export default function todoForm(callback) {
 	const dueDateForm = createDateForm();
 	todoForm.append(dueDateForm);
 
-	//? Lists Select / Datalist element, populated with all lists and projects available
-	const listsFrom = createListsForm(listsArr);
+	const listsFrom = createListsForm();
 	todoForm.append(listsFrom);
 
 	const priorityForm = createPriorityForm();
@@ -107,7 +106,7 @@ function createDateForm() {
 	return formDateLabel;
 }
 
-function createListsForm(listsArr) {
+function createListsForm() {
 	const formListLabel = createLabel('formList');
 
 	const formList = document.createElement('select');
@@ -116,7 +115,6 @@ function createListsForm(listsArr) {
 	formList.className = 'formList';
 
 	listsArr.forEach((list) => {
-		console.log(list);
 		const optionElement = document.createElement('option');
 		optionElement.value = list.id;
 		console.log(list.id);

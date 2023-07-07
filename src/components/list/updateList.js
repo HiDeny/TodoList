@@ -1,14 +1,20 @@
 import { listsArr } from "./createList";
 
 // Delete list function
+function deleteList (list) {
+	listsArr.splice(listsArr.indexOf(list), 1);
+}
+
+
 function findCorrectList(todo) {
+	console.log(todo);
 	const list = listsArr.find((list) => list.id === todo.listId);
 	console.log(list);
 	return list;
 }
 
 function addTodoList(todo, list) {
-	list.todosArr.unshift(todo);
+	list.unshift(todo);
 }
 
 function removeTodoList(todo, list) {

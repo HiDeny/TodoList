@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { displayTodoCard } from './displayTodo.js';
+import { listsArr } from '../list/createList.js';
 import { refreshList, refreshCompleted } from '../list/displayList';
 import {
 	replaceOldTodo,
@@ -8,6 +9,7 @@ import {
 	undoFinishedTodo,
 	removeTodoList,
 	findCorrectList,
+	moveTodoToDiffList,
 } from '../list/updateList';
 
 function createTodoEditMode(todo) {
@@ -46,6 +48,9 @@ function createTodoEditCard(todo, todoLi) {
 
 	const editDate = createDueDate(todo);
 	todoCardEdit.append(editDate);
+
+	const editList = createListSelector(todo);
+	todoCardEdit.append(editList);
 
 	const editPriority = createPrioritySelector(todo, todoCardEdit);
 	todoCardEdit.append(editPriority);
@@ -130,6 +135,41 @@ function createDueDate(todo) {
 	});
 
 	return editDate;
+}
+
+function createListSelector(todo) {
+	const editList = document.createElement('select');
+	editList.className = 'todoListEdit';
+
+	listsArr.forEach((list) => {
+		const optionElement = document.createElement('option');
+		optionElement.value = list.id;
+		optionElement.textContent = list.title;
+		optionElement.selected = list.id === todo.listId ? true : false;
+		editList.append(optionElement);
+	});
+
+	editList.addEventListener('input', (event) => {
+		if (todo.listId === event.target.value) return;
+
+		const orgList = findCorrectList(todo);
+		todo.listId = Number(event.target.value);
+		const newList = findCorrectList(todo);
+		
+		if (!todo.done) {
+			const list = orgList.todosArr;
+			const nList = newList.todosArr;
+			moveTodoToDiffList(todo, list, nList);
+			refreshList(orgList);
+		} else {
+			const nList = newList.completedTodos;
+			moveTodoToDiffList(todo, list, nList);
+			refreshCompleted(orgList);
+		}
+		
+	});
+
+	return editList;
 }
 
 function createPrioritySelector(todo, todoCardEdit) {

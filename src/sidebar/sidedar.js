@@ -60,7 +60,11 @@ function createCustomLists(listsArr) {
 
 	const addListButton = createAddListButton();
 	addListButton.addEventListener('click', () => {
-		addListButton.replaceWith(newListForm());
+		const newForm = newListForm();
+		addListButton.replaceWith(newForm);
+		const titleInput = newForm.querySelector('input');
+		console.log(titleInput);
+		titleInput.focus();
 	});
 	customLists.append(addListButton);
 
@@ -86,10 +90,6 @@ function createAddListButton() {
 }
 
 function newListForm() {
-	// Use data from form for Title and Description
-	// add new list to list arr
-	// refresh side bar
-	// display new list
 	
 	const activeForm = document.querySelector('#listForm');
 
