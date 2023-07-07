@@ -1,13 +1,13 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { displayTodoCard } from './displayTodo.js';
-import { listsArr } from '../list/createList.js';
 import { refreshList, refreshCompleted } from '../list/displayList';
 import {
 	replaceOldTodo,
 	moveFinishedTodo,
 	undoFinishedTodo,
 	removeTodoList,
+	findCorrectList,
 } from '../list/updateList';
 
 function createTodoEditMode(todo) {

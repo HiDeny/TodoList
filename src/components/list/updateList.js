@@ -2,7 +2,9 @@ import { listsArr } from "./createList";
 
 // Delete list function
 function findCorrectList(todo) {
-	return listsArr.find((list) => list.title === todo.list);
+	const list = listsArr.find((list) => list.id === todo.listId);
+	console.log(list);
+	return list;
 }
 
 function addTodoList(todo, list) {
@@ -38,7 +40,7 @@ function undoFinishedTodo(list) {
 }
 
 function replaceOldTodo(todo, newTodo) {
-	const currentList = listsArr.find((list) => list.title === todo.list);
+	const currentList = findCorrectList(todo);
 
 	if (!todo.done) {
 		const todoIndex = currentList.todosArr.indexOf(todo);

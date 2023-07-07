@@ -1,12 +1,5 @@
-export default function createTodo(
-	title,
-	notes,
-	dueDate,
-	priority,
-	list,
-	listIndex
-) {
+export default function createTodo(title, notes, dueDate, priority, listId) {
 	const done = false;
 
-	return { title, notes, dueDate, priority, list, listIndex, done };
+	return { title, notes, dueDate, priority, listId, done };
 }

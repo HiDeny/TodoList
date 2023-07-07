@@ -6,6 +6,7 @@ html {
 	font-family: Helvetica;
 	font-size: 16px;
 	height: 100vh;
+  background: #e6e6e6;
 }
 
 p {
@@ -35,19 +36,20 @@ header {
 .addTodoBtn {
 	z-index: 10;
 	position: fixed;
-	left: 30%;
-	top: 15px;
-	border: white 0.2px solid;
-	background: lightcoral;
+	right: 50px;
+	top: 20px;
+	border: black 0.2px solid;
+	background: white;
 	width: 40px;
 	height: 40px;
 	border-radius: 30px;
 	font-size: 1.5rem;
 	margin: 0;
 	padding: 0;
-	color: white;
 	cursor: pointer;
 }
+
+
 
 .hamburger {
 	z-index: 10;
@@ -172,9 +174,10 @@ header {
 
 /* LIST */
 
-.list > ul {
-	list-style: none;
-	margin: 0;
+.list {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .titleList {
@@ -188,11 +191,24 @@ header {
 	font-weight: bold;
 }
 
+.titleListCompleted {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 20%;
+  margin: 1rem auto;
+  padding: 1rem 0;
+  border-bottom: 1px solid #80808061;
+
+  font-size: 1rem;
+  color: #00000059;
+}
+
 .listUl,
 .listUlCompleted {
 	list-style: none;
 
-	background: #ffe2e796;
 	width: 90%;
 	min-height: 80%;
 
@@ -206,12 +222,6 @@ header {
 	overflow: scroll;
 }
 
-.list {
-	grid-template-columns: 1fr 1fr;
-	height: 100%;
-	background: #ffbf7fa3;
-	display: grid;
-}
 
 /* TODO */
 
@@ -468,21 +478,3 @@ textarea {
 	border-bottom: 5px solid red;
 }
 
-
-.addTodoBtn {
-	z-index: 10;
-	position: fixed;
-	right: 50px;
-	bottom: 50px;
-	border: black 0.2px solid;
-	background: white;
-	width: 40px;
-	height: 40px;
-	border-radius: 30px;
-	font-size: 1.5rem;
-	margin: 0;
-	padding: 0;
-	color: white;
-	cursor: pointer;
-	color: black;
-}

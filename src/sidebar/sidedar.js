@@ -27,6 +27,7 @@ function createDefaultLists(defaultListsArr) {
 	defaultLists.className = 'defaultLists';
 
 	defaultListsArr.forEach((list) => {
+		console.log(list);
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -45,7 +46,8 @@ function createCustomLists(listsArr) {
 	customLists.className = 'customLists';
 
 	listsArr.forEach((list) => {
-		if(list.title === 'Inbox') return;
+		console.log(list);
+		if(list.title === '📥 Inbox') return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -76,7 +78,8 @@ function listButtonHandleClick(list) {
 
 function createAddListButton() {
 	const addListButton = document.createElement('button');
-	addListButton.setAttribute('class', 'sidebarButton');
+	addListButton.className =  'sidebarButton';
+	addListButton.classList.add('addListButton');
 	addListButton.textContent = '+ New List';
 
 	return addListButton;
@@ -116,13 +119,12 @@ function createListForm() {
 	listForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleSubmit(handleReturn, listForm);
-		// console.log(listForm);
 	});
 
-	// listForm.addEventListener('keydown', (event) => {
-	// 	handleEnterKey(event, listForm, callback);
-	// 	handleEscapeKey(event, listForm);
-	// });
+	listForm.addEventListener('keydown', (event) => {
+		handleEnterKey(event, handleReturn, listForm)
+		handleEscapeKey(event, listForm);
+	}) 	
 
 	return listForm;
 }
@@ -205,6 +207,20 @@ function toggleSidebar() {
 		sidebar.classList.remove('showSidebar');
 	} else {
 		sidebar.classList.add('showSidebar');
+	}
+}
+
+function handleEnterKey(event, handleReturn, formDiv) {
+	if (event.code === 'Enter') {
+		handleSubmit(handleReturn, formDiv);
+		formDiv.removeEventListener('keydown', handleEnterKey);
+	}
+}
+
+function handleEscapeKey(event, formDiv) {
+	if (event.code === 'Escape') {
+		formDiv.remove();
+		formDiv.removeEventListener('keydown', handleEscapeKey);
 	}
 }
 

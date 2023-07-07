@@ -442,6 +442,7 @@ html {
 	font-family: Helvetica;
 	font-size: 16px;
 	height: 100vh;
+  background: #e6e6e6;
 }
 
 p {
@@ -471,19 +472,20 @@ header {
 .addTodoBtn {
 	z-index: 10;
 	position: fixed;
-	left: 30%;
-	top: 15px;
-	border: white 0.2px solid;
-	background: lightcoral;
+	right: 50px;
+	top: 20px;
+	border: black 0.2px solid;
+	background: white;
 	width: 40px;
 	height: 40px;
 	border-radius: 30px;
 	font-size: 1.5rem;
 	margin: 0;
 	padding: 0;
-	color: white;
 	cursor: pointer;
 }
+
+
 
 .hamburger {
 	z-index: 10;
@@ -608,9 +610,10 @@ header {
 
 /* LIST */
 
-.list > ul {
-	list-style: none;
-	margin: 0;
+.list {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 }
 
 .titleList {
@@ -624,11 +627,24 @@ header {
 	font-weight: bold;
 }
 
+.titleListCompleted {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  width: 20%;
+  margin: 1rem auto;
+  padding: 1rem 0;
+  border-bottom: 1px solid #80808061;
+
+  font-size: 1rem;
+  color: #00000059;
+}
+
 .listUl,
 .listUlCompleted {
 	list-style: none;
 
-	background: #ffe2e796;
 	width: 90%;
 	min-height: 80%;
 
@@ -642,12 +658,6 @@ header {
 	overflow: scroll;
 }
 
-.list {
-	grid-template-columns: 1fr 1fr;
-	height: 100%;
-	background: #ffbf7fa3;
-	display: grid;
-}
 
 /* TODO */
 
@@ -904,24 +914,7 @@ textarea {
 	border-bottom: 5px solid red;
 }
 
-
-.addTodoBtn {
-	z-index: 10;
-	position: fixed;
-	right: 50px;
-	bottom: 50px;
-	border: black 0.2px solid;
-	background: white;
-	width: 40px;
-	height: 40px;
-	border-radius: 30px;
-	font-size: 1.5rem;
-	margin: 0;
-	padding: 0;
-	color: white;
-	cursor: pointer;
-	color: black;
-}`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tleft: 30%;\n\ttop: 15px;\n\tborder: white 0.2px solid;\n\tbackground: lightcoral;\n\twidth: 40px;\n\theight: 40px;\n\tborder-radius: 30px;\n\tfont-size: 1.5rem;\n\tmargin: 0;\n\tpadding: 0;\n\tcolor: white;\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 2rem;\n\ttop: 2rem;\n\n\tbackground: #fff;\n\tpadding: 5px 10px;\n\tborder-radius: 20px;\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n  gap: 30px;\n\n\twidth: 200px;\n\theight: 100vh;\n\t/* background-color: #646464e5; */\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-100%);\n\n\ttop: 4rem;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n}\n  \n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n  background: #b4b4b436;\n  backdrop-filter: blur(50px);\n\n  border: 1px solid gray;\n  border-radius: 20px;\n  box-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n  margin: 0px 10px;\n\n  color: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n  border: 0;\n}\n\n.sidebarButton {\n\ttext-align: left;\n\tpadding: 5px 10px;\n\tborder: 0;\n\tbackground: transparent;\n\tborder-bottom: solid gray 1px;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tbackground: #ffebc5;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder: 1px wheat solid;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\tbackground: transparent;\n\tright: 0px;\n\tborder-radius: 20px;\n\tfont-size: 0.7rem;\n\tborder: 0;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tfont-size: 0.8rem;\n\twidth: 3.5rem;\n\tborder-radius: 20px;\n\tjustify-self: center;\n\tborder: solid 1px gray;\n\tposition: absolute;\n\tbottom: -30px;\n\theight: 1.5rem;\n}\n\n/* LIST */\n\n.list > ul {\n\tlist-style: none;\n\tmargin: 0;\n}\n\n.titleList {\n\tdisplay: flex;\n\ttext-transform: uppercase;\n\tjustify-content: center;\n\talign-items: center;\n\tmargin: 0;\n\theight: 40px;\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n}\n\n.listUl,\n.listUlCompleted {\n\tlist-style: none;\n\n\tbackground: #ffe2e796;\n\twidth: 90%;\n\tmin-height: 80%;\n\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tmargin: auto;\n\tpadding: 0;\n\n\toverflow: scroll;\n}\n\n.list {\n\tgrid-template-columns: 1fr 1fr;\n\theight: 100%;\n\tbackground: #ffbf7fa3;\n\tdisplay: grid;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(5, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\tbackground-color: gray;\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 19px;\n\tborder-radius: 20px;\n}\n\n.cancelForm {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n\tfont-size: 0.8rem;\n\tborder-radius: 20px;\n\tcolor: white;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n}\n\n#formTitle {\n\twidth: 90%;\n\tmargin: auto;\n\theight: 60%;\n\tborder-radius: 20px;\n\tpadding: 0px 10px;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n}\n\n#formNotes {\n\twidth: 90%;\n\tmargin: auto;\n\theight: 60%;\n\tborder-radius: 20px;\n\tpadding: 5px 10px;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formDate {\n\twidth: 6rem;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formList {\n\twidth: 100%;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\theight: 1.5rem;\n\twidth: 5rem;\n\tborder-radius: 20px;\n\n\tgrid-area: 5 / 3;\n\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\tborder-radius: 5px;\n\tpadding: 3px 10px;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 15px;\n\tgrid-template-columns: 30px 1fr;\n\tcolumn-gap: 10px;\n\n\twidth: 300px;\n\tmargin: auto;\n\tpadding: 10px 10px;\n\tborder-radius: 20px;\n\tbackground-color: #e7eeff;\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\tborder-bottom: 5px solid #b2bfca;\n\n\tcursor: pointer;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 5px;\n\ttop: 5px;\n\tfont-size: 0.5rem;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\tfont-size: 0.6rem;\n\tbackground: transparent;\n\tborder: 0;\n\ttop: 30%;\n\tright: 5px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 300px;\n\tmargin: auto;\n\tpadding: 5px 5px;\n\tborder-radius: 20px;\n\tbackground-color: #e7eeff;\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\tborder-bottom: 5px solid #b2bfca;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 5px;\n\ttop: 5px;\n\tfont-size: 0.5rem;\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit,\n.cancelForm {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 4;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 4;\n\tgrid-row: 2 / span 2;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\twidth: 100%;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 5;\n\tgrid-row: 4;\n\talign-self: end;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: gray;\n}\n\n/* Priority */\n.low {\n\tborder-bottom: 5px solid lightblue;\n}\n\n.medium {\n\tborder-bottom: 5px solid orange;\n}\n\n.high {\n\tborder-bottom: 5px solid red;\n}\n\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tright: 50px;\n\tbottom: 50px;\n\tborder: black 0.2px solid;\n\tbackground: white;\n\twidth: 40px;\n\theight: 40px;\n\tborder-radius: 30px;\n\tfont-size: 1.5rem;\n\tmargin: 0;\n\tpadding: 0;\n\tcolor: white;\n\tcursor: pointer;\n\tcolor: black;\n}"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n  background: #e6e6e6;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tright: 50px;\n\ttop: 20px;\n\tborder: black 0.2px solid;\n\tbackground: white;\n\twidth: 40px;\n\theight: 40px;\n\tborder-radius: 30px;\n\tfont-size: 1.5rem;\n\tmargin: 0;\n\tpadding: 0;\n\tcursor: pointer;\n}\n\n\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 2rem;\n\ttop: 2rem;\n\n\tbackground: #fff;\n\tpadding: 5px 10px;\n\tborder-radius: 20px;\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n  gap: 30px;\n\n\twidth: 200px;\n\theight: 100vh;\n\t/* background-color: #646464e5; */\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-100%);\n\n\ttop: 4rem;\n\tleft: 0;\n\tright: 0;\n\tbottom: 0;\n}\n  \n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n  background: #b4b4b436;\n  backdrop-filter: blur(50px);\n\n  border: 1px solid gray;\n  border-radius: 20px;\n  box-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n  margin: 0px 10px;\n\n  color: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n  border: 0;\n}\n\n.sidebarButton {\n\ttext-align: left;\n\tpadding: 5px 10px;\n\tborder: 0;\n\tbackground: transparent;\n\tborder-bottom: solid gray 1px;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tbackground: #ffebc5;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder: 1px wheat solid;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\tbackground: transparent;\n\tright: 0px;\n\tborder-radius: 20px;\n\tfont-size: 0.7rem;\n\tborder: 0;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tfont-size: 0.8rem;\n\twidth: 3.5rem;\n\tborder-radius: 20px;\n\tjustify-self: center;\n\tborder: solid 1px gray;\n\tposition: absolute;\n\tbottom: -30px;\n\theight: 1.5rem;\n}\n\n/* LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n}\n\n.titleList {\n\tdisplay: flex;\n\ttext-transform: uppercase;\n\tjustify-content: center;\n\talign-items: center;\n\tmargin: 0;\n\theight: 40px;\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n}\n\n.titleListCompleted {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  \n  width: 20%;\n  margin: 1rem auto;\n  padding: 1rem 0;\n  border-bottom: 1px solid #80808061;\n\n  font-size: 1rem;\n  color: #00000059;\n}\n\n.listUl,\n.listUlCompleted {\n\tlist-style: none;\n\n\twidth: 90%;\n\tmin-height: 80%;\n\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tmargin: auto;\n\tpadding: 0;\n\n\toverflow: scroll;\n}\n\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(5, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\tbackground-color: gray;\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 19px;\n\tborder-radius: 20px;\n}\n\n.cancelForm {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n\tfont-size: 0.8rem;\n\tborder-radius: 20px;\n\tcolor: white;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n}\n\n#formTitle {\n\twidth: 90%;\n\tmargin: auto;\n\theight: 60%;\n\tborder-radius: 20px;\n\tpadding: 0px 10px;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n}\n\n#formNotes {\n\twidth: 90%;\n\tmargin: auto;\n\theight: 60%;\n\tborder-radius: 20px;\n\tpadding: 5px 10px;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formDate {\n\twidth: 6rem;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formList {\n\twidth: 100%;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\theight: 1.5rem;\n\twidth: 5rem;\n\tborder-radius: 20px;\n\n\tgrid-area: 5 / 3;\n\n\talign-self: center;\n\tjustify-self: center;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\tborder-radius: 5px;\n\tpadding: 3px 10px;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 15px;\n\tgrid-template-columns: 30px 1fr;\n\tcolumn-gap: 10px;\n\n\twidth: 300px;\n\tmargin: auto;\n\tpadding: 10px 10px;\n\tborder-radius: 20px;\n\tbackground-color: #e7eeff;\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\tborder-bottom: 5px solid #b2bfca;\n\n\tcursor: pointer;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 5px;\n\ttop: 5px;\n\tfont-size: 0.5rem;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\tfont-size: 0.6rem;\n\tbackground: transparent;\n\tborder: 0;\n\ttop: 30%;\n\tright: 5px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.4fr 1fr 1fr 1fr 1fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 300px;\n\tmargin: auto;\n\tpadding: 5px 5px;\n\tborder-radius: 20px;\n\tbackground-color: #e7eeff;\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\tborder-bottom: 5px solid #b2bfca;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 5px;\n\ttop: 5px;\n\tfont-size: 0.5rem;\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit,\n.cancelForm {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 4;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 4;\n\tgrid-row: 2 / span 2;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\twidth: 100%;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 5;\n\tgrid-row: 4;\n\talign-self: end;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: gray;\n}\n\n/* Priority */\n.low {\n\tborder-bottom: 5px solid lightblue;\n}\n\n.medium {\n\tborder-bottom: 5px solid orange;\n}\n\n.high {\n\tborder-bottom: 5px solid red;\n}\n\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7275,17 +7268,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   inbox: () => (/* binding */ inbox),
 /* harmony export */   listsArr: () => (/* binding */ listsArr)
 /* harmony export */ });
+let id = 0;
+
 function createList(title, description) {
+	const listId = id++;
+	title = title ? title : 'List';
 	const todosArr = [];
 	const completedTodos = [];
 
-	return { title, description, todosArr, completedTodos };
+	return { title, description, todosArr, completedTodos, id: listId };
 }
 
 // Default list
-const inbox = createList('Inbox', 'Default list');
-const today = createList('Today', 'Todos with todays date');
-const upcoming = createList('Upcoming', 'Todos with future dates');
+const inbox = createList('📥 Inbox', 'Default list');
+const today = createList('🌤️ Today', "Todos with today's date");
+const upcoming = createList('📆 Upcoming', 'Todos with future dates');
 
 const defaultListsArr = [inbox, today, upcoming];
 const listsArr = [inbox];
@@ -7335,7 +7332,7 @@ function displayFreshList(list) {
 	listDivCompleted.className = 'listCompleted';
 
 	const listTitleCompleted = document.createElement('p');
-	listTitleCompleted.className = 'titleList';
+	listTitleCompleted.className = 'titleListCompleted';
 	listTitleCompleted.textContent = 'Completed';
 	listDivCompleted.append(listTitleCompleted);
 
@@ -7399,7 +7396,9 @@ __webpack_require__.r(__webpack_exports__);
 
 // Delete list function
 function findCorrectList(todo) {
-	return _createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.find((list) => list.title === todo.list);
+	const list = _createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.find((list) => list.id === todo.listId);
+	console.log(list);
+	return list;
 }
 
 function addTodoList(todo, list) {
@@ -7435,7 +7434,7 @@ function undoFinishedTodo(list) {
 }
 
 function replaceOldTodo(todo, newTodo) {
-	const currentList = _createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.find((list) => list.title === todo.list);
+	const currentList = findCorrectList(todo);
 
 	if (!todo.done) {
 		const todoIndex = currentList.todosArr.indexOf(todo);
@@ -7461,17 +7460,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
 /* harmony export */ });
-function createTodo(
-	title,
-	notes,
-	dueDate,
-	priority,
-	list,
-	listIndex
-) {
+function createTodo(title, notes, dueDate, priority, listId) {
 	const done = false;
 
-	return { title, notes, dueDate, priority, list, listIndex, done };
+	return { title, notes, dueDate, priority, listId, done };
 }
 
 
@@ -7791,7 +7783,8 @@ function createListsForm(listsArr) {
 	listsArr.forEach((list) => {
 		console.log(list);
 		const optionElement = document.createElement('option');
-		optionElement.setAttribute('value', list.title);
+		optionElement.value = list.id;
+		console.log(list.id);
 		optionElement.textContent = list.title;
 		formList.append(optionElement);
 	});
@@ -7852,10 +7845,11 @@ function handleSubmit(callback, formDiv) {
 	const notes = formDiv.elements['formNotes'].value;
 	const dueDate = formDiv.elements['formDate'].value;
 	const priority = formDiv.elements['formPriority'].value;
-	const list = formDiv.elements['formList'].value;
-	console.log(list);
+	const listId = Number(formDiv.elements['formList'].value);
+	console.log(listId);
 
-	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority, list);
+	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority, listId);
+	console.log(newTodo);
 
 	callback(newTodo);
 	formDiv.remove();
@@ -7891,10 +7885,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 /* harmony import */ var _displayTodo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./displayTodo.js */ "./src/components/todo/displayTodo.js");
-/* harmony import */ var _list_createList_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/createList.js */ "./src/components/list/createList.js");
-/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
-/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
-
+/* harmony import */ var _list_displayList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../list/displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
 
 
 
@@ -8063,41 +8055,41 @@ function visualizePriority(todo, todoCard) {
 }
 
 function handleCheckboxClick(todo) {
-	const list = findCorrectList(todo);
-	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, todo);
+	const list = (0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.findCorrectList)(todo);
+	(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, todo);
 	if (todo.done === false) {
 		todo.done = true;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.moveFinishedTodo)(list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.moveFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(list);
 	} else if (todo.done === true) {
 		todo.done = false;
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.undoFinishedTodo)(list);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshList)(list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.undoFinishedTodo)(list);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(list);
 	}
 }
 
 function handleCancelButton(todo) {
-	const list = findCorrectList(todo);
+	const list = (0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.findCorrectList)(todo);
 	if (todo.done === false) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.removeTodoList)(todo, list.todosArr);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, list.todosArr);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(list);
 	} else if (todo.done === true) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.removeTodoList)(todo, list.completedTodos);
-		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshCompleted)(list);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodoList)(todo, list.completedTodos);
+		(0,_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshCompleted)(list);
 	}
 }
 
 function handleEnterKey(event, todoLi, editedTodo, todo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(editedTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, editedTodo);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
 	}
 }
 
 function handleEscapeKey(event, todoLi, originalTodo, todo) {
 	if (event.code === 'Escape') {
 		todoLi.replaceWith((0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.displayTodoCard)(originalTodo));
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_5__.replaceOldTodo)(todo, originalTodo);
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, originalTodo);
 	}
 }
 
@@ -8258,6 +8250,7 @@ function createDefaultLists(defaultListsArr) {
 	defaultLists.className = 'defaultLists';
 
 	defaultListsArr.forEach((list) => {
+		console.log(list);
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -8276,7 +8269,8 @@ function createCustomLists(listsArr) {
 	customLists.className = 'customLists';
 
 	listsArr.forEach((list) => {
-		if(list.title === 'Inbox') return;
+		console.log(list);
+		if(list.title === '📥 Inbox') return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -8307,7 +8301,8 @@ function listButtonHandleClick(list) {
 
 function createAddListButton() {
 	const addListButton = document.createElement('button');
-	addListButton.setAttribute('class', 'sidebarButton');
+	addListButton.className =  'sidebarButton';
+	addListButton.classList.add('addListButton');
 	addListButton.textContent = '+ New List';
 
 	return addListButton;
@@ -8347,13 +8342,12 @@ function createListForm() {
 	listForm.addEventListener('submit', (e) => {
 		e.preventDefault();
 		handleSubmit(handleReturn, listForm);
-		// console.log(listForm);
 	});
 
-	// listForm.addEventListener('keydown', (event) => {
-	// 	handleEnterKey(event, listForm, callback);
-	// 	handleEscapeKey(event, listForm);
-	// });
+	listForm.addEventListener('keydown', (event) => {
+		handleEnterKey(event, handleReturn, listForm)
+		handleEscapeKey(event, listForm);
+	}) 	
 
 	return listForm;
 }
@@ -8436,6 +8430,20 @@ function toggleSidebar() {
 		sidebar.classList.remove('showSidebar');
 	} else {
 		sidebar.classList.add('showSidebar');
+	}
+}
+
+function handleEnterKey(event, handleReturn, formDiv) {
+	if (event.code === 'Enter') {
+		handleSubmit(handleReturn, formDiv);
+		formDiv.removeEventListener('keydown', handleEnterKey);
+	}
+}
+
+function handleEscapeKey(event, formDiv) {
+	if (event.code === 'Escape') {
+		formDiv.remove();
+		formDiv.removeEventListener('keydown', handleEscapeKey);
 	}
 }
 
