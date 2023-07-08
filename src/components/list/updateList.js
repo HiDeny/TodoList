@@ -1,89 +1,109 @@
-import { listsArr } from "./createList";
+import { listsArr, today, upcoming } from './createList';
+import { isFuture, isToday } from 'date-fns';
+import { refreshList } from './displayList';
 
 // Delete list function
-function deleteList (list) {
+function deleteList(list) {
 	listsArr.splice(listsArr.indexOf(list), 1);
 }
 
+// Find todo in all lists
 
-function findCorrectList(todo) {
-	console.log(todo);
-	const list = listsArr.find((list) => list.id === todo.listId);
-	console.log(list);
-	return list;
+// Sort todos to Today, and upcoming lists
+function processDueDate(todo) {
+	if (!todo.dueDate) return;
+
+	const date = new Date(todo.dueDate);
+	if (isToday(date)) {
+		if (!todo.done) return today.todosArr;
+		if (todo.done) return today.completedTodos;
+	}
+	if (isFuture(date)) {
+		if (!todo.done) return upcoming.todosArr;
+		if (todo.done) return upcoming.completedTodos;
+	}
+}
+
+// Process change for today and upcoming
+
+function findList(todo) {
+	return listsArr.find((list) => list.id === todo.listId);
+}
+
+function findSubList(todo) {
+	const list = findList(todo);
+	if (!todo.done) return list.todosArr;
+	if (todo.done) return list.completedTodos;
+}
+
+function setList(todo) {
+	const list = findList(todo).todosArr;
+	list.push(todo);
+	refreshList(todo);
+}
+
+function addTodoList(todo) {
+	const list = findSubList(todo);
+	list.push(todo);
+	refreshList(todo);
+}
+
+function removeTodoList(todo) {
+	const list = findSubList(todo);
+	list.splice(list.indexOf(todo), 1);
+	refreshList(todo);
+}
+
+function changeList(todo, newListId) {
+	// Copy todo
+	const updatedTodo = Object.assign({}, todo);
+	// Remove original todo
+	removeTodoList(todo);
+	refreshList(todo);
+	// Set new list
+	updatedTodo.listId = Number(newListId);
+	// Add to new list
+	addTodoList(updatedTodo);
+	refreshList(updatedTodo);
+}
+
+function changeSubList(todo) {
+	// Copy
+	const updatedTodo = { ...todo };
+	// Remove Old
+	removeTodoList(todo);
+	refreshList(todo);
+	// Set New
+	updatedTodo.done = !todo.done;
+	// Add New
+	addTodoList(updatedTodo);
+	refreshList(updatedTodo);
 }
 
 function sortList(list) {
 	return list.sort(compareTodos);
 }
 
-function compareTodos(a , b) {
-	console.log(a);
-	console.log(b);
+function compareTodos(a, b) {
 	if (a.priority === b.priority) {
 		return new Date(a.dueDate) - new Date(b.dueDate);
 	} else {
 		const priorityOrder = ['high', 'medium', 'low', ''];
 		const priorityA = priorityOrder.indexOf(a.priority);
-		console.log(priorityA);
 		const priorityB = priorityOrder.indexOf(b.priority);
-		console.log(priorityB);
-		return priorityA - priorityB
-	}
-}
-
-
-function addTodoList(todo, list) {
-	list.unshift(todo);
-}
-
-function removeTodoList(todo, list) {
-	list.splice(list.indexOf(todo), 1);
-}
-
-function moveTodoToDiffList(todo, orgList, newList) {
-	addTodoList(todo, newList);
-	removeTodoList(todo, orgList);
-}
-
-function moveFinishedTodo(list) {
-	console.log(list);
-	list.todosArr.forEach((todo) => {
-		if (todo.done === true) {
-			list.completedTodos.unshift(todo);
-			list.todosArr.splice(list.todosArr.indexOf(todo), 1);
-		}
-	});
-}
-
-function undoFinishedTodo(list) {
-	list.completedTodos.forEach((todo) => {
-		if (todo.done === false) {
-			list.todosArr.unshift(todo);
-			list.completedTodos.splice(list.completedTodos.indexOf(todo), 1);
-		}
-	});
-}
-
-function replaceOldTodo(todo, newTodo) {
-	const currentList = findCorrectList(todo);
-
-	if (!todo.done) {
-		const todoIndex = currentList.todosArr.indexOf(todo);
-		currentList.todosArr.splice(todoIndex, 1, newTodo);
-	} else {
-		const todoIndex = currentList.completedTodos.indexOf(todo);
-		currentList.completedTodos.splice(todoIndex, 1, newTodo);
+		console.log(priorityA - priorityB);
+		return priorityA - priorityB;
 	}
 }
 
 export {
-	findCorrectList,
 	sortList,
+	processDueDate,
+	findList,
+	findSubList,
+	setList,
 	addTodoList,
 	removeTodoList,
-	moveFinishedTodo,
-	undoFinishedTodo,
-	moveTodoToDiffList,
-	replaceOldTodo,
+	changeList,
+	changeSubList,
 };

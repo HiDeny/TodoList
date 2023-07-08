@@ -1,16 +1,8 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import { displayTodoCard } from './displayTodo.js';
+
 import { listsArr } from '../list/createList.js';
-import { refreshList, refreshCompleted } from '../list/displayList';
-import {
-	replaceOldTodo,
-	moveFinishedTodo,
-	undoFinishedTodo,
-	removeTodoList,
-	findCorrectList,
-	moveTodoToDiffList,
-} from '../list/updateList';
+import { addTodoList, removeTodoList, changeSubList } from '../list/updateList';
 
 function createTodoEditMode(todo) {
 	const originalTodo = Object.assign({}, todo);
@@ -24,8 +16,8 @@ function createTodoEditMode(todo) {
 	visualizePriority(todo, todoEditCard);
 
 	todoEditCard.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todoLi, editedTodo, todo);
-		handleEscapeKey(event, todoLi, originalTodo, todo);
+		handleEnterKey(event, todo);
+		handleEscapeKey(event, originalTodo, todo);
 	});
 
 	return todoLi;
@@ -141,39 +133,29 @@ function createListSelector(todo) {
 	const editList = document.createElement('select');
 	editList.className = 'todoListEdit';
 
-	listsArr.forEach((list) => {
-		const optionElement = document.createElement('option');
-		optionElement.value = list.id;
-		optionElement.textContent = list.title;
-		optionElement.selected = list.id === todo.listId ? true : false;
+	listsArr.forEach((option) => {
+		const optionElement = new Option(option.title, option.id);
+		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);
 	});
 
 	editList.addEventListener('input', (event) => {
 		if (todo.listId === event.target.value) return;
-
-		const orgList = findCorrectList(todo);
-		todo.listId = Number(event.target.value);
-		const newList = findCorrectList(todo);
-
-		if (!todo.done) {
-			const list = orgList.todosArr;
-			const nList = newList.todosArr;
-			moveTodoToDiffList(todo, list, nList);
-			refreshList(orgList);
-		} else {
-			const nList = newList.completedTodos;
-			moveTodoToDiffList(todo, list, nList);
-			refreshCompleted(orgList);
-		}
+		changeList(todo, Number(event.target.value));
 	});
 
 	return editList;
 }
 
 function createPrioritySelector(todo, todoCardEdit) {
+	console.log(todo.priority);
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
+
+	editPriority.addEventListener('input', (event) => {
+		todo.priority = event.target.value;
+		visualizePriority(todo, todoCardEdit);
+	});
 
 	const priorityOptions = [
 		{ value: 'high', text: 'High' },
@@ -186,12 +168,12 @@ function createPrioritySelector(todo, todoCardEdit) {
 		editPriority.append(optionElement);
 	});
 
-	editPriority.value = todo.priority;
-
-	editPriority.addEventListener('input', (event) => {
-		todo.priority = event.target.value;
-		visualizePriority(todo, todoCardEdit);
-	});
+	const placeholderPriority = new Option('Priority', '');
+	placeholderPriority.className = 'placeholderPri';
+	placeholderPriority.selected = true;
+	placeholderPriority.disabled = true;
+	placeholderPriority.hidden = true;
+	editPriority.append(placeholderPriority);
 
 	return editPriority;
 }
@@ -211,47 +193,25 @@ function visualizePriority(todo, todoCard) {
 }
 
 function handleCheckboxClick(todo) {
-	const list = findCorrectList(todo);
-	replaceOldTodo(todo, todo);
-	if (todo.done === false) {
-		todo.done = true;
-		moveFinishedTodo(list);
-		refreshCompleted(list);
-	} else if (todo.done === true) {
-		todo.done = false;
-		undoFinishedTodo(list);
-		refreshList(list);
-	}
+	changeSubList(todo);
 }
 
 function handleCancelButton(todo) {
-	const list = findCorrectList(todo);
-	if (todo.done === false) {
-		removeTodoList(todo, list.todosArr);
-		refreshCompleted(list);
-	} else if (todo.done === true) {
-		removeTodoList(todo, list.completedTodos);
-		refreshCompleted(list);
-	}
+	removeTodoList(todo);
 }
 
-function handleEnterKey(event, todoLi, editedTodo, todo) {
+function handleEnterKey(event, todo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
-		todoLi.replaceWith(displayTodoCard(editedTodo));
-		replaceOldTodo(todo, editedTodo);
+		removeTodoList(todo);
+		addTodoList(todo);
 	}
 }
 
-function handleEscapeKey(event, todoLi, originalTodo, todo) {
+function handleEscapeKey(event, originalTodo, todo) {
 	if (event.code === 'Escape') {
-		todoLi.replaceWith(displayTodoCard(originalTodo));
-		replaceOldTodo(todo, originalTodo);
+		removeTodoList(originalTodo);
+		addTodoList(todo);
 	}
 }
 
 export { createTodoEditMode };
-
-// function handleMouseLeave(event, todoLi, editedTodo, todo) {
-// 	todoLi.replaceWith(displayTodoCard(editedTodo));
-// 	replaceOldTodo(todo, editedTodo);
-// }

@@ -2,14 +2,7 @@ import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
 import { createTodoEditMode } from './updateTodo.js';
 
-import { listsArr } from '../list/createList.js';
-import { refreshList, refreshCompleted } from '../list/displayList';
-import {
-	findCorrectList,
-	moveFinishedTodo,
-	undoFinishedTodo,
-	removeTodoList,
-} from '../list/updateList';
+import { removeTodoList, changeSubList } from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -37,8 +30,8 @@ function displayTodoCard(todo) {
 function createTodoCard(todo, todoLi) {
 	const todoCard = createCard();
 
-	const cancelButton = createCancelButton(todoCard, todo);
-	todoCard.append(cancelButton);
+	const removeButton = createRemoveButton(todoCard, todo);
+	todoCard.append(removeButton);
 
 	const checkBox = createCheckBox(todo, todoLi);
 	todoCard.append(checkBox);
@@ -62,7 +55,7 @@ function createCard() {
 	return todoCard;
 }
 
-function createCancelButton(todoCard, todo) {
+function createRemoveButton(todoCard, todo) {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
 	cancelButton.textContent = 'x';
@@ -101,18 +94,21 @@ function createTitle(todo) {
 function createDueDate(todo) {
 	const dueDate = document.createElement('p');
 	dueDate.className = 'todoDate';
+	dueDate.textContent = todo.dueDate ? selectDateName(todo.dueDate) : '';
 
-	const dateToCheck = new Date(todo.dueDate);
-	if (isToday(dateToCheck)) {
-		dueDate.textContent = 'Today';
-	} else if (isTomorrow(dateToCheck)) {
-		dueDate.textContent = 'Tomorrow';
-	} else if (isThisYear(dateToCheck)) {
-		const formattedDate = format(dateToCheck, 'dd MMM');
-		dueDate.textContent = formattedDate;
-	} else {
-		dueDate.textContent = todo.dueDate;
-	}
+	return dueDate;
+}
+
+function selectDateName(dueDate) {
+	const dateToCheck = new Date(dueDate);
+	console.log(dateToCheck);
+	console.log(dueDate);
+
+	if (isToday(dateToCheck)) return 'Today';
+	if (isTomorrow(dateToCheck)) return 'Tomorrow';
+
+	const formattedDate = format(dateToCheck, 'dd MMM');
+	if (isThisYear(dateToCheck)) return formattedDate;
 
 	return dueDate;
 }
@@ -131,27 +127,11 @@ function visualizePriority(todo, todoCard) {
 }
 
 function handleCheckboxClick(todo) {
-	const list = findCorrectList(todo);
-	if (todo.done === false) {
-		todo.done = true;
-		moveFinishedTodo(list);
-		refreshCompleted(list);
-	} else if (todo.done === true) {
-		todo.done = false;
-		undoFinishedTodo(list);
-		refreshList(list);
-	}
+	changeSubList(todo);
 }
 
 function handleCancelButton(todo) {
-	const list = findCorrectList(todo);
-	if (todo.done === false) {
-		removeTodoList(todo, list.todosArr);
-		refreshCompleted(list);
-	} else if (todo.done === true) {
-		removeTodoList(todo, list.completedTodos);
-		refreshCompleted(list);
-	}
+	removeTodoList(todo);
 }
 
 function removeFlatpickrDiv() {

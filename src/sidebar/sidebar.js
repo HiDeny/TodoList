@@ -11,16 +11,32 @@ import {
 } from '../components/list/displayList';
 
 // Sidebar
-function sidebarMenu() {
-	const sidebar = createSidebar();
+function sidebar() {
+	const sidebarDiv = createSidebarVisual();
+
+	function toggleSidebar() {
+		const sidebar = document.querySelector('.sidebar');
+
+		if (sidebar.classList.contains('showSidebar')) {
+			sidebar.classList.remove('showSidebar');
+		} else {
+			sidebar.classList.add('showSidebar');
+		}
+	}
+
+	return { sidebarDiv, toggleSidebar };
+}
+
+function createSidebarVisual() {
+	const sidebarVisual = createSidebar();
 
 	const defaultLists = createDefaultLists(defaultListsArr);
-	sidebar.append(defaultLists);
+	sidebarVisual.append(defaultLists);
 
 	const customLists = createCustomLists(listsArr);
-	sidebar.append(customLists);
+	sidebarVisual.append(customLists);
 
-	return sidebar;
+	return sidebarVisual;
 }
 
 function createSidebar() {
@@ -81,7 +97,6 @@ function listButtonHandleClick(list) {
 	const currentList = document.querySelector('.list');
 	currentList.replaceWith(newList.completeList);
 	refreshList(list);
-	refreshCompleted(list);
 }
 
 function createAddListButton() {
@@ -201,18 +216,6 @@ function refreshLists() {
 	currentLists.replaceWith(createCustomLists(listsArr));
 }
 
-function toggleSidebar() {
-	// close on click
-
-	const sidebar = document.querySelector('.sidebar');
-
-	if (sidebar.classList.contains('showSidebar')) {
-		sidebar.classList.remove('showSidebar');
-	} else {
-		sidebar.classList.add('showSidebar');
-	}
-}
-
 function handleEnterKey(event, handleReturn, formDiv) {
 	if (event.code === 'Enter') {
 		handleSubmit(handleReturn, formDiv);
@@ -227,4 +230,4 @@ function handleEscapeKey(event, formDiv) {
 	}
 }
 
-export { sidebarMenu };
+export { sidebar };

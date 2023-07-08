@@ -1,10 +1,10 @@
 import { displayTodoCard } from '../todo/displayTodo';
-import { sortList } from './updateList';
+import { findList, findSubList, sortList } from './updateList';
 
 function displayFreshList(list) {
-	const completeList = document.createElement('div');
-	completeList.className = 'list';
-	completeList.setAttribute('id', list.title);
+	const displayList = document.createElement('div');
+	displayList.className = 'list';
+	displayList.setAttribute('id', list.title);
 
 	// Tasks
 	const listDiv = document.createElement('div');
@@ -12,14 +12,14 @@ function displayFreshList(list) {
 
 	const listTitle = document.createElement('p');
 	listTitle.className = 'titleList';
-	listTitle.textContent = list.title ? list.title : 'List Name';
+	listTitle.textContent = list.title;
 	listDiv.append(listTitle);
 
 	const listUl = document.createElement('ul');
 	listUl.className = 'listUl';
 
 	listDiv.append(listUl);
-	completeList.append(listDiv);
+	displayList.append(listDiv);
 
 	// Completed
 	const listDivCompleted = document.createElement('div');
@@ -35,35 +35,34 @@ function displayFreshList(list) {
 
 	listDivCompleted.append(listUlCompleted);
 
-	completeList.append(listDivCompleted);
+	displayList.append(listDivCompleted);
 
-	return { completeList, listUl, listUlCompleted, list };
+	return displayList;
 }
 
-function refreshList(list) {
-	list = sortList(list.todosArr);
-	console.log(list);
-	const newListUl = displayFreshList(list).listUl;
-	list.forEach((todo) => {
-		newListUl.appendChild(displayTodoCard(todo));
+function refreshList(todo) {
+	// ! May break
+	const list = findList(todo);
+	const visibleList = document.querySelector('.list');
+	if (!visibleList.id === list.title) return;
+
+	const subList = findSubList(todo);
+	const sortedList = sortList(subList);
+
+	const listClass = !todo.done ? 'listUl' : 'listUlCompleted';
+	const newVisual = document.createElement('ul');
+	newVisual.className = listClass;
+
+	sortedList.forEach((todo) => {
+		newVisual.appendChild(displayTodoCard(todo));
 	});
 
-	const oldUl = document.querySelector('.listUl');
-	oldUl.replaceWith(newListUl);
-}
-
-function refreshCompleted(list) {
-	list = sortList(list.completedTodos);
-	const newCompletedListUl = displayFreshList(list).listUlCompleted;
-	list.forEach((todo) => {
-		newCompletedListUl.appendChild(displayTodoCard(todo));
-	});
-	const oldUlCompleted = document.querySelector('.listUlCompleted');
-	oldUlCompleted.replaceWith(newCompletedListUl);
+	const oldUl = document.querySelector(`.${listClass}`);
+	oldUl.replaceWith(newVisual);
 }
 
 // Delete list button, double check if they want to delete the list
 
 // Sorting methods
 
-export { displayFreshList, refreshList, refreshCompleted };
+export { displayFreshList, refreshList };

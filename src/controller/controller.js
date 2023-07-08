@@ -1,24 +1,34 @@
 import '../style.css';
 import 'normalize.css';
 
-import { inbox, defaultListsArr } from '../components/list/createList.js';
-import { displayFreshList, refreshList } from '../components/list/displayList';
-import { addTodoList, findCorrectList } from '../components/list/updateList';
+import { inbox } from '../components/list/createList.js';
+import { displayFreshList } from '../components/list/displayList';
+import {
+	setList,
+	findCorrectList,
+	processDueDate,
+} from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
 
-import { sidebarMenu } from '../sidebar/sidedar';
+import { sidebar } from '../sidebar/sidebar.js';
 
 export default function generalController() {
 	// Header
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
 
+	// Container
+	const container = document.createElement('div');
+	container.className = 'container';
+
+	document.body.appendChild(container);
+
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
-	addTodoBtn.classList.add('addTodoBtn');
-	addTodoBtn.setAttribute('tabindex', '0');
+	addTodoBtn.className = 'addTodoBtn';
 	addTodoBtn.textContent = '+';
+	addTodoBtn.setAttribute('tabindex', '0');
 	addTodoBtn.addEventListener('click', () => {
 		const activeForm = document.querySelector('#todoForm');
 
@@ -31,47 +41,29 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		const list = findCorrectList(newTodo);
-		addTodoList(newTodo, list.todosArr);
+		const dateList = processDueDate(newTodo);
+		if (dateList) dateList.push(newTodo);
 
-		const visibleList = document.querySelector('.list');
-		if (visibleList.id === list.title) {
-			refreshList(list);
-		}
+		setList(newTodo);
 	}
 
 	headerDiv.prepend(addTodoBtn);
+
+	// Sidebar
+	const sidebarComponent = sidebar();
+	container.append(sidebarComponent.sidebarDiv);
 
 	// Menu Button
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
-	menuButton.addEventListener('click', toggleSidebar);
+	menuButton.addEventListener('click', sidebarComponent.toggleSidebar);
 
 	headerDiv.append(menuButton);
 
-	// Container
-	const container = document.createElement('div');
-	container.className = 'container';
-
-	document.body.appendChild(container);
-
-	// Sidebar
-	const sidebar = sidebarMenu();
-	container.append(sidebar);
-
-	function toggleSidebar() {
-		// Close on click
-
-		if (sidebar.classList.contains('showSidebar')) {
-			sidebar.classList.remove('showSidebar');
-		} else {
-			sidebar.classList.add('showSidebar');
-		}
-	}
 	//* List stuff
 
 	// Inbox - list
 	const displayInbox = displayFreshList(inbox);
-	container.appendChild(displayInbox.completeList);
+	container.appendChild(displayInbox);
 }
