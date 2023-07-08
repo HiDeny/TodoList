@@ -14,13 +14,6 @@ export default function generalController() {
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
 
-	// Title
-	const title = document.createElement('h1');
-	title.className = 'mainTitle';
-	title.textContent = 'TodoList';
-
-	headerDiv.appendChild(title);
-
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.classList.add('addTodoBtn');
@@ -39,13 +32,12 @@ export default function generalController() {
 
 	function formReturn(newTodo) {
 		const list = findCorrectList(newTodo);
-		console.log(list);
 		addTodoList(newTodo, list.todosArr);
 
 		const visibleList = document.querySelector('.list');
 		if (visibleList.id === list.title) {
 			refreshList(list);
-		};
+		}
 	}
 
 	headerDiv.prepend(addTodoBtn);

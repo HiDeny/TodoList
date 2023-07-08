@@ -2,11 +2,17 @@
 	box-sizing: border-box;
 }
 
+*:focus-visible {
+	outline: 0.5px rgba(150, 150, 150, 0.23) solid;
+	box-shadow: inset 0px 0px 20px 0px #8080803b;
+	border-radius: 3px;
+}
+
 html {
 	font-family: Helvetica;
 	font-size: 16px;
 	height: 100vh;
-  background: #e6e6e6;
+	background: #e6e6e6;
 }
 
 p {
@@ -32,34 +38,67 @@ header {
 }
 
 /* Add TODO BTN */
+.cancelForm:hover,
+.deleteTodo:hover,
+.deleteTodoEdit:hover,
+.cancelListForm:hover {
+	background: #ff5d5d;
+	color: #700;
+}
+
+.cancelForm,
+.deleteTodo,
+.deleteTodoEdit,
+.cancelListForm {
+	height: 0.9rem;
+	width: 0.9rem;
+	padding: 0;
+
+	border: 1px solid #808080b8;
+	border-radius: 100%;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+
+	font-size: 0.6rem;
+	text-align: center;
+	color: transparent;
+}
 
 .addTodoBtn {
 	z-index: 10;
 	position: fixed;
-	right: 50px;
-	top: 20px;
-	border: black 0.2px solid;
-	background: white;
-	width: 40px;
+	left: 12rem;
+	top: 1.7rem;
+
 	height: 40px;
-	border-radius: 30px;
-	font-size: 1.5rem;
+	width: 40px;
 	margin: 0;
 	padding: 0;
+	padding-bottom: 0.5px;
+
+	border: solid 1px gray;
+	border-radius: 30px;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+	box-shadow: 5px 5px 12px 1px #80808057;
+
+	font-size: 1.5rem;
 	cursor: pointer;
 }
-
-
 
 .hamburger {
 	z-index: 10;
 	position: absolute;
-	left: 2rem;
+	left: 6rem;
 	top: 2rem;
 
-	background: #fff;
 	padding: 5px 10px;
-	border-radius: 20px;
+	border-radius: 10px;
+	border: solid 1px gray;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+	box-shadow: 5px 5px 12px 1px #80808057;
+
 	cursor: pointer;
 }
 
@@ -67,22 +106,19 @@ header {
 	z-index: 10;
 	display: flex;
 	flex-direction: column;
-  gap: 30px;
+	gap: 30px;
 
 	width: 200px;
-	height: 100vh;
-	/* background-color: #646464e5; */
 
 	position: fixed;
 	transition: transform 0.3s;
-	transform: translateX(-100%);
+	transform: translateX(-150%);
 
-	top: 4rem;
-	left: 0;
+	top: 6rem;
+	left: 4rem;
 	right: 0;
 	bottom: 0;
 }
-  
 
 .showSidebar {
 	transform: translateX(0);
@@ -94,30 +130,34 @@ header {
 	flex-direction: column;
 	gap: 10px;
 
-  background: #b4b4b436;
-  backdrop-filter: blur(50px);
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
 
-  border: 1px solid gray;
-  border-radius: 20px;
-  box-shadow: 5px 5px 12px 1px #80808057;
+	border: 1px solid gray;
+	border-radius: 20px;
+	box-shadow: 5px 5px 12px 1px #80808057;
 
 	padding: 10px 30px;
-  margin: 0px 10px;
+	margin: 0px 10px;
 
-  color: gray;
+	color: gray;
 }
 
 .defaultLists > .sidebarButton:last-child,
 .customLists > .sidebarButton:last-child {
-  border: 0;
+	border: 0;
 }
 
 .sidebarButton {
-	text-align: left;
-	padding: 5px 10px;
+	padding: 5px 2px;
+
 	border: 0;
+	border-bottom: solid #80808040 1px;
 	background: transparent;
-	border-bottom: solid gray 1px;
+
+	text-align: left;
+	font-size: 0.9rem;
+	letter-spacing: 0.3px;
 }
 
 .container {
@@ -135,11 +175,8 @@ header {
 
 .cancelListForm {
 	position: absolute;
-	background: transparent;
-	right: 0px;
-	border-radius: 20px;
-	font-size: 0.7rem;
-	border: 0;
+	top: 5px;
+	left: -1.2rem;
 }
 
 #listTitle {
@@ -160,14 +197,19 @@ header {
 }
 
 .listSubmitButton {
-	font-size: 0.8rem;
-	width: 3.5rem;
-	border-radius: 20px;
-	justify-self: center;
-	border: solid 1px gray;
 	position: absolute;
-	bottom: -30px;
-	height: 1.5rem;
+	bottom: -3.5rem;
+	left: 1.5rem;
+
+	height: 2rem;
+	width: 4.1rem;
+	border: solid 1px gray;
+	border-radius: 20px;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+	box-shadow: 5px 5px 12px 1px #80808057;
+
+	font-size: 1rem;
 }
 
 /* LIST */
@@ -176,59 +218,63 @@ header {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
+	width: 40%;
+	margin: auto;
 }
 
 .todoListEdit {
-  grid-column: 3;
-  grid-row: 4;
-  width: 100%;
-  background: transparent;
-  border: 0;
-  font-size: 0.9rem;
+	grid-column: 3;
+	grid-row: 4;
+	justify-self: start;
+
+	border: 0;
+	background: transparent;
+
+	font-size: 0.9rem;
 }
 
 .titleList {
 	display: flex;
-	text-transform: uppercase;
-	justify-content: center;
 	align-items: center;
-	margin: 0;
+
 	height: 40px;
+	margin: 0 1.2rem;
+
 	font-size: 1.5rem;
 	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 0.1rem;
 }
 
 .titleListCompleted {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
-  width: 20%;
-  margin: 1rem auto;
-  padding: 1rem 0;
-  border-bottom: 1px solid #80808061;
+	display: flex;
+	align-items: center;
 
-  font-size: 1rem;
-  color: #00000059;
+	max-width: 550px;
+	margin: 0px 1rem;
+	padding: 0.2rem 0;
+	border-bottom: 1px solid #80808061;
+
+	font-size: 0.9rem;
+	color: #00000059;
+	letter-spacing: 0.5px;
 }
 
 .listUl,
 .listUlCompleted {
-	list-style: none;
-
-	width: 40%;
-	min-height: 80%;
-
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+
+	min-height: 80%;
+
+	gap: 5px;
 
 	margin: auto;
-	padding: 0;
+	padding: 15px 0px;
+	padding-top: 10px;
 
 	overflow: scroll;
 }
-
 
 /* TODO */
 
@@ -242,47 +288,69 @@ header {
 	transform: translate(-50%, -50%);
 
 	display: grid;
-	grid-template-rows: repeat(5, 2.5rem);
+	grid-template-rows: repeat(4, 2.5rem);
 	grid-template-columns: 1fr 1fr 1fr;
 
-	background-color: gray;
 	width: 400px;
 	margin: auto;
-	padding: 19px;
+	padding: 15px 13px;
+
+	border: 1px solid gray;
+	border-bottom: 5px solid #9f9b9bd1;
 	border-radius: 20px;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+	box-shadow: 5px 5px 12px 1px #80808057;
 }
 
 .cancelForm {
 	position: absolute;
-	right: 10px;
-	top: 10px;
-	font-size: 0.8rem;
-	border-radius: 20px;
-	color: white;
+	top: 5px;
+	left: 10px;
+}
+
+#formTitle,
+#formNotes,
+#formDate,
+#formList,
+#formPriority {
+	height: 100%;
+	width: 100%;
+	padding: 5px 5px;
+
+	border: 0;
+	border-bottom: 1px solid #a1a2a430;
+
+	background: transparent;
 }
 
 .formTitle {
 	grid-area: 1 / 1 / 1 / 4;
+	align-self: center;
 }
 
 #formTitle {
-	width: 90%;
-	margin: auto;
+	width: 95%;
 	height: 60%;
-	border-radius: 20px;
-	padding: 0px 10px;
+	padding: 5px 10px;
+	margin: 0px 10px;
 }
 
 .formNotes {
 	grid-area: 2 / 1 / 4 / 4;
+	align-self: center;
+
+	height: 100%;
+	width: 100%;
+	margin-bottom: 3px;
+
+	border-radius: 10px;
+	border: 1px solid #a1a2a430;
 }
 
 #formNotes {
-	width: 90%;
-	margin: auto;
-	height: 60%;
-	border-radius: 20px;
 	padding: 5px 10px;
+	border: 0;
 }
 
 textarea {
@@ -290,30 +358,32 @@ textarea {
 	overflow: scroll;
 }
 
-.formDate {
-	grid-area: 4 / 1;
-	align-self: center;
+.formDate,
+.formList,
+.formPriority {
+	align-self: end;
 	justify-self: center;
 }
 
+.formDate {
+	grid-area: 4 / 1;
+}
+
 #formDate {
-	width: 6rem;
+	width: 90%;
 }
 
 .formList {
 	grid-area: 4 / 2;
-	align-self: center;
-	justify-self: center;
 }
 
 #formList {
 	width: 100%;
+	padding: 5px;
 }
 
 .formPriority {
 	grid-area: 4 / 3;
-	align-self: center;
-	justify-self: center;
 }
 
 #priority {
@@ -325,23 +395,20 @@ textarea {
 }
 
 .submitButton {
-	height: 1.5rem;
-	width: 5rem;
-	border-radius: 20px;
+	position: absolute;
+	bottom: -2.5rem;
 
-	grid-area: 5 / 3;
+	height: 1.8rem;
+	width: 6.5rem;
 
-	align-self: center;
+	border: 1px solid #808080b8;
+	border-radius: 10px;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
+	box-shadow: 5px 5px 12px 1px #80808057;
+
+	align-self: end;
 	justify-self: center;
-}
-
-#formTitle,
-#formNotes,
-#formDate,
-#formList,
-#formPriority {
-	border-radius: 5px;
-	padding: 3px 10px;
 }
 
 /* TODO CARD */
@@ -349,20 +416,20 @@ textarea {
 .todoCard {
 	position: relative;
 
-	display: grid;
-	grid-template-rows: 1fr 15px;
-	grid-template-columns: 30px 1fr;
+	display: flex;
 	column-gap: 10px;
 
 	width: 90%;
-	margin: auto;
-  margin-top: 0.5rem;
-	padding: 10px 10px;
+	max-width: 550px;
+	margin: 0.5rem 0.5rem 0rem;
+	padding: 10px 5px;
 
 	border-radius: 20px;
-	border-bottom: 5px solid #b2bfca;
+	border: 1px solid gray;
+	border-bottom: 5px solid #8080809c;
 
-	background-color: #e7eeff;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
 	box-shadow: 3px 5px 12px 0px #00000042;
 
 	cursor: pointer;
@@ -380,11 +447,8 @@ textarea {
 
 .deleteTodo {
 	position: absolute;
-	font-size: 0.6rem;
-	background: transparent;
-	border: 0;
 	top: 30%;
-	right: 5px;
+	right: 10px;
 }
 
 .todoCheck {
@@ -399,37 +463,34 @@ textarea {
 	position: relative;
 
 	display: grid;
-	grid-template-columns: 0.4fr 1fr 1.5fr 1fr;
+	grid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;
 	grid-template-rows: 1fr 1fr 1fr 1fr;
 
 	width: 90%;
-	margin: auto;
-	padding: 15px 5px;
+	padding: 10px 5px;
+	margin: 0.5rem 0.5rem 0rem;
+
 	border-radius: 20px;
-	background-color: #e7eeff;
+	border: 1px solid gray;
+	border-bottom: 5px solid #8080809c;
+	background: #b4b4b436;
+	backdrop-filter: blur(15px);
 	box-shadow: 3px 5px 12px 0px #00000042;
-	border-bottom: 5px solid #b2bfca;
 }
 
 .deleteTodoEdit {
 	position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 0.7rem;
-	background: transparent;
-	border: 0;
+	right: 10px;
+	top: 10px;
 }
 
 .todoTitleEdit,
 .todoDueDateEdit,
 .todoNotesEdit,
-.todoPriorityEdit,
-.cancelForm {
+.todoPriorityEdit {
 	background: transparent;
 	border: 0;
 }
-
-
 
 .todoNotesEdit,
 .todoDueDateEdit,
@@ -437,57 +498,67 @@ textarea {
 	font-size: 0.8rem;
 }
 
+.todoTitle {
+	max-height: 1.1rem;
+	overflow: auto;
+	width: 95%;
+}
+
 .todoCheckEdit {
 	grid-row: 1 / span 4;
 	align-self: flex-start;
 	margin-top: 10%;
+	border-radius: 10px;
 }
 
 .todoTitleEdit {
 	grid-column: 2 / span 3;
 }
 
-
-
 .todoNotesEdit {
 	grid-column: 2 / span 3;
 	grid-row: 2 / span 2;
+	width: 95%;
 }
 
 .todoDueDateEdit {
 	grid-column: 2;
 	grid-row: 4;
-	width: 100%;
+
+	justify-self: start;
+	width: 70%;
 }
 
 .todoPriorityEdit {
 	grid-column: 4;
 	grid-row: 4;
 	align-self: end;
+	justify-self: start;
+
+	width: 85%;
 }
 
 .done > .todoCard > * {
 	color: #8080807d;
 	text-decoration: line-through;
-	color: gray;
+	color: rgba(128, 128, 128, 0.64);
 }
 
 /* Priority */
 .low {
+	border: 1px solid lightblue;
 	border-bottom: 5px solid lightblue;
+	box-shadow: 3px 5px 12px 0px #92bcca99;
 }
 
 .medium {
+	border: 1px solid orange;
 	border-bottom: 5px solid orange;
+	box-shadow: 3px 5px 12px 0px #bd7a005e;
 }
 
 .high {
-	border-bottom: 5px solid red;
+	border: 1px solid #ff5b5b;
+	border-bottom: 5px solid #ff5b5b;
+	box-shadow: 3px 5px 12px 0px #db020259;
 }
-
-
-
-
-
-
-

@@ -13,6 +13,26 @@ function findCorrectList(todo) {
 	return list;
 }
 
+function sortList(list) {
+	return list.sort(compareTodos);
+}
+
+function compareTodos(a , b) {
+	console.log(a);
+	console.log(b);
+	if (a.priority === b.priority) {
+		return new Date(a.dueDate) - new Date(b.dueDate);
+	} else {
+		const priorityOrder = ['high', 'medium', 'low', ''];
+		const priorityA = priorityOrder.indexOf(a.priority);
+		console.log(priorityA);
+		const priorityB = priorityOrder.indexOf(b.priority);
+		console.log(priorityB);
+		return priorityA - priorityB
+	}
+}
+
+
 function addTodoList(todo, list) {
 	list.unshift(todo);
 }
@@ -59,6 +79,7 @@ function replaceOldTodo(todo, newTodo) {
 
 export {
 	findCorrectList,
+	sortList,
 	addTodoList,
 	removeTodoList,
 	moveFinishedTodo,

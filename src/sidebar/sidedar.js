@@ -1,6 +1,14 @@
-import { createList, defaultListsArr, listsArr } from '../components/list/createList';
+import {
+	createList,
+	defaultListsArr,
+	listsArr,
+} from '../components/list/createList';
 
-import { displayFreshList, refreshCompleted, refreshList } from '../components/list/displayList';
+import {
+	displayFreshList,
+	refreshCompleted,
+	refreshList,
+} from '../components/list/displayList';
 
 // Sidebar
 function sidebarMenu() {
@@ -27,13 +35,12 @@ function createDefaultLists(defaultListsArr) {
 	defaultLists.className = 'defaultLists';
 
 	defaultListsArr.forEach((list) => {
-		console.log(list);
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
 			listButtonHandleClick(list);
-			toggleSidebar();
+			// toggleSidebar();
 		});
 		defaultLists.append(listButton);
 	});
@@ -46,14 +53,12 @@ function createCustomLists(listsArr) {
 	customLists.className = 'customLists';
 
 	listsArr.forEach((list) => {
-		console.log(list);
-		if(list.title === '📥 Inbox') return;
+		if (list.title === '📥 Inbox') return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
 			listButtonHandleClick(list);
-			toggleSidebar();
 		});
 		customLists.append(listButton);
 	});
@@ -71,7 +76,6 @@ function createCustomLists(listsArr) {
 	return customLists;
 }
 
-
 function listButtonHandleClick(list) {
 	const newList = displayFreshList(list);
 	const currentList = document.querySelector('.list');
@@ -82,7 +86,7 @@ function listButtonHandleClick(list) {
 
 function createAddListButton() {
 	const addListButton = document.createElement('button');
-	addListButton.className =  'sidebarButton';
+	addListButton.className = 'sidebarButton';
 	addListButton.classList.add('addListButton');
 	addListButton.textContent = '+ New List';
 
@@ -90,7 +94,6 @@ function createAddListButton() {
 }
 
 function newListForm() {
-	
 	const activeForm = document.querySelector('#listForm');
 
 	if (activeForm) return;
@@ -122,9 +125,9 @@ function createListForm() {
 	});
 
 	listForm.addEventListener('keydown', (event) => {
-		handleEnterKey(event, handleReturn, listForm)
+		handleEnterKey(event, handleReturn, listForm);
 		handleEscapeKey(event, listForm);
-	}) 	
+	});
 
 	return listForm;
 }
@@ -190,7 +193,7 @@ function handleSubmit(handleReturn, formDiv) {
 function handleReturn(newList) {
 	listsArr.push(newList);
 	refreshLists();
-	displayFreshList(newList)
+	displayFreshList(newList);
 }
 
 function refreshLists() {

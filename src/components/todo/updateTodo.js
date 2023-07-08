@@ -155,7 +155,7 @@ function createListSelector(todo) {
 		const orgList = findCorrectList(todo);
 		todo.listId = Number(event.target.value);
 		const newList = findCorrectList(todo);
-		
+
 		if (!todo.done) {
 			const list = orgList.todosArr;
 			const nList = newList.todosArr;
@@ -166,7 +166,6 @@ function createListSelector(todo) {
 			moveTodoToDiffList(todo, list, nList);
 			refreshCompleted(orgList);
 		}
-		
 	});
 
 	return editList;
