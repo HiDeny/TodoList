@@ -118,10 +118,11 @@ function visualizePriority(todo, todoCard) {
 		high: 'high',
 		medium: 'medium',
 		low: 'low',
+		none: '',
 	};
-
+	todoCard.classList.remove('high', 'medium', 'low');
 	const priorityClass = priorityClassMap[todo.priority];
-	if (priorityClass) {
+	if (priorityClass && priorityClass !== '') {
 		todoCard.classList.add(priorityClass);
 	}
 }
@@ -140,4 +141,4 @@ function removeFlatpickrDiv() {
 	flatpickrDiv.remove();
 }
 
-export { displayTodoCard };
+export { displayTodoCard, visualizePriority };

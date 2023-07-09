@@ -1,5 +1,5 @@
 import createTodo from './createTodo';
-import { listsArr } from '../list/createList';
+import { customListsArr } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -47,7 +47,6 @@ function createTodoForm() {
 	const todoForm = document.createElement('form');
 	todoForm.setAttribute('id', 'todoForm');
 	todoForm.setAttribute('tabindex', '1');
-	// todoForm.setAttribute('method', 'post');
 
 	return todoForm;
 }
@@ -114,10 +113,9 @@ function createListsForm() {
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
 
-	listsArr.forEach((list) => {
+	customListsArr.forEach((list) => {
 		const optionElement = document.createElement('option');
 		optionElement.value = list.id;
-		console.log(list.id);
 		optionElement.textContent = list.title;
 		formList.append(optionElement);
 	});
@@ -145,6 +143,7 @@ function createPriorityForm() {
 		{ value: 'high', text: 'High' },
 		{ value: 'medium', text: 'Medium' },
 		{ value: 'low', text: 'Low' },
+		{ value: '', text: 'None' },
 	];
 
 	priorityOptions.forEach((option) => {

@@ -3,11 +3,7 @@ import 'normalize.css';
 
 import { inbox } from '../components/list/createList.js';
 import { displayFreshList } from '../components/list/displayList';
-import {
-	setList,
-	findCorrectList,
-	processDueDate,
-} from '../components/list/updateList';
+import { setList, processDueDate } from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
 

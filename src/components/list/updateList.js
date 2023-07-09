@@ -1,10 +1,21 @@
-import { listsArr, today, upcoming } from './createList';
+import { customListsArr, today, upcoming } from './createList';
 import { isFuture, isToday } from 'date-fns';
-import { refreshList } from './displayList';
+import { refreshSubList } from './displayList';
+import { refreshSideLists } from '../../sidebar/sidebar';
 
 // Delete list function
 function deleteList(list) {
-	listsArr.splice(listsArr.indexOf(list), 1);
+	customListsArr.splice(customListsArr.indexOf(list), 1);
+}
+
+function addCustomList(list) {
+	customListsArr.push(list);
+}
+
+function updateCustomList(list) {
+	console.log(list);
+	customListsArr.splice(customListsArr.indexOf(list), 1, list);
+	refreshSideLists();
 }
 
 // Find todo in all lists
@@ -27,7 +38,7 @@ function processDueDate(todo) {
 // Process change for today and upcoming
 
 function findList(todo) {
-	return listsArr.find((list) => list.id === todo.listId);
+	return customListsArr.find((list) => list.id === todo.listId);
 }
 
 function findSubList(todo) {
@@ -38,20 +49,21 @@ function findSubList(todo) {
 
 function setList(todo) {
 	const list = findList(todo).todosArr;
+	console.log(list);
 	list.push(todo);
-	refreshList(todo);
+	refreshSubList(todo);
 }
 
 function addTodoList(todo) {
 	const list = findSubList(todo);
 	list.push(todo);
-	refreshList(todo);
+	refreshSubList(todo);
 }
 
 function removeTodoList(todo) {
 	const list = findSubList(todo);
 	list.splice(list.indexOf(todo), 1);
-	refreshList(todo);
+	refreshSubList(todo);
 }
 
 function changeList(todo, newListId) {
@@ -59,12 +71,11 @@ function changeList(todo, newListId) {
 	const updatedTodo = Object.assign({}, todo);
 	// Remove original todo
 	removeTodoList(todo);
-	refreshList(todo);
+	console.log(todo);
 	// Set new list
 	updatedTodo.listId = Number(newListId);
 	// Add to new list
 	addTodoList(updatedTodo);
-	refreshList(updatedTodo);
 }
 
 function changeSubList(todo) {
@@ -72,12 +83,10 @@ function changeSubList(todo) {
 	const updatedTodo = { ...todo };
 	// Remove Old
 	removeTodoList(todo);
-	refreshList(todo);
 	// Set New
 	updatedTodo.done = !todo.done;
 	// Add New
 	addTodoList(updatedTodo);
-	refreshList(updatedTodo);
 }
 
 function sortList(list) {
@@ -101,9 +110,12 @@ export {
 	processDueDate,
 	findList,
 	findSubList,
+	deleteList,
 	setList,
 	addTodoList,
 	removeTodoList,
 	changeList,
 	changeSubList,
+	addCustomList,
+	updateCustomList,
 };

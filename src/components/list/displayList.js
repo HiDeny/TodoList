@@ -1,10 +1,12 @@
 import { displayTodoCard } from '../todo/displayTodo';
 import { findList, findSubList, sortList } from './updateList';
+import { displayCustomList } from './displayCustomList';
 
 function displayFreshList(list) {
 	const displayList = document.createElement('div');
 	displayList.className = 'list';
-	displayList.setAttribute('id', list.title);
+	console.log(list.title);
+	displayList.setAttribute('id', list.id);
 
 	// Tasks
 	const listDiv = document.createElement('div');
@@ -40,11 +42,25 @@ function displayFreshList(list) {
 	return displayList;
 }
 
-function refreshList(todo) {
-	// ! May break
-	const list = findList(todo);
+function refreshList(list) {
 	const visibleList = document.querySelector('.list');
-	if (!visibleList.id === list.title) return;
+	if (Number(visibleList.id) === list.id) return;
+
+	let newList;
+	if (list.id <= 2 ) newList = displayFreshList(list);
+	if (list.id > 2 ) newList = displayCustomList(list);
+	visibleList.replaceWith(newList);
+	
+	if (list.todosArr.length > 0) refreshSubList(list.todosArr[0]); 
+	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]); 
+}
+
+function refreshSubList(todo) {
+	console.log(todo);
+	const list = findList(todo);
+	console.log(list);
+	const visibleList = document.querySelector('.list');
+	if (Number(visibleList.id) !== list.id) return;
 
 	const subList = findSubList(todo);
 	const sortedList = sortList(subList);
@@ -65,4 +81,4 @@ function refreshList(todo) {
 
 // Sorting methods
 
-export { displayFreshList, refreshList };
+export { displayFreshList, refreshList,  refreshSubList};

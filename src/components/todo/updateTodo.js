@@ -1,8 +1,14 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-import { listsArr } from '../list/createList.js';
-import { addTodoList, removeTodoList, changeSubList } from '../list/updateList';
+import { visualizePriority } from './displayTodo.js';
+import { customListsArr } from '../list/createList.js';
+import {
+	addTodoList,
+	removeTodoList,
+	changeList,
+	changeSubList,
+} from '../list/updateList';
 
 function createTodoEditMode(todo) {
 	const originalTodo = Object.assign({}, todo);
@@ -16,7 +22,7 @@ function createTodoEditMode(todo) {
 	visualizePriority(todo, todoEditCard);
 
 	todoEditCard.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todo);
+		handleEnterKey(event, todo, editedTodo);
 		handleEscapeKey(event, originalTodo, todo);
 	});
 
@@ -133,7 +139,7 @@ function createListSelector(todo) {
 	const editList = document.createElement('select');
 	editList.className = 'todoListEdit';
 
-	listsArr.forEach((option) => {
+	customListsArr.forEach((option) => {
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);
@@ -148,48 +154,35 @@ function createListSelector(todo) {
 }
 
 function createPrioritySelector(todo, todoCardEdit) {
-	console.log(todo.priority);
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
+
+	const priorityOptions = [
+		{ value: 'high', text: 'High' },
+		{ value: 'medium', text: 'Medium' },
+		{ value: 'low', text: 'Low' },
+		{ value: '', text: 'None' },
+	];
+
+	priorityOptions.forEach((option) => {
+		const optionElement = new Option(option.text, option.value);
+		optionElement.selected = option.value === todo.priority ? true : false;
+		editPriority.append(optionElement);
+	});
 
 	editPriority.addEventListener('input', (event) => {
 		todo.priority = event.target.value;
 		visualizePriority(todo, todoCardEdit);
 	});
 
-	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-	];
-
-	priorityOptions.forEach((option) => {
-		const optionElement = new Option(option.text, option.value);
-		editPriority.append(optionElement);
-	});
-
 	const placeholderPriority = new Option('Priority', '');
 	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = true;
+	placeholderPriority.selected = !todo.priority ? true : false;
 	placeholderPriority.disabled = true;
 	placeholderPriority.hidden = true;
 	editPriority.append(placeholderPriority);
 
 	return editPriority;
-}
-
-function visualizePriority(todo, todoCard) {
-	const priorityClassMap = {
-		high: 'high',
-		medium: 'medium',
-		low: 'low',
-	};
-
-	todoCard.classList.remove('high', 'medium', 'low');
-	const priorityClass = priorityClassMap[todo.priority];
-	if (priorityClass) {
-		todoCard.classList.add(priorityClass);
-	}
 }
 
 function handleCheckboxClick(todo) {
@@ -200,10 +193,10 @@ function handleCancelButton(todo) {
 	removeTodoList(todo);
 }
 
-function handleEnterKey(event, todo) {
+function handleEnterKey(event, todo, editedTodo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
 		removeTodoList(todo);
-		addTodoList(todo);
+		addTodoList(editedTodo);
 	}
 }
 
