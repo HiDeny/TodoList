@@ -212,7 +212,7 @@ header {
 	font-size: 1rem;
 }
 
-/* LIST */
+/** LIST */
 
 .list {
 	display: flex;
@@ -220,17 +220,6 @@ header {
 	height: 100%;
 	width: 40%;
 	margin: auto;
-}
-
-.todoListEdit {
-	grid-column: 3;
-	grid-row: 4;
-	justify-self: start;
-
-	border: 0;
-	background: transparent;
-
-	font-size: 0.9rem;
 }
 
 .titleList {
@@ -244,6 +233,17 @@ header {
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 0.1rem;
+}
+
+.descriptionList {
+	display: flex;
+	align-items: end;
+	height: 20px;
+	margin: 0 1.2rem;
+	font-size: 0.8rem;
+	font-weight: lighter;
+	color: gray;
+	font-style: italic;
 }
 
 .titleListCompleted {
@@ -274,6 +274,13 @@ header {
 	padding-top: 10px;
 
 	overflow: scroll;
+}
+
+/** Custom Lists */
+.customList > .titleList,
+.customList > .descriptionList {
+	background: transparent;
+	border: 0;
 }
 
 /* TODO */
@@ -526,6 +533,17 @@ textarea {
 
 	justify-self: start;
 	width: 70%;
+}
+
+.todoListEdit {
+	grid-column: 3;
+	grid-row: 4;
+	justify-self: start;
+
+	border: 0;
+	background: transparent;
+
+	font-size: 0.9rem;
 }
 
 .todoPriorityEdit {

@@ -3,11 +3,8 @@ import { updateCustomList } from './updateList';
 function displayCustomList(list) {
 	const customList = document.createElement('div');
 	customList.className = 'list';
+	customList.classList.add('customList');
 	customList.setAttribute('id', list.id);
-
-	// Tasks
-	const listDiv = document.createElement('div');
-	listDiv.className = 'listTodos';
 
 	const listTitle = document.createElement('input');
 	listTitle.className = 'titleList';
@@ -17,12 +14,11 @@ function displayCustomList(list) {
 	listTitle.addEventListener('input', (event) => {
 		list.title = event.target.value;
 		updateCustomList(list);
-		//! POTENTIAL MESS
 	});
 
-	listDiv.append(listTitle);
+	customList.append(listTitle);
 
-	const listDescription = document.createElement('textarea');
+	const listDescription = document.createElement('input');
 	listDescription.className = 'descriptionList';
 	listDescription.setAttribute('type', 'text');
 	listDescription.setAttribute('placeholder', 'Description');
@@ -30,10 +26,13 @@ function displayCustomList(list) {
 	listDescription.addEventListener('input', (event) => {
 		list.description = event.target.value;
 		updateCustomList(list);
-		//! POTENTIAL MESS
 	});
 
-	listDiv.append(listDescription);
+	customList.append(listDescription);
+
+	// Tasks
+	const listDiv = document.createElement('div');
+	listDiv.className = 'listTodos';
 
 	const listUl = document.createElement('ul');
 	listUl.className = 'listUl';
@@ -42,13 +41,13 @@ function displayCustomList(list) {
 	customList.append(listDiv);
 
 	// Completed
-	const listDivCompleted = document.createElement('div');
-	listDivCompleted.className = 'listCompleted';
-
-	const listTitleCompleted = document.createElement('p');
+    const listTitleCompleted = document.createElement('p');
 	listTitleCompleted.className = 'titleListCompleted';
 	listTitleCompleted.textContent = 'Completed';
-	listDivCompleted.append(listTitleCompleted);
+	customList.append(listTitleCompleted);
+
+	const listDivCompleted = document.createElement('div');
+	listDivCompleted.className = 'listCompleted';
 
 	const listUlCompleted = document.createElement('ul');
 	listUlCompleted.className = 'listUlCompleted';

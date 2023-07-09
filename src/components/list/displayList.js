@@ -8,14 +8,20 @@ function displayFreshList(list) {
 	console.log(list.title);
 	displayList.setAttribute('id', list.id);
 
-	// Tasks
-	const listDiv = document.createElement('div');
-	listDiv.className = 'listTodos';
-
 	const listTitle = document.createElement('p');
 	listTitle.className = 'titleList';
 	listTitle.textContent = list.title;
-	listDiv.append(listTitle);
+	displayList.append(listTitle);
+
+	const listDescription = document.createElement('p');
+	listDescription.className = 'descriptionList';
+	listDescription.textContent = list.description;
+	displayList.append(listDescription);
+
+
+	// Tasks
+	const listDiv = document.createElement('div');
+	listDiv.className = 'listTodos';
 
 	const listUl = document.createElement('ul');
 	listUl.className = 'listUl';
@@ -24,13 +30,13 @@ function displayFreshList(list) {
 	displayList.append(listDiv);
 
 	// Completed
-	const listDivCompleted = document.createElement('div');
-	listDivCompleted.className = 'listCompleted';
-
 	const listTitleCompleted = document.createElement('p');
 	listTitleCompleted.className = 'titleListCompleted';
 	listTitleCompleted.textContent = 'Completed';
-	listDivCompleted.append(listTitleCompleted);
+	displayList.append(listTitleCompleted);
+
+	const listDivCompleted = document.createElement('div');
+	listDivCompleted.className = 'listCompleted';
 
 	const listUlCompleted = document.createElement('ul');
 	listUlCompleted.className = 'listUlCompleted';
@@ -47,12 +53,12 @@ function refreshList(list) {
 	if (Number(visibleList.id) === list.id) return;
 
 	let newList;
-	if (list.id <= 2 ) newList = displayFreshList(list);
-	if (list.id > 2 ) newList = displayCustomList(list);
+	if (list.id <= 2) newList = displayFreshList(list);
+	if (list.id > 2) newList = displayCustomList(list);
 	visibleList.replaceWith(newList);
-	
-	if (list.todosArr.length > 0) refreshSubList(list.todosArr[0]); 
-	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]); 
+
+	if (list.todosArr.length > 0) refreshSubList(list.todosArr[0]);
+	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
 }
 
 function refreshSubList(todo) {
@@ -81,4 +87,4 @@ function refreshSubList(todo) {
 
 // Sorting methods
 
-export { displayFreshList, refreshList,  refreshSubList};
+export { displayFreshList, refreshList, refreshSubList };
