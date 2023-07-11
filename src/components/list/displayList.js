@@ -1,5 +1,7 @@
+import { isFuture, isToday } from 'date-fns';
 import { displayTodoCard } from '../todo/displayTodo';
 import {
+	findDateSubList,
 	findList,
 	findSubList,
 	sortList,
@@ -130,22 +132,28 @@ function replaceOldList(list) {
 	visibleList.replaceWith(newList);
 }
 
-function focusTitle () {
+function focusTitle() {
 	const titleName = document.querySelector('.customTitle');
-	if (titleName.value === 'New List') titleName.focus();
+	const titleValue = titleName ? titleName.value : null;
+	if (titleValue === 'New List') titleName.focus();
 }
 
 function checkSubList(list) {
-	if (list.todosArr.length > 0) refreshSubList(list.todosArr[0]);
+	if (list.activeTodos.length > 0) refreshSubList(list.activeTodos[0]);
 	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
 }
 
 function refreshSubList(todo) {
 	const list = findList(todo);
 	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) !== list.id) return;
 
-	const subList = findSubList(todo);
+	const nextStep = refreshConditions(visibleList, todo);
+	console.log(nextStep);
+
+	// if (Number(visibleList.id) !== list.id) return;
+	if (!nextStep) return;
+
+	const subList = nextStep;
 	const sortedList = sortList(subList);
 
 	const listClass = !todo.done ? 'activeTodos' : 'completedTodos';
@@ -158,6 +166,19 @@ function refreshSubList(todo) {
 
 	const oldUl = document.querySelector(`.${listClass}`);
 	oldUl.replaceWith(newVisual);
+}
+
+function refreshConditions(visibleList, todo) {
+
+	if (visibleList.id < 2) {
+		console.log(todo.dateList !== Number(visibleList.id));
+		if (todo.dateList !== Number(visibleList.id)) return;
+		console.log(todo);
+		return findDateSubList(todo);
+	}
+
+	if (todo.listId !== Number(visibleList.id)) return;
+	return findSubList(todo);
 }
 
 // Delete list button, double check if they want to delete the list

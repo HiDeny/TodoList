@@ -12,6 +12,8 @@ function displayTodoCard(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
+		const currentEdit = document.querySelector('.todoCardEdit');
+		if (currentEdit) return;
 		if (
 			event.target.className === 'todoCheck' ||
 			event.target.className === 'deleteTodo'

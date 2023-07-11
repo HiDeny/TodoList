@@ -1,8 +1,9 @@
 import createTodo from './createTodo';
-import { customListsArr } from '../list/createList';
+import { customListsArr, today, upcoming } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+import { isFuture, isToday } from 'date-fns';
 
 export default function todoForm(callback) {
 	const todoForm = createTodoForm();

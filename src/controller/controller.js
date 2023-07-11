@@ -37,9 +37,6 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		const dateList = processDueDate(newTodo);
-		if (dateList) dateList.push(newTodo);
-
 		setList(newTodo);
 	}
 

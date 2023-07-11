@@ -48,6 +48,7 @@ function createDefaultLists() {
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
+			console.log(list);
 			listButtonHandleClick(list);
 			// toggleSidebar();
 		});
@@ -62,7 +63,7 @@ function createCustomLists() {
 	customLists.className = 'customLists';
 
 	customListsArr.forEach((list) => {
-		if (list.id === 0) return;
+		if (list.id === 2) return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
