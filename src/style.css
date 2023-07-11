@@ -222,7 +222,7 @@ header {
 	margin: auto;
 }
 
-.titleList {
+.listTitle {
 	display: flex;
 	align-items: center;
 
@@ -235,7 +235,7 @@ header {
 	letter-spacing: 0.1rem;
 }
 
-.descriptionList {
+.listDescription {
 	display: flex;
 	align-items: end;
 	height: 20px;
@@ -246,7 +246,13 @@ header {
 	font-style: italic;
 }
 
-.titleListCompleted {
+.customTitle,
+.customDescription {
+	background: transparent;
+	border: 0;
+}
+
+.completedTodosTitle {
 	display: flex;
 	align-items: center;
 
@@ -260,28 +266,19 @@ header {
 	letter-spacing: 0.5px;
 }
 
-.listUl,
-.listUlCompleted {
+.activeTodos,
+.completedTodos {
 	display: flex;
 	flex-direction: column;
 
-	min-height: 80%;
-
 	gap: 5px;
 
-	margin: auto;
 	padding: 15px 0px;
 	padding-top: 10px;
 
 	overflow: scroll;
 }
 
-/** Custom Lists */
-.customList > .titleList,
-.customList > .descriptionList {
-	background: transparent;
-	border: 0;
-}
 
 /* TODO */
 

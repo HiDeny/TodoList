@@ -2,9 +2,9 @@ import { createList, defaultListsArr, customListsArr } from '../components/list/
 
 // import { createListForm } from '../components/list/listForm';
 
-import { refreshList } from '../components/list/displayList';
+import { refreshList, displayList } from '../components/list/displayList';
 import { addCustomList } from '../components/list/updateList';
-import { displayCustomList } from '../components/list/displayCustomList';
+
 
 // Sidebar
 function sidebar() {
@@ -94,7 +94,7 @@ function createCustomLists(customListsArr) {
 		refreshSideLists();
 		console.log(newList);
 
-		const displayNewList = displayCustomList(newList);
+		const displayNewList = displayList(newList);
 		visibleList.replaceWith(displayNewList);
 		const titleInput = displayNewList.querySelector('input');
 		titleInput.focus();
@@ -116,11 +116,6 @@ function createAddListButton() {
 
 	return addListButton;
 }
-
-// function handleReturn(newList) {
-// 	customListsArr.push(newList);
-// 	refreshSideLists();
-// }
 
 function refreshSideLists() {
 	const currentLists = document.querySelector('.customLists');
