@@ -715,7 +715,6 @@ header {
 	overflow: scroll;
 }
 
-
 /* TODO */
 
 /* TODO FORM */
@@ -1012,7 +1011,7 @@ textarea {
 	border-bottom: 5px solid #ff5b5b;
 	box-shadow: 3px 5px 12px 0px #db020259;
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\toutline: 0.5px rgba(150, 150, 150, 0.23) solid;\n\tbox-shadow: inset 0px 0px 20px 0px #8080803b;\n\tborder-radius: 3px;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n\tbackground: #e6e6e6;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\theight: 0.9rem;\n\twidth: 0.9rem;\n\tpadding: 0;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 100%;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tleft: 12rem;\n\ttop: 1.7rem;\n\n\theight: 40px;\n\twidth: 40px;\n\tmargin: 0;\n\tpadding: 0;\n\tpadding-bottom: 0.5px;\n\n\tborder: solid 1px gray;\n\tborder-radius: 30px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1.5rem;\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 6rem;\n\ttop: 2rem;\n\n\tpadding: 5px 10px;\n\tborder-radius: 10px;\n\tborder: solid 1px gray;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 200px;\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-150%);\n\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tborder: 1px solid gray;\n\tborder-radius: 20px;\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n\tmargin: 0px 10px;\n\n\tcolor: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\tpadding: 5px 2px;\n\n\tborder: 0;\n\tborder-bottom: solid #80808040 1px;\n\tbackground: transparent;\n\n\ttext-align: left;\n\tfont-size: 0.9rem;\n\tletter-spacing: 0.3px;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: -1.2rem;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tposition: absolute;\n\tbottom: -3.5rem;\n\tleft: 1.5rem;\n\n\theight: 2rem;\n\twidth: 4.1rem;\n\tborder: solid 1px gray;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1rem;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\twidth: 40%;\n\tmargin: auto;\n}\n\n.listTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\theight: 40px;\n\tmargin: 0 1.2rem;\n\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.1rem;\n}\n\n.listDescription {\n\tdisplay: flex;\n\talign-items: end;\n\theight: 20px;\n\tmargin: 0 1.2rem;\n\tfont-size: 0.8rem;\n\tfont-weight: lighter;\n\tcolor: gray;\n\tfont-style: italic;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\tmax-width: 550px;\n\tmargin: 0px 1rem;\n\tpadding: 0.2rem 0;\n\tborder-bottom: 1px solid #80808061;\n\n\tfont-size: 0.9rem;\n\tcolor: #00000059;\n\tletter-spacing: 0.5px;\n}\n\n.activeTodos,\n.completedTodos {\n\tdisplay: flex;\n\tflex-direction: column;\n\n\tgap: 5px;\n\n\tpadding: 15px 0px;\n\tpadding-top: 10px;\n\n\toverflow: scroll;\n}\n\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 15px 13px;\n\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #9f9b9bd1;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: 10px;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px 5px;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #a1a2a430;\n\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 95%;\n\theight: 60%;\n\tpadding: 5px 10px;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 5px 10px;\n\tborder: 0;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\tjustify-self: center;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n}\n\n#formDate {\n\twidth: 90%;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n}\n\n#formList {\n\twidth: 100%;\n\tpadding: 5px;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 1.8rem;\n\twidth: 6.5rem;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 10px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\talign-self: end;\n\tjustify-self: center;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: flex;\n\tcolumn-gap: 10px;\n\n\twidth: 90%;\n\tmax-width: 550px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px 5px;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\n\tcursor: pointer;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\ttop: 30%;\n\tright: 10px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 90%;\n\tpadding: 10px 5px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoTitle {\n\tmax-height: 1.1rem;\n\toverflow: auto;\n\tmax-width: 75%;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tborder: 1px solid lightblue;\n\tborder-bottom: 5px solid lightblue;\n\tbox-shadow: 3px 5px 12px 0px #92bcca99;\n}\n\n.medium {\n\tborder: 1px solid orange;\n\tborder-bottom: 5px solid orange;\n\tbox-shadow: 3px 5px 12px 0px #bd7a005e;\n}\n\n.high {\n\tborder: 1px solid #ff5b5b;\n\tborder-bottom: 5px solid #ff5b5b;\n\tbox-shadow: 3px 5px 12px 0px #db020259;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\toutline: 0.5px rgba(150, 150, 150, 0.23) solid;\n\tbox-shadow: inset 0px 0px 20px 0px #8080803b;\n\tborder-radius: 3px;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n\tbackground: #e6e6e6;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\theight: 0.9rem;\n\twidth: 0.9rem;\n\tpadding: 0;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 100%;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tleft: 12rem;\n\ttop: 1.7rem;\n\n\theight: 40px;\n\twidth: 40px;\n\tmargin: 0;\n\tpadding: 0;\n\tpadding-bottom: 0.5px;\n\n\tborder: solid 1px gray;\n\tborder-radius: 30px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1.5rem;\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 6rem;\n\ttop: 2rem;\n\n\tpadding: 5px 10px;\n\tborder-radius: 10px;\n\tborder: solid 1px gray;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 200px;\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-150%);\n\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tborder: 1px solid gray;\n\tborder-radius: 20px;\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n\tmargin: 0px 10px;\n\n\tcolor: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\tpadding: 5px 2px;\n\n\tborder: 0;\n\tborder-bottom: solid #80808040 1px;\n\tbackground: transparent;\n\n\ttext-align: left;\n\tfont-size: 0.9rem;\n\tletter-spacing: 0.3px;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: -1.2rem;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tposition: absolute;\n\tbottom: -3.5rem;\n\tleft: 1.5rem;\n\n\theight: 2rem;\n\twidth: 4.1rem;\n\tborder: solid 1px gray;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1rem;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\twidth: 40%;\n\tmargin: auto;\n}\n\n.listTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\theight: 40px;\n\tmargin: 0 1.2rem;\n\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.1rem;\n}\n\n.listDescription {\n\tdisplay: flex;\n\talign-items: end;\n\theight: 20px;\n\tmargin: 0 1.2rem;\n\tfont-size: 0.8rem;\n\tfont-weight: lighter;\n\tcolor: gray;\n\tfont-style: italic;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\tmax-width: 550px;\n\tmargin: 0px 1rem;\n\tpadding: 0.2rem 0;\n\tborder-bottom: 1px solid #80808061;\n\n\tfont-size: 0.9rem;\n\tcolor: #00000059;\n\tletter-spacing: 0.5px;\n}\n\n.activeTodos,\n.completedTodos {\n\tdisplay: flex;\n\tflex-direction: column;\n\n\tgap: 5px;\n\n\tpadding: 15px 0px;\n\tpadding-top: 10px;\n\n\toverflow: scroll;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 15px 13px;\n\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #9f9b9bd1;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: 10px;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px 5px;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #a1a2a430;\n\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 95%;\n\theight: 60%;\n\tpadding: 5px 10px;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 5px 10px;\n\tborder: 0;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\tjustify-self: center;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n}\n\n#formDate {\n\twidth: 90%;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n}\n\n#formList {\n\twidth: 100%;\n\tpadding: 5px;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 1.8rem;\n\twidth: 6.5rem;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 10px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\talign-self: end;\n\tjustify-self: center;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: flex;\n\tcolumn-gap: 10px;\n\n\twidth: 90%;\n\tmax-width: 550px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px 5px;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\n\tcursor: pointer;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\ttop: 30%;\n\tright: 10px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 90%;\n\tpadding: 10px 5px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoTitle {\n\tmax-height: 1.1rem;\n\toverflow: auto;\n\tmax-width: 75%;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tborder: 1px solid lightblue;\n\tborder-bottom: 5px solid lightblue;\n\tbox-shadow: 3px 5px 12px 0px #92bcca99;\n}\n\n.medium {\n\tborder: 1px solid orange;\n\tborder-bottom: 5px solid orange;\n\tbox-shadow: 3px 5px 12px 0px #bd7a005e;\n}\n\n.high {\n\tborder: 1px solid #ff5b5b;\n\tborder-bottom: 5px solid #ff5b5b;\n\tbox-shadow: 3px 5px 12px 0px #db020259;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7407,7 +7406,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   customListsArr: () => (/* binding */ customListsArr),
 /* harmony export */   defaultListsArr: () => (/* binding */ defaultListsArr),
 /* harmony export */   inbox: () => (/* binding */ inbox),
-/* harmony export */   listsArr: () => (/* binding */ listsArr),
 /* harmony export */   today: () => (/* binding */ today),
 /* harmony export */   upcoming: () => (/* binding */ upcoming)
 /* harmony export */ });
@@ -7416,20 +7414,19 @@ let id = 0;
 function createList(title, description) {
 	const listId = id++;
 	title = title ? title : 'List';
-	const todosArr = [];
+	const activeTodos = [];
 	const completedTodos = [];
 
-	return { title, description, todosArr, completedTodos, id: listId };
+	return { title, description, activeTodos, completedTodos, id: listId };
 }
 
 // Default list
-const inbox = createList('📥 Inbox', 'Default list');
 const today = createList('🌤️ Today', "Todos with today's date");
 const upcoming = createList('📆 Upcoming', 'Todos with future dates');
+const inbox = createList('📥 Inbox', 'Default list');
 
 const defaultListsArr = [inbox, today, upcoming];
 const customListsArr = [inbox];
-const listsArr = [inbox, today, upcoming];
 
 
 
@@ -7450,6 +7447,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _todo_displayTodo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../todo/displayTodo */ "./src/components/todo/displayTodo.js");
 /* harmony import */ var _updateList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./updateList */ "./src/components/list/updateList.js");
+
 
 
 
@@ -7577,22 +7575,28 @@ function replaceOldList(list) {
 	visibleList.replaceWith(newList);
 }
 
-function focusTitle () {
+function focusTitle() {
 	const titleName = document.querySelector('.customTitle');
-	if (titleName.value === 'New List') titleName.focus();
+	const titleValue = titleName ? titleName.value : null;
+	if (titleValue === 'New List') titleName.focus();
 }
 
 function checkSubList(list) {
-	if (list.todosArr.length > 0) refreshSubList(list.todosArr[0]);
+	if (list.activeTodos.length > 0) refreshSubList(list.activeTodos[0]);
 	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
 }
 
 function refreshSubList(todo) {
 	const list = (0,_updateList__WEBPACK_IMPORTED_MODULE_1__.findList)(todo);
 	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) !== list.id) return;
 
-	const subList = (0,_updateList__WEBPACK_IMPORTED_MODULE_1__.findSubList)(todo);
+	const nextStep = refreshConditions(visibleList, todo);
+	console.log(nextStep);
+
+	// if (Number(visibleList.id) !== list.id) return;
+	if (!nextStep) return;
+
+	const subList = nextStep;
 	const sortedList = (0,_updateList__WEBPACK_IMPORTED_MODULE_1__.sortList)(subList);
 
 	const listClass = !todo.done ? 'activeTodos' : 'completedTodos';
@@ -7605,6 +7609,19 @@ function refreshSubList(todo) {
 
 	const oldUl = document.querySelector(`.${listClass}`);
 	oldUl.replaceWith(newVisual);
+}
+
+function refreshConditions(visibleList, todo) {
+
+	if (visibleList.id < 2) {
+		console.log(todo.dateList !== Number(visibleList.id));
+		if (todo.dateList !== Number(visibleList.id)) return;
+		console.log(todo);
+		return (0,_updateList__WEBPACK_IMPORTED_MODULE_1__.findDateSubList)(todo);
+	}
+
+	if (todo.listId !== Number(visibleList.id)) return;
+	return (0,_updateList__WEBPACK_IMPORTED_MODULE_1__.findSubList)(todo);
 }
 
 // Delete list button, double check if they want to delete the list
@@ -7627,9 +7644,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   changeList: () => (/* binding */ changeList),
 /* harmony export */   changeSubList: () => (/* binding */ changeSubList),
 /* harmony export */   deleteList: () => (/* binding */ deleteList),
+/* harmony export */   findDateList: () => (/* binding */ findDateList),
+/* harmony export */   findDateSubList: () => (/* binding */ findDateSubList),
 /* harmony export */   findList: () => (/* binding */ findList),
 /* harmony export */   findSubList: () => (/* binding */ findSubList),
-/* harmony export */   processDueDate: () => (/* binding */ processDueDate),
 /* harmony export */   removeTodoList: () => (/* binding */ removeTodoList),
 /* harmony export */   setList: () => (/* binding */ setList),
 /* harmony export */   sortList: () => (/* binding */ sortList),
@@ -7662,22 +7680,6 @@ function updateCustomList(list) {
 }
 
 // Find todo in all lists
-
-// Sort todos to Today, and upcoming lists
-function processDueDate(todo) {
-	if (!todo.dueDate) return;
-
-	const date = new Date(todo.dueDate);
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date)) {
-		if (!todo.done) return _createList__WEBPACK_IMPORTED_MODULE_0__.today.todosArr;
-		if (todo.done) return _createList__WEBPACK_IMPORTED_MODULE_0__.today.completedTodos;
-	}
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date)) {
-		if (!todo.done) return _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming.todosArr;
-		if (todo.done) return _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming.completedTodos;
-	}
-}
-
 // Process change for today and upcoming
 
 function findList(todo) {
@@ -7686,24 +7688,32 @@ function findList(todo) {
 
 function findSubList(todo) {
 	const list = findList(todo);
-	if (!todo.done) return list.todosArr;
-	if (todo.done) return list.completedTodos;
+	if (!todo.done) return list.activeTodos;
+	return list.completedTodos;
 }
 
 function setList(todo) {
-	const list = findList(todo).todosArr;
-	console.log(list);
+	if (todo.dueDate) {
+		const dateList = findDateList(todo);
+		dateList.activeTodos.push(todo);
+	}
+
+	const list = findList(todo).activeTodos;
 	list.push(todo);
+
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
 }
 
 function addTodoList(todo) {
 	const list = findSubList(todo);
 	list.push(todo);
+	console.log(todo);
+	addDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
 }
 
 function removeTodoList(todo) {
+	removeDateList(todo);
 	const list = findSubList(todo);
 	list.splice(list.indexOf(todo), 1);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
@@ -7713,6 +7723,7 @@ function changeList(todo, newListId) {
 	// Copy todo
 	const updatedTodo = Object.assign({}, todo);
 	// Remove original todo
+	removeDateList(todo);
 	removeTodoList(todo);
 	console.log(todo);
 	// Set new list
@@ -7725,11 +7736,13 @@ function changeSubList(todo) {
 	// Copy
 	const updatedTodo = { ...todo };
 	// Remove Old
+	removeDateList(todo);
 	removeTodoList(todo);
 	// Set New
 	updatedTodo.done = !todo.done;
 	// Add New
 	addTodoList(updatedTodo);
+	addDateList(updatedTodo);
 }
 
 function sortList(list) {
@@ -7746,6 +7759,45 @@ function compareTodos(a, b) {
 		console.log(priorityA - priorityB);
 		return priorityA - priorityB;
 	}
+}
+
+// Sort todos to Today, and upcoming lists
+function addDateList(todo) {
+	console.log(todo);
+	if (todo.dueDate) {
+		const dateSubList = findDateSubList(todo);
+		dateSubList.push(todo);
+		console.log(dateSubList);
+		(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
+	}
+}
+
+function removeDateList(todo) {
+	const dateSubList = findDateSubList(todo);
+	console.log(dateSubList);
+	if (!dateSubList) return;
+	dateSubList.splice(dateSubList.indexOf(todo), 1);
+	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
+}
+
+function findDateList(todo) {
+	// console.log(todo);
+	if (!todo.dueDate) return null;
+
+	const date = new Date(todo.dueDate);
+
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date)) todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.today.id;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date)) return _createList__WEBPACK_IMPORTED_MODULE_0__.today;
+
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date)) todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming.id;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date)) return _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming;
+}
+
+function findDateSubList(todo) {
+	const dateList = findDateList(todo);
+	if (!dateList) return;
+	if (!todo.done) return dateList.activeTodos;
+	return dateList.completedTodos;
 }
 
 
@@ -7765,8 +7817,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function createTodo(title, notes, dueDate, priority, listId) {
 	const done = false;
+	const dateList = null;
 
-	return { title, notes, dueDate, priority, listId, done };
+	return { title, notes, dueDate, priority, listId, dateList, done };
 }
 
 
@@ -7803,6 +7856,8 @@ function displayTodoCard(todo) {
 
 	// Change to edit form
 	todoCard.addEventListener('click', (event) => {
+		const currentEdit = document.querySelector('.todoCardEdit');
+		if (currentEdit) return;
 		if (
 			event.target.className === 'todoCheck' ||
 			event.target.className === 'deleteTodo'
@@ -7951,6 +8006,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_createList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/createList */ "./src/components/list/createList.js");
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
+
 
 
 
@@ -8435,9 +8491,6 @@ function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		const dateList = (0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.processDueDate)(newTodo);
-		if (dateList) dateList.push(newTodo);
-
 		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.setList)(newTodo);
 	}
 
@@ -8529,6 +8582,7 @@ function createDefaultLists() {
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
+			console.log(list);
 			listButtonHandleClick(list);
 			// toggleSidebar();
 		});
@@ -8543,7 +8597,7 @@ function createCustomLists() {
 	customLists.className = 'customLists';
 
 	_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.forEach((list) => {
-		if (list.id === 0) return;
+		if (list.id === 2) return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
