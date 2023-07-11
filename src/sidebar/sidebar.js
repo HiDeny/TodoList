@@ -1,10 +1,7 @@
-import { createList, defaultListsArr, customListsArr } from '../components/list/createList';
+import { defaultListsArr, customListsArr } from '../components/list/createList';
 
-// import { createListForm } from '../components/list/listForm';
-
-import { refreshList, displayList } from '../components/list/displayList';
+import { refreshList } from '../components/list/displayList';
 import { addCustomList } from '../components/list/updateList';
-
 
 // Sidebar
 function sidebar() {
@@ -26,10 +23,10 @@ function sidebar() {
 function createSidebarVisual() {
 	const sidebarVisual = createSidebar();
 
-	const defaultLists = createDefaultLists(defaultListsArr);
+	const defaultLists = createDefaultLists();
 	sidebarVisual.append(defaultLists);
 
-	const customLists = createCustomLists(customListsArr);
+	const customLists = createCustomLists();
 	sidebarVisual.append(customLists);
 
 	return sidebarVisual;
@@ -42,7 +39,7 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createDefaultLists(defaultListsArr) {
+function createDefaultLists() {
 	const defaultLists = document.createElement('div');
 	defaultLists.className = 'defaultLists';
 
@@ -60,7 +57,7 @@ function createDefaultLists(defaultListsArr) {
 	return defaultLists;
 }
 
-function createCustomLists(customListsArr) {
+function createCustomLists() {
 	const customLists = document.createElement('div');
 	customLists.className = 'customLists';
 
@@ -76,28 +73,10 @@ function createCustomLists(customListsArr) {
 		customLists.append(listButton);
 	});
 
-	// const addListButton = createAddListButton();
-	// addListButton.addEventListener('click', () => {
-	// 	const newForm = createListForm(handleReturn);
-	// 	addListButton.replaceWith(newForm);
-	// 	const titleInput = newForm.querySelector('input[name="listTitle"]');
-	// 	titleInput.focus();
-	// });
-	// customLists.append(addListButton);
-
-
 	const addListButton = createAddListButton();
 	addListButton.addEventListener('click', () => {
-		const visibleList = document.querySelector('.list');
-		const newList = createList('New List');
-		addCustomList(newList);
+		addCustomList();
 		refreshSideLists();
-		console.log(newList);
-
-		const displayNewList = displayList(newList);
-		visibleList.replaceWith(displayNewList);
-		const titleInput = displayNewList.querySelector('input');
-		titleInput.focus();
 	});
 	customLists.append(addListButton);
 

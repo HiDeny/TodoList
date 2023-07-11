@@ -7407,6 +7407,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   customListsArr: () => (/* binding */ customListsArr),
 /* harmony export */   defaultListsArr: () => (/* binding */ defaultListsArr),
 /* harmony export */   inbox: () => (/* binding */ inbox),
+/* harmony export */   listsArr: () => (/* binding */ listsArr),
 /* harmony export */   today: () => (/* binding */ today),
 /* harmony export */   upcoming: () => (/* binding */ upcoming)
 /* harmony export */ });
@@ -7428,6 +7429,7 @@ const upcoming = createList('📆 Upcoming', 'Todos with future dates');
 
 const defaultListsArr = [inbox, today, upcoming];
 const customListsArr = [inbox];
+const listsArr = [inbox, today, upcoming];
 
 
 
@@ -7475,7 +7477,6 @@ function displayList(list) {
 function createDisplayList(list) {
 	const displayList = document.createElement('div');
 	displayList.className = 'list';
-	console.log(list.title);
 	displayList.setAttribute('id', list.id);
 
 	return displayList;
@@ -7484,7 +7485,7 @@ function createDisplayList(list) {
 function createListTitle(list) {
 	let listTitle = createCustomListTitle(list);
 	if (list.id <= 2) listTitle = createDefaultListTitle(list);
-	listTitle.className = 'listTitle';
+	listTitle.classList.add('listTitle');
 
 	return listTitle;
 }
@@ -7564,6 +7565,7 @@ function createCompletedTodos() {
 
 function refreshList(list) {
 	replaceOldList(list);
+	focusTitle();
 	checkSubList(list);
 }
 
@@ -7573,6 +7575,11 @@ function replaceOldList(list) {
 
 	const newList = displayList(list);
 	visibleList.replaceWith(newList);
+}
+
+function focusTitle () {
+	const titleName = document.querySelector('.customTitle');
+	if (titleName.value === 'New List') titleName.focus();
 }
 
 function checkSubList(list) {
@@ -7601,8 +7608,6 @@ function refreshSubList(todo) {
 }
 
 // Delete list button, double check if they want to delete the list
-
-// Sorting methods
 
 
 
@@ -7646,11 +7651,12 @@ function deleteList(list) {
 }
 
 function addCustomList(list) {
-	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.push(list);
+	const newList = list ? list : (0,_createList__WEBPACK_IMPORTED_MODULE_0__.createList)('New List');
+	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.push(newList);
+	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(newList);
 }
 
 function updateCustomList(list) {
-	console.log(list);
 	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.indexOf(list), 1, list);
 	(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__.refreshSideLists)();
 }
@@ -8475,9 +8481,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_list_updateList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/list/updateList */ "./src/components/list/updateList.js");
 
 
-// import { createListForm } from '../components/list/listForm';
-
-
 
 
 
@@ -8501,10 +8504,10 @@ function sidebar() {
 function createSidebarVisual() {
 	const sidebarVisual = createSidebar();
 
-	const defaultLists = createDefaultLists(_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.defaultListsArr);
+	const defaultLists = createDefaultLists();
 	sidebarVisual.append(defaultLists);
 
-	const customLists = createCustomLists(_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr);
+	const customLists = createCustomLists();
 	sidebarVisual.append(customLists);
 
 	return sidebarVisual;
@@ -8517,11 +8520,11 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createDefaultLists(defaultListsArr) {
+function createDefaultLists() {
 	const defaultLists = document.createElement('div');
 	defaultLists.className = 'defaultLists';
 
-	defaultListsArr.forEach((list) => {
+	_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.defaultListsArr.forEach((list) => {
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -8535,11 +8538,11 @@ function createDefaultLists(defaultListsArr) {
 	return defaultLists;
 }
 
-function createCustomLists(customListsArr) {
+function createCustomLists() {
 	const customLists = document.createElement('div');
 	customLists.className = 'customLists';
 
-	customListsArr.forEach((list) => {
+	_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.forEach((list) => {
 		if (list.id === 0) return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
@@ -8551,28 +8554,10 @@ function createCustomLists(customListsArr) {
 		customLists.append(listButton);
 	});
 
-	// const addListButton = createAddListButton();
-	// addListButton.addEventListener('click', () => {
-	// 	const newForm = createListForm(handleReturn);
-	// 	addListButton.replaceWith(newForm);
-	// 	const titleInput = newForm.querySelector('input[name="listTitle"]');
-	// 	titleInput.focus();
-	// });
-	// customLists.append(addListButton);
-
-
 	const addListButton = createAddListButton();
 	addListButton.addEventListener('click', () => {
-		const visibleList = document.querySelector('.list');
-		const newList = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.createList)('New List');
-		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_2__.addCustomList)(newList);
+		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_2__.addCustomList)();
 		refreshSideLists();
-		console.log(newList);
-
-		const displayNewList = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_1__.displayList)(newList);
-		visibleList.replaceWith(displayNewList);
-		const titleInput = displayNewList.querySelector('input');
-		titleInput.focus();
 	});
 	customLists.append(addListButton);
 

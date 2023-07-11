@@ -30,7 +30,6 @@ function displayList(list) {
 function createDisplayList(list) {
 	const displayList = document.createElement('div');
 	displayList.className = 'list';
-	console.log(list.title);
 	displayList.setAttribute('id', list.id);
 
 	return displayList;
@@ -39,7 +38,7 @@ function createDisplayList(list) {
 function createListTitle(list) {
 	let listTitle = createCustomListTitle(list);
 	if (list.id <= 2) listTitle = createDefaultListTitle(list);
-	listTitle.className = 'listTitle';
+	listTitle.classList.add('listTitle');
 
 	return listTitle;
 }
@@ -119,6 +118,7 @@ function createCompletedTodos() {
 
 function refreshList(list) {
 	replaceOldList(list);
+	focusTitle();
 	checkSubList(list);
 }
 
@@ -128,6 +128,11 @@ function replaceOldList(list) {
 
 	const newList = displayList(list);
 	visibleList.replaceWith(newList);
+}
+
+function focusTitle () {
+	const titleName = document.querySelector('.customTitle');
+	if (titleName.value === 'New List') titleName.focus();
 }
 
 function checkSubList(list) {
@@ -156,7 +161,5 @@ function refreshSubList(todo) {
 }
 
 // Delete list button, double check if they want to delete the list
-
-// Sorting methods
 
 export { displayList, refreshList, refreshSubList };

@@ -1,6 +1,6 @@
-import { customListsArr, today, upcoming } from './createList';
+import { createList, customListsArr, today, upcoming } from './createList';
 import { isFuture, isToday } from 'date-fns';
-import { refreshSubList } from './displayList';
+import { refreshList, refreshSubList } from './displayList';
 import { refreshSideLists } from '../../sidebar/sidebar';
 
 // Delete list function
@@ -9,11 +9,12 @@ function deleteList(list) {
 }
 
 function addCustomList(list) {
-	customListsArr.push(list);
+	const newList = list ? list : createList('New List');
+	customListsArr.push(newList);
+	refreshList(newList);
 }
 
 function updateCustomList(list) {
-	console.log(list);
 	customListsArr.splice(customListsArr.indexOf(list), 1, list);
 	refreshSideLists();
 }

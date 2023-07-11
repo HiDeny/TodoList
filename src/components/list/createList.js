@@ -16,5 +16,6 @@ const upcoming = createList('📆 Upcoming', 'Todos with future dates');
 
 const defaultListsArr = [inbox, today, upcoming];
 const customListsArr = [inbox];
+const listsArr = [inbox, today, upcoming];
 
-export { createList, defaultListsArr, customListsArr, inbox, today, upcoming };
+export { createList, defaultListsArr, customListsArr, listsArr, inbox, today, upcoming };
