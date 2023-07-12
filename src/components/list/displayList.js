@@ -121,7 +121,9 @@ function createDeleteButton(list) {
 	deleteButton.className = 'deleteListButton';
 	deleteButton.textContent = 'Delete';
 	deleteButton.addEventListener('click', () => {
-		const check = confirm(`Do you really want to delete ${(list.title).toUpperCase()}?`)
+		const check = confirm(
+			`Do you really want to delete ${list.title.toUpperCase()}?`
+		);
 		if (check) {
 			deleteList(list);
 			refreshList(inbox);
@@ -215,7 +217,5 @@ function refreshConditions(visibleList, todo) {
 	if (todo.listId !== Number(visibleList.id)) return;
 	return findSubList(todo);
 }
-
-// Delete list button, double check if they want to delete the list
 
 export { displayList, refreshList, refreshSubList };
