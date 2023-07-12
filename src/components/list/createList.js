@@ -2,7 +2,7 @@ let id = 0;
 
 function createList(title, description) {
 	const listId = id++;
-	title = title ? title : 'List';
+	// title = title ? title : '';
 	const activeTodos = [];
 	const completedTodos = [];
 

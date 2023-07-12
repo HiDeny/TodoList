@@ -82,10 +82,9 @@ function createDefaultListDescription(list) {
 }
 
 function createCustomListDescription(list) {
-	const listDescription = document.createElement('input');
+	const listDescription = document.createElement('textarea');
 	listDescription.className = 'listDescription';
 	listDescription.classList.add('customDescription');
-	listDescription.setAttribute('type', 'text');
 	listDescription.setAttribute('placeholder', 'Description');
 	listDescription.textContent = list.description;
 	listDescription.addEventListener('input', (event) => {
@@ -135,7 +134,7 @@ function replaceOldList(list) {
 function focusTitle() {
 	const titleName = document.querySelector('.customTitle');
 	const titleValue = titleName ? titleName.value : null;
-	if (titleValue === 'New List') titleName.focus();
+	if (titleValue === '') titleName.focus();
 }
 
 function checkSubList(list) {
@@ -144,7 +143,7 @@ function checkSubList(list) {
 }
 
 function refreshSubList(todo) {
-	const list = findList(todo);
+	// const list = findList(todo);
 	const visibleList = document.querySelector('.list');
 
 	const nextStep = refreshConditions(visibleList, todo);

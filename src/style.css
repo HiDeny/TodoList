@@ -158,6 +158,7 @@ header {
 	text-align: left;
 	font-size: 0.9rem;
 	letter-spacing: 0.3px;
+	text-overflow: ellipsis;
 }
 
 .container {
@@ -233,6 +234,7 @@ header {
 	font-weight: bold;
 	text-transform: uppercase;
 	letter-spacing: 0.1rem;
+	text-overflow: ellipsis;
 }
 
 .listDescription {
@@ -244,6 +246,7 @@ header {
 	font-weight: lighter;
 	color: gray;
 	font-style: italic;
+	text-overflow: ellipsis;
 }
 
 .customTitle,
@@ -264,6 +267,7 @@ header {
 	font-size: 0.9rem;
 	color: #00000059;
 	letter-spacing: 0.5px;
+	text-overflow: ellipsis;
 }
 
 .activeTodos,
@@ -304,6 +308,7 @@ header {
 	background: #b4b4b436;
 	backdrop-filter: blur(15px);
 	box-shadow: 5px 5px 12px 1px #80808057;
+	text-overflow: ellipsis;
 }
 
 .cancelForm {
@@ -336,6 +341,7 @@ header {
 	width: 95%;
 	height: 60%;
 	padding: 5px 10px;
+	text-overflow: ellipsis;
 }
 
 .formNotes {
@@ -492,6 +498,7 @@ textarea {
 .todoPriorityEdit {
 	background: transparent;
 	border: 0;
+	text-overflow: ellipsis;
 }
 
 .todoNotesEdit,

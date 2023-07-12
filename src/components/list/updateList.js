@@ -15,7 +15,7 @@ function deleteList(list) {
 }
 
 function addCustomList(list) {
-	const newList = list ? list : createList('New List');
+	const newList = list ? list : createList('');
 	customListsArr.push(newList);
 	refreshList(newList);
 }
@@ -26,7 +26,12 @@ function updateCustomList(list) {
 }
 
 // Find todo in all lists
-// Process change for today and upcoming
+function findAllLists(todo) {
+	const customList = findList(todo);
+	const dateList = findDateList(todo);
+
+	return { customList, dateList };
+}
 
 function findList(todo) {
 	return customListsArr.find((list) => list.id === todo.listId);
@@ -40,8 +45,8 @@ function findSubList(todo) {
 
 function setList(todo) {
 	if (todo.dueDate) {
-		const dateList = findDateList(todo);
-		dateList.activeTodos.push(todo);
+		const dateList = findDateList(todo).activeTodos;
+		dateList.push(todo);
 	}
 
 	const list = findList(todo).activeTodos;
@@ -59,9 +64,9 @@ function addTodoList(todo) {
 }
 
 function removeTodoList(todo) {
-	removeDateList(todo);
 	const list = findSubList(todo);
 	list.splice(list.indexOf(todo), 1);
+	removeDateList(todo);
 	refreshSubList(todo);
 }
 
@@ -69,9 +74,7 @@ function changeList(todo, newListId) {
 	// Copy todo
 	const updatedTodo = Object.assign({}, todo);
 	// Remove original todo
-	removeDateList(todo);
 	removeTodoList(todo);
-	console.log(todo);
 	// Set new list
 	updatedTodo.listId = Number(newListId);
 	// Add to new list
@@ -82,13 +85,11 @@ function changeSubList(todo) {
 	// Copy
 	const updatedTodo = { ...todo };
 	// Remove Old
-	removeDateList(todo);
 	removeTodoList(todo);
 	// Set New
 	updatedTodo.done = !todo.done;
 	// Add New
 	addTodoList(updatedTodo);
-	addDateList(updatedTodo);
 }
 
 function sortList(list) {
@@ -107,6 +108,7 @@ function compareTodos(a, b) {
 	}
 }
 
+// Process change for today and upcoming
 // Sort todos to Today, and upcoming lists
 function addDateList(todo) {
 	console.log(todo);
