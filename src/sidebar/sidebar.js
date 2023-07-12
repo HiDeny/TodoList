@@ -66,7 +66,7 @@ function createCustomLists() {
 		if (list.id === 2) return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
-		listButton.textContent = list.title ? list.title : `New List ${Number(list.id) - 2}`;
+		listButton.textContent = list.title ? list.title : `New List ${customListsArr.indexOf(list)}`;
 		listButton.addEventListener('click', () => {
 			listButtonHandleClick(list);
 			// toggleSidebar();

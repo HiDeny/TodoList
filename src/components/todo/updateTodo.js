@@ -4,8 +4,8 @@ import 'flatpickr/dist/flatpickr.min.css';
 import { visualizePriority } from './displayTodo.js';
 import { customListsArr } from '../list/createList.js';
 import {
-	addTodoList,
-	removeTodoList,
+	addTodo,
+	removeTodo,
 	changeList,
 	changeSubList,
 } from '../list/updateList';
@@ -190,20 +190,20 @@ function handleCheckboxClick(todo) {
 }
 
 function handleCancelButton(todo) {
-	removeTodoList(todo);
+	removeTodo(todo);
 }
 
 function handleEnterKey(event, todo, editedTodo) {
 	if (event.code === 'Enter' && !event.shiftKey) {
-		removeTodoList(todo);
-		addTodoList(editedTodo);
+		removeTodo(todo);
+		addTodo(editedTodo);
 	}
 }
 
 function handleEscapeKey(event, originalTodo, todo) {
 	if (event.code === 'Escape') {
-		removeTodoList(originalTodo);
-		addTodoList(todo);
+		removeTodo(originalTodo);
+		addTodo(todo);
 	}
 }
 

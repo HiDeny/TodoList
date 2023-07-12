@@ -2,7 +2,7 @@ import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
 import { createTodoEditMode } from './updateTodo.js';
 
-import { removeTodoList, changeSubList } from '../list/updateList';
+import { removeTodo, changeSubList } from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -134,7 +134,7 @@ function handleCheckboxClick(todo) {
 }
 
 function handleCancelButton(todo) {
-	removeTodoList(todo);
+	removeTodo(todo);
 }
 
 function removeFlatpickrDiv() {

@@ -159,6 +159,8 @@ header {
 	font-size: 0.9rem;
 	letter-spacing: 0.3px;
 	text-overflow: ellipsis;
+
+	cursor: pointer;
 }
 
 .container {

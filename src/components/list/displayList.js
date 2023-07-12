@@ -1,8 +1,9 @@
-import { isFuture, isToday } from 'date-fns';
+import { refreshSideLists } from '../../sidebar/sidebar';
 import { displayTodoCard } from '../todo/displayTodo';
+import { inbox } from './createList';
 import {
+	deleteList,
 	findDateSubList,
-	findList,
 	findSubList,
 	sortList,
 	updateCustomList,
@@ -11,11 +12,8 @@ import {
 function displayList(list) {
 	const displayListDiv = createDisplayList(list);
 
-	const listTitle = createListTitle(list);
-	displayListDiv.append(listTitle);
-
-	const listDescription = createListDescription(list);
-	displayListDiv.append(listDescription);
+	const listHead = createListHead(list);
+	displayListDiv.append(listHead);
 
 	const activeTodos = createActiveTodos();
 	displayListDiv.append(activeTodos);
@@ -37,12 +35,23 @@ function createDisplayList(list) {
 	return displayList;
 }
 
-function createListTitle(list) {
-	let listTitle = createCustomListTitle(list);
-	if (list.id <= 2) listTitle = createDefaultListTitle(list);
-	listTitle.classList.add('listTitle');
+function createListHead(list) {
+	if (list.id <= 2) return createDefaultListHead(list);
+	return createCustomListHead(list);
+}
 
-	return listTitle;
+//* Default List
+function createDefaultListHead(list) {
+	const headDiv = document.createElement('div');
+
+	const title = createDefaultListTitle(list);
+	title.className = 'listTitle';
+	headDiv.append(title);
+
+	const description = createDefaultListDescription(list);
+	headDiv.append(description);
+
+	return headDiv;
 }
 
 function createDefaultListTitle(list) {
@@ -52,33 +61,44 @@ function createDefaultListTitle(list) {
 	return listTitle;
 }
 
-function createCustomListTitle(list) {
-	const listTitle = document.createElement('input');
-	listTitle.classList.add('customTitle');
-	listTitle.setAttribute('type', 'text');
-	listTitle.setAttribute('placeholder', 'New List');
-	listTitle.value = list.title;
-	listTitle.addEventListener('input', (event) => {
-		list.title = event.target.value;
-		updateCustomList(list);
-	});
-
-	return listTitle;
-}
-
-function createListDescription(list) {
-	let listDescription = createCustomListDescription(list);
-	if (list.id <= 2) listDescription = createDefaultListDescription(list);
-
-	return listDescription;
-}
-
 function createDefaultListDescription(list) {
 	const listDescription = document.createElement('p');
 	listDescription.className = 'listDescription';
 	listDescription.textContent = list.description;
 
 	return listDescription;
+}
+
+//* Custom List
+function createCustomListHead(list) {
+	const headDiv = document.createElement('div');
+
+	const title = createCustomListTitle(list);
+	title.classList.add('listTitle');
+	headDiv.append(title);
+
+	const deleteButton = createDeleteButton(list);
+	headDiv.append(deleteButton);
+
+	const description = createCustomListDescription(list);
+	headDiv.append(description);
+
+	return headDiv;
+}
+
+function createCustomListTitle(list) {
+	const listTitle = document.createElement('input');
+	listTitle.className = 'customTitle';
+	listTitle.setAttribute('type', 'text');
+	listTitle.setAttribute('placeholder', 'New List');
+	listTitle.value = list.title;
+	listTitle.addEventListener('input', (event) => {
+		list.title = event.target.value;
+		updateCustomList(list);
+		refreshSideLists();
+	});
+
+	return listTitle;
 }
 
 function createCustomListDescription(list) {
@@ -90,9 +110,26 @@ function createCustomListDescription(list) {
 	listDescription.addEventListener('input', (event) => {
 		list.description = event.target.value;
 		updateCustomList(list);
+		refreshSideLists();
 	});
 
 	return listDescription;
+}
+
+function createDeleteButton(list) {
+	const deleteButton = document.createElement('button');
+	deleteButton.className = 'deleteListButton';
+	deleteButton.textContent = 'Delete';
+	deleteButton.addEventListener('click', () => {
+		const check = confirm(`Do you really want to delete ${(list.title).toUpperCase()}?`)
+		if (check) {
+			deleteList(list);
+			refreshList(inbox);
+			refreshSideLists();
+		}
+	});
+
+	return deleteButton;
 }
 
 function createActiveTodos() {
@@ -168,7 +205,6 @@ function refreshSubList(todo) {
 }
 
 function refreshConditions(visibleList, todo) {
-
 	if (visibleList.id < 2) {
 		console.log(todo.dateList !== Number(visibleList.id));
 		if (todo.dateList !== Number(visibleList.id)) return;
