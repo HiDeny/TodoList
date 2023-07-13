@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/flatpickr/dist/flatpickr.min.css":
@@ -7,7 +8,6 @@
   \*********************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -46,7 +46,6 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.flatpickr-calendar{background:transpa
   \****************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -422,7 +421,6 @@ template {
   \*************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -672,7 +670,6 @@ header {
 
 	font-size: 1.5rem;
 	font-weight: bold;
-	text-transform: uppercase;
 	letter-spacing: 0.1rem;
 	text-overflow: ellipsis;
 }
@@ -1022,7 +1019,7 @@ textarea {
 	border-bottom: 5px solid #ff5b5b;
 	box-shadow: 3px 5px 12px 0px #db020259;
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\toutline: 0.5px rgba(150, 150, 150, 0.23) solid;\n\tbox-shadow: inset 0px 0px 20px 0px #8080803b;\n\tborder-radius: 3px;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n\tbackground: #e6e6e6;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\theight: 0.9rem;\n\twidth: 0.9rem;\n\tpadding: 0;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 100%;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tleft: 12rem;\n\ttop: 1.7rem;\n\n\theight: 40px;\n\twidth: 40px;\n\tmargin: 0;\n\tpadding: 0;\n\tpadding-bottom: 0.5px;\n\n\tborder: solid 1px gray;\n\tborder-radius: 30px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1.5rem;\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 6rem;\n\ttop: 2rem;\n\n\tpadding: 5px 10px;\n\tborder-radius: 10px;\n\tborder: solid 1px gray;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 200px;\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-150%);\n\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tborder: 1px solid gray;\n\tborder-radius: 20px;\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n\tmargin: 0px 10px;\n\n\tcolor: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\tpadding: 5px 2px;\n\n\tborder: 0;\n\tborder-bottom: solid #80808040 1px;\n\tbackground: transparent;\n\n\ttext-align: left;\n\tfont-size: 0.9rem;\n\tletter-spacing: 0.3px;\n\ttext-overflow: ellipsis;\n\n\tcursor: pointer;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: -1.2rem;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tposition: absolute;\n\tbottom: -3.5rem;\n\tleft: 1.5rem;\n\n\theight: 2rem;\n\twidth: 4.1rem;\n\tborder: solid 1px gray;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1rem;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\twidth: 40%;\n\tmargin: auto;\n}\n\n.listTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\theight: 40px;\n\tmargin: 0 1.2rem;\n\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n\ttext-transform: uppercase;\n\tletter-spacing: 0.1rem;\n\ttext-overflow: ellipsis;\n}\n\n.listDescription {\n\tdisplay: flex;\n\talign-items: end;\n\theight: 20px;\n\tmargin: 0 1.2rem;\n\tfont-size: 0.8rem;\n\tfont-weight: lighter;\n\tcolor: gray;\n\tfont-style: italic;\n\ttext-overflow: ellipsis;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\tmax-width: 550px;\n\tmargin: 0px 1rem;\n\tpadding: 0.2rem 0;\n\tborder-bottom: 1px solid #80808061;\n\n\tfont-size: 0.9rem;\n\tcolor: #00000059;\n\tletter-spacing: 0.5px;\n\ttext-overflow: ellipsis;\n}\n\n.activeTodos,\n.completedTodos {\n\tdisplay: flex;\n\tflex-direction: column;\n\n\tgap: 5px;\n\n\tpadding: 15px 0px;\n\tpadding-top: 10px;\n\n\toverflow: scroll;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 15px 13px;\n\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #9f9b9bd1;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\ttext-overflow: ellipsis;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: 10px;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px 5px;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #a1a2a430;\n\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 95%;\n\theight: 60%;\n\tpadding: 5px 10px;\n\ttext-overflow: ellipsis;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 5px 10px;\n\tborder: 0;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\tjustify-self: center;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n}\n\n#formDate {\n\twidth: 90%;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n}\n\n#formList {\n\twidth: 100%;\n\tpadding: 5px;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 1.8rem;\n\twidth: 6.5rem;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 10px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\talign-self: end;\n\tjustify-self: center;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: flex;\n\tcolumn-gap: 10px;\n\n\twidth: 90%;\n\tmax-width: 550px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px 5px;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\n\tcursor: pointer;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\ttop: 30%;\n\tright: 10px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 90%;\n\tpadding: 10px 5px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n\ttext-overflow: ellipsis;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoTitle {\n\tmax-height: 1.1rem;\n\toverflow: auto;\n\tmax-width: 75%;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tborder: 1px solid lightblue;\n\tborder-bottom: 5px solid lightblue;\n\tbox-shadow: 3px 5px 12px 0px #92bcca99;\n}\n\n.medium {\n\tborder: 1px solid orange;\n\tborder-bottom: 5px solid orange;\n\tbox-shadow: 3px 5px 12px 0px #bd7a005e;\n}\n\n.high {\n\tborder: 1px solid #ff5b5b;\n\tborder-bottom: 5px solid #ff5b5b;\n\tbox-shadow: 3px 5px 12px 0px #db020259;\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\toutline: 0.5px rgba(150, 150, 150, 0.23) solid;\n\tbox-shadow: inset 0px 0px 20px 0px #8080803b;\n\tborder-radius: 3px;\n}\n\nhtml {\n\tfont-family: Helvetica;\n\tfont-size: 16px;\n\theight: 100vh;\n\tbackground: #e6e6e6;\n}\n\np {\n\tmargin: 0;\n}\n\nbody {\n\tposition: relative;\n\theight: 100vh;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 10fr;\n}\n\nheader {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n}\n\n.mainTitle {\n\ttext-align: center;\n}\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\theight: 0.9rem;\n\twidth: 0.9rem;\n\tpadding: 0;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 100%;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\tposition: fixed;\n\tleft: 12rem;\n\ttop: 1.7rem;\n\n\theight: 40px;\n\twidth: 40px;\n\tmargin: 0;\n\tpadding: 0;\n\tpadding-bottom: 0.5px;\n\n\tborder: solid 1px gray;\n\tborder-radius: 30px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1.5rem;\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\tposition: absolute;\n\tleft: 6rem;\n\ttop: 2rem;\n\n\tpadding: 5px 10px;\n\tborder-radius: 10px;\n\tborder: solid 1px gray;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tcursor: pointer;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 200px;\n\n\tposition: fixed;\n\ttransition: transform 0.3s;\n\ttransform: translateX(-150%);\n\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\ttransform: translateX(0);\n}\n\n.defaultLists,\n.customLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 10px;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\n\tborder: 1px solid gray;\n\tborder-radius: 20px;\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tpadding: 10px 30px;\n\tmargin: 0px 10px;\n\n\tcolor: gray;\n}\n\n.defaultLists > .sidebarButton:last-child,\n.customLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\tpadding: 5px 2px;\n\n\tborder: 0;\n\tborder-bottom: solid #80808040 1px;\n\tbackground: transparent;\n\n\ttext-align: left;\n\tfont-size: 0.9rem;\n\tletter-spacing: 0.3px;\n\ttext-overflow: ellipsis;\n\n\tcursor: pointer;\n}\n\n.container {\n\tposition: relative;\n}\n\n#listForm {\n\twidth: 100%;\n\tposition: relative;\n\tdisplay: grid;\n\tgrid-template-rows: 1fr 3fr;\n\tgap: 5px;\n\tborder-radius: 10px;\n}\n\n.cancelListForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: -1.2rem;\n}\n\n#listTitle {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tborder-bottom: 1px solid #93939391;\n\tpadding: 5px;\n\tfont-size: 1rem;\n}\n\n#listDescription {\n\twidth: 90%;\n\tbackground: transparent;\n\tborder: 0;\n\tfont-size: 0.8rem;\n\tpadding: 5px;\n}\n\n.listSubmitButton {\n\tposition: absolute;\n\tbottom: -3.5rem;\n\tleft: 1.5rem;\n\n\theight: 2rem;\n\twidth: 4.1rem;\n\tborder: solid 1px gray;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\tfont-size: 1rem;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\theight: 100%;\n\twidth: 40%;\n\tmargin: auto;\n}\n\n.listTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\theight: 40px;\n\tmargin: 0 1.2rem;\n\n\tfont-size: 1.5rem;\n\tfont-weight: bold;\n\tletter-spacing: 0.1rem;\n\ttext-overflow: ellipsis;\n}\n\n.listDescription {\n\tdisplay: flex;\n\talign-items: end;\n\theight: 20px;\n\tmargin: 0 1.2rem;\n\tfont-size: 0.8rem;\n\tfont-weight: lighter;\n\tcolor: gray;\n\tfont-style: italic;\n\ttext-overflow: ellipsis;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\tdisplay: flex;\n\talign-items: center;\n\n\tmax-width: 550px;\n\tmargin: 0px 1rem;\n\tpadding: 0.2rem 0;\n\tborder-bottom: 1px solid #80808061;\n\n\tfont-size: 0.9rem;\n\tcolor: #00000059;\n\tletter-spacing: 0.5px;\n\ttext-overflow: ellipsis;\n}\n\n.activeTodos,\n.completedTodos {\n\tdisplay: flex;\n\tflex-direction: column;\n\n\tgap: 5px;\n\n\tpadding: 15px 0px;\n\tpadding-top: 10px;\n\n\toverflow: scroll;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 30%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 2.5rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: 400px;\n\tmargin: auto;\n\tpadding: 15px 13px;\n\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #9f9b9bd1;\n\tborder-radius: 20px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\ttext-overflow: ellipsis;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 5px;\n\tleft: 10px;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px 5px;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #a1a2a430;\n\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 95%;\n\theight: 60%;\n\tpadding: 5px 10px;\n\ttext-overflow: ellipsis;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 5px 10px;\n\tborder: 0;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\tjustify-self: center;\n}\n\n.formDate {\n\tgrid-area: 4 / 1;\n}\n\n#formDate {\n\twidth: 90%;\n}\n\n.formList {\n\tgrid-area: 4 / 2;\n}\n\n#formList {\n\twidth: 100%;\n\tpadding: 5px;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n}\n\n#priority {\n\twidth: 100%;\n}\n\n.placeholderPri {\n\tcolor: gray;\n}\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 1.8rem;\n\twidth: 6.5rem;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 10px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\talign-self: end;\n\tjustify-self: center;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: flex;\n\tcolumn-gap: 10px;\n\n\twidth: 90%;\n\tmax-width: 550px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px 5px;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n\n\tcursor: pointer;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\tposition: absolute;\n\ttop: 30%;\n\tright: 10px;\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.todoCardEdit {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 90%;\n\tpadding: 10px 5px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n\ttext-overflow: ellipsis;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoTitle {\n\tmax-height: 1.1rem;\n\toverflow: auto;\n\tmax-width: 75%;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > .todoCard > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tborder: 1px solid lightblue;\n\tborder-bottom: 5px solid lightblue;\n\tbox-shadow: 3px 5px 12px 0px #92bcca99;\n}\n\n.medium {\n\tborder: 1px solid orange;\n\tborder-bottom: 5px solid orange;\n\tbox-shadow: 3px 5px 12px 0px #bd7a005e;\n}\n\n.high {\n\tborder: 1px solid #ff5b5b;\n\tborder-bottom: 5px solid #ff5b5b;\n\tbox-shadow: 3px 5px 12px 0px #db020259;\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1035,7 +1032,6 @@ textarea {
   \*****************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /*
@@ -1130,7 +1126,6 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 module.exports = function (item) {
@@ -1156,7 +1151,6 @@ module.exports = function (item) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addLeadingZeros)
@@ -1178,7 +1172,6 @@ function addLeadingZeros(number, targetLength) {
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1195,7 +1188,6 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDefaultOptions: () => (/* binding */ getDefaultOptions),
@@ -1217,7 +1209,6 @@ function setDefaultOptions(newOptions) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2010,7 +2001,6 @@ function formatTimezone(offset, dirtyDelimiter) {
   \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2105,7 +2095,6 @@ var formatters = {
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2199,7 +2188,6 @@ var longFormatters = {
   \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getTimezoneOffsetInMilliseconds)
@@ -2229,7 +2217,6 @@ function getTimezoneOffsetInMilliseconds(date) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCDayOfYear)
@@ -2258,7 +2245,6 @@ function getUTCDayOfYear(dirtyDate) {
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
@@ -2291,7 +2277,6 @@ function getUTCISOWeek(dirtyDate) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCISOWeekYear)
@@ -2331,7 +2316,6 @@ function getUTCISOWeekYear(dirtyDate) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCWeek)
@@ -2364,7 +2348,6 @@ function getUTCWeek(dirtyDate, options) {
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCWeekYear)
@@ -2416,7 +2399,6 @@ function getUTCWeekYear(dirtyDate, options) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isProtectedDayOfYearToken: () => (/* binding */ isProtectedDayOfYearToken),
@@ -2451,7 +2433,6 @@ function throwProtectedError(token, format, input) {
   \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ requiredArgs)
@@ -2470,7 +2451,6 @@ function requiredArgs(required, args) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
@@ -2498,7 +2478,6 @@ function startOfUTCISOWeek(dirtyDate) {
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCISOWeekYear)
@@ -2527,7 +2506,6 @@ function startOfUTCISOWeekYear(dirtyDate) {
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
@@ -2566,7 +2544,6 @@ function startOfUTCWeek(dirtyDate, options) {
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCWeekYear)
@@ -2602,7 +2579,6 @@ function startOfUTCWeekYear(dirtyDate, options) {
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ toInteger)
@@ -2626,7 +2602,6 @@ function toInteger(dirtyNumber) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addDays)
@@ -2678,7 +2653,6 @@ function addDays(dirtyDate, dirtyAmount) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addMilliseconds)
@@ -2722,7 +2696,6 @@ function addMilliseconds(dirtyDate, dirtyAmount) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ format)
@@ -3149,7 +3122,6 @@ function cleanEscapedString(input) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isDate)
@@ -3203,7 +3175,6 @@ function isDate(value) {
   \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isFuture)
@@ -3246,7 +3217,6 @@ function isFuture(dirtyDate) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isSameDay)
@@ -3298,7 +3268,6 @@ function isSameDay(dirtyDateLeft, dirtyDateRight) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isSameYear)
@@ -3340,7 +3309,6 @@ function isSameYear(dirtyDateLeft, dirtyDateRight) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isThisYear)
@@ -3383,7 +3351,6 @@ function isThisYear(dirtyDate) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isToday)
@@ -3426,7 +3393,6 @@ function isToday(dirtyDate) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isTomorrow)
@@ -3471,7 +3437,6 @@ function isTomorrow(dirtyDate) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isValid)
@@ -3530,7 +3495,6 @@ function isValid(dirtyDate) {
   \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildFormatLongFn)
@@ -3553,7 +3517,6 @@ function buildFormatLongFn(args) {
   \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildLocalizeFn)
@@ -3585,7 +3548,6 @@ function buildLocalizeFn(args) {
   \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildMatchFn)
@@ -3641,7 +3603,6 @@ function findIndex(array, predicate) {
   \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildMatchPatternFn)
@@ -3672,7 +3633,6 @@ function buildMatchPatternFn(args) {
   \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3769,7 +3729,6 @@ var formatDistance = function formatDistance(token, count, options) {
   \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3818,7 +3777,6 @@ var formatLong = {
   \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3844,7 +3802,6 @@ var formatRelative = function formatRelative(token, _date, _baseDate, _options) 
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4002,7 +3959,6 @@ var localize = {
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4116,7 +4072,6 @@ var match = {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4162,7 +4117,6 @@ var locale = {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfDay)
@@ -4204,7 +4158,6 @@ function startOfDay(dirtyDate) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ subMilliseconds)
@@ -4247,7 +4200,6 @@ function subMilliseconds(dirtyDate, dirtyAmount) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ toDate)
@@ -4315,7 +4267,6 @@ function toDate(argument) {
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -6384,7 +6335,6 @@ if (typeof window !== "undefined") {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
@@ -6472,7 +6422,6 @@ var english = {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HOOKS: () => (/* binding */ HOOKS),
@@ -6571,7 +6520,6 @@ var defaults = {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calculateSecondsSinceMidnight: () => (/* binding */ calculateSecondsSinceMidnight),
@@ -6740,7 +6688,6 @@ function getDefaultHours(config) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   clearNode: () => (/* binding */ clearNode),
@@ -6814,7 +6761,6 @@ function getEventTarget(event) {
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   formats: () => (/* binding */ formats),
@@ -6967,7 +6913,6 @@ var formats = {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   arrayify: () => (/* binding */ arrayify),
@@ -7002,7 +6947,6 @@ var arrayify = function (obj) {
   \************************************************************/
 /***/ (() => {
 
-"use strict";
 
 if (typeof Object.assign !== "function") {
     Object.assign = function (target) {
@@ -7035,7 +6979,6 @@ if (typeof Object.assign !== "function") {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -7090,7 +7033,6 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -7145,7 +7087,6 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -7200,7 +7141,6 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 var stylesInDOM = [];
@@ -7294,7 +7234,6 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 var memo = {};
@@ -7338,7 +7277,6 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -7358,7 +7296,6 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -7378,7 +7315,6 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -7449,7 +7385,6 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
-"use strict";
 
 
 /* istanbul ignore next  */
@@ -7473,12 +7408,11 @@ module.exports = styleTagTransform;
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ListsArr: () => (/* binding */ ListsArr),
 /* harmony export */   createList: () => (/* binding */ createList),
 /* harmony export */   inbox: () => (/* binding */ inbox),
-/* harmony export */   listArr: () => (/* binding */ listArr),
 /* harmony export */   today: () => (/* binding */ today),
 /* harmony export */   upcoming: () => (/* binding */ upcoming)
 /* harmony export */ });
@@ -7496,7 +7430,6 @@ function createList(title, description) {
 	const listId = id;
 	id++;
 	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.setIdStorage)(id);
-	console.log(listId);
 	const activeTodos = [];
 	const completedTodos = [];
 	return { title, description, activeTodos, completedTodos, id: listId };
@@ -7504,11 +7437,11 @@ function createList(title, description) {
 
 // Default list
 const allTodos = (0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.getArrStorage)();
-let listArr;
+
+let ListsArr;
 function sortTodos(arr) {
-	console.log(arr);
 	if (arr.length > 1) {
-		listArr = arr;
+		ListsArr = arr;
 	} else {
 		initSetup();
 	}
@@ -7516,18 +7449,16 @@ function sortTodos(arr) {
 sortTodos(allTodos);
 
 function initSetup() {
-	console.log('test');
 	const today = createList('🌤️ Today', "Todos with today's date");
 	const upcoming = createList('📆 Upcoming', 'Todos with future dates');
 	const inbox = createList('📥 Inbox', 'Default list');
-	listArr = [inbox, today, upcoming];
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.setArrStorage)(listArr);
+	ListsArr = [today, upcoming, inbox];
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.setArrStorage)(ListsArr);
 }
 
-const inbox = listArr[0];
-const today = listArr[1];
-const upcoming = listArr[2];
-
+const today = ListsArr[0];
+const upcoming = ListsArr[1];
+const inbox = ListsArr[2];
 
 
 
@@ -7540,7 +7471,6 @@ const upcoming = listArr[2];
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   displayList: () => (/* binding */ displayList),
@@ -7642,7 +7572,7 @@ function createCustomListTitle(list) {
 	listTitle.addEventListener('input', (event) => {
 		list.title = event.target.value;
 		(0,_updateList__WEBPACK_IMPORTED_MODULE_3__.updateCustomList)(list);
-		(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_0__.refreshSideLists)();
+		(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_0__.refreshSideList)(list);
 	});
 
 	return listTitle;
@@ -7657,7 +7587,6 @@ function createCustomListDescription(list) {
 	listDescription.addEventListener('input', (event) => {
 		list.description = event.target.value;
 		(0,_updateList__WEBPACK_IMPORTED_MODULE_3__.updateCustomList)(list);
-		(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_0__.refreshSideLists)();
 	});
 
 	return listDescription;
@@ -7674,7 +7603,6 @@ function createDeleteButton(list) {
 		if (check) {
 			(0,_updateList__WEBPACK_IMPORTED_MODULE_3__.deleteList)(list);
 			refreshList(_createList__WEBPACK_IMPORTED_MODULE_2__.inbox);
-			(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_0__.refreshSideLists)();
 		}
 	});
 
@@ -7733,7 +7661,6 @@ function refreshSubList(todo) {
 	const visibleList = document.querySelector('.list');
 
 	const nextStep = refreshConditions(visibleList, todo);
-	console.log(nextStep);
 
 	// if (Number(visibleList.id) !== list.id) return;
 	if (!nextStep) return;
@@ -7755,9 +7682,7 @@ function refreshSubList(todo) {
 
 function refreshConditions(visibleList, todo) {
 	if (visibleList.id < 2) {
-		console.log(todo.dateList !== Number(visibleList.id));
 		if (todo.dateList !== Number(visibleList.id)) return;
-		console.log(todo);
 		return (0,_updateList__WEBPACK_IMPORTED_MODULE_3__.findDateSubList)(todo);
 	}
 
@@ -7776,7 +7701,6 @@ function refreshConditions(visibleList, todo) {
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addCustomList: () => (/* binding */ addCustomList),
@@ -7789,15 +7713,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   findList: () => (/* binding */ findList),
 /* harmony export */   findSubList: () => (/* binding */ findSubList),
 /* harmony export */   removeTodo: () => (/* binding */ removeTodo),
-/* harmony export */   setList: () => (/* binding */ setList),
 /* harmony export */   sortList: () => (/* binding */ sortList),
 /* harmony export */   updateCustomList: () => (/* binding */ updateCustomList)
 /* harmony export */ });
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
 /* harmony import */ var _createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createList */ "./src/components/list/createList.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
 /* harmony import */ var _displayList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayList */ "./src/components/list/displayList.js");
-/* harmony import */ var _memory_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../memory/storage */ "./src/components/memory/storage.js");
+/* harmony import */ var _sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../sidebar/sidebar */ "./src/sidebar/sidebar.js");
+/* harmony import */ var _memory_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../memory/storage */ "./src/components/memory/storage.js");
+
+
+
+
 
 
 
@@ -7805,12 +7733,27 @@ __webpack_require__.r(__webpack_exports__);
 
 //* List Handling
 
+
+// Add
+function addCustomList() {
+	const newList = (0,_createList__WEBPACK_IMPORTED_MODULE_0__.createList)('');
+	_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.push(newList);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(newList);
+	(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__.addNewSideList)(newList);
+	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(newList);
+}
+
+function updateCustomList(list) {
+	_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.indexOf(list), 1, list);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(list);
+}
+
 // Delete
 function deleteList(list) {
 	deleteSubLists(list);
-	_createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.indexOf(list), 1);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.removeListStorage)(list);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.getArrStorage)();
+	(0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__.removeSideList)(list);
+	_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.indexOf(list), 1);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.removeListStorage)(list);
 }
 
 function deleteSubLists(list) {
@@ -7822,30 +7765,12 @@ function deleteSubLists(list) {
 	}
 }
 
-// Add
-function addCustomList(list) {
-	const newList = list ? list : (0,_createList__WEBPACK_IMPORTED_MODULE_0__.createList)('');
-	_createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.push(newList);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(newList);
-	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(newList);
-}
-
-function updateCustomList(list) {
-	_createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.indexOf(list), 1, list);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(list);
-}
-
-// Set
-function setList(todo) {
-	addDateList(todo)
-	addTodo(todo)
-}
 
 //* Search
 
 // Find
 function findList(todo) {
-	return _createList__WEBPACK_IMPORTED_MODULE_0__.listsArr.find((list) => list.id === todo.listId);
+	return _createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.find((list) => list.id === todo.listId);
 }
 
 function findSubList(todo) {
@@ -7857,20 +7782,20 @@ function findSubList(todo) {
 //* Manipulation
 // Add
 function addTodo(todo) {
-	const list = findSubList(todo);
-	list.push(todo);
+	const subList = findSubList(todo);
+	subList.push(todo);
 	addDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(todo.listId);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(findList(todo));
 }
 
 // Remove
 function removeTodo(todo) {
-	const list = findSubList(todo);
-	list.splice(list.indexOf(todo), 1);
+	const subList = findSubList(todo);
+	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(todo.listId);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(findList(todo));
 }
 
 function changeList(todo, newListId) {
@@ -7918,7 +7843,8 @@ function addDateList(todo) {
 		const dateSubList = findDateSubList(todo);
 		dateSubList.push(todo);
 		(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
-		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(todo.dateList);
+		console.log(findDateList(todo));
+		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(findDateList(todo));
 	}
 }
 
@@ -7927,7 +7853,7 @@ function removeDateList(todo) {
 	if (!dateSubList) return;
 	dateSubList.splice(dateSubList.indexOf(todo), 1);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
-	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.setListStorage)(todo.dateList);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_3__.setListStorage)(findDateList(todo));
 }
 
 //* Date-Search
@@ -7936,12 +7862,12 @@ function findDateList(todo) {
 
 	const date = new Date(todo.dueDate);
 
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date)) {
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date)) {
 		todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.today.id;
 		return _createList__WEBPACK_IMPORTED_MODULE_0__.today;
 	}
 
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(date)) {
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(date)) {
 		todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming.id;
 		return _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming;
 	}
@@ -7965,7 +7891,6 @@ function findDateSubList(todo) {
   \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getArrStorage: () => (/* binding */ getArrStorage),
@@ -7979,7 +7904,6 @@ __webpack_require__.r(__webpack_exports__);
 // Store ID
 function setIdStorage(id) {
 	localStorage.setItem('id', id);
-	console.log(window.localStorage);
 }
 
 function getIdStorage() {
@@ -7989,12 +7913,9 @@ function getIdStorage() {
 
 // Store Lists
 function setArrStorage(arr) {
-	console.log(arr.length);
 	for (let i = 0; i < arr.length; i++) {
-		console.log(i);
 		localStorage.setItem(arr[i].id, JSON.stringify(arr[i]));
 	}
-	console.log(window.localStorage);
 }
 
 // Get all tasks
@@ -8006,14 +7927,12 @@ function getArrStorage() {
 		allTodosArr.push(list);
 	}
 
-    console.log(localStorage.length);
 	return allTodosArr;
 }
 
 // set single List
 function setListStorage(list) {
 	localStorage.setItem(list.id, JSON.stringify(list));
-	// console.log(window.localStorage);
 }
 
 // get single List
@@ -8021,15 +7940,11 @@ function getListStorage() {
 	for (let i = 0; i < localStorage.length - 1; i++) {
 		const listJSON = localStorage.getItem(i);
 		const list = JSON.parse(listJSON);
-		console.log(list);
 	}
-
-	console.log(localStorage.length - 1);
 }
 
 function removeListStorage(list) {
-    localStorage.removeItem(list.id);
-    console.log(window.localStorage);
+	localStorage.removeItem(list.id);
 }
 
 
@@ -8043,7 +7958,6 @@ function removeListStorage(list) {
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
@@ -8064,7 +7978,6 @@ function createTodo(title, notes, dueDate, priority, listId) {
   \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   displayTodoCard: () => (/* binding */ displayTodoCard),
@@ -8181,8 +8094,6 @@ function createDueDate(todo) {
 
 function selectDateName(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	console.log(dateToCheck);
-	console.log(dueDate);
 
 	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(dateToCheck)) return 'Today';
 	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateToCheck)) return 'Tomorrow';
@@ -8232,7 +8143,6 @@ function removeFlatpickrDiv() {
   \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ todoForm)
@@ -8355,11 +8265,10 @@ function createListsForm() {
 	formList.className = 'formList';
 	const visibleList = getVisibleId();
 
-	_list_createList__WEBPACK_IMPORTED_MODULE_1__.customListsArr.forEach((list) => {
-		const optionElement = document.createElement('option');
-		optionElement.value = list.id;
-		optionElement.textContent = list.title;
-		optionElement.selected = list.id === Number(visibleList) ? true : false;
+	_list_createList__WEBPACK_IMPORTED_MODULE_1__.ListsArr.forEach((option) => {
+		if (option.id < 2) return;
+		const optionElement = new Option(option.title, option.id);
+		optionElement.selected = option.id === Number(visibleList) ? true : false;
 		formList.append(optionElement);
 	});
 
@@ -8457,7 +8366,6 @@ function handleEscapeKey(event, div) {
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createTodoEditMode: () => (/* binding */ createTodoEditMode)
@@ -8603,7 +8511,8 @@ function createListSelector(todo) {
 	const editList = document.createElement('select');
 	editList.className = 'todoListEdit';
 
-	_list_createList_js__WEBPACK_IMPORTED_MODULE_3__.customListsArr.forEach((option) => {
+	_list_createList_js__WEBPACK_IMPORTED_MODULE_3__.ListsArr.forEach((option) => {
+		if (option.id < 3) return;
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);
@@ -8682,7 +8591,6 @@ function handleEscapeKey(event, originalTodo, todo) {
   \**************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ generalController)
@@ -8733,7 +8641,7 @@ function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.setList)(newTodo);
+		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(newTodo);
 	}
 
 	headerDiv.prepend(addTodoBtn);
@@ -8755,6 +8663,7 @@ function generalController() {
 	// Inbox - list
 	const displayInbox = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.displayList)(_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.inbox);
 	container.appendChild(displayInbox);
+	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.inbox);
 }
 
 
@@ -8764,9 +8673,134 @@ function generalController() {
 /*!********************************!*\
   !*** ./src/sidebar/sidebar.js ***!
   \********************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-throw new Error("Module parse failed: Unexpected token (63:16)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n| \t\t\tconsole.log(defaultLists);\n| \t\t}\n> \t\tif (list.id > ) {\n| \t\t\tconsole.log(list);\n| \t\t\tcustomLists.append(listButton);");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addNewSideList: () => (/* binding */ addNewSideList),
+/* harmony export */   refreshSideList: () => (/* binding */ refreshSideList),
+/* harmony export */   removeSideList: () => (/* binding */ removeSideList),
+/* harmony export */   sidebar: () => (/* binding */ sidebar)
+/* harmony export */ });
+/* harmony import */ var _components_list_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/list/createList */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_updateList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/list/updateList */ "./src/components/list/updateList.js");
+/* harmony import */ var _components_list_displayList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/list/displayList */ "./src/components/list/displayList.js");
+
+
+
+
+
+
+// Sidebar
+function sidebar() {
+	const sidebarDiv = createSidebarVisual();
+
+	function toggleSidebar() {
+		const sidebar = document.querySelector('.sidebar');
+
+		if (sidebar.classList.contains('showSidebar')) {
+			sidebar.classList.remove('showSidebar');
+		} else {
+			sidebar.classList.add('showSidebar');
+		}
+	}
+
+	return { sidebarDiv, toggleSidebar };
+}
+
+function createSidebarVisual() {
+	const sidebarVisual = createSidebar();
+
+	const defaultDiv = createDefaultListsDiv();
+	sidebarVisual.append(defaultDiv);
+
+	const customDiv = createCustomListsDiv();
+	sidebarVisual.append(customDiv);
+
+	populateLists(defaultDiv, customDiv);
+
+	return sidebarVisual;
+}
+
+function createSidebar() {
+	const sidebar = document.createElement('div');
+	sidebar.className = 'sidebar';
+
+	return sidebar;
+}
+
+function createDefaultListsDiv() {
+	const defaultLists = document.createElement('div');
+	defaultLists.className = 'defaultLists';
+
+	return defaultLists;
+}
+
+function createCustomListsDiv() {
+	const customLists = document.createElement('div');
+	customLists.className = 'customLists';
+
+	return customLists;
+}
+
+function populateLists(defaultDiv, customDiv) {
+	_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.ListsArr.forEach((list) => {
+		const listButton = createListButton(list);
+		if (list.id < 2) defaultDiv.append(listButton);
+		if (list.id == 2) defaultDiv.prepend(listButton);
+		if (list.id >= 3) customDiv.append(listButton);
+	});
+
+	const addListButton = createAddListButton();
+	addListButton.addEventListener('click', () => {
+		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_1__.addCustomList)();
+	});
+	customDiv.append(addListButton);
+}
+
+function createListButton(list) {
+	const listButton = document.createElement('button');
+	listButton.className = 'sidebarButton';
+	listButton.classList.add(`no${list.id}`);
+	listButton.textContent = list.title ? list.title : 'New List';
+	listButton.addEventListener('click', () => {
+		sideListButtonClick(list);
+		// toggleSidebar();
+	});
+
+	return listButton;
+}
+
+function createAddListButton() {
+	const addListButton = document.createElement('button');
+	addListButton.className = 'sidebarButton';
+	addListButton.classList.add('addListButton');
+	addListButton.textContent = '+ New List';
+
+	return addListButton;
+}
+
+function sideListButtonClick(list) {
+	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_2__.refreshList)(list);
+}
+
+function refreshSideList(list) {
+	const currentList = document.querySelector(`.sidebarButton.no${list.id}`);
+	currentList.replaceWith(createListButton(list));
+}
+
+function addNewSideList(list) {
+	const customLists = document.querySelector('.customLists');
+	customLists.insertBefore(createListButton(list), customLists.lastChild);
+}
+
+function removeSideList(list) {
+	const currentList = document.querySelector(`.sidebarButton.no${list.id}`);
+	currentList.remove();
+}
+
+
+
 
 /***/ }),
 
@@ -8776,7 +8810,6 @@ throw new Error("Module parse failed: Unexpected token (63:16)\nYou may need an 
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ _typeof)
@@ -8867,9 +8900,8 @@ function _typeof(obj) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
