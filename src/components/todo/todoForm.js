@@ -1,5 +1,5 @@
 import createTodo from './createTodo';
-import { customListsArr } from '../list/createList';
+import { ListsArr } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
@@ -112,11 +112,10 @@ function createListsForm() {
 	formList.className = 'formList';
 	const visibleList = getVisibleId();
 
-	customListsArr.forEach((list) => {
-		const optionElement = document.createElement('option');
-		optionElement.value = list.id;
-		optionElement.textContent = list.title;
-		optionElement.selected = list.id === Number(visibleList) ? true : false;
+	ListsArr.forEach((option) => {
+		if (option.id < 2) return;
+		const optionElement = new Option(option.title, option.id);
+		optionElement.selected = option.id === Number(visibleList) ? true : false;
 		formList.append(optionElement);
 	});
 

@@ -1,7 +1,8 @@
-import { listArr } from '../components/list/createList';
+import { ListsArr } from '../components/list/createList';
+
+import { addCustomList } from '../components/list/updateList';
 
 import { refreshList } from '../components/list/displayList';
-import { addCustomList } from '../components/list/updateList';
 
 // Sidebar
 function sidebar() {
@@ -23,8 +24,13 @@ function sidebar() {
 function createSidebarVisual() {
 	const sidebarVisual = createSidebar();
 
-	const listsDiv = createLists();
-	sidebarVisual.append(listsDiv);
+	const defaultDiv = createDefaultListsDiv();
+	sidebarVisual.append(defaultDiv);
+
+	const customDiv = createCustomListsDiv();
+	sidebarVisual.append(customDiv);
+
+	populateLists(defaultDiv, customDiv);
 
 	return sidebarVisual;
 }
@@ -36,48 +42,46 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createLists() {
-	const listsDiv = document.createElement('div');
-
+function createDefaultListsDiv() {
 	const defaultLists = document.createElement('div');
 	defaultLists.className = 'defaultLists';
-	listsDiv.append(defaultLists);
 
+	return defaultLists;
+}
+
+function createCustomListsDiv() {
 	const customLists = document.createElement('div');
 	customLists.className = 'customLists';
-	listsDiv.append(customLists);
 
-	listArr.forEach((list) => {
-		const listButton = document.createElement('button');
-		listButton.setAttribute('class', 'sidebarButton');
-		listButton.textContent = list.title;
-		listButton.addEventListener('click', () => {
-			listButtonHandleClick(list);
-			// toggleSidebar();
-		});
-		if (list.id < 3) {
-			console.log(list);
-			defaultLists.append(listButton);
-			console.log(defaultLists);
-		}
-		if (list.id > ) {
-			console.log(list);
-			customLists.append(listButton);
-		}
+	return customLists;
+}
+
+function populateLists(defaultDiv, customDiv) {
+	ListsArr.forEach((list) => {
+		const listButton = createListButton(list);
+		if (list.id < 2) defaultDiv.append(listButton);
+		if (list.id == 2) defaultDiv.prepend(listButton);
+		if (list.id >= 3) customDiv.append(listButton);
 	});
 
 	const addListButton = createAddListButton();
 	addListButton.addEventListener('click', () => {
 		addCustomList();
-		refreshSideLists();
 	});
-	customLists.append(addListButton);
-
-	return listsDiv;
+	customDiv.append(addListButton);
 }
 
-function listButtonHandleClick(list) {
-	refreshList(list);
+function createListButton(list) {
+	const listButton = document.createElement('button');
+	listButton.className = 'sidebarButton';
+	listButton.classList.add(`no${list.id}`);
+	listButton.textContent = list.title ? list.title : 'New List';
+	listButton.addEventListener('click', () => {
+		sideListButtonClick(list);
+		// toggleSidebar();
+	});
+
+	return listButton;
 }
 
 function createAddListButton() {
@@ -89,9 +93,23 @@ function createAddListButton() {
 	return addListButton;
 }
 
-function refreshSideLists() {
-	const currentLists = document.querySelector('.customLists');
-	currentLists.replaceWith(createCustomLists(customListsArr));
+function sideListButtonClick(list) {
+	refreshList(list);
 }
 
-export { sidebar, refreshSideLists };
+function refreshSideList(list) {
+	const currentList = document.querySelector(`.sidebarButton.no${list.id}`);
+	currentList.replaceWith(createListButton(list));
+}
+
+function addNewSideList(list) {
+	const customLists = document.querySelector('.customLists');
+	customLists.insertBefore(createListButton(list), customLists.lastChild);
+}
+
+function removeSideList(list) {
+	const currentList = document.querySelector(`.sidebarButton.no${list.id}`);
+	currentList.remove();
+}
+
+export { sidebar, addNewSideList, refreshSideList, removeSideList };

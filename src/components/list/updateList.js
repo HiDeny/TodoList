@@ -1,22 +1,41 @@
-import { createList, listsArr, today, upcoming } from './createList';
 import { isFuture, isToday } from 'date-fns';
+
+import { createList, ListsArr, today, upcoming } from './createList';
 import { refreshList, refreshSubList } from './displayList';
+
+import { addNewSideList, removeSideList } from '../../sidebar/sidebar';
+
 import {
 	setListStorage,
 	getListStorage,
 	removeListStorage,
-    setArrStorage,
-    getArrStorage
+	setArrStorage,
+	getArrStorage,
 } from '../memory/storage';
 
 //* List Handling
 
+
+// Add
+function addCustomList() {
+	const newList = createList('');
+	ListsArr.push(newList);
+	setListStorage(newList);
+	addNewSideList(newList);
+	refreshList(newList);
+}
+
+function updateCustomList(list) {
+	ListsArr.splice(ListsArr.indexOf(list), 1, list);
+	setListStorage(list);
+}
+
 // Delete
 function deleteList(list) {
 	deleteSubLists(list);
-	listsArr.splice(listsArr.indexOf(list), 1);
+	removeSideList(list);
+	ListsArr.splice(ListsArr.indexOf(list), 1);
 	removeListStorage(list);
-	getArrStorage();
 }
 
 function deleteSubLists(list) {
@@ -28,30 +47,12 @@ function deleteSubLists(list) {
 	}
 }
 
-// Add
-function addCustomList(list) {
-	const newList = list ? list : createList('');
-	listsArr.push(newList);
-	setListStorage(newList);
-	refreshList(newList);
-}
-
-function updateCustomList(list) {
-	listsArr.splice(listsArr.indexOf(list), 1, list);
-	setListStorage(list);
-}
-
-// Set
-function setList(todo) {
-	addDateList(todo)
-	addTodo(todo)
-}
 
 //* Search
 
 // Find
 function findList(todo) {
-	return listsArr.find((list) => list.id === todo.listId);
+	return ListsArr.find((list) => list.id === todo.listId);
 }
 
 function findSubList(todo) {
@@ -63,20 +64,20 @@ function findSubList(todo) {
 //* Manipulation
 // Add
 function addTodo(todo) {
-	const list = findSubList(todo);
-	list.push(todo);
+	const subList = findSubList(todo);
+	subList.push(todo);
 	addDateList(todo);
 	refreshSubList(todo);
-	setListStorage(todo.listId);
+	setListStorage(findList(todo));
 }
 
 // Remove
 function removeTodo(todo) {
-	const list = findSubList(todo);
-	list.splice(list.indexOf(todo), 1);
+	const subList = findSubList(todo);
+	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	refreshSubList(todo);
-	setListStorage(todo.listId);
+	setListStorage(findList(todo));
 }
 
 function changeList(todo, newListId) {
@@ -124,7 +125,8 @@ function addDateList(todo) {
 		const dateSubList = findDateSubList(todo);
 		dateSubList.push(todo);
 		refreshSubList(todo);
-		setListStorage(todo.dateList);
+		console.log(findDateList(todo));
+		setListStorage(findDateList(todo));
 	}
 }
 
@@ -133,7 +135,7 @@ function removeDateList(todo) {
 	if (!dateSubList) return;
 	dateSubList.splice(dateSubList.indexOf(todo), 1);
 	refreshSubList(todo);
-	setListStorage(todo.dateList);
+	setListStorage(findDateList(todo));
 }
 
 //* Date-Search
@@ -167,7 +169,6 @@ export {
 	findList,
 	findSubList,
 	deleteList,
-	setList,
 	addTodo,
 	removeTodo,
 	changeList,

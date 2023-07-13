@@ -103,8 +103,6 @@ function createDueDate(todo) {
 
 function selectDateName(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	console.log(dateToCheck);
-	console.log(dueDate);
 
 	if (isToday(dateToCheck)) return 'Today';
 	if (isTomorrow(dateToCheck)) return 'Tomorrow';

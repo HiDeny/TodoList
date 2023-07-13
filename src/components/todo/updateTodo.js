@@ -2,7 +2,7 @@ import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 import { visualizePriority } from './displayTodo.js';
-import { customListsArr } from '../list/createList.js';
+import { ListsArr } from '../list/createList.js';
 import {
 	addTodo,
 	removeTodo,
@@ -139,7 +139,8 @@ function createListSelector(todo) {
 	const editList = document.createElement('select');
 	editList.className = 'todoListEdit';
 
-	customListsArr.forEach((option) => {
+	ListsArr.forEach((option) => {
+		if (option.id < 3) return;
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);

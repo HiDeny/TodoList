@@ -1,4 +1,4 @@
-import { refreshSideLists } from '../../sidebar/sidebar';
+import { refreshSideList } from '../../sidebar/sidebar';
 import { displayTodoCard } from '../todo/displayTodo';
 import { inbox } from './createList';
 import {
@@ -95,7 +95,7 @@ function createCustomListTitle(list) {
 	listTitle.addEventListener('input', (event) => {
 		list.title = event.target.value;
 		updateCustomList(list);
-		refreshSideLists();
+		refreshSideList(list);
 	});
 
 	return listTitle;
@@ -110,7 +110,6 @@ function createCustomListDescription(list) {
 	listDescription.addEventListener('input', (event) => {
 		list.description = event.target.value;
 		updateCustomList(list);
-		refreshSideLists();
 	});
 
 	return listDescription;
@@ -127,7 +126,6 @@ function createDeleteButton(list) {
 		if (check) {
 			deleteList(list);
 			refreshList(inbox);
-			refreshSideLists();
 		}
 	});
 
@@ -186,7 +184,6 @@ function refreshSubList(todo) {
 	const visibleList = document.querySelector('.list');
 
 	const nextStep = refreshConditions(visibleList, todo);
-	console.log(nextStep);
 
 	// if (Number(visibleList.id) !== list.id) return;
 	if (!nextStep) return;
@@ -208,9 +205,7 @@ function refreshSubList(todo) {
 
 function refreshConditions(visibleList, todo) {
 	if (visibleList.id < 2) {
-		console.log(todo.dateList !== Number(visibleList.id));
 		if (todo.dateList !== Number(visibleList.id)) return;
-		console.log(todo);
 		return findDateSubList(todo);
 	}
 
