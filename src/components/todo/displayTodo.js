@@ -15,7 +15,7 @@ function displayTodoCard(todo) {
 		const currentEdit = document.querySelector('.todoCardEdit');
 		if (currentEdit) return;
 		if (
-			event.target.className === 'todoCheck' ||
+			event.target.type === 'checkbox' ||
 			event.target.className === 'deleteTodo'
 		) {
 			return;

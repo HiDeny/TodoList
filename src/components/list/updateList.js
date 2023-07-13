@@ -5,16 +5,9 @@ import { refreshList, refreshSubList } from './displayList';
 
 import { addNewSideList, removeSideList } from '../../sidebar/sidebar';
 
-import {
-	setListStorage,
-	getListStorage,
-	removeListStorage,
-	setArrStorage,
-	getArrStorage,
-} from '../memory/storage';
+import { setListStorage, removeListStorage, setArrStorage } from '../memory/storage';
 
 //* List Handling
-
 
 // Add
 function addCustomList() {
@@ -35,7 +28,9 @@ function deleteList(list) {
 	deleteSubLists(list);
 	removeSideList(list);
 	ListsArr.splice(ListsArr.indexOf(list), 1);
-	removeListStorage(list);
+	// removeListStorage(list);
+	setArrStorage(ListsArr);
+	console.log(localStorage);
 }
 
 function deleteSubLists(list) {
@@ -46,7 +41,6 @@ function deleteSubLists(list) {
 		removeTodo(list.completedTodos[0]);
 	}
 }
-
 
 //* Search
 
@@ -80,26 +74,26 @@ function removeTodo(todo) {
 	setListStorage(findList(todo));
 }
 
-function changeList(todo, newListId) {
+function changeList(todo, updatedTodo, newListId) {
 	// Copy todo
-	const updatedTodo = Object.assign({}, todo);
+	const newTodo = updatedTodo ? updatedTodo : { ...todo };
 	// Remove original todo
 	removeTodo(todo);
 	// Set new list
-	updatedTodo.listId = Number(newListId);
+	newTodo.listId = Number(newListId);
 	// Add to new list
-	addTodo(updatedTodo);
+	addTodo(newTodo);
 }
 
-function changeSubList(todo) {
+function changeSubList(todo, updatedTodo) {
 	// Copy
-	const updatedTodo = { ...todo };
+	const newTodo = updatedTodo ? updatedTodo : { ...todo };
 	// Remove Old
 	removeTodo(todo);
 	// Set New
-	updatedTodo.done = !todo.done;
+	newTodo.done = !todo.done;
 	// Add New
-	addTodo(updatedTodo);
+	addTodo(newTodo);
 }
 
 //* Sort and Date
@@ -125,7 +119,6 @@ function addDateList(todo) {
 		const dateSubList = findDateSubList(todo);
 		dateSubList.push(todo);
 		refreshSubList(todo);
-		console.log(findDateList(todo));
 		setListStorage(findDateList(todo));
 	}
 }

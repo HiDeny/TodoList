@@ -10,8 +10,11 @@ import {
 	changeSubList,
 } from '../list/updateList';
 
+let originalTodo;
+let handleMouseClick;
+
 function createTodoEditMode(todo) {
-	const originalTodo = Object.assign({}, todo);
+	originalTodo = Object.assign({}, todo);
 	const editedTodo = Object.assign({}, todo);
 
 	const todoLi = document.createElement('li');
@@ -25,6 +28,24 @@ function createTodoEditMode(todo) {
 		handleEnterKey(event, todo, editedTodo);
 		handleEscapeKey(event, originalTodo, todo);
 	});
+
+	handleMouseClick = (event) => {
+		const save = !todoEditCard.contains(event.target);
+
+		if (save) {
+			removeTodo(todo);
+			addTodo(editedTodo);
+			document.removeEventListener('click', handleMouseClick);
+		}
+		if (event.target.type === 'checkbox') {
+			changeSubList(originalTodo, editedTodo);
+			document.removeEventListener('click', handleMouseClick);
+		}
+	};
+
+	setTimeout(() => {
+		document.addEventListener('click', handleMouseClick);
+	}, 100);
 
 	return todoLi;
 }
@@ -84,10 +105,6 @@ function createCheckBox(todo, todoLi) {
 		checkBox.setAttribute('checked', true);
 		todoLi.classList.add('done');
 	}
-	checkBox.addEventListener('click', () => {
-		handleCheckboxClick(todo);
-		todoLi.remove();
-	});
 
 	return checkBox;
 }
@@ -140,7 +157,7 @@ function createListSelector(todo) {
 	editList.className = 'todoListEdit';
 
 	ListsArr.forEach((option) => {
-		if (option.id < 3) return;
+		if (option.id < 2) return;
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);
@@ -148,7 +165,8 @@ function createListSelector(todo) {
 
 	editList.addEventListener('input', (event) => {
 		if (todo.listId === event.target.value) return;
-		changeList(todo, Number(event.target.value));
+		changeList(originalTodo, todo, Number(event.target.value));
+		document.removeEventListener('click', handleMouseClick);
 	});
 
 	return editList;
@@ -186,12 +204,9 @@ function createPrioritySelector(todo, todoCardEdit) {
 	return editPriority;
 }
 
-function handleCheckboxClick(todo) {
-	changeSubList(todo);
-}
-
 function handleCancelButton(todo) {
 	removeTodo(todo);
+	document.removeEventListener('click', handleMouseClick);
 }
 
 function handleEnterKey(event, todo, editedTodo) {

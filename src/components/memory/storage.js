@@ -1,3 +1,4 @@
+import { ListsArr, id } from '../list/createList';
 // Store ID
 function setIdStorage(id) {
 	localStorage.setItem('id', id);
@@ -10,36 +11,35 @@ function getIdStorage() {
 
 // Store Lists
 function setArrStorage(arr) {
+	localStorage.clear();
+	setIdStorage(id);
 	for (let i = 0; i < arr.length; i++) {
-		localStorage.setItem(arr[i].id, JSON.stringify(arr[i]));
+		// localStorage.setItem(arr[i].id, JSON.stringify(arr[i]));
+		localStorage.setItem(arr.indexOf(arr[i]), JSON.stringify(arr[i]));
 	}
 }
 
 // Get all tasks
 function getArrStorage() {
-	const allTodosArr = [];
+	const allListsArr = [];
 	for (let i = 0; i < localStorage.length - 1; i++) {
 		const listJSON = localStorage.getItem(i);
 		const list = JSON.parse(listJSON);
-		allTodosArr.push(list);
+		console.log(list);
+		allListsArr.push(list);
 	}
 
-	return allTodosArr;
+	console.log(allListsArr);
+	return allListsArr;
 }
 
 // set single List
 function setListStorage(list) {
-	localStorage.setItem(list.id, JSON.stringify(list));
+	console.log(ListsArr.indexOf(list));
+	localStorage.setItem(ListsArr.indexOf(list), JSON.stringify(list));
 }
 
-// get single List
-function getListStorage() {
-	for (let i = 0; i < localStorage.length - 1; i++) {
-		const listJSON = localStorage.getItem(i);
-		const list = JSON.parse(listJSON);
-	}
-}
-
+// remove single list
 function removeListStorage(list) {
 	localStorage.removeItem(list.id);
 }
@@ -48,7 +48,7 @@ export {
 	setIdStorage,
 	getIdStorage,
 	setListStorage,
-	getListStorage,
+	// getListStorage,
 	removeListStorage,
 	setArrStorage,
 	getArrStorage,

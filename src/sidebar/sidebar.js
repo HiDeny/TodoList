@@ -74,6 +74,7 @@ function populateLists(defaultDiv, customDiv) {
 function createListButton(list) {
 	const listButton = document.createElement('button');
 	listButton.className = 'sidebarButton';
+	console.log(list);
 	listButton.classList.add(`no${list.id}`);
 	listButton.textContent = list.title ? list.title : 'New List';
 	listButton.addEventListener('click', () => {

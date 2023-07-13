@@ -5,12 +5,12 @@ import {
 	getArrStorage,
 } from '../memory/storage';
 
-let id;
+const id = setId();
 function setId() {
 	const storedId = getIdStorage();
-	id = Number(storedId) > 0 ? Number(storedId) : 0;
+	return Number(storedId) > 0 ? Number(storedId) : 0;
 }
-setId();
+
 
 function createList(title, description) {
 	const listId = id;
@@ -22,28 +22,33 @@ function createList(title, description) {
 }
 
 // Default list
-const allTodos = getArrStorage();
+const allLists = getArrStorage();
 
-let ListsArr;
+
 function sortTodos(arr) {
 	if (arr.length > 1) {
-		ListsArr = arr;
+		console.log('1 ' + new Date);
+		return arr;
 	} else {
-		initSetup();
+		console.log('2');
+		return initSetup();
 	}
 }
-sortTodos(allTodos);
+
+const ListsArr = sortTodos(allLists);
+console.log(ListsArr);
 
 function initSetup() {
 	const today = createList('🌤️ Today', "Todos with today's date");
 	const upcoming = createList('📆 Upcoming', 'Todos with future dates');
 	const inbox = createList('📥 Inbox', 'Default list');
-	ListsArr = [today, upcoming, inbox];
+	const ListsArr = [today, upcoming, inbox];
 	setArrStorage(ListsArr);
+	return ListsArr;
 }
 
 const today = ListsArr[0];
 const upcoming = ListsArr[1];
 const inbox = ListsArr[2];
 
-export { createList, ListsArr, inbox, today, upcoming };
+export { createList, ListsArr, inbox, today, upcoming, id };
