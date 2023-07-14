@@ -30,24 +30,11 @@ function updateCustomList(list) {
 	customListsArr.splice(customListsArr.indexOf(list), 1, list);
 }
 
-// Set
-function setList(todo) {
-	if (todo.dueDate) {
-		const dateList = findDateList(todo).activeTodos;
-		dateList.push(todo);
-	}
-
-	const list = findList(todo).activeTodos;
-	list.push(todo);
-
-	refreshSubList(todo);
-}
-
 //* Search
 
 // Find
 function findList(todo) {
-	return customListsArr.find((list) => list.id === todo.listId);
+	return customListsArr.find((list) => list.id === Number(todo.listId));
 }
 
 function findSubList(todo) {
@@ -59,40 +46,19 @@ function findSubList(todo) {
 //* Manipulation
 // Add
 function addTodo(todo) {
-	const list = findSubList(todo);
-	list.push(todo);
+	const subList = findSubList(todo);
+	subList.push(todo);
 	addDateList(todo);
 	refreshSubList(todo);
 }
 
 // Remove
 function removeTodo(todo) {
-	const list = findSubList(todo);
-	list.splice(list.indexOf(todo), 1);
+	const subList = findSubList(todo);
+	console.log(subList.indexOf(todo));
+	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	refreshSubList(todo);
-}
-
-function changeList(todo, newListId) {
-	// Copy todo
-	const updatedTodo = Object.assign({}, todo);
-	// Remove original todo
-	removeTodo(todo);
-	// Set new list
-	updatedTodo.listId = Number(newListId);
-	// Add to new list
-	addTodo(updatedTodo);
-}
-
-function changeSubList(todo) {
-	// Copy
-	const updatedTodo = { ...todo };
-	// Remove Old
-	removeTodo(todo);
-	// Set New
-	updatedTodo.done = !todo.done;
-	// Add New
-	addTodo(updatedTodo);
 }
 
 //* Sort and Date
@@ -117,15 +83,13 @@ function addDateList(todo) {
 	if (todo.dueDate) {
 		const dateSubList = findDateSubList(todo);
 		dateSubList.push(todo);
-		refreshSubList(todo);
 	}
 }
 
 function removeDateList(todo) {
 	const dateSubList = findDateSubList(todo);
-	if (!dateSubList) return;
+	if (!dateSubList) return null;
 	dateSubList.splice(dateSubList.indexOf(todo), 1);
-	refreshSubList(todo);
 }
 
 //* Date-Search
@@ -147,7 +111,7 @@ function findDateList(todo) {
 
 function findDateSubList(todo) {
 	const dateList = findDateList(todo);
-	if (!dateList) return;
+	if (!dateList) return null;
 	if (!todo.done) return dateList.activeTodos;
 	return dateList.completedTodos;
 }
@@ -159,11 +123,11 @@ export {
 	findList,
 	findSubList,
 	deleteList,
-	setList,
+	// setList,
 	addTodo,
 	removeTodo,
-	changeList,
-	changeSubList,
+	// changeList,
+	// changeSubList,
 	addCustomList,
 	updateCustomList,
 };

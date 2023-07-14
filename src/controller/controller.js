@@ -3,7 +3,7 @@ import 'normalize.css';
 
 import { inbox } from '../components/list/createList.js';
 import { displayList } from '../components/list/displayList';
-import { setList } from '../components/list/updateList';
+import { addTodo } from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
 
@@ -37,7 +37,7 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		setList(newTodo);
+		addTodo(newTodo)
 	}
 
 	headerDiv.prepend(addTodoBtn);

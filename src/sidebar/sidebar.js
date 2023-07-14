@@ -48,7 +48,6 @@ function createDefaultLists() {
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
 		listButton.addEventListener('click', () => {
-			console.log(list);
 			listButtonHandleClick(list);
 			// toggleSidebar();
 		});
@@ -66,7 +65,9 @@ function createCustomLists() {
 		if (list.id === 2) return;
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
-		listButton.textContent = list.title ? list.title : `New List ${customListsArr.indexOf(list)}`;
+		listButton.textContent = list.title
+			? list.title
+			: `New List ${customListsArr.indexOf(list)}`;
 		listButton.addEventListener('click', () => {
 			listButtonHandleClick(list);
 			// toggleSidebar();

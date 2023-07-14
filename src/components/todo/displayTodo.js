@@ -2,7 +2,7 @@ import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
 import { createTodoEditMode } from './updateTodo.js';
 
-import { removeTodo, changeSubList } from '../list/updateList';
+import { addTodo, removeTodo } from '../list/updateList';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -10,20 +10,29 @@ function displayTodoCard(todo) {
 	const todoCard = createTodoCard(todo, todoLi);
 	todoLi.append(todoCard);
 
-	// Change to edit form
-	todoCard.addEventListener('click', (event) => {
-		const currentEdit = document.querySelector('.todoCardEdit');
-		if (currentEdit) return;
-		if (
-			event.target.className === 'todoCheck' ||
-			event.target.className === 'deleteTodo'
-		) {
-			return;
+	const handleMouseClick = (event) => {
+		if (event.target.className === 'deleteTodo') {
+			removeTodo(todo);
+			// todoCard.remove();
+			todoCard.removeEventListener('click', handleMouseClick);
 		}
-		const todoCardEdit = createTodoEditMode(todo);
-		todoLi.replaceWith(todoCardEdit);
-		todoCardEdit.focus();
-	});
+		if (event.target.type === 'checkbox') {
+			const updatedTodo = { ...todo };
+			updatedTodo.done = !todo.done;
+			addTodo(updatedTodo);
+			removeTodo(todo);
+			todoCard.removeEventListener('click', handleMouseClick);
+		}
+		if (event.target.classList[0] === 'todoCard') {
+			const todoCardEdit = createTodoEditMode(todo);
+			todoLi.replaceWith(todoCardEdit);
+			todoCardEdit.focus();
+			todoCard.removeEventListener('click', handleMouseClick);
+		}
+	};
+
+	// Change to edit form
+	todoCard.addEventListener('click', handleMouseClick);
 
 	removeFlatpickrDiv();
 	return todoLi;
@@ -57,14 +66,10 @@ function createCard() {
 	return todoCard;
 }
 
-function createRemoveButton(todoCard, todo) {
+function createRemoveButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
 	cancelButton.textContent = 'x';
-	cancelButton.addEventListener('click', () => {
-		handleCancelButton(todo);
-		todoCard.remove();
-	});
 
 	return cancelButton;
 }
@@ -77,10 +82,6 @@ function createCheckBox(todo, todoLi) {
 		checkBox.setAttribute('checked', true);
 		todoLi.classList.add('done');
 	}
-	checkBox.addEventListener('click', () => {
-		handleCheckboxClick(todo);
-		todoLi.remove();
-	});
 
 	return checkBox;
 }
@@ -103,8 +104,6 @@ function createDueDate(todo) {
 
 function selectDateName(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	console.log(dateToCheck);
-	console.log(dueDate);
 
 	if (isToday(dateToCheck)) return 'Today';
 	if (isTomorrow(dateToCheck)) return 'Tomorrow';
@@ -127,14 +126,6 @@ function visualizePriority(todo, todoCard) {
 	if (priorityClass && priorityClass !== '') {
 		todoCard.classList.add(priorityClass);
 	}
-}
-
-function handleCheckboxClick(todo) {
-	changeSubList(todo);
-}
-
-function handleCancelButton(todo) {
-	removeTodo(todo);
 }
 
 function removeFlatpickrDiv() {

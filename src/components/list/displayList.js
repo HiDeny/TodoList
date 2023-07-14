@@ -121,7 +121,9 @@ function createDeleteButton(list) {
 	deleteButton.className = 'deleteListButton';
 	deleteButton.textContent = 'Delete';
 	deleteButton.addEventListener('click', () => {
-		const check = confirm(`Do you really want to delete ${(list.title).toUpperCase()}?`)
+		const check = confirm(
+			`Do you really want to delete ${list.title.toUpperCase()}?`
+		);
 		if (check) {
 			deleteList(list);
 			refreshList(inbox);
@@ -180,13 +182,10 @@ function checkSubList(list) {
 }
 
 function refreshSubList(todo) {
-	// const list = findList(todo);
 	const visibleList = document.querySelector('.list');
 
 	const nextStep = refreshConditions(visibleList, todo);
-	console.log(nextStep);
 
-	// if (Number(visibleList.id) !== list.id) return;
 	if (!nextStep) return;
 
 	const subList = nextStep;
@@ -206,13 +205,11 @@ function refreshSubList(todo) {
 
 function refreshConditions(visibleList, todo) {
 	if (visibleList.id < 2) {
-		console.log(todo.dateList !== Number(visibleList.id));
-		if (todo.dateList !== Number(visibleList.id)) return;
-		console.log(todo);
+		if (Number(todo.dateList) !== Number(visibleList.id)) return;
 		return findDateSubList(todo);
 	}
 
-	if (todo.listId !== Number(visibleList.id)) return;
+	if (Number(todo.listId) !== Number(visibleList.id)) return;
 	return findSubList(todo);
 }
 

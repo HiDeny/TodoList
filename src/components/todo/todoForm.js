@@ -1,9 +1,8 @@
 import createTodo from './createTodo';
-import { customListsArr, today, upcoming } from '../list/createList';
+import { customListsArr } from '../list/createList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
-import { isFuture, isToday } from 'date-fns';
 
 export default function todoForm(callback) {
 	const todoForm = createTodoForm();
@@ -113,16 +112,22 @@ function createListsForm() {
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
+	const visibleList = getVisibleId();
 
-	customListsArr.forEach((list) => {
-		const optionElement = document.createElement('option');
-		optionElement.value = list.id;
-		optionElement.textContent = list.title;
+	customListsArr.forEach((option) => {
+		const optionElement = new Option(option.title, option.id);
+		optionElement.selected = option.id === Number(visibleList) ? true : false;
 		formList.append(optionElement);
 	});
 
 	formListLabel.append(formList);
 	return formListLabel;
+}
+
+function getVisibleId() {
+	const visibleId = document.querySelector('.list').id;
+	if (visibleId < 2) return 2;
+	return visibleId;
 }
 
 function createPriorityForm() {
