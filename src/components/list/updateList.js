@@ -61,6 +61,21 @@ function removeTodo(todo) {
 	refreshSubList(todo);
 }
 
+// Replace Old
+function replaceOldTodo(oldTodo, newTodo) {
+	console.log(oldTodo);
+	console.log(newTodo);
+	const subList = findSubList(oldTodo);
+	console.log(subList.indexOf(oldTodo));
+	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
+	if (oldTodo.date) {
+		const dateSubList = findDateSubList(oldTodo)
+		console.log(dateSubList.indexOf(oldTodo));
+		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
+	}
+	refreshSubList(newTodo);
+}
+
 //* Sort and Date
 // Sort
 function sortList(list) {
@@ -123,11 +138,9 @@ export {
 	findList,
 	findSubList,
 	deleteList,
-	// setList,
 	addTodo,
 	removeTodo,
-	// changeList,
-	// changeSubList,
+	replaceOldTodo,
 	addCustomList,
 	updateCustomList,
 };

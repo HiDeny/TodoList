@@ -11,9 +11,9 @@ function displayTodoCard(todo) {
 	todoLi.append(todoCard);
 
 	const handleMouseClick = (event) => {
+		console.log(event.target);
 		if (event.target.className === 'deleteTodo') {
 			removeTodo(todo);
-			// todoCard.remove();
 			todoCard.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.type === 'checkbox') {
@@ -24,6 +24,8 @@ function displayTodoCard(todo) {
 			todoCard.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.classList[0] === 'todoCard') {
+			const activeEdit = document.querySelector('.todoCardEdit');
+			if (activeEdit) return;
 			const todoCardEdit = createTodoEditMode(todo);
 			todoLi.replaceWith(todoCardEdit);
 			todoCardEdit.focus();

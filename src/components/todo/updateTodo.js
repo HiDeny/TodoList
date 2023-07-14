@@ -1,9 +1,9 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-import { visualizePriority } from './displayTodo.js';
+import { displayTodoCard, visualizePriority } from './displayTodo.js';
 import { customListsArr } from '../list/createList.js';
-import { addTodo, removeTodo } from '../list/updateList';
+import { addTodo, removeTodo, replaceOldTodo } from '../list/updateList';
 
 function createTodoEditMode(todo) {
 	const originalTodo = Object.assign({}, todo);
@@ -22,11 +22,16 @@ function createTodoEditMode(todo) {
 	});
 
 	const handleMouseClick = (event) => {
+		console.log(event.target);
 		const save = !todoEditCard.contains(event.target);
+		console.log(save);
 
 		if (save) {
-			addTodo(editedTodo);
-			removeTodo(todo);
+			if (todo.listId === editedTodo.listId) replaceOldTodo(todo, editedTodo);
+			if (todo.listId !== editedTodo.listId) {
+				addTodo(editedTodo);
+				removeTodo(todo);
+			}
 			document.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.type === 'checkbox') {

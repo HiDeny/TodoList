@@ -7688,6 +7688,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   findList: () => (/* binding */ findList),
 /* harmony export */   findSubList: () => (/* binding */ findSubList),
 /* harmony export */   removeTodo: () => (/* binding */ removeTodo),
+/* harmony export */   replaceOldTodo: () => (/* binding */ replaceOldTodo),
 /* harmony export */   sortList: () => (/* binding */ sortList),
 /* harmony export */   updateCustomList: () => (/* binding */ updateCustomList)
 /* harmony export */ });
@@ -7756,6 +7757,21 @@ function removeTodo(todo) {
 	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
+}
+
+// Replace Old
+function replaceOldTodo(oldTodo, newTodo) {
+	console.log(oldTodo);
+	console.log(newTodo);
+	const subList = findSubList(oldTodo);
+	console.log(subList.indexOf(oldTodo));
+	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
+	if (oldTodo.date) {
+		const dateSubList = findDateSubList(oldTodo)
+		console.log(dateSubList.indexOf(oldTodo));
+		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
+	}
+	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(newTodo);
 }
 
 //* Sort and Date
@@ -7868,9 +7884,9 @@ function displayTodoCard(todo) {
 	todoLi.append(todoCard);
 
 	const handleMouseClick = (event) => {
+		console.log(event.target);
 		if (event.target.className === 'deleteTodo') {
 			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.removeTodo)(todo);
-			// todoCard.remove();
 			todoCard.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.type === 'checkbox') {
@@ -7881,6 +7897,8 @@ function displayTodoCard(todo) {
 			todoCard.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.classList[0] === 'todoCard') {
+			const activeEdit = document.querySelector('.todoCardEdit');
+			if (activeEdit) return;
 			const todoCardEdit = (0,_updateTodo_js__WEBPACK_IMPORTED_MODULE_0__.createTodoEditMode)(todo);
 			todoLi.replaceWith(todoCardEdit);
 			todoCardEdit.focus();
@@ -8259,11 +8277,16 @@ function createTodoEditMode(todo) {
 	});
 
 	const handleMouseClick = (event) => {
+		console.log(event.target);
 		const save = !todoEditCard.contains(event.target);
+		console.log(save);
 
 		if (save) {
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+			if (todo.listId === editedTodo.listId) (0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+			if (todo.listId !== editedTodo.listId) {
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+			}
 			document.removeEventListener('click', handleMouseClick);
 		}
 		if (event.target.type === 'checkbox') {
