@@ -1,11 +1,11 @@
 import { isFuture, isToday } from 'date-fns';
 
-import { createList, ListsArr, today, upcoming } from './createList';
+import { createList, ListsArr, today, upcoming, setListId } from './createList';
 import { refreshList, refreshSubList } from './displayList';
 
-import { addNewSideList, removeSideList } from '../../sidebar/sidebar';
+import { addNewSideList, customSideLists } from '../../sidebar/sidebar';
 
-import { setListStorage, removeListStorage, setArrStorage } from '../memory/storage';
+import { setListStorage, setListsStorage } from '../memory/storage';
 
 //* List Handling
 
@@ -13,6 +13,7 @@ import { setListStorage, removeListStorage, setArrStorage } from '../memory/stor
 function addCustomList() {
 	const newList = createList('');
 	ListsArr.push(newList);
+	newList.id = ListsArr.indexOf(newList);
 	setListStorage(newList);
 	addNewSideList(newList);
 	refreshList(newList);
@@ -26,10 +27,11 @@ function updateCustomList(list) {
 // Delete
 function deleteList(list) {
 	deleteSubLists(list);
-	removeSideList(list);
 	ListsArr.splice(ListsArr.indexOf(list), 1);
-	// removeListStorage(list);
-	setArrStorage(ListsArr);
+	console.log(ListsArr);
+	setListId(ListsArr);
+	customSideLists();
+	setListsStorage(ListsArr);
 	console.log(localStorage);
 }
 

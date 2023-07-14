@@ -1,4 +1,4 @@
-import { refreshSideList } from '../../sidebar/sidebar';
+import { customSideLists } from '../../sidebar/sidebar';
 import { displayTodoCard } from '../todo/displayTodo';
 import { inbox } from './createList';
 import {
@@ -95,7 +95,7 @@ function createCustomListTitle(list) {
 	listTitle.addEventListener('input', (event) => {
 		list.title = event.target.value;
 		updateCustomList(list);
-		refreshSideList(list);
+		customSideLists();
 	});
 
 	return listTitle;

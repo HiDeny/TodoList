@@ -24,10 +24,10 @@ function sidebar() {
 function createSidebarVisual() {
 	const sidebarVisual = createSidebar();
 
-	const defaultDiv = createDefaultListsDiv();
+	const defaultDiv = populateLists().defaultDiv;
 	sidebarVisual.append(defaultDiv);
 
-	const customDiv = createCustomListsDiv();
+	const customDiv = populateLists().customDiv;
 	sidebarVisual.append(customDiv);
 
 	populateLists(defaultDiv, customDiv);
@@ -42,21 +42,13 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createDefaultListsDiv() {
-	const defaultLists = document.createElement('div');
-	defaultLists.className = 'defaultLists';
+function populateLists() {
+	const defaultDiv = document.createElement('div');
+	defaultDiv.className = 'defaultLists';
 
-	return defaultLists;
-}
+	const customDiv = document.createElement('div');
+	customDiv.className = 'customLists';
 
-function createCustomListsDiv() {
-	const customLists = document.createElement('div');
-	customLists.className = 'customLists';
-
-	return customLists;
-}
-
-function populateLists(defaultDiv, customDiv) {
 	ListsArr.forEach((list) => {
 		const listButton = createListButton(list);
 		if (list.id < 2) defaultDiv.append(listButton);
@@ -69,6 +61,8 @@ function populateLists(defaultDiv, customDiv) {
 		addCustomList();
 	});
 	customDiv.append(addListButton);
+
+	return { defaultDiv, customDiv };
 }
 
 function createListButton(list) {
@@ -98,9 +92,9 @@ function sideListButtonClick(list) {
 	refreshList(list);
 }
 
-function refreshSideList(list) {
-	const currentList = document.querySelector(`.sidebarButton.no${list.id}`);
-	currentList.replaceWith(createListButton(list));
+function customSideLists() {
+	const customLists = document.querySelector(`.customLists`);
+	customLists.replaceWith(populateLists().customDiv);
 }
 
 function addNewSideList(list) {
@@ -113,4 +107,4 @@ function removeSideList(list) {
 	currentList.remove();
 }
 
-export { sidebar, addNewSideList, refreshSideList, removeSideList };
+export { sidebar, addNewSideList, customSideLists, removeSideList };
