@@ -16,7 +16,7 @@ function createTodoEditMode(todo) {
 
 	visualizePriority(todo, todoEditCard);
 
-	// Handle submits
+	// Handle events
 	const handleMouseClick = (event) => {
 		const insideContainer = todoEditCard.contains(event.target);
 

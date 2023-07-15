@@ -8038,8 +8038,69 @@ __webpack_require__.r(__webpack_exports__);
 
 function todoForm(callback) {
 	const todoForm = createTodoForm();
+	// Original form beh
 
-	//? Id input - hidden ?
+	// Redo
+	const handleMouseClick = (event) => {
+		const insideContainer = todoForm.contains(event.target);
+
+		if (!insideContainer) {
+			removeListeners();
+			todoForm.remove();
+		}
+		if (insideContainer) {
+			if (event.target.className === 'deleteTodoEdit') {
+				removeListeners();
+				todoForm.remove();
+			}
+		}
+	};
+
+	const handleKeyDown = (event) => {
+		if (event.code === 'Enter' && !event.shiftKey) {
+			handleSubmit(callback);
+		}
+
+		if (event.code === 'Escape') {
+			removeListeners();
+			todoForm.remove();
+		}
+	};
+
+	function handleSubmit(callback) {
+		console.log('test');
+		const title = todoForm.elements['formTitle'].value;
+		const notes = todoForm.elements['formNotes'].value;
+		const dueDate = todoForm.elements['formDate'].value;
+		const priority = todoForm.elements['formPriority'].value;
+		const listId = Number(todoForm.elements['formList'].value);
+
+		const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority, listId);
+
+		removeListeners();
+		todoForm.remove();
+		callback(newTodo);
+	}
+
+	setTimeout(() => {
+		document.addEventListener('click', handleMouseClick);
+		document.addEventListener('keydown', handleKeyDown);
+		todoForm.addEventListener('submit', (event) => {
+			event.preventDefault();
+			handleSubmit(callback);
+		});
+	}, 50);
+
+	function removeListeners() {
+		document.removeEventListener('click', handleMouseClick);
+		document.removeEventListener('keydown', handleKeyDown);
+	}
+
+	return todoForm;
+}
+
+function createTodoForm() {
+	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm(todoForm);
 	todoForm.append(cancelButtonForm);
@@ -8062,20 +8123,10 @@ function todoForm(callback) {
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
 
-	todoForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-		handleSubmit(callback, todoForm);
-	});
-
-	todoForm.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todoForm, callback);
-		handleEscapeKey(event, todoForm);
-	});
-
 	return todoForm;
 }
 
-function createTodoForm() {
+function createTodoFormContainer() {
 	const todoForm = document.createElement('form');
 	todoForm.setAttribute('id', 'todoForm');
 	todoForm.setAttribute('tabindex', '1');
@@ -8210,33 +8261,6 @@ function createLabel(name) {
 	return label;
 }
 
-function handleSubmit(callback, formDiv) {
-	const title = formDiv.elements['formTitle'].value;
-	const notes = formDiv.elements['formNotes'].value;
-	const dueDate = formDiv.elements['formDate'].value;
-	const priority = formDiv.elements['formPriority'].value;
-	const listId = Number(formDiv.elements['formList'].value);
-
-	const newTodo = (0,_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"])(title, notes, dueDate, priority, listId);
-
-	callback(newTodo);
-	formDiv.remove();
-}
-
-function handleEnterKey(event, div, callback) {
-	if (event.code === 'Enter') {
-		handleSubmit(callback, div);
-		div.removeEventListener('keydown', handleEnterKey);
-	}
-}
-
-function handleEscapeKey(event, div) {
-	if (event.code === 'Escape') {
-		div.remove();
-		div.removeEventListener('keydown', handleEscapeKey);
-	}
-}
-
 
 /***/ }),
 
@@ -8273,7 +8297,7 @@ function createTodoEditMode(todo) {
 
 	(0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.visualizePriority)(todo, todoEditCard);
 
-	// Handle submits
+	// Handle events
 	const handleMouseClick = (event) => {
 		const insideContainer = todoEditCard.contains(event.target);
 
