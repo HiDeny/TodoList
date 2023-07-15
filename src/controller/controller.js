@@ -37,7 +37,7 @@ export default function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		addTodo(newTodo)
+		addTodo(newTodo);
 	}
 
 	headerDiv.prepend(addTodoBtn);

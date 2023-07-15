@@ -55,7 +55,7 @@ function addTodo(todo) {
 // Remove
 function removeTodo(todo) {
 	const subList = findSubList(todo);
-	console.log(subList.indexOf(todo));
+
 	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	refreshSubList(todo);
@@ -63,14 +63,12 @@ function removeTodo(todo) {
 
 // Replace Old
 function replaceOldTodo(oldTodo, newTodo) {
-	console.log(oldTodo);
-	console.log(newTodo);
 	const subList = findSubList(oldTodo);
-	console.log(subList.indexOf(oldTodo));
+
 	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
-	if (oldTodo.date) {
-		const dateSubList = findDateSubList(oldTodo)
-		console.log(dateSubList.indexOf(oldTodo));
+	if (oldTodo.dueDate) {
+		const dateSubList = findDateSubList(oldTodo);
+
 		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
 	}
 	refreshSubList(newTodo);
@@ -84,6 +82,8 @@ function sortList(list) {
 
 function compareTodos(a, b) {
 	if (a.priority === b.priority) {
+		if (a.dueDate && !b.dueDate) return -1;
+		if (!a.dueDate && b.dueDate) return 1;
 		return new Date(a.dueDate) - new Date(b.dueDate);
 	} else {
 		const priorityOrder = ['high', 'medium', 'low', ''];

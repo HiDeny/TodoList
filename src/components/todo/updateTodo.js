@@ -1,7 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-import { displayTodoCard, visualizePriority } from './displayTodo.js';
+import { visualizePriority } from './displayTodo.js';
 import { customListsArr } from '../list/createList.js';
 import { addTodo, removeTodo, replaceOldTodo } from '../list/updateList';
 
@@ -16,39 +16,59 @@ function createTodoEditMode(todo) {
 
 	visualizePriority(todo, todoEditCard);
 
-	todoEditCard.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todo, editedTodo);
-		handleEscapeKey(event, originalTodo, todo);
-	});
-
+	// Handle submits
 	const handleMouseClick = (event) => {
-		console.log(event.target);
-		const save = !todoEditCard.contains(event.target);
-		console.log(save);
+		const insideContainer = todoEditCard.contains(event.target);
 
-		if (save) {
-			if (todo.listId === editedTodo.listId) replaceOldTodo(todo, editedTodo);
-			if (todo.listId !== editedTodo.listId) {
+		if (!insideContainer) {
+			if (
+				todo.listId === editedTodo.listId &&
+				todo.dueDate === editedTodo.dueDate
+			) {
+				replaceOldTodo(todo, editedTodo);
+				removeListeners();
+			} else {
 				addTodo(editedTodo);
 				removeTodo(todo);
+				removeListeners();
 			}
-			document.removeEventListener('click', handleMouseClick);
 		}
-		if (event.target.type === 'checkbox') {
-			editedTodo.done = !originalTodo.done;
-			addTodo(editedTodo);
-			removeTodo(todo);
-			document.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.className === 'deleteTodoEdit') {
-			removeTodo(todo);
-			document.removeEventListener('click', handleMouseClick);
+		if (insideContainer) {
+			if (event.target.type === 'checkbox') {
+				editedTodo.done = !originalTodo.done;
+				addTodo(editedTodo);
+				removeTodo(todo);
+				removeListeners();
+			}
+			if (event.target.className === 'deleteTodoEdit') {
+				removeTodo(todo);
+				removeListeners();
+			}
 		}
 	};
 
+	const handleKeyDown = (event) => {
+		if (event.code === 'Enter' && !event.shiftKey) {
+			removeTodo(todo);
+			addTodo(editedTodo);
+			removeListeners();
+		}
+
+		if (event.code === 'Escape') {
+			removeTodo(todo);
+			addTodo(originalTodo);
+			removeListeners();
+		}
+	};
+
+	function removeListeners() {
+		document.removeEventListener('keydown', handleKeyDown);
+		document.removeEventListener('click', handleMouseClick);
+	}
 	setTimeout(() => {
 		document.addEventListener('click', handleMouseClick);
-	}, 100);
+		document.addEventListener('keydown', handleKeyDown);
+	}, 50);
 
 	return todoLi;
 }
@@ -198,20 +218,6 @@ function createPrioritySelector(todo, todoCardEdit) {
 	editPriority.append(placeholderPriority);
 
 	return editPriority;
-}
-
-function handleEnterKey(event, todo, editedTodo) {
-	if (event.code === 'Enter' && !event.shiftKey) {
-		removeTodo(todo);
-		addTodo(editedTodo);
-	}
-}
-
-function handleEscapeKey(event, originalTodo, todo) {
-	if (event.code === 'Escape') {
-		removeTodo(originalTodo);
-		addTodo(todo);
-	}
 }
 
 export { createTodoEditMode };

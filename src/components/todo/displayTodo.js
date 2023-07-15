@@ -11,25 +11,27 @@ function displayTodoCard(todo) {
 	todoLi.append(todoCard);
 
 	const handleMouseClick = (event) => {
-		console.log(event.target);
-		if (event.target.className === 'deleteTodo') {
-			removeTodo(todo);
-			todoCard.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.type === 'checkbox') {
-			const updatedTodo = { ...todo };
-			updatedTodo.done = !todo.done;
-			addTodo(updatedTodo);
-			removeTodo(todo);
-			todoCard.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.classList[0] === 'todoCard') {
-			const activeEdit = document.querySelector('.todoCardEdit');
-			if (activeEdit) return;
-			const todoCardEdit = createTodoEditMode(todo);
-			todoLi.replaceWith(todoCardEdit);
-			todoCardEdit.focus();
-			todoCard.removeEventListener('click', handleMouseClick);
+		const insideContainer = todoCard.contains(event.target);
+		const activeEdit = document.querySelector('.todoCardEdit');
+
+		if (activeEdit) {
+			return;
+		} else {
+			if (event.target.className === 'deleteTodo') {
+				removeTodo(todo);
+				todoCard.removeEventListener('click', handleMouseClick);
+			} else if (event.target.type === 'checkbox') {
+				const updatedTodo = { ...todo };
+				updatedTodo.done = !todo.done;
+				addTodo(updatedTodo);
+				removeTodo(todo);
+				todoCard.removeEventListener('click', handleMouseClick);
+			} else if (insideContainer) {
+				const todoCardEdit = createTodoEditMode(todo);
+				todoLi.replaceWith(todoCardEdit);
+				todoCardEdit.focus();
+				todoCard.removeEventListener('click', handleMouseClick);
+			}
 		}
 	};
 
