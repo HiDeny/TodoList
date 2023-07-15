@@ -7753,7 +7753,7 @@ function addTodo(todo) {
 // Remove
 function removeTodo(todo) {
 	const subList = findSubList(todo);
-	console.log(subList.indexOf(todo));
+
 	subList.splice(subList.indexOf(todo), 1);
 	removeDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
@@ -7761,14 +7761,12 @@ function removeTodo(todo) {
 
 // Replace Old
 function replaceOldTodo(oldTodo, newTodo) {
-	console.log(oldTodo);
-	console.log(newTodo);
 	const subList = findSubList(oldTodo);
-	console.log(subList.indexOf(oldTodo));
+
 	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
-	if (oldTodo.date) {
-		const dateSubList = findDateSubList(oldTodo)
-		console.log(dateSubList.indexOf(oldTodo));
+	if (oldTodo.dueDate) {
+		const dateSubList = findDateSubList(oldTodo);
+
 		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
 	}
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(newTodo);
@@ -7782,6 +7780,8 @@ function sortList(list) {
 
 function compareTodos(a, b) {
 	if (a.priority === b.priority) {
+		if (a.dueDate && !b.dueDate) return -1;
+		if (!a.dueDate && b.dueDate) return 1;
 		return new Date(a.dueDate) - new Date(b.dueDate);
 	} else {
 		const priorityOrder = ['high', 'medium', 'low', ''];
@@ -7884,25 +7884,27 @@ function displayTodoCard(todo) {
 	todoLi.append(todoCard);
 
 	const handleMouseClick = (event) => {
-		console.log(event.target);
-		if (event.target.className === 'deleteTodo') {
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.removeTodo)(todo);
-			todoCard.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.type === 'checkbox') {
-			const updatedTodo = { ...todo };
-			updatedTodo.done = !todo.done;
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.addTodo)(updatedTodo);
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.removeTodo)(todo);
-			todoCard.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.classList[0] === 'todoCard') {
-			const activeEdit = document.querySelector('.todoCardEdit');
-			if (activeEdit) return;
-			const todoCardEdit = (0,_updateTodo_js__WEBPACK_IMPORTED_MODULE_0__.createTodoEditMode)(todo);
-			todoLi.replaceWith(todoCardEdit);
-			todoCardEdit.focus();
-			todoCard.removeEventListener('click', handleMouseClick);
+		const insideContainer = todoCard.contains(event.target);
+		const activeEdit = document.querySelector('.todoCardEdit');
+
+		if (activeEdit) {
+			return;
+		} else {
+			if (event.target.className === 'deleteTodo') {
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.removeTodo)(todo);
+				todoCard.removeEventListener('click', handleMouseClick);
+			} else if (event.target.type === 'checkbox') {
+				const updatedTodo = { ...todo };
+				updatedTodo.done = !todo.done;
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.addTodo)(updatedTodo);
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_1__.removeTodo)(todo);
+				todoCard.removeEventListener('click', handleMouseClick);
+			} else if (insideContainer) {
+				const todoCardEdit = (0,_updateTodo_js__WEBPACK_IMPORTED_MODULE_0__.createTodoEditMode)(todo);
+				todoLi.replaceWith(todoCardEdit);
+				todoCardEdit.focus();
+				todoCard.removeEventListener('click', handleMouseClick);
+			}
 		}
 	};
 
@@ -8271,39 +8273,59 @@ function createTodoEditMode(todo) {
 
 	(0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.visualizePriority)(todo, todoEditCard);
 
-	todoEditCard.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todo, editedTodo);
-		handleEscapeKey(event, originalTodo, todo);
-	});
-
+	// Handle submits
 	const handleMouseClick = (event) => {
-		console.log(event.target);
-		const save = !todoEditCard.contains(event.target);
-		console.log(save);
+		const insideContainer = todoEditCard.contains(event.target);
 
-		if (save) {
-			if (todo.listId === editedTodo.listId) (0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
-			if (todo.listId !== editedTodo.listId) {
+		if (!insideContainer) {
+			if (
+				todo.listId === editedTodo.listId &&
+				todo.dueDate === editedTodo.dueDate
+			) {
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.replaceOldTodo)(todo, editedTodo);
+				removeListeners();
+			} else {
 				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
 				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+				removeListeners();
 			}
-			document.removeEventListener('click', handleMouseClick);
 		}
-		if (event.target.type === 'checkbox') {
-			editedTodo.done = !originalTodo.done;
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
-			document.removeEventListener('click', handleMouseClick);
-		}
-		if (event.target.className === 'deleteTodoEdit') {
-			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
-			document.removeEventListener('click', handleMouseClick);
+		if (insideContainer) {
+			if (event.target.type === 'checkbox') {
+				editedTodo.done = !originalTodo.done;
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+				removeListeners();
+			}
+			if (event.target.className === 'deleteTodoEdit') {
+				(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+				removeListeners();
+			}
 		}
 	};
 
+	const handleKeyDown = (event) => {
+		if (event.code === 'Enter' && !event.shiftKey) {
+			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
+			removeListeners();
+		}
+
+		if (event.code === 'Escape') {
+			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
+			(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(originalTodo);
+			removeListeners();
+		}
+	};
+
+	function removeListeners() {
+		document.removeEventListener('keydown', handleKeyDown);
+		document.removeEventListener('click', handleMouseClick);
+	}
 	setTimeout(() => {
 		document.addEventListener('click', handleMouseClick);
-	}, 100);
+		document.addEventListener('keydown', handleKeyDown);
+	}, 50);
 
 	return todoLi;
 }
@@ -8455,20 +8477,6 @@ function createPrioritySelector(todo, todoCardEdit) {
 	return editPriority;
 }
 
-function handleEnterKey(event, todo, editedTodo) {
-	if (event.code === 'Enter' && !event.shiftKey) {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(todo);
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(editedTodo);
-	}
-}
-
-function handleEscapeKey(event, originalTodo, todo) {
-	if (event.code === 'Escape') {
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.removeTodo)(originalTodo);
-		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(todo);
-	}
-}
-
 
 
 
@@ -8530,7 +8538,7 @@ function generalController() {
 	});
 
 	function formReturn(newTodo) {
-		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(newTodo)
+		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(newTodo);
 	}
 
 	headerDiv.prepend(addTodoBtn);
