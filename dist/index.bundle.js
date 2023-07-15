@@ -8038,9 +8038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function todoForm(callback) {
 	const todoForm = createTodoForm();
-	// Original form beh
 
-	// Redo
 	const handleMouseClick = (event) => {
 		const insideContainer = todoForm.contains(event.target);
 
@@ -8102,7 +8100,7 @@ function todoForm(callback) {
 function createTodoForm() {
 	const todoForm = createTodoFormContainer();
 
-	const cancelButtonForm = createCancelButtonForm(todoForm);
+	const cancelButtonForm = createCancelButtonForm();
 	todoForm.append(cancelButtonForm);
 
 	const titleForm = createTitleForm();
@@ -8134,13 +8132,10 @@ function createTodoFormContainer() {
 	return todoForm;
 }
 
-function createCancelButtonForm(form) {
+function createCancelButtonForm() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
 	cancelButton.textContent = 'x';
-	cancelButton.addEventListener('click', () => {
-		form.remove();
-	});
 
 	return cancelButton;
 }
@@ -8415,9 +8410,18 @@ function createTitle(todo) {
 	editTitle.setAttribute('type', 'text');
 	editTitle.setAttribute('placeholder', 'New Task ...');
 	editTitle.value = todo.title;
-	editTitle.addEventListener('input', (event) => {
+
+	const handleTitleInput = (event) => {
 		todo.title = event.target.value;
-	});
+	};
+
+	const previousListener = editTitle.dataset.eventListener;
+	if (previousListener) {
+		editTitle.removeEventListener('input', previousListener);
+	}
+
+	editTitle.addEventListener('input', handleTitleInput);
+	editTitle.dataset.eventListener = handleTitleInput;
 
 	return editTitle;
 }
@@ -8428,9 +8432,18 @@ function createNotes(todo) {
 	editNotes.className = 'todoNotesEdit';
 	editNotes.textContent = todo.notes;
 	editNotes.setAttribute('placeholder', 'Notes');
-	editNotes.addEventListener('input', (event) => {
+
+	const handleNotesInput = (event) => {
 		todo.notes = event.target.value;
-	});
+	};
+
+	const previousListener = editNotes.dataset.eventListener;
+	if (previousListener) {
+		editNotes.removeEventListener('input', previousListener);
+	}
+
+	editNotes.addEventListener('input', handleNotesInput);
+	editNotes.dataset.eventListener = handleNotesInput;
 
 	return editNotes;
 }
@@ -8445,9 +8458,18 @@ function createDueDate(todo) {
 		minDate: 'today',
 		dateFormat: 'j M Y',
 	});
-	editDate.addEventListener('input', (event) => {
+
+	const handleDateInput = (event) => {
 		todo.dueDate = event.target.value;
-	});
+	};
+
+	const previousListener = editDate.dataset.eventListener;
+	if (previousListener) {
+		editDate.removeEventListener('input', previousListener);
+	}
+
+	editDate.addEventListener('input', handleDateInput);
+	editDate.dataset.eventListener = handleDateInput;
 
 	return editDate;
 }
@@ -8462,9 +8484,12 @@ function createListSelector(todo) {
 		editList.append(optionElement);
 	});
 
-	editList.addEventListener('input', (event) => {
+	const handleListIdInput = (event) => {
 		todo.listId = Number(event.target.value);
-	});
+		editList.removeEventListener('input', handleListIdInput);
+	};
+
+	editList.addEventListener('input', handleListIdInput);
 
 	return editList;
 }
@@ -8486,10 +8511,13 @@ function createPrioritySelector(todo, todoCardEdit) {
 		editPriority.append(optionElement);
 	});
 
-	editPriority.addEventListener('input', (event) => {
+	const handlePriorityInput = (event) => {
 		todo.priority = event.target.value;
 		(0,_displayTodo_js__WEBPACK_IMPORTED_MODULE_2__.visualizePriority)(todo, todoCardEdit);
-	});
+		editPriority.removeEventListener('input', handlePriorityInput);
+	};
+
+	editPriority.addEventListener('input', handlePriorityInput);
 
 	const placeholderPriority = new Option('Priority', '');
 	placeholderPriority.className = 'placeholderPri';

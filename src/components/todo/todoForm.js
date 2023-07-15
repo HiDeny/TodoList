@@ -6,9 +6,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 export default function todoForm(callback) {
 	const todoForm = createTodoForm();
-	// Original form beh
 
-	// Redo
 	const handleMouseClick = (event) => {
 		const insideContainer = todoForm.contains(event.target);
 
@@ -70,7 +68,7 @@ export default function todoForm(callback) {
 function createTodoForm() {
 	const todoForm = createTodoFormContainer();
 
-	const cancelButtonForm = createCancelButtonForm(todoForm);
+	const cancelButtonForm = createCancelButtonForm();
 	todoForm.append(cancelButtonForm);
 
 	const titleForm = createTitleForm();
@@ -102,13 +100,10 @@ function createTodoFormContainer() {
 	return todoForm;
 }
 
-function createCancelButtonForm(form) {
+function createCancelButtonForm() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
 	cancelButton.textContent = 'x';
-	cancelButton.addEventListener('click', () => {
-		form.remove();
-	});
 
 	return cancelButton;
 }
