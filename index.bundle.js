@@ -3169,48 +3169,6 @@ function isDate(value) {
 
 /***/ }),
 
-/***/ "./node_modules/date-fns/esm/isFuture/index.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/date-fns/esm/isFuture/index.js ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ isFuture)
-/* harmony export */ });
-/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
-/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
-
-
-/**
- * @name isFuture
- * @category Common Helpers
- * @summary Is the given date in the future?
- * @pure false
- *
- * @description
- * Is the given date in the future?
- *
- * > ⚠️ Please note that this function is not present in the FP submodule as
- * > it uses `Date.now()` internally hence impure and can't be safely curried.
- *
- * @param {Date|Number} date - the date to check
- * @returns {Boolean} the date is in the future
- * @throws {TypeError} 1 argument required
- *
- * @example
- * // If today is 6 October 2014, is 31 December 2014 in the future?
- * const result = isFuture(new Date(2014, 11, 31))
- * //=> true
- */
-function isFuture(dirtyDate) {
-  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
-  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate).getTime() > Date.now();
-}
-
-/***/ }),
-
 /***/ "./node_modules/date-fns/esm/isSameDay/index.js":
 /*!******************************************************!*\
   !*** ./node_modules/date-fns/esm/isSameDay/index.js ***!
@@ -7410,6 +7368,7 @@ module.exports = styleTagTransform;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   combineLists: () => (/* binding */ combineLists),
 /* harmony export */   createList: () => (/* binding */ createList),
 /* harmony export */   customListsArr: () => (/* binding */ customListsArr),
 /* harmony export */   defaultListsArr: () => (/* binding */ defaultListsArr),
@@ -7417,6 +7376,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   today: () => (/* binding */ today),
 /* harmony export */   upcoming: () => (/* binding */ upcoming)
 /* harmony export */ });
+/* harmony import */ var _memory_storage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../memory/storage */ "./src/components/memory/storage.js");
+
+
 let id = 0;
 
 function createList(title, description) {
@@ -7434,6 +7396,22 @@ const inbox = createList('📥 Inbox', 'Default list');
 
 const defaultListsArr = [inbox, today, upcoming];
 const customListsArr = [inbox];
+const combineLists = () => {
+	const completeArr = [];
+
+	defaultListsArr.forEach((defaultList) => {
+		completeArr.push(defaultList);
+	});
+
+	customListsArr.forEach((customList) => {
+		if (customList.id === 2) return;
+		completeArr.push(customList);
+	});
+
+	return completeArr;
+};
+
+console.log(combineLists());
 
 
 
@@ -7658,11 +7636,11 @@ function refreshSubList(todo) {
 function refreshConditions(visibleList, todo) {
 	if (visibleList.id < 2) {
 		if (Number(todo.dateList) !== Number(visibleList.id)) return;
-		return (0,_updateList__WEBPACK_IMPORTED_MODULE_3__.findDateSubList)(todo);
+		return (0,_updateList__WEBPACK_IMPORTED_MODULE_3__.findDateList)(todo).subList;
 	}
 
 	if (Number(todo.listId) !== Number(visibleList.id)) return;
-	return (0,_updateList__WEBPACK_IMPORTED_MODULE_3__.findSubList)(todo);
+	return (0,_updateList__WEBPACK_IMPORTED_MODULE_3__.findList)(todo).subList;
 }
 
 // Delete list button, double check if they want to delete the list
@@ -7684,28 +7662,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   addTodo: () => (/* binding */ addTodo),
 /* harmony export */   deleteList: () => (/* binding */ deleteList),
 /* harmony export */   findDateList: () => (/* binding */ findDateList),
-/* harmony export */   findDateSubList: () => (/* binding */ findDateSubList),
 /* harmony export */   findList: () => (/* binding */ findList),
-/* harmony export */   findSubList: () => (/* binding */ findSubList),
 /* harmony export */   removeTodo: () => (/* binding */ removeTodo),
 /* harmony export */   replaceOldTodo: () => (/* binding */ replaceOldTodo),
 /* harmony export */   sortList: () => (/* binding */ sortList),
 /* harmony export */   updateCustomList: () => (/* binding */ updateCustomList)
 /* harmony export */ });
 /* harmony import */ var _createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createList */ "./src/components/list/createList.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
 /* harmony import */ var _displayList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./displayList */ "./src/components/list/displayList.js");
+/* harmony import */ var _memory_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../memory/storage */ "./src/components/memory/storage.js");
+
+
 
 
 
 
 //* List Handling
+function findListIndex(list) {
+	const allLists = (0,_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
+	console.log(allLists.indexOf(list));
+	return allLists.indexOf(list);
+}
 
 // Delete
 function deleteList(list) {
 	deleteSubLists(list);
 	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.indexOf(list), 1);
+	const allLists = (0,_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.saveListsMemory)(allLists);
 }
 
 function deleteSubLists(list) {
@@ -7722,53 +7707,62 @@ function addCustomList(list) {
 	const newList = list ? list : (0,_createList__WEBPACK_IMPORTED_MODULE_0__.createList)('');
 	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.push(newList);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(newList);
+	const allLists = (0,_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.saveListsMemory)(allLists);
 }
 
 function updateCustomList(list) {
 	_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.splice(_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.indexOf(list), 1, list);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(list, findListIndex(list));
 }
 
 //* Search
 
 // Find
 function findList(todo) {
-	return _createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.find((list) => list.id === Number(todo.listId));
-}
-
-function findSubList(todo) {
-	const list = findList(todo);
-	if (!todo.done) return list.activeTodos;
-	return list.completedTodos;
+	const completeList = _createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.find(
+		(list) => list.id === Number(todo.listId)
+	);
+	const arrIndex = findListIndex(completeList);
+	console.log(arrIndex);
+	const subList = !todo.done
+		? completeList.activeTodos
+		: completeList.completedTodos;
+	return { completeList, subList, arrIndex };
 }
 
 //* Manipulation
 // Add
 function addTodo(todo) {
-	const subList = findSubList(todo);
-	subList.push(todo);
+	const list = findList(todo);
+	list.subList.push(todo);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(list.completeList, list.arrIndex);
 	addDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
 }
 
 // Remove
 function removeTodo(todo) {
-	const subList = findSubList(todo);
-
-	subList.splice(subList.indexOf(todo), 1);
+	const list = findList(todo);
+	list.subList.splice(list.subList.indexOf(todo), 1);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(list.completeList, list.arrIndex);
 	removeDateList(todo);
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(todo);
 }
 
 // Replace Old
 function replaceOldTodo(oldTodo, newTodo) {
-	const subList = findSubList(oldTodo);
+	const list = findList(oldTodo);
+	const dateList = findDateList(oldTodo);
 
-	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
-	if (oldTodo.dueDate) {
-		const dateSubList = findDateSubList(oldTodo);
+	list.subList.splice(list.subList.indexOf(oldTodo), 1, newTodo);
+	(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(list.completeList, list.arrIndex);
 
-		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
+	if (dateList) {
+		dateList.subList.splice(dateList.subList.indexOf(oldTodo), 1, newTodo);
+		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(dateList.completeList, dateList.arrIndex);
 	}
+
 	(0,_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshSubList)(newTodo);
 }
 
@@ -7791,42 +7785,82 @@ function compareTodos(a, b) {
 	}
 }
 
-// Date
-function addDateList(todo) {
-	if (todo.dueDate) {
-		const dateSubList = findDateSubList(todo);
-		dateSubList.push(todo);
-	}
-}
-
-function removeDateList(todo) {
-	const dateSubList = findDateSubList(todo);
-	if (!dateSubList) return null;
-	dateSubList.splice(dateSubList.indexOf(todo), 1);
-}
-
-//* Date-Search
+//* Date
+// Find
 function findDateList(todo) {
 	if (!todo.dueDate) return null;
 
 	const date = new Date(todo.dueDate);
 
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(date)) {
-		todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.today.id;
-		return _createList__WEBPACK_IMPORTED_MODULE_0__.today;
-	}
+	const completeList = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date) ? _createList__WEBPACK_IMPORTED_MODULE_0__.today : _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming;
+	const arrIndex = findListIndex(completeList);
+	const subList = !todo.done
+		? completeList.activeTodos
+		: completeList.completedTodos;
 
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(date)) {
-		todo.dateList = _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming.id;
-		return _createList__WEBPACK_IMPORTED_MODULE_0__.upcoming;
+	return { completeList, subList, arrIndex };
+}
+
+// Add
+function addDateList(todo) {
+	const dateList = findDateList(todo);
+	if (dateList) {
+		todo.dateList = dateList.id;
+		dateList.subList.push(todo);
+		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(dateList.completeList, dateList.arrIndex);
 	}
 }
 
-function findDateSubList(todo) {
+// Remove
+function removeDateList(todo) {
 	const dateList = findDateList(todo);
-	if (!dateList) return null;
-	if (!todo.done) return dateList.activeTodos;
-	return dateList.completedTodos;
+	if (dateList) {
+		todo.dateList = null;
+		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
+		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(dateList.completeList, dateList.arrIndex);
+	}
+}
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/memory/storage.js":
+/*!******************************************!*\
+  !*** ./src/components/memory/storage.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   getLists: () => (/* binding */ getLists),
+/* harmony export */   saveListsMemory: () => (/* binding */ saveListsMemory),
+/* harmony export */   updateListMemory: () => (/* binding */ updateListMemory)
+/* harmony export */ });
+function saveListsMemory(arr) {
+	localStorage.clear();
+    console.log(arr);
+
+	for (let i = 0; i < arr.length; i++) {
+		const list = JSON.stringify(arr[i]);
+		localStorage.setItem(i, list);
+	}
+
+	console.log(localStorage);
+}
+
+function updateListMemory(list, index) {
+	localStorage.setItem(index, JSON.stringify(list));
+}
+
+function getLists(arr) {
+	const allLists = [];
+	for (let i = 0; i < arr.length; i++) {
+		const list = arr[i];
+		allLists.push(list);
+	}
+	return allLists;
 }
 
 
