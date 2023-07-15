@@ -1,13 +1,28 @@
-import { createList, customListsArr, today, upcoming } from './createList';
-import { isFuture, isToday } from 'date-fns';
+import {
+	createList,
+	customListsArr,
+	today,
+	upcoming,
+	combineLists,
+} from './createList';
+import { isToday } from 'date-fns';
 import { refreshList, refreshSubList } from './displayList';
 
+import { saveListsMemory, updateListMemory } from '../memory/storage';
+
 //* List Handling
+function findListIndex(list) {
+	const allLists = combineLists();
+	console.log(allLists.indexOf(list));
+	return allLists.indexOf(list);
+}
 
 // Delete
 function deleteList(list) {
 	deleteSubLists(list);
 	customListsArr.splice(customListsArr.indexOf(list), 1);
+	const allLists = combineLists();
+	saveListsMemory(allLists);
 }
 
 function deleteSubLists(list) {
@@ -24,53 +39,62 @@ function addCustomList(list) {
 	const newList = list ? list : createList('');
 	customListsArr.push(newList);
 	refreshList(newList);
+	const allLists = combineLists();
+	saveListsMemory(allLists);
 }
 
 function updateCustomList(list) {
 	customListsArr.splice(customListsArr.indexOf(list), 1, list);
+	updateListMemory(list, findListIndex(list));
 }
 
 //* Search
 
 // Find
 function findList(todo) {
-	return customListsArr.find((list) => list.id === Number(todo.listId));
-}
-
-function findSubList(todo) {
-	const list = findList(todo);
-	if (!todo.done) return list.activeTodos;
-	return list.completedTodos;
+	const completeList = customListsArr.find(
+		(list) => list.id === Number(todo.listId)
+	);
+	const arrIndex = findListIndex(completeList);
+	console.log(arrIndex);
+	const subList = !todo.done
+		? completeList.activeTodos
+		: completeList.completedTodos;
+	return { completeList, subList, arrIndex };
 }
 
 //* Manipulation
 // Add
 function addTodo(todo) {
-	const subList = findSubList(todo);
-	subList.push(todo);
+	const list = findList(todo);
+	list.subList.push(todo);
+	updateListMemory(list.completeList, list.arrIndex);
 	addDateList(todo);
 	refreshSubList(todo);
 }
 
 // Remove
 function removeTodo(todo) {
-	const subList = findSubList(todo);
-
-	subList.splice(subList.indexOf(todo), 1);
+	const list = findList(todo);
+	list.subList.splice(list.subList.indexOf(todo), 1);
+	updateListMemory(list.completeList, list.arrIndex);
 	removeDateList(todo);
 	refreshSubList(todo);
 }
 
 // Replace Old
 function replaceOldTodo(oldTodo, newTodo) {
-	const subList = findSubList(oldTodo);
+	const list = findList(oldTodo);
+	const dateList = findDateList(oldTodo);
 
-	subList.splice(subList.indexOf(oldTodo), 1, newTodo);
-	if (oldTodo.dueDate) {
-		const dateSubList = findDateSubList(oldTodo);
+	list.subList.splice(list.subList.indexOf(oldTodo), 1, newTodo);
+	updateListMemory(list.completeList, list.arrIndex);
 
-		dateSubList.splice(dateSubList.indexOf(oldTodo), 1, newTodo);
+	if (dateList) {
+		dateList.subList.splice(dateList.subList.indexOf(oldTodo), 1, newTodo);
+		updateListMemory(dateList.completeList, dateList.arrIndex);
 	}
+
 	refreshSubList(newTodo);
 }
 
@@ -93,50 +117,46 @@ function compareTodos(a, b) {
 	}
 }
 
-// Date
-function addDateList(todo) {
-	if (todo.dueDate) {
-		const dateSubList = findDateSubList(todo);
-		dateSubList.push(todo);
-	}
-}
-
-function removeDateList(todo) {
-	const dateSubList = findDateSubList(todo);
-	if (!dateSubList) return null;
-	dateSubList.splice(dateSubList.indexOf(todo), 1);
-}
-
-//* Date-Search
+//* Date
+// Find
 function findDateList(todo) {
 	if (!todo.dueDate) return null;
 
 	const date = new Date(todo.dueDate);
 
-	if (isToday(date)) {
-		todo.dateList = today.id;
-		return today;
-	}
+	const completeList = isToday(date) ? today : upcoming;
+	const arrIndex = findListIndex(completeList);
+	const subList = !todo.done
+		? completeList.activeTodos
+		: completeList.completedTodos;
 
-	if (isFuture(date)) {
-		todo.dateList = upcoming.id;
-		return upcoming;
+	return { completeList, subList, arrIndex };
+}
+
+// Add
+function addDateList(todo) {
+	const dateList = findDateList(todo);
+	if (dateList) {
+		todo.dateList = dateList.id;
+		dateList.subList.push(todo);
+		updateListMemory(dateList.completeList, dateList.arrIndex);
 	}
 }
 
-function findDateSubList(todo) {
+// Remove
+function removeDateList(todo) {
 	const dateList = findDateList(todo);
-	if (!dateList) return null;
-	if (!todo.done) return dateList.activeTodos;
-	return dateList.completedTodos;
+	if (dateList) {
+		todo.dateList = null;
+		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
+		updateListMemory(dateList.completeList, dateList.arrIndex);
+	}
 }
 
 export {
 	sortList,
 	findDateList,
-	findDateSubList,
 	findList,
-	findSubList,
 	deleteList,
 	addTodo,
 	removeTodo,

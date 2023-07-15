@@ -1,3 +1,5 @@
+import { getLists } from '../memory/storage';
+
 let id = 0;
 
 function createList(title, description) {
@@ -15,5 +17,29 @@ const inbox = createList('📥 Inbox', 'Default list');
 
 const defaultListsArr = [inbox, today, upcoming];
 const customListsArr = [inbox];
+const combineLists = () => {
+	const completeArr = [];
 
-export { createList, defaultListsArr, customListsArr, inbox, today, upcoming };
+	defaultListsArr.forEach((defaultList) => {
+		completeArr.push(defaultList);
+	});
+
+	customListsArr.forEach((customList) => {
+		if (customList.id === 2) return;
+		completeArr.push(customList);
+	});
+
+	return completeArr;
+};
+
+console.log(combineLists());
+
+export {
+	createList,
+	defaultListsArr,
+	customListsArr,
+	inbox,
+	today,
+	upcoming,
+	combineLists,
+};

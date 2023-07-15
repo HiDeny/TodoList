@@ -3,8 +3,8 @@ import { displayTodoCard } from '../todo/displayTodo';
 import { inbox } from './createList';
 import {
 	deleteList,
-	findDateSubList,
-	findSubList,
+	findDateList,
+	findList,
 	sortList,
 	updateCustomList,
 } from './updateList';
@@ -206,11 +206,11 @@ function refreshSubList(todo) {
 function refreshConditions(visibleList, todo) {
 	if (visibleList.id < 2) {
 		if (Number(todo.dateList) !== Number(visibleList.id)) return;
-		return findDateSubList(todo);
+		return findDateList(todo).subList;
 	}
 
 	if (Number(todo.listId) !== Number(visibleList.id)) return;
-	return findSubList(todo);
+	return findList(todo).subList;
 }
 
 // Delete list button, double check if they want to delete the list
