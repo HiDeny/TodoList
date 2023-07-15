@@ -44,6 +44,7 @@ function createDefaultLists() {
 	defaultLists.className = 'defaultLists';
 
 	defaultListsArr.forEach((list) => {
+		console.log(list);
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -86,6 +87,7 @@ function createCustomLists() {
 }
 
 function listButtonHandleClick(list) {
+	console.log(list);
 	refreshList(list);
 }
 

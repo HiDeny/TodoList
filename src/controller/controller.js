@@ -2,7 +2,7 @@ import '../style.css';
 import 'normalize.css';
 
 import { inbox } from '../components/list/createList.js';
-import { displayList } from '../components/list/displayList';
+import { displayList, refreshList } from '../components/list/displayList';
 import { addTodo } from '../components/list/updateList';
 
 import todoForm from '../components/todo/todoForm';
@@ -59,4 +59,5 @@ export default function generalController() {
 	// Inbox - list
 	const displayInbox = displayList(inbox);
 	container.appendChild(displayInbox);
+	refreshList(inbox);
 }
