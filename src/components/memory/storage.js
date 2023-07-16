@@ -11,6 +11,7 @@ function saveAllListsMemory() {
 }
 
 function updateListMemory(list) {
+	console.log('Here');
 	const allLists = combineLists();
 	const index = allLists.indexOf(list);
 	if (localStorage.length < 3) {
@@ -22,13 +23,16 @@ function updateListMemory(list) {
 }
 
 function getLists() {
+	console.log('Also here');
 	const allLists = [];
-	Object.values(localStorage).forEach((list) => {
+	const storedLists = Object.values(localStorage);
+	storedLists.forEach((list) => {
 		const listJSON = JSON.parse(list);
 		console.log(listJSON);
 		allLists.push(listJSON);
 	});
 
+	allLists.sort((a, b) => a.id - b.id);
 	return allLists;
 }
 

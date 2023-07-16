@@ -53,6 +53,7 @@ function createDefaultLists() {
 			// toggleSidebar();
 		});
 		defaultLists.append(listButton);
+		if (list.id === 2) defaultLists.prepend(listButton);
 	});
 
 	return defaultLists;

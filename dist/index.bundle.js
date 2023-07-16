@@ -7416,7 +7416,7 @@ function createList(title, description) {
 }
 
 // Default list
-const defaultListsArr = [inbox, today, upcoming];
+const defaultListsArr = [today, upcoming, inbox];
 const customListsArr = allLists.slice(2);
 console.log(customListsArr);
 
@@ -7832,7 +7832,6 @@ function addDateList(todo) {
 function removeDateList(todo) {
 	const dateList = findDateList(todo);
 	if (dateList) {
-		todo.dateList = null;
 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
 		(0,_memory_storage__WEBPACK_IMPORTED_MODULE_2__.updateListMemory)(dateList.completeList);
 	}
@@ -7869,6 +7868,7 @@ function saveAllListsMemory() {
 }
 
 function updateListMemory(list) {
+	console.log('Here');
 	const allLists = (0,_list_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
 	const index = allLists.indexOf(list);
 	if (localStorage.length < 3) {
@@ -7880,13 +7880,16 @@ function updateListMemory(list) {
 }
 
 function getLists() {
+	console.log('Also here');
 	const allLists = [];
-	Object.values(localStorage).forEach((list) => {
+	const storedLists = Object.values(localStorage);
+	storedLists.forEach((list) => {
 		const listJSON = JSON.parse(list);
 		console.log(listJSON);
 		allLists.push(listJSON);
 	});
 
+	allLists.sort((a, b) => a.id - b.id);
 	return allLists;
 }
 
@@ -8748,6 +8751,7 @@ function createDefaultLists() {
 			// toggleSidebar();
 		});
 		defaultLists.append(listButton);
+		if (list.id === 2) defaultLists.prepend(listButton);
 	});
 
 	return defaultLists;

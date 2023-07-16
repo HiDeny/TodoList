@@ -132,7 +132,6 @@ function addDateList(todo) {
 function removeDateList(todo) {
 	const dateList = findDateList(todo);
 	if (dateList) {
-		todo.dateList = null;
 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
 		updateListMemory(dateList.completeList);
 	}

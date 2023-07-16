@@ -37,7 +37,7 @@ function createList(title, description) {
 }
 
 // Default list
-const defaultListsArr = [inbox, today, upcoming];
+const defaultListsArr = [today, upcoming, inbox];
 const customListsArr = allLists.slice(2);
 console.log(customListsArr);
 
