@@ -1,8 +1,8 @@
 import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
-import { createTodoEditMode } from './updateTodo.js';
+import createTodoEditCard from './displayEditCard.js';
 
-import { addTodo, removeTodo } from '../list/updateList';
+import { addTodo, removeTodo } from '../list/updateList.js';
 
 function displayTodoCard(todo) {
 	const todoLi = document.createElement('li');
@@ -27,7 +27,7 @@ function displayTodoCard(todo) {
 				removeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (insideContainer) {
-				const todoCardEdit = createTodoEditMode(todo);
+				const todoCardEdit = createTodoEditCard(todo);
 				todoLi.replaceWith(todoCardEdit);
 				const todoEditTitle = todoCardEdit.querySelector(
 					'input[class="todoTitleEdit"]'

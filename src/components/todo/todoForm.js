@@ -2,9 +2,6 @@ import createTodo from './createTodo';
 import { customListsArr } from '../list/createList';
 import { addTodo } from '../list/updateList';
 
-import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-
 export default function todoForm() {
 	const todoForm = createTodoForm();
 

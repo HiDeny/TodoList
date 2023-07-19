@@ -1,6 +1,9 @@
 import '../style.css';
 import 'normalize.css';
 
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
 import { sidebar } from '../sidebar/sidebar';
 import { inbox } from '../components/list/createList';
 import { displayList, refreshList } from '../components/list/displayList';

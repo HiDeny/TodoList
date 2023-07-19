@@ -1,5 +1,5 @@
 import { refreshSideLists } from '../../sidebar/sidebar';
-import { displayTodoCard } from '../todo/displayTodo';
+import { displayTodoCard } from '../todo/displayCard';
 import { inbox } from './createList';
 import {
 	deleteList,
