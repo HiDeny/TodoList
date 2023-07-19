@@ -1,4 +1,19 @@
-import { combineLists } from '../list/createList';
+import { defaultListsArr, customListsArr } from '../list/createList';
+
+const combineLists = () => {
+	const completeArr = [];
+
+	defaultListsArr.forEach((defaultList) => {
+		completeArr.push(defaultList);
+	});
+
+	customListsArr.forEach((customList) => {
+		if (customList.id === 2) return;
+		completeArr.push(customList);
+	});
+
+	return completeArr;
+};
 
 function saveAllListsMemory() {
 	localStorage.clear();
@@ -11,7 +26,6 @@ function saveAllListsMemory() {
 }
 
 function updateListMemory(list) {
-	console.log('Here');
 	const allLists = combineLists();
 	const index = allLists.indexOf(list);
 	if (localStorage.length < 3) {
@@ -23,12 +37,10 @@ function updateListMemory(list) {
 }
 
 function getLists() {
-	console.log('Also here');
 	const allLists = [];
 	const storedLists = Object.values(localStorage);
 	storedLists.forEach((list) => {
 		const listJSON = JSON.parse(list);
-		console.log(listJSON);
 		allLists.push(listJSON);
 	});
 

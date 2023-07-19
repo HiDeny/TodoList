@@ -1,10 +1,11 @@
 import createTodo from './createTodo';
 import { customListsArr } from '../list/createList';
+import { addTodo } from '../list/updateList';
 
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-export default function todoForm(callback) {
+export default function todoForm() {
 	const todoForm = createTodoForm();
 
 	const handleMouseClick = (event) => {
@@ -24,7 +25,7 @@ export default function todoForm(callback) {
 
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey) {
-			handleSubmit(callback);
+			handleSubmit();
 		}
 
 		if (event.code === 'Escape') {
@@ -33,8 +34,7 @@ export default function todoForm(callback) {
 		}
 	};
 
-	function handleSubmit(callback) {
-		console.log('test');
+	function handleSubmit() {
 		const title = todoForm.elements['formTitle'].value;
 		const notes = todoForm.elements['formNotes'].value;
 		const dueDate = todoForm.elements['formDate'].value;
@@ -45,7 +45,11 @@ export default function todoForm(callback) {
 
 		removeListeners();
 		todoForm.remove();
-		callback(newTodo);
+		formReturn(newTodo);
+	}
+
+	function formReturn(newTodo) {
+		addTodo(newTodo);
 	}
 
 	setTimeout(() => {
@@ -53,7 +57,7 @@ export default function todoForm(callback) {
 		document.addEventListener('keydown', handleKeyDown);
 		todoForm.addEventListener('submit', (event) => {
 			event.preventDefault();
-			handleSubmit(callback);
+			handleSubmit();
 		});
 	}, 50);
 

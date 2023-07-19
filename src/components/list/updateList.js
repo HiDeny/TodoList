@@ -105,7 +105,6 @@ function compareTodos(a, b) {
 //* Date
 // Find
 function findDateList(todo) {
-	console.log(todo);
 	if (!todo.dueDate) return null;
 
 	const date = new Date(todo.dueDate);

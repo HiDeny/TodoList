@@ -1,63 +1,18 @@
-import '../style.css';
-import 'normalize.css';
-
-import { inbox } from '../components/list/createList.js';
-import { displayList, refreshList } from '../components/list/displayList';
-import { addTodo } from '../components/list/updateList';
-
 import todoForm from '../components/todo/todoForm';
 
-import { sidebar } from '../sidebar/sidebar.js';
-
 export default function generalController() {
-	// Header
-	const headerDiv = document.createElement('header');
-	document.body.append(headerDiv);
+	const addTodoBtn = document.querySelector('.addTodoBtn');
+	addTodoBtn.addEventListener('click', requestForm);
+}
 
-	// Container
-	const container = document.createElement('div');
-	container.className = 'container';
+function requestForm() {
+	const container = document.querySelector('div.container');
+	const activeForm = document.querySelector('#todoForm');
 
-	document.body.appendChild(container);
-
-	// Add Todo Btn
-	const addTodoBtn = document.createElement('button');
-	addTodoBtn.className = 'addTodoBtn';
-	addTodoBtn.textContent = '+';
-	addTodoBtn.setAttribute('tabindex', '0');
-	addTodoBtn.addEventListener('click', () => {
-		const activeForm = document.querySelector('#todoForm');
-
-		if (!activeForm) {
-			const newTaskForm = todoForm(formReturn);
-			container.appendChild(newTaskForm);
-			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-			titleInput.focus();
-		}
-	});
-
-	function formReturn(newTodo) {
-		addTodo(newTodo);
+	if (!activeForm) {
+		const newTaskForm = todoForm();
+		container.appendChild(newTaskForm);
+		const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
+		titleInput.focus();
 	}
-
-	headerDiv.prepend(addTodoBtn);
-
-	// Sidebar
-	const sidebarComponent = sidebar();
-	container.append(sidebarComponent.sidebarDiv);
-
-	// Menu Button
-	const menuButton = document.createElement('button');
-	menuButton.className = 'hamburger';
-	menuButton.textContent = 'MENU';
-	menuButton.addEventListener('click', sidebarComponent.toggleSidebar);
-
-	headerDiv.append(menuButton);
-
-	//* List stuff
-
-	// Inbox - list
-	const displayInbox = displayList(inbox);
-	container.appendChild(displayInbox);
-	refreshList(inbox);
 }

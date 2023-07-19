@@ -157,7 +157,6 @@ function createCompletedTodos() {
 }
 
 function refreshList(list) {
-	console.log(list);
 	replaceOldList(list);
 	focusTitle();
 	checkSubList(list);

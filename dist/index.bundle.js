@@ -7380,13 +7380,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const allLists = (0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.getLists)();
-// console.log(allLists);
 
 function firstSetup() {
 	let today;
 	let upcoming;
 	let inbox;
-	console.log('test');
+
 	if (allLists.length < 2) {
 		today = createList('🌤️ Today', "Todos with today's date");
 		upcoming = createList('📆 Upcoming', 'Todos with future dates');
@@ -7418,7 +7417,6 @@ function createList(title, description) {
 // Default list
 const defaultListsArr = [today, upcoming, inbox];
 const customListsArr = allLists.slice(2);
-console.log(customListsArr);
 
 const combineLists = () => {
 	const completeArr = [];
@@ -7435,7 +7433,6 @@ const combineLists = () => {
 	return completeArr;
 };
 
-console.log(combineLists());
 (0,_memory_storage__WEBPACK_IMPORTED_MODULE_0__.updateListMemory)();
 
 
@@ -7612,7 +7609,6 @@ function createCompletedTodos() {
 }
 
 function refreshList(list) {
-	console.log(list);
 	replaceOldList(list);
 	focusTitle();
 	checkSubList(list);
@@ -7805,7 +7801,6 @@ function compareTodos(a, b) {
 //* Date
 // Find
 function findDateList(todo) {
-	console.log(todo);
 	if (!todo.dueDate) return null;
 
 	const date = new Date(todo.dueDate);
@@ -7857,9 +7852,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _list_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../list/createList */ "./src/components/list/createList.js");
 
 
+const combineLists = () => {
+	const completeArr = [];
+
+	_list_createList__WEBPACK_IMPORTED_MODULE_0__.defaultListsArr.forEach((defaultList) => {
+		completeArr.push(defaultList);
+	});
+
+	_list_createList__WEBPACK_IMPORTED_MODULE_0__.customListsArr.forEach((customList) => {
+		if (customList.id === 2) return;
+		completeArr.push(customList);
+	});
+
+	return completeArr;
+};
+
 function saveAllListsMemory() {
 	localStorage.clear();
-	const allLists = (0,_list_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
+	const allLists = combineLists();
 
 	for (let i = 0; i < allLists.length; i++) {
 		const list = JSON.stringify(allLists[i]);
@@ -7868,8 +7878,7 @@ function saveAllListsMemory() {
 }
 
 function updateListMemory(list) {
-	console.log('Here');
-	const allLists = (0,_list_createList__WEBPACK_IMPORTED_MODULE_0__.combineLists)();
+	const allLists = combineLists();
 	const index = allLists.indexOf(list);
 	if (localStorage.length < 3) {
 		localStorage.setItem(0, JSON.stringify(allLists[0]));
@@ -7880,12 +7889,10 @@ function updateListMemory(list) {
 }
 
 function getLists() {
-	console.log('Also here');
 	const allLists = [];
 	const storedLists = Object.values(localStorage);
 	storedLists.forEach((list) => {
 		const listJSON = JSON.parse(list);
-		console.log(listJSON);
 		allLists.push(listJSON);
 	});
 
@@ -7966,7 +7973,10 @@ function displayTodoCard(todo) {
 			} else if (insideContainer) {
 				const todoCardEdit = (0,_updateTodo_js__WEBPACK_IMPORTED_MODULE_0__.createTodoEditMode)(todo);
 				todoLi.replaceWith(todoCardEdit);
-				todoCardEdit.focus();
+				const todoEditTitle = todoCardEdit.querySelector(
+					'input[class="todoTitleEdit"]'
+				);
+				todoEditTitle.focus();
 				todoCard.removeEventListener('click', handleMouseClick);
 			}
 		}
@@ -8092,15 +8102,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _createTodo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTodo */ "./src/components/todo/createTodo.js");
 /* harmony import */ var _list_createList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../list/createList */ "./src/components/list/createList.js");
-/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
-/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
+/* harmony import */ var _list_updateList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../list/updateList */ "./src/components/list/updateList.js");
+/* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
+/* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
 
 
 
 
 
 
-function todoForm(callback) {
+
+function todoForm() {
 	const todoForm = createTodoForm();
 
 	const handleMouseClick = (event) => {
@@ -8120,7 +8132,7 @@ function todoForm(callback) {
 
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey) {
-			handleSubmit(callback);
+			handleSubmit();
 		}
 
 		if (event.code === 'Escape') {
@@ -8129,8 +8141,7 @@ function todoForm(callback) {
 		}
 	};
 
-	function handleSubmit(callback) {
-		console.log('test');
+	function handleSubmit() {
 		const title = todoForm.elements['formTitle'].value;
 		const notes = todoForm.elements['formNotes'].value;
 		const dueDate = todoForm.elements['formDate'].value;
@@ -8141,7 +8152,11 @@ function todoForm(callback) {
 
 		removeListeners();
 		todoForm.remove();
-		callback(newTodo);
+		formReturn(newTodo);
+	}
+
+	function formReturn(newTodo) {
+		(0,_list_updateList__WEBPACK_IMPORTED_MODULE_2__.addTodo)(newTodo);
 	}
 
 	setTimeout(() => {
@@ -8149,7 +8164,7 @@ function todoForm(callback) {
 		document.addEventListener('keydown', handleKeyDown);
 		todoForm.addEventListener('submit', (event) => {
 			event.preventDefault();
-			handleSubmit(callback);
+			handleSubmit();
 		});
 	}, 50);
 
@@ -8238,7 +8253,7 @@ function createDateForm() {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
-	(0,flatpickr__WEBPACK_IMPORTED_MODULE_2__["default"])(formDate, {
+	(0,flatpickr__WEBPACK_IMPORTED_MODULE_3__["default"])(formDate, {
 		minDate: 'today',
 		dateFormat: 'd M y',
 	});
@@ -8608,25 +8623,52 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ generalController)
 /* harmony export */ });
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
-/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
-/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/list/createList.js */ "./src/components/list/createList.js");
-/* harmony import */ var _components_list_displayList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/list/displayList */ "./src/components/list/displayList.js");
-/* harmony import */ var _components_list_updateList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/list/updateList */ "./src/components/list/updateList.js");
-/* harmony import */ var _components_todo_todoForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/todo/todoForm */ "./src/components/todo/todoForm.js");
-/* harmony import */ var _sidebar_sidebar_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../sidebar/sidebar.js */ "./src/sidebar/sidebar.js");
-
-
-
-
-
-
-
-
-
+/* harmony import */ var _components_todo_todoForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/todo/todoForm */ "./src/components/todo/todoForm.js");
 
 
 function generalController() {
+	const addTodoBtn = document.querySelector('.addTodoBtn');
+	addTodoBtn.addEventListener('click', requestForm);
+}
+
+function requestForm() {
+	const container = document.querySelector('div.container');
+	const activeForm = document.querySelector('#todoForm');
+
+	if (!activeForm) {
+		const newTaskForm = (0,_components_todo_todoForm__WEBPACK_IMPORTED_MODULE_0__["default"])();
+		container.appendChild(newTaskForm);
+		const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
+		titleInput.focus();
+	}
+}
+
+
+/***/ }),
+
+/***/ "./src/interface/mainPage.js":
+/*!***********************************!*\
+  !*** ./src/interface/mainPage.js ***!
+  \***********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ mainPage)
+/* harmony export */ });
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var normalize_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! normalize.css */ "./node_modules/normalize.css/normalize.css");
+/* harmony import */ var _sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../sidebar/sidebar */ "./src/sidebar/sidebar.js");
+/* harmony import */ var _components_list_createList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/list/createList */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_displayList__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/list/displayList */ "./src/components/list/displayList.js");
+
+
+
+
+
+
+
+function mainPage() {
 	// Header
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
@@ -8641,26 +8683,11 @@ function generalController() {
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
 	addTodoBtn.textContent = '+';
-	addTodoBtn.setAttribute('tabindex', '0');
-	addTodoBtn.addEventListener('click', () => {
-		const activeForm = document.querySelector('#todoForm');
-
-		if (!activeForm) {
-			const newTaskForm = (0,_components_todo_todoForm__WEBPACK_IMPORTED_MODULE_5__["default"])(formReturn);
-			container.appendChild(newTaskForm);
-			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-			titleInput.focus();
-		}
-	});
-
-	function formReturn(newTodo) {
-		(0,_components_list_updateList__WEBPACK_IMPORTED_MODULE_4__.addTodo)(newTodo);
-	}
 
 	headerDiv.prepend(addTodoBtn);
 
 	// Sidebar
-	const sidebarComponent = (0,_sidebar_sidebar_js__WEBPACK_IMPORTED_MODULE_6__.sidebar)();
+	const sidebarComponent = (0,_sidebar_sidebar__WEBPACK_IMPORTED_MODULE_2__.sidebar)();
 	container.append(sidebarComponent.sidebarDiv);
 
 	// Menu Button
@@ -8671,12 +8698,10 @@ function generalController() {
 
 	headerDiv.append(menuButton);
 
-	//* List stuff
-
 	// Inbox - list
-	const displayInbox = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.displayList)(_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.inbox);
+	const displayInbox = (0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_4__.displayList)(_components_list_createList__WEBPACK_IMPORTED_MODULE_3__.inbox);
 	container.appendChild(displayInbox);
-	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_3__.refreshList)(_components_list_createList_js__WEBPACK_IMPORTED_MODULE_2__.inbox);
+	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_4__.refreshList)(_components_list_createList__WEBPACK_IMPORTED_MODULE_3__.inbox);
 }
 
 
@@ -8742,7 +8767,6 @@ function createDefaultLists() {
 	defaultLists.className = 'defaultLists';
 
 	_components_list_createList__WEBPACK_IMPORTED_MODULE_0__.defaultListsArr.forEach((list) => {
-		console.log(list);
 		const listButton = document.createElement('button');
 		listButton.setAttribute('class', 'sidebarButton');
 		listButton.textContent = list.title;
@@ -8786,7 +8810,6 @@ function createCustomLists() {
 }
 
 function listButtonHandleClick(list) {
-	console.log(list);
 	(0,_components_list_displayList__WEBPACK_IMPORTED_MODULE_1__.refreshList)(list);
 }
 
@@ -8912,8 +8935,11 @@ var __webpack_exports__ = {};
   \**********************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controller/controller */ "./src/controller/controller.js");
+/* harmony import */ var _interface_mainPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interface/mainPage */ "./src/interface/mainPage.js");
 
 
+
+(0,_interface_mainPage__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_controller_controller__WEBPACK_IMPORTED_MODULE_0__["default"])();
 
 })();

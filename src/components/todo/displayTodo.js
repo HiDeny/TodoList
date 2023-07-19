@@ -29,7 +29,10 @@ function displayTodoCard(todo) {
 			} else if (insideContainer) {
 				const todoCardEdit = createTodoEditMode(todo);
 				todoLi.replaceWith(todoCardEdit);
-				todoCardEdit.focus();
+				const todoEditTitle = todoCardEdit.querySelector(
+					'input[class="todoTitleEdit"]'
+				);
+				todoEditTitle.focus();
 				todoCard.removeEventListener('click', handleMouseClick);
 			}
 		}

@@ -1,13 +1,12 @@
 import { getLists, updateListMemory } from '../memory/storage';
 
 const allLists = getLists();
-// console.log(allLists);
 
 function firstSetup() {
 	let today;
 	let upcoming;
 	let inbox;
-	console.log('test');
+
 	if (allLists.length < 2) {
 		today = createList('🌤️ Today', "Todos with today's date");
 		upcoming = createList('📆 Upcoming', 'Todos with future dates');
@@ -39,7 +38,6 @@ function createList(title, description) {
 // Default list
 const defaultListsArr = [today, upcoming, inbox];
 const customListsArr = allLists.slice(2);
-console.log(customListsArr);
 
 const combineLists = () => {
 	const completeArr = [];
@@ -56,7 +54,6 @@ const combineLists = () => {
 	return completeArr;
 };
 
-console.log(combineLists());
 updateListMemory();
 
 export {
