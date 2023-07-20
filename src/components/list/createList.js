@@ -1,67 +1,83 @@
-import { getLists, updateListMemory } from '../memory/storage';
+let id = parseInt(localStorage.getItem('listId')) || 0;
 
-const allLists = getLists();
+function incrementAndStoreId() {
+	id++;
+	localStorage.setItem('listId', id.toString());
+}
 
-function firstSetup() {
-	let today;
-	let upcoming;
-	let inbox;
+export default function createList(title, description) {
+	let _listId = id;
+	incrementAndStoreId();
+	let _activeTodos = [];
+	let _completedTodos = [];
 
-	if (allLists.length < 2) {
-		today = createList('🌤️ Today', "Todos with today's date");
-		upcoming = createList('📆 Upcoming', 'Todos with future dates');
-		inbox = createList('📥 Inbox', 'Default list');
-	} else {
-		today = allLists.find((list) => list.id === 0);
-		upcoming = allLists.find((list) => list.id === 1);
-		inbox = allLists.find((list) => list.id === 2);
+	function removeTodo(todo) {
+		if (todo.done === false) {
+			_activeTodos.splice(_activeTodos.indexOf(todo), 1);
+		} else {
+			_completedTodos.splice(_completedTodos.indexOf(todo), 1);
+		}
 	}
 
-	return { today, upcoming, inbox };
+	return {
+		title,
+		description,
+		// Get
+		get id() {
+			return _listId;
+		},
+		get activeTodos() {
+			return _activeTodos;
+		},
+		get completedTodos() {
+			return _completedTodos;
+		},
+		// Add
+		addTodo(todo) {
+			if (todo.done === false) {
+				_activeTodos.push(todo);
+			} else {
+				_completedTodos.push(todo);
+			}
+		},
+		// Remove
+		removeTodo,
+		updateTodo(oldTodo, updatedTodo) {
+			if (todo.done === false)
+				_activeTodos.splice(_activeTodos.indexOf(oldTodo), 1, updatedTodo);
+			if (todo.done === true)
+				_completedTodos.splice(
+					_completedTodos.indexOf(oldTodo),
+					1,
+					updatedTodo
+				);
+		},
+		clearSubLists(shouldClear) {
+			if (shouldClear === true) {
+				while (_activeTodos.length > 0) {
+					removeTodo(_activeTodos[0]);
+				}
+				while (_completedTodos.length > 0) {
+					removeTodo(_completedTodos[0]);
+				}
+			}
+		},
+		sortList() {
+			_activeTodos.sort(compareTodos);
+			_completedTodos.sort(compareTodos);
+		},
+	};
 }
 
-let id = allLists.length > 0 ? allLists.length : 0;
-
-const getDefaults = firstSetup();
-const today = getDefaults.today;
-const upcoming = getDefaults.upcoming;
-const inbox = getDefaults.inbox;
-
-function createList(title, description) {
-	const listId = id++;
-	const activeTodos = [];
-	const completedTodos = [];
-
-	return { title, description, activeTodos, completedTodos, id: listId };
+function compareTodos(a, b) {
+	if (a.priority === b.priority) {
+		if (a.dueDate && !b.dueDate) return -1;
+		if (!a.dueDate && b.dueDate) return 1;
+		return new Date(a.dueDate) - new Date(b.dueDate);
+	} else {
+		const priorityOrder = ['high', 'medium', 'low', ''];
+		const priorityA = priorityOrder.indexOf(a.priority);
+		const priorityB = priorityOrder.indexOf(b.priority);
+		return priorityA - priorityB;
+	}
 }
-
-// Default list
-const defaultListsArr = [today, upcoming, inbox];
-const customListsArr = allLists.slice(2);
-
-const combineLists = () => {
-	const completeArr = [];
-
-	defaultListsArr.forEach((defaultList) => {
-		completeArr.push(defaultList);
-	});
-
-	customListsArr.forEach((customList) => {
-		if (customList.id === 2) return;
-		completeArr.push(customList);
-	});
-
-	return completeArr;
-};
-
-updateListMemory();
-
-export {
-	createList,
-	defaultListsArr,
-	customListsArr,
-	inbox,
-	today,
-	upcoming,
-	combineLists,
-};

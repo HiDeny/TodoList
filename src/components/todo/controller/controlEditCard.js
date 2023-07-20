@@ -1,8 +1,8 @@
 import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
 
 export default function controlEditCard(todo, todoCardEdit) {
-	const originalTodo = Object.assign({}, todo);
-	const editedTodo = Object.assign({}, todo);
+	const originalTodo = { ...todo };
+	const editedTodo = { ...todo };
 
 	// Handle events
 	const handleMouseClick = (event) => {
@@ -23,12 +23,15 @@ export default function controlEditCard(todo, todoCardEdit) {
 		}
 		if (insideContainer) {
 			if (event.target.type === 'checkbox') {
-				editedTodo.done = !originalTodo.done;
+				editedTodo.toggleDone;
+				// Remove list control
 				addTodo(editedTodo);
 				removeTodo(todo);
+				//
 				removeListeners();
 			}
 			if (event.target.className === 'deleteTodoEdit') {
+				// Remove list control
 				removeTodo(todo);
 				removeListeners();
 			}
@@ -57,23 +60,18 @@ export default function controlEditCard(todo, todoCardEdit) {
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
 
-	titleEventListener(editedTodo);
+	(() => {
+		const title = document.querySelector('.todoTitleEdit');
+
+		title.addEventListener('input', (event) => {
+			editedTodo.title = event.target.value;
+		});
+	})();
 	notesEventListener(editedTodo);
 	dueDateEventListener(editedTodo);
 	listEventListener(editedTodo);
 	priorityEventListener(editedTodo);
 }
-
-const titleEventListener = (editedTodo) => {
-	const title = document.querySelector('.todoTitleEdit');
-
-	const handleTitleInput = (event) => {
-		const newTitle = event.target.value;
-		editedTodo.title = newTitle;
-	};
-
-	title.addEventListener('input', handleTitleInput);
-};
 
 const notesEventListener = (editedTodo) => {
 	const notes = document.querySelector('.todoNotesEdit');
