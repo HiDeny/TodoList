@@ -1,15 +1,41 @@
-function refreshDisplay(list) {
-	replaceOldList(list);
-	focusTitle();
-	checkSubList(list);
-}
+import listController from './controlLists';
 
-function replaceOldList(list) {
-	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) === list.id) return;
+export default function controlDisplayList(list) {
+	// const originalList = { ...list };
+	const updatedList = { ...list };
 
-	const newList = displayList(list);
-	visibleList.replaceWith(newList);
+	(() => {
+		const deleteButton = document.querySelector('#deleteListButton');
+
+		deleteButton.addEventListener('click', () => {
+			const check = confirm(
+				`Do you really want to delete ${list.title.toUpperCase()}?`
+			);
+			if (check) {
+				listController.deleteList(list, check);
+			}
+		});
+	})();
+
+	(() => {
+		const descriptionList = document.querySelector('.customDescription');
+
+		descriptionList.addEventListener('input', (event) => {
+			updatedList.description = event.target.value;
+            // Master List?
+            listController.updateList(updatedList);
+		});
+	})();
+
+	(() => {
+		const titleList = document.querySelector('.customTitle');
+
+		titleList.addEventListener('input', (event) => {
+			updatedList.title = event.target.value;
+            // Master List?
+            listController.updateList(updatedList);
+		});
+	})();
 }
 
 function focusTitle() {
@@ -55,27 +81,19 @@ function refreshConditions(visibleList, todo) {
 	return findList(todo).subList;
 }
 
-deleteButton.addEventListener('click', () => {
-    const check = confirm(
-        `Do you really want to delete ${list.title.toUpperCase()}?`
-    );
-    if (check) {
-        deleteList(list);
-        refreshList(inbox);
-        refreshSideLists();
-    }
-});
+// updateCustomList(list);
+// refreshSideLists();
 
-customDescription
-listDescription.addEventListener('input', (event) => {
-    list.description = event.target.value;
-    updateCustomList(list);
-    refreshSideLists();
-});
+// function refreshDisplay(list) {
+// 	replaceOldList(list);
+// 	focusTitle();
+// 	checkSubList(list);
+// }
 
-customTitle
-listTitle.addEventListener('input', (event) => {
-    list.title = event.target.value;
-    updateCustomList(list);
-    refreshSideLists();
-});
+// function replaceOldList(list) {
+// 	const visibleList = document.querySelector('.list');
+// 	if (Number(visibleList.id) === list.id) return;
+
+// 	const newList = displayList(list);
+// 	visibleList.replaceWith(newList);
+// }

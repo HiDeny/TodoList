@@ -1,30 +1,28 @@
-import { refreshSideLists } from '../../../sidebar/sidebar';
-import { displayTodoCard } from '../../todo/interface/displayCard';
-import { inbox } from '../createList';
-import {
-	deleteList,
-	findDateList,
-	findList,
-	sortList,
-	updateCustomList,
-} from '../updateList';
+// import { refreshSideLists } from '../../../sidebar/sidebar';
+// import { displayTodoCard } from '../../todo/interface/displayCard';
+// import { inbox } from '../createList';
+import controlDisplayList from '../controller/controlDisplayList';
 
-function displayList(list) {
-	const displayListDiv = createDisplayList(list);
+export default function displayList(list) {
+	const displayList = createDisplayList(list);
 
 	const listHead = createListHead(list);
-	displayListDiv.append(listHead);
+	displayList.append(listHead);
 
 	const activeTodos = createActiveTodos();
-	displayListDiv.append(activeTodos);
+	displayList.append(activeTodos);
 
 	const completedTodosTitle = createCompletedTodosTitle();
-	displayListDiv.append(completedTodosTitle);
+	displayList.append(completedTodosTitle);
 
 	const completedTodos = createCompletedTodos();
-	displayListDiv.append(completedTodos);
+	displayList.append(completedTodos);
 
-	return displayListDiv;
+	setTimeout(() => {
+		controlDisplayList(list, todoCard);
+	}, 50);
+
+	return displayList;
 }
 
 function createDisplayList(list) {
@@ -36,8 +34,11 @@ function createDisplayList(list) {
 }
 
 function createListHead(list) {
-	if (list.id <= 2) return createDefaultListHead(list);
-	return createCustomListHead(list);
+	if (list.id <= 2) {
+		return createDefaultListHead(list);
+	} else {
+		return createCustomListHead(list);
+	}
 }
 
 //* Default List
@@ -68,7 +69,6 @@ function createDefaultListDescription(list) {
 
 	return listDescription;
 }
-
 
 //* Custom List
 function createCustomListHead(list) {
@@ -107,16 +107,16 @@ function createCustomListDescription(list) {
 	return listDescription;
 }
 
-function createDeleteButton(list) {
+function createDeleteButton() {
 	const deleteButton = document.createElement('button');
-	deleteButton.className = 'deleteListButton';
+	deleteButton.setAttribute('id', 'deleteListButton');
 	deleteButton.textContent = 'Delete';
 
 	return deleteButton;
 }
 
 function createActiveTodos() {
-	const active = document.createElement('ul');
+	const active = document.createElement('div');
 	active.className = 'activeTodos';
 
 	return active;
@@ -131,10 +131,8 @@ function createCompletedTodosTitle() {
 }
 
 function createCompletedTodos() {
-	const completedTodos = document.createElement('ul');
+	const completedTodos = document.createElement('div');
 	completedTodos.className = 'completedTodos';
 
 	return completedTodos;
 }
-
-export { displayList, refreshList, refreshSubList };
