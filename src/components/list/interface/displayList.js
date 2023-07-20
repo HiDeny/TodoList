@@ -1,13 +1,13 @@
-import { refreshSideLists } from '../../sidebar/sidebar';
-import { displayTodoCard } from '../todo/displayCard';
-import { inbox } from './createList';
+import { refreshSideLists } from '../../../sidebar/sidebar';
+import { displayTodoCard } from '../../todo/interface/displayCard';
+import { inbox } from '../createList';
 import {
 	deleteList,
 	findDateList,
 	findList,
 	sortList,
 	updateCustomList,
-} from './updateList';
+} from '../updateList';
 
 function displayList(list) {
 	const displayListDiv = createDisplayList(list);

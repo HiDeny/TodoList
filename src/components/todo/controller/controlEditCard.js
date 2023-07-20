@@ -1,11 +1,4 @@
-import { addTodo, removeTodo, replaceOldTodo } from '../list/updateList';
-import {
-	updateTitleTodo,
-	updateNotesTodo,
-	updateDateTodo,
-	updateListTodo,
-	updatePriorityTodo,
-} from './updateTodo';
+import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
 
 export default function controlEditCard(todo, todoCardEdit) {
 	const originalTodo = Object.assign({}, todo);
@@ -76,7 +69,7 @@ const titleEventListener = (editedTodo) => {
 
 	const handleTitleInput = (event) => {
 		const newTitle = event.target.value;
-		updateTitleTodo(editedTodo, newTitle);
+		editedTodo.title = newTitle;
 	};
 
 	title.addEventListener('input', handleTitleInput);
@@ -87,7 +80,7 @@ const notesEventListener = (editedTodo) => {
 
 	const handleNotesInput = (event) => {
 		const newNotes = event.target.value;
-		updateNotesTodo(editedTodo, newNotes);
+		editedTodo.notes = newNotes;
 	};
 
 	notes.addEventListener('input', handleNotesInput);
@@ -98,7 +91,7 @@ const dueDateEventListener = (editedTodo) => {
 
 	const handleDateInput = (event) => {
 		const newDate = event.target.value;
-		updateDateTodo(editedTodo, newDate);
+		editedTodo.dueDate = newDate;
 	};
 
 	dueDate.addEventListener('input', handleDateInput);
@@ -109,7 +102,7 @@ const listEventListener = (editedTodo) => {
 
 	const handleListIdInput = (event) => {
 		const newListId = event.target.value;
-		updateListTodo(editedTodo, newListId);
+		editedTodo.listId = newListId;
 	};
 
 	list.addEventListener('input', handleListIdInput);
@@ -120,7 +113,7 @@ const priorityEventListener = (editedTodo) => {
 
 	const handlePriorityInput = (event) => {
 		const newPriority = event.target.value;
-		updatePriorityTodo(editedTodo, newPriority);
+		editedTodo.priority = newPriority;
 	};
 
 	priority.addEventListener('input', handlePriorityInput);

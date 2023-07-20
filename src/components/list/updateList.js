@@ -1,6 +1,6 @@
 import { createList, customListsArr, today, upcoming } from './createList';
 import { isToday } from 'date-fns';
-import { refreshList, refreshSubList } from './displayList';
+import { refreshList, refreshSubList } from './interface/displayList';
 
 import { saveAllListsMemory, updateListMemory } from '../memory/storage';
 

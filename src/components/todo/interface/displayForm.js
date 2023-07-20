@@ -1,72 +1,7 @@
-import createTodo from './createTodo';
-import { customListsArr } from '../list/createList';
-import { addTodo } from '../list/updateList';
+import { customListsArr } from '../../list/createList';
+import controlForm from '../controller/controlForm';
 
-export default function todoForm() {
-	const todoForm = createTodoForm();
-
-	const handleMouseClick = (event) => {
-		const insideContainer = todoForm.contains(event.target);
-
-		if (!insideContainer) {
-			removeListeners();
-			todoForm.remove();
-		}
-		if (insideContainer) {
-			if (event.target.className === 'deleteTodoEdit') {
-				removeListeners();
-				todoForm.remove();
-			}
-		}
-	};
-
-	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
-			handleSubmit();
-		}
-
-		if (event.code === 'Escape') {
-			removeListeners();
-			todoForm.remove();
-		}
-	};
-
-	function handleSubmit() {
-		const title = todoForm.elements['formTitle'].value;
-		const notes = todoForm.elements['formNotes'].value;
-		const dueDate = todoForm.elements['formDate'].value;
-		const priority = todoForm.elements['formPriority'].value;
-		const listId = Number(todoForm.elements['formList'].value);
-
-		const newTodo = createTodo(title, notes, dueDate, priority, listId);
-
-		removeListeners();
-		todoForm.remove();
-		formReturn(newTodo);
-	}
-
-	function formReturn(newTodo) {
-		addTodo(newTodo);
-	}
-
-	setTimeout(() => {
-		document.addEventListener('click', handleMouseClick);
-		document.addEventListener('keydown', handleKeyDown);
-		todoForm.addEventListener('submit', (event) => {
-			event.preventDefault();
-			handleSubmit();
-		});
-	}, 50);
-
-	function removeListeners() {
-		document.removeEventListener('click', handleMouseClick);
-		document.removeEventListener('keydown', handleKeyDown);
-	}
-
-	return todoForm;
-}
-
-function createTodoForm() {
+export default function createForm() {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -89,6 +24,10 @@ function createTodoForm() {
 
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
+
+	setTimeout(() => {
+		controlForm(todoForm);
+	}, 50);
 
 	return todoForm;
 }

@@ -1,4 +1,5 @@
-import todoForm from '../components/todo/todoForm';
+import createForm from '../components/todo/interface/displayForm';
+import { addTodo } from '../components/list/updateList';
 
 export default function generalController() {
 	const addTodoBtn = document.querySelector('.addTodoBtn');
@@ -10,9 +11,13 @@ function requestForm() {
 	const activeForm = document.querySelector('#todoForm');
 
 	if (!activeForm) {
-		const newTaskForm = todoForm();
+		const newTaskForm = createForm();
 		container.appendChild(newTaskForm);
 		const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
 		titleInput.focus();
 	}
+
+	// function formReturn(newTodo) {
+	// 	addTodo(newTodo);
+	// }
 }

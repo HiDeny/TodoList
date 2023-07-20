@@ -1,11 +1,9 @@
-import controlEditCard from './controlEditCard.js';
+import controlEditCard from '../controller/controlEditCard.js';
 
-import { customListsArr } from '../list/createList.js';
-import { visualizePriority } from './displayCard.js';
+import { customListsArr } from '../../list/createList.js';
+import visualizePriority from './visualizePriority.js';
 
 export default function createTodoEditCard(todo) {
-	const todoLi = document.createElement('li');
-
 	const todoCardEdit = createTodoCardEdit(todo);
 
 	const cancelButton = createCancelButton();
@@ -32,9 +30,8 @@ export default function createTodoEditCard(todo) {
 	setTimeout(() => {
 		controlEditCard(todo, todoCardEdit);
 	}, 50);
-	todoLi.append(todoCardEdit);
 
-	return todoLi;
+	return todoCardEdit;
 }
 
 function createTodoCardEdit(todo) {
@@ -113,7 +110,7 @@ function createListSelector(todo) {
 	return editList;
 }
 
-function createPrioritySelector(todo, todoCardEdit) {
+function createPrioritySelector(todo) {
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
 
