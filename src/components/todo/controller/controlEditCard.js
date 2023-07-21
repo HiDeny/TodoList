@@ -1,4 +1,4 @@
-import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
+// import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
 
 export default function controlEditCard(todo, todoCardEdit) {
 	const originalTodo = { ...todo };
@@ -13,11 +13,11 @@ export default function controlEditCard(todo, todoCardEdit) {
 				todo.listId === editedTodo.listId &&
 				todo.dueDate === editedTodo.dueDate
 			) {
-				replaceOldTodo(todo, editedTodo);
+				// replaceOldTodo(todo, editedTodo);
 				removeListeners();
 			} else {
-				addTodo(editedTodo);
-				removeTodo(todo);
+				// addTodo(editedTodo);
+				// removeTodo(todo);
 				removeListeners();
 			}
 		}
@@ -25,14 +25,14 @@ export default function controlEditCard(todo, todoCardEdit) {
 			if (event.target.type === 'checkbox') {
 				editedTodo.toggleDone;
 				// Remove list control
-				addTodo(editedTodo);
-				removeTodo(todo);
+				// addTodo(editedTodo);
+				// removeTodo(todo);
 				//
 				removeListeners();
 			}
 			if (event.target.className === 'deleteTodoEdit') {
 				// Remove list control
-				removeTodo(todo);
+				// removeTodo(todo);
 				removeListeners();
 			}
 		}

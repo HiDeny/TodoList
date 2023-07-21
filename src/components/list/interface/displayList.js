@@ -15,9 +15,11 @@ export default function displayList(list) {
 	const completedTodos = createCompletedTodos();
 	displayList.append(completedTodos);
 
-	setTimeout(() => {
-		handleDisplayList(list);
-	}, 50);
+	if (list.id > 2) {
+		setTimeout(() => {
+			handleDisplayList(list);
+		}, 50);
+	}
 
 	return displayList;
 }

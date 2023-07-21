@@ -1,7 +1,6 @@
-import { masterListsArr } from '../../mainScreen/controller/controlMainPage';
 import controlForm from '../controller/controlForm';
 
-export default function createForm(masterListsArr) {
+export default function createForm(masterListsArr, formReturn) {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -16,7 +15,7 @@ export default function createForm(masterListsArr) {
 	const dueDateForm = createDateForm();
 	todoForm.append(dueDateForm);
 
-	const listsFrom = createListsForm();
+	const listsFrom = createListsForm(masterListsArr);
 	todoForm.append(listsFrom);
 
 	const priorityForm = createPriorityForm();
@@ -26,7 +25,7 @@ export default function createForm(masterListsArr) {
 	todoForm.append(submitButton);
 
 	setTimeout(() => {
-		controlForm(todoForm);
+		controlForm(todoForm ,formReturn);
 	}, 50);
 
 	return todoForm;
@@ -91,7 +90,7 @@ function createDateForm() {
 	return formDateLabel;
 }
 
-function createListsForm() {
+function createListsForm(masterListsArr) {
 	const formListLabel = createLabel('formList');
 
 	const formList = document.createElement('select');
@@ -99,7 +98,7 @@ function createListsForm() {
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
 	// const visibleList = getVisibleId();
-	const inbox = createInboxOption();
+	const inbox = createInboxOption(masterListsArr);
 	formList.append(inbox);
 
 	masterListsArr.customLists.forEach((option) => {
@@ -112,7 +111,7 @@ function createListsForm() {
 	return formListLabel;
 }
 
-function createInboxOption() {
+function createInboxOption(masterListsArr) {
 	const inbox = masterListsArr.defaultLists[2];
 	const inboxOption = new Option(inbox.title, inbox.id);
 	return inboxOption;

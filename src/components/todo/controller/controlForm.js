@@ -1,6 +1,4 @@
-import createTodo from "../todo";
-
-export default function controlForm(todoForm) {
+export default function controlForm(todoForm, formReturn) {
 	const handleMouseClick = (event) => {
 		const insideContainer = todoForm.contains(event.target);
 
@@ -27,27 +25,25 @@ export default function controlForm(todoForm) {
 		}
 	};
 
-	function handleSubmit() {
-		const newTodo = createTodo();
-		newTodo.title = todoForm.elements['formTitle'].value;
-		newTodo.notes = todoForm.elements['formNotes'].value;
-		newTodo.dueDate = todoForm.elements['formDate'].value;
-		newTodo.priority = todoForm.elements['formPriority'].value;
-		newTodo.listId = Number(todoForm.elements['formList'].value);
-		console.log(newTodo.listId);
-
-		removeListeners();
-		todoForm.remove();
-        console.log(newTodo);
-		return newTodo;
-	}
-
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
 	todoForm.addEventListener('submit', (event) => {
 		event.preventDefault();
 		handleSubmit();
 	});
+
+	function handleSubmit() {
+		const title = todoForm.elements['formTitle'].value;
+		const notes = todoForm.elements['formNotes'].value;
+		const dueDate = todoForm.elements['formDate'].value;
+		const priority = todoForm.elements['formPriority'].value;
+		const listId = Number(todoForm.elements['formList'].value);
+
+		removeListeners();
+		todoForm.remove();
+
+		formReturn({ title, notes, dueDate, priority, listId });
+	}
 
 	function removeListeners() {
 		document.removeEventListener('click', handleMouseClick);

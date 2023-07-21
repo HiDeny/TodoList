@@ -121,7 +121,8 @@ header {
 }
 
 .showSidebar {
-	transform: translateX(0);
+	/* transform: translateX(0); */
+	transform: translateX(-150%);
 }
 
 .defaultLists,
@@ -468,7 +469,7 @@ textarea {
 
 /* TODO CARD - edit */
 
-.todoCardEdit {
+.editCard {
 	position: relative;
 
 	display: grid;

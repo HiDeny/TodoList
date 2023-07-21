@@ -1,16 +1,10 @@
-import { masterListsArr } from '../controller/controlMainPage';
-import displaySidebar from '../../sidebar/interface/displaySidebar';
+import controlMainPage from '../controller/controlMainPage';
 
 export default function mainPage() {
 	// Header
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
 
-	// Container
-	const container = document.createElement('div');
-	container.className = 'container';
-
-	document.body.appendChild(container);
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
@@ -18,19 +12,32 @@ export default function mainPage() {
 
 	headerDiv.prepend(addTodoBtn);
 
-	// Sidebar
-	container.append(displaySidebar(masterListsArr));
-
 	// Menu Button
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
-	// menuButton.addEventListener('click', sidebarComponent.toggleSidebar);
 
 	headerDiv.append(menuButton);
 
-	// Inbox - list
-	// const displayInbox = displayList(inbox);
-	// container.appendChild(displayInbox);
-	// refreshList(inbox);
+	// Container
+	const container = document.createElement('div');
+	container.className = 'container';
+
+	document.body.appendChild(container);
+
+	// List
+	const mainList = document.createElement('div');
+	mainList.className = 'list';
+
+	container.append(mainList);
+
+	// Sidebar
+	const sidebar = document.createElement('div');
+	sidebar.className = 'sidebar';
+
+	container.append(sidebar);
+
+	setTimeout(() => {
+		controlMainPage();
+	}, 50);
 }

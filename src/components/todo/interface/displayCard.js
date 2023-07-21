@@ -7,11 +7,15 @@ import visualizePriority from './visualizePriority';
 export default function displayCard(todo) {
 	const todoCard = createCard();
 
-	const removeButton = createRemoveButton(todoCard, todo);
+	const removeButton = createRemoveButton();
 	todoCard.append(removeButton);
 
-	const checkBox = createCheckBox(todo, todoCard);
+	const checkBox = createCheckBox();
 	todoCard.append(checkBox);
+	if (todo.done) {
+		checkBox.setAttribute('checked', true);
+		todoCard.classList.add('done');
+	}
 
 	const title = createTitle(todo);
 	todoCard.append(title);
@@ -45,14 +49,10 @@ function createRemoveButton() {
 	return cancelButton;
 }
 
-function createCheckBox(todo, todoCard) {
+function createCheckBox() {
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheck';
-	if (todo.done) {
-		checkBox.setAttribute('checked', true);
-		todoCard.classList.add('done');
-	}
 
 	return checkBox;
 }

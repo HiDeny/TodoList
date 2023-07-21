@@ -1,9 +1,8 @@
 import controlEditCard from '../controller/controlEditCard.js';
 
-import { customListsArr } from '../../list/createList.js';
 import visualizePriority from './visualizePriority.js';
 
-export default function createTodoEditCard(todo) {
+export default function displayEditCard(todo, masterListsArr) {
 	const todoCardEdit = createTodoCardEdit(todo);
 
 	const cancelButton = createCancelButton();
@@ -21,7 +20,7 @@ export default function createTodoEditCard(todo) {
 	const editDate = createDueDate(todo);
 	todoCardEdit.append(editDate);
 
-	const editList = createListSelector(todo);
+	const editList = createListSelector(todo, masterListsArr);
 	todoCardEdit.append(editList);
 
 	const editPriority = createPrioritySelector(todo, todoCardEdit);
@@ -37,7 +36,7 @@ export default function createTodoEditCard(todo) {
 function createTodoCardEdit(todo) {
 	const todoCardEdit = document.createElement('div');
 	todoCardEdit.setAttribute('tabindex', '1');
-	todoCardEdit.className = 'todoCardEdit';
+	todoCardEdit.className = 'editCard';
 
 	visualizePriority(todo, todoCardEdit);
 
@@ -97,11 +96,13 @@ function createDueDate(todo) {
 	return editDate;
 }
 
-function createListSelector(todo) {
+function createListSelector(todo, masterListsArr) {
 	const editList = document.createElement('select');
 	editList.className = 'todoListEdit';
+	const inbox = createInboxOption(masterListsArr);
+	editList.append(inbox);
 
-	customListsArr.forEach((option) => {
+	masterListsArr.customLists.forEach((option) => {
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === todo.listId ? true : false;
 		editList.append(optionElement);
@@ -110,6 +111,11 @@ function createListSelector(todo) {
 	return editList;
 }
 
+function createInboxOption(masterListsArr) {
+	const inbox = masterListsArr.defaultLists[2];
+	const inboxOption = new Option(inbox.title, inbox.id);
+	return inboxOption;
+}
 function createPrioritySelector(todo) {
 	const editPriority = document.createElement('select');
 	editPriority.className = 'todoPriorityEdit';
