@@ -1,7 +1,4 @@
-// import { refreshSideLists } from '../../../sidebar/sidebar';
-// import { displayTodoCard } from '../../todo/interface/displayCard';
-// import { inbox } from '../createList';
-import controlDisplayList from '../controller/controlDisplayList';
+import handleDisplayList from '../controller/handleDisplayList';
 
 export default function displayList(list) {
 	const displayList = createDisplayList(list);
@@ -19,7 +16,7 @@ export default function displayList(list) {
 	displayList.append(completedTodos);
 
 	setTimeout(() => {
-		controlDisplayList(list, todoCard);
+		handleDisplayList(list);
 	}, 50);
 
 	return displayList;

@@ -2,7 +2,7 @@ let id = parseInt(localStorage.getItem('listId')) || 0;
 
 function incrementAndStoreId() {
 	id++;
-	localStorage.setItem('listId', id.toString());
+	// localStorage.setItem('listId', id.toString());
 }
 
 export default function createList(title, description) {

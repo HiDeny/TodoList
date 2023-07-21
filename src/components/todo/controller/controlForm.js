@@ -34,6 +34,7 @@ export default function controlForm(todoForm) {
 		newTodo.dueDate = todoForm.elements['formDate'].value;
 		newTodo.priority = todoForm.elements['formPriority'].value;
 		newTodo.listId = Number(todoForm.elements['formList'].value);
+		console.log(newTodo.listId);
 
 		removeListeners();
 		todoForm.remove();

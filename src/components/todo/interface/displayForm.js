@@ -1,7 +1,7 @@
-import { customListsArr } from '../../list/createList';
+import { masterListsArr } from '../../mainScreen/controller/controlMainPage';
 import controlForm from '../controller/controlForm';
 
-export default function createForm() {
+export default function createForm(masterListsArr) {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -98,11 +98,13 @@ function createListsForm() {
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
-	const visibleList = getVisibleId();
+	// const visibleList = getVisibleId();
+	const inbox = createInboxOption();
+	formList.append(inbox);
 
-	customListsArr.forEach((option) => {
+	masterListsArr.customLists.forEach((option) => {
 		const optionElement = new Option(option.title, option.id);
-		optionElement.selected = option.id === Number(visibleList) ? true : false;
+		// optionElement.selected = option.id === Number(visibleList) ? true : false;
 		formList.append(optionElement);
 	});
 
@@ -110,11 +112,17 @@ function createListsForm() {
 	return formListLabel;
 }
 
-function getVisibleId() {
-	const visibleId = document.querySelector('.list').id;
-	if (visibleId < 2) return 2;
-	return visibleId;
+function createInboxOption() {
+	const inbox = masterListsArr.defaultLists[2];
+	const inboxOption = new Option(inbox.title, inbox.id);
+	return inboxOption;
 }
+
+// function getVisibleId() {
+// 	const visibleId = document.querySelector('.list').id;
+// 	if (visibleId < 2) return 2;
+// 	return visibleId;
+// }
 
 function createPriorityForm() {
 	const formPriorityLabel = createLabel('formPriority');

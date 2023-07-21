@@ -112,7 +112,7 @@ header {
 
 	position: fixed;
 	transition: transform 0.3s;
-	transform: translateX(-150%);
+	/* transform: translateX(-150%); */
 
 	top: 6rem;
 	left: 4rem;

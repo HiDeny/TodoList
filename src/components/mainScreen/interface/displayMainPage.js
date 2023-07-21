@@ -1,12 +1,5 @@
-import '../style.css';
-import 'normalize.css';
-
-import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-
-import { sidebar } from '../sidebar/sidebar';
-import { inbox } from '../components/list/createList';
-import { displayList, refreshList } from '../components/list/displayList';
+import { masterListsArr } from '../controller/controlMainPage';
+import displaySidebar from '../../sidebar/interface/displaySidebar';
 
 export default function mainPage() {
 	// Header
@@ -18,7 +11,6 @@ export default function mainPage() {
 	container.className = 'container';
 
 	document.body.appendChild(container);
-
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
@@ -27,19 +19,18 @@ export default function mainPage() {
 	headerDiv.prepend(addTodoBtn);
 
 	// Sidebar
-	const sidebarComponent = sidebar();
-	container.append(sidebarComponent.sidebarDiv);
+	container.append(displaySidebar(masterListsArr));
 
 	// Menu Button
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
-	menuButton.addEventListener('click', sidebarComponent.toggleSidebar);
+	// menuButton.addEventListener('click', sidebarComponent.toggleSidebar);
 
 	headerDiv.append(menuButton);
 
 	// Inbox - list
-	const displayInbox = displayList(inbox);
-	container.appendChild(displayInbox);
-	refreshList(inbox);
+	// const displayInbox = displayList(inbox);
+	// container.appendChild(displayInbox);
+	// refreshList(inbox);
 }
