@@ -7544,15 +7544,25 @@ function createList(title, description) {
 	let _activeTodos = [];
 	let _completedTodos = [];
 
-	function removeTodo(todo) {
-		if (todo.done === false) {
-			_activeTodos.splice(_activeTodos.indexOf(todo), 1);
-		} else {
-			_completedTodos.splice(_completedTodos.indexOf(todo), 1);
-		}
+	// Find
+	function findTodo(todo) {
+		const subList = getSubList(todo);
+		const foundTodo = subList.find((currentTodo) => currentTodo.id === todo.id);
+		return foundTodo;
+	}
+
+	function findTodoIndex(todo) {
+		const subList = getSubList(todo);
+	}
+
+	// SubList
+	function getSubList(todo) {
+		if (!todo.done) return _activeTodos;
+		if (todo.done) return _completedTodos;
 	}
 
 	return {
+		//* LIST
 		title,
 		description,
 		// Get
@@ -7565,26 +7575,7 @@ function createList(title, description) {
 		get completedTodos() {
 			return _completedTodos;
 		},
-		// Add
-		addTodo(todo) {
-			if (todo.done === false) {
-				_activeTodos.push(todo);
-			} else {
-				_completedTodos.push(todo);
-			}
-		},
-		// Remove
-		removeTodo,
-		updateTodo(oldTodo, updatedTodo) {
-			if (todo.done === false)
-				_activeTodos.splice(_activeTodos.indexOf(oldTodo), 1, updatedTodo);
-			if (todo.done === true)
-				_completedTodos.splice(
-					_completedTodos.indexOf(oldTodo),
-					1,
-					updatedTodo
-				);
-		},
+		// Clear SubList
 		clearSubLists(shouldClear) {
 			if (shouldClear === true) {
 				while (_activeTodos.length > 0) {
@@ -7595,9 +7586,26 @@ function createList(title, description) {
 				}
 			}
 		},
+		// Sort
 		sortList() {
 			_activeTodos.sort(compareTodos);
 			_completedTodos.sort(compareTodos);
+		},
+
+		//* TODO
+		// Add
+		addTodo(todo) {
+			const subList = getSubList(todo);
+			subList.push(todo);
+		},
+		// Remove
+		removeTodo(todo) {
+			const subList = getSubList(todo);
+			subList.splice(subList.indexOf(todo), 1);
+		},
+		updateTodo(updatedTodo) {
+			const oldTodo = findTodo(updatedTodo);
+			if (oldTodo) Object.assign(oldTodo, updatedTodo);
 		},
 	};
 }
@@ -7947,10 +7955,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlCard)
 /* harmony export */ });
-/* harmony import */ var _interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../interface/displayEditCard.js */ "./src/components/todo/interface/displayEditCard.js");
+/* harmony import */ var _masterController_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController.js */ "./src/masterController.js");
+/* harmony import */ var _interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interface/displayEditCard.js */ "./src/components/todo/interface/displayEditCard.js");
 
 
-// import { addTodo, removeTodo } from '../../list/updateList.js';
+
 
 function controlCard(todo, todoCard) {
 	const handleMouseClick = (event) => {
@@ -7961,21 +7970,20 @@ function controlCard(todo, todoCard) {
 			return;
 		} else {
 			if (event.target.className === 'deleteTodo') {
-				// removeTodo(todo);
-				// Update todo
+				_masterController_js__WEBPACK_IMPORTED_MODULE_0__["default"].removeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (event.target.type === 'checkbox') {
-				const updatedTodo = { ...todo };
-				updatedTodo.toggleDone;
-				// Remove list control
-				// addTodo(updatedTodo);
-				// removeTodo(todo);
-				//
+				todo.toggleDone;
+				_masterController_js__WEBPACK_IMPORTED_MODULE_0__["default"].completeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (insideContainer) {
-				const editCard = (0,_interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_0__["default"])(todo);
+				const editCard = (0,_interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(todo);
+				console.log('test');
+
 				todoCard.replaceWith(editCard);
+				controlCard(todo, editCard, list);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
+
 				todoCard.removeEventListener('click', handleMouseClick);
 			}
 		}
@@ -7998,124 +8006,145 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlEditCard)
 /* harmony export */ });
-// import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
+
 
 function controlEditCard(todo, todoCardEdit) {
-	const originalTodo = { ...todo };
-	const editedTodo = { ...todo };
+	const updatedTodo = { ...todo };
 
-	// Handle events
+	//* Handle Mouse Event
 	const handleMouseClick = (event) => {
 		const insideContainer = todoCardEdit.contains(event.target);
 
 		if (!insideContainer) {
 			if (
-				todo.listId === editedTodo.listId &&
-				todo.dueDate === editedTodo.dueDate
+				todo.listId !== updatedTodo.listId ||
+				todo.dueDate !== updatedTodo.dueDate
 			) {
-				// replaceOldTodo(todo, editedTodo);
+				_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].moveTodo(todo, updatedTodo);
 				removeListeners();
 			} else {
-				// addTodo(editedTodo);
-				// removeTodo(todo);
+				_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].updatedTodo(todo, updatedTodo);
 				removeListeners();
 			}
 		}
 		if (insideContainer) {
 			if (event.target.type === 'checkbox') {
-				editedTodo.toggleDone;
-				// Remove list control
-				// addTodo(editedTodo);
-				// removeTodo(todo);
-				//
+				updatedTodo.toggleDone;
+				_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].completeTodo(todo);
 				removeListeners();
 			}
 			if (event.target.className === 'deleteTodoEdit') {
-				// Remove list control
-				// removeTodo(todo);
+				_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].removeTodo(todo);
 				removeListeners();
 			}
 		}
 	};
 
-	function removeListeners() {
-		document.removeEventListener('keydown', handleKeyDown);
-		document.removeEventListener('click', handleMouseClick);
-	}
-
+	//* Handle Key Event
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey) {
-			removeTodo(todo);
-			addTodo(editedTodo);
+			_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].updatedTodo(todo, updatedTodo);
 			removeListeners();
 		}
 
 		if (event.code === 'Escape') {
-			removeTodo(todo);
-			addTodo(originalTodo);
+			_masterController__WEBPACK_IMPORTED_MODULE_0__["default"].updatedTodo(todo, todo);
 			removeListeners();
 		}
 	};
 
+	//! Add Listeners
+	(() => {
+		// Title
+		const title = document.querySelector('.todoTitleEdit');
+		title.addEventListener('input', (event) => {
+			updatedTodo.title = event.target.value;
+		});
+
+		// Notes
+		const notes = document.querySelector('.todoNotesEdit');
+		notes.addEventListener('input', (event) => {
+			updatedTodo.notes = event.target.value;
+		});
+
+		// Date
+		const dueDate = document.querySelector('.todoDueDateEdit');
+		dueDate.addEventListener('input', (event) => {
+			updatedTodo.dueDate = event.target.value;
+		});
+
+		// List
+		const list = document.querySelector('.todoListEdit');
+		list.addEventListener('input', (event) => {
+			updatedTodo.listId = event.target.value;
+		});
+
+		// Priority
+		const priority = document.querySelector('.todoPriorityEdit');
+		priority.addEventListener('input', (event) => {
+			updatedTodo.priority = event.target.value;
+		});
+	})();
+
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
 
-	(() => {
-		const title = document.querySelector('.todoTitleEdit');
-
-		title.addEventListener('input', (event) => {
-			editedTodo.title = event.target.value;
-		});
-	})();
-	notesEventListener(editedTodo);
-	dueDateEventListener(editedTodo);
-	listEventListener(editedTodo);
-	priorityEventListener(editedTodo);
+	// Remove Listeners
+	function removeListeners() {
+		document.removeEventListener('keydown', handleKeyDown);
+		document.removeEventListener('click', handleMouseClick);
+	}
 }
 
-const notesEventListener = (editedTodo) => {
-	const notes = document.querySelector('.todoNotesEdit');
+// notesEventListener(updatedTodo);
+// dueDateEventListener(updatedTodo);
+// listEventListener(updatedTodo);
+// priorityEventListener(updatedTodo);
 
-	const handleNotesInput = (event) => {
-		const newNotes = event.target.value;
-		editedTodo.notes = newNotes;
-	};
+// const notesEventListener = (updatedTodo) => {
+// 	const notes = document.querySelector('.todoNotesEdit');
 
-	notes.addEventListener('input', handleNotesInput);
-};
+// 	const handleNotesInput = (event) => {
+// 		const newNotes = event.target.value;
+// 		updatedTodo.notes = newNotes;
+// 	};
 
-const dueDateEventListener = (editedTodo) => {
-	const dueDate = document.querySelector('.todoDueDateEdit');
+// 	notes.addEventListener('input', handleNotesInput);
+// };
 
-	const handleDateInput = (event) => {
-		const newDate = event.target.value;
-		editedTodo.dueDate = newDate;
-	};
+// const dueDateEventListener = (updatedTodo) => {
+// 	const dueDate = document.querySelector('.todoDueDateEdit');
 
-	dueDate.addEventListener('input', handleDateInput);
-};
+// 	const handleDateInput = (event) => {
+// 		const newDate = event.target.value;
+// 		updatedTodo.dueDate = newDate;
+// 	};
 
-const listEventListener = (editedTodo) => {
-	const list = document.querySelector('.todoListEdit');
+// 	dueDate.addEventListener('input', handleDateInput);
+// };
 
-	const handleListIdInput = (event) => {
-		const newListId = event.target.value;
-		editedTodo.listId = newListId;
-	};
+// const listEventListener = (updatedTodo) => {
+// 	const list = document.querySelector('.todoListEdit');
 
-	list.addEventListener('input', handleListIdInput);
-};
+// 	const handleListIdInput = (event) => {
+// 		const newListId = event.target.value;
+// 		updatedTodo.listId = newListId;
+// 	};
 
-const priorityEventListener = (editedTodo) => {
-	const priority = document.querySelector('.todoPriorityEdit');
+// 	list.addEventListener('input', handleListIdInput);
+// };
 
-	const handlePriorityInput = (event) => {
-		const newPriority = event.target.value;
-		editedTodo.priority = newPriority;
-	};
+// const priorityEventListener = (updatedTodo) => {
+// 	const priority = document.querySelector('.todoPriorityEdit');
 
-	priority.addEventListener('input', handlePriorityInput);
-};
+// 	const handlePriorityInput = (event) => {
+// 		const newPriority = event.target.value;
+// 		updatedTodo.priority = newPriority;
+// 	};
+
+// 	priority.addEventListener('input', handlePriorityInput);
+// };
 
 
 /***/ }),
@@ -8130,6 +8159,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlForm)
 /* harmony export */ });
+/* harmony import */ var _interface_helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../interface/helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
+
+
 function controlForm(todoForm, formReturn) {
 	const handleMouseClick = (event) => {
 		const insideContainer = todoForm.contains(event.target);
@@ -8196,15 +8228,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displayCard)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isTomorrow/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isThisYear/index.js");
-/* harmony import */ var _controller_controlCard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlCard */ "./src/components/todo/controller/controlCard.js");
-/* harmony import */ var _visualizePriority__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./visualizePriority */ "./src/components/todo/interface/visualizePriority.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isTomorrow/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/format/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isThisYear/index.js");
+/* harmony import */ var _helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
 
 
-
+// import controlCard from '../controller/controlCard';
 
 
 
@@ -8227,12 +8258,12 @@ function displayCard(todo) {
 	const dueDate = createDueDate(todo);
 	todoCard.append(dueDate);
 
-	(0,_visualizePriority__WEBPACK_IMPORTED_MODULE_1__["default"])(todo, todoCard);
+	(0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__["default"])(todo, todoCard);
 	removeFlatpickrDiv();
 
-	setTimeout(() => {
-		(0,_controller_controlCard__WEBPACK_IMPORTED_MODULE_0__["default"])(todo, todoCard);
-	}, 50);
+	// setTimeout(() => {
+	// 	controlCard(todo, todoCard);
+	// }, 50);
 
 	return todoCard;
 }
@@ -8280,11 +8311,11 @@ function createDueDate(todo) {
 function selectDateName(dueDate) {
 	const dateToCheck = new Date(dueDate);
 
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(dateToCheck)) return 'Today';
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateToCheck)) return 'Tomorrow';
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_1__["default"])(dateToCheck)) return 'Today';
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_2__["default"])(dateToCheck)) return 'Tomorrow';
 
-	const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateToCheck, 'dd MMM');
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dateToCheck)) return formattedDate;
+	const formattedDate = (0,date_fns__WEBPACK_IMPORTED_MODULE_3__["default"])(dateToCheck, 'dd MMM');
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_4__["default"])(dateToCheck)) return formattedDate;
 
 	return dueDate;
 }
@@ -8309,8 +8340,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ displayEditCard)
 /* harmony export */ });
 /* harmony import */ var _controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlEditCard.js */ "./src/components/todo/controller/controlEditCard.js");
-/* harmony import */ var _visualizePriority_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./visualizePriority.js */ "./src/components/todo/interface/visualizePriority.js");
-
+/* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helperFunctions.js */ "./src/components/todo/interface/helperFunctions.js");
 
 
 
@@ -8320,8 +8350,12 @@ function displayEditCard(todo, masterListsArr) {
 	const cancelButton = createCancelButton();
 	todoCardEdit.append(cancelButton);
 
-	const checkBox = createCheckBox(todo, todoLi);
+	const checkBox = createCheckBox(todo);
 	todoCardEdit.append(checkBox);
+	if (todo.done) {
+		checkBox.setAttribute('checked', true);
+		todoCardEdit.classList.add('done');
+	}
 
 	const editTitle = createTitle(todo);
 	todoCardEdit.append(editTitle);
@@ -8350,7 +8384,7 @@ function createTodoCardEdit(todo) {
 	todoCardEdit.setAttribute('tabindex', '1');
 	todoCardEdit.className = 'editCard';
 
-	(0,_visualizePriority_js__WEBPACK_IMPORTED_MODULE_1__["default"])(todo, todoCardEdit);
+	(0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.visualizePriority)(todo, todoCardEdit);
 
 	return todoCardEdit;
 }
@@ -8363,14 +8397,10 @@ function createCancelButton() {
 	return cancelButton;
 }
 
-function createCheckBox(todo, todoLi) {
+function createCheckBox(todo) {
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheckEdit';
-	if (todo.done) {
-		checkBox.setAttribute('checked', true);
-		todoLi.classList.add('done');
-	}
 
 	return checkBox;
 }
@@ -8408,52 +8438,67 @@ function createDueDate(todo) {
 	return editDate;
 }
 
-function createListSelector(todo, masterListsArr) {
-	const editList = document.createElement('select');
+function createListSelector(todo) {
+	const editList = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.createListSelector)(todo.listId);
 	editList.className = 'todoListEdit';
-	const inbox = createInboxOption(masterListsArr);
-	editList.append(inbox);
-
-	masterListsArr.customLists.forEach((option) => {
-		const optionElement = new Option(option.title, option.id);
-		optionElement.selected = option.id === todo.listId ? true : false;
-		editList.append(optionElement);
-	});
 
 	return editList;
 }
 
-function createInboxOption(masterListsArr) {
-	const inbox = masterListsArr.defaultLists[2];
-	const inboxOption = new Option(inbox.title, inbox.id);
-	return inboxOption;
-}
 function createPrioritySelector(todo) {
-	const editPriority = document.createElement('select');
+	const editPriority = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.createPrioritySelector)(!todo.priority, todo.priority);
 	editPriority.className = 'todoPriorityEdit';
-
-	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-		{ value: '', text: 'None' },
-	];
-
-	priorityOptions.forEach((option) => {
-		const optionElement = new Option(option.text, option.value);
-		optionElement.selected = option.value === todo.priority ? true : false;
-		editPriority.append(optionElement);
-	});
-
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = !todo.priority ? true : false;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
-	editPriority.append(placeholderPriority);
 
 	return editPriority;
 }
+
+// function createListSelector(todo, masterListsArr) {
+// 	const editList = document.createElement('select');
+// 	editList.className = 'todoListEdit';
+// 	const inbox = createInboxOption(masterListsArr);
+// 	editList.append(inbox);
+
+// 	masterListsArr.customLists.forEach((option) => {
+// 		const optionElement = new Option(option.title, option.id);
+// 		optionElement.selected = option.id === todo.listId ? true : false;
+// 		editList.append(optionElement);
+// 	});
+
+// 	return editList;
+// }
+
+// function createInboxOption(masterListsArr) {
+// 	const inbox = masterListsArr.defaultLists[2];
+// 	const inboxOption = new Option(inbox.title, inbox.id);
+// 	return inboxOption;
+// }
+
+// function createPrioritySelector(todo) {
+// 	const editPriority = document.createElement('select');
+// 	editPriority.className = 'todoPriorityEdit';
+
+// 	const priorityOptions = [
+// 		{ value: 'high', text: 'High' },
+// 		{ value: 'medium', text: 'Medium' },
+// 		{ value: 'low', text: 'Low' },
+// 		{ value: '', text: 'None' },
+// 	];
+
+// 	priorityOptions.forEach((option) => {
+// 		const optionElement = new Option(option.text, option.value);
+// 		optionElement.selected = option.value === todo.priority ? true : false;
+// 		editPriority.append(optionElement);
+// 	});
+
+// 	const placeholderPriority = new Option('Priority', '');
+// 	placeholderPriority.className = 'placeholderPri';
+// 	placeholderPriority.selected = !todo.priority ? true : false;
+// 	placeholderPriority.disabled = true;
+// 	placeholderPriority.hidden = true;
+// 	editPriority.append(placeholderPriority);
+
+// 	return editPriority;
+// }
 
 
 /***/ }),
@@ -8468,7 +8513,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createForm)
 /* harmony export */ });
-/* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlForm */ "./src/components/todo/controller/controlForm.js");
+/* harmony import */ var _helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
+/* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controller/controlForm */ "./src/components/todo/controller/controlForm.js");
+
+
 
 
 function createForm(masterListsArr, formReturn) {
@@ -8496,7 +8544,7 @@ function createForm(masterListsArr, formReturn) {
 	todoForm.append(submitButton);
 
 	setTimeout(() => {
-		(0,_controller_controlForm__WEBPACK_IMPORTED_MODULE_0__["default"])(todoForm ,formReturn);
+		(0,_controller_controlForm__WEBPACK_IMPORTED_MODULE_1__["default"])(todoForm, formReturn);
 	}, 50);
 
 	return todoForm;
@@ -8561,65 +8609,25 @@ function createDateForm() {
 	return formDateLabel;
 }
 
-function createListsForm(masterListsArr) {
+function createListsForm() {
 	const formListLabel = createLabel('formList');
 
-	const formList = document.createElement('select');
+	const formList = (0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.createListSelector)();
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
-	// const visibleList = getVisibleId();
-	const inbox = createInboxOption(masterListsArr);
-	formList.append(inbox);
-
-	masterListsArr.customLists.forEach((option) => {
-		const optionElement = new Option(option.title, option.id);
-		// optionElement.selected = option.id === Number(visibleList) ? true : false;
-		formList.append(optionElement);
-	});
 
 	formListLabel.append(formList);
 	return formListLabel;
 }
 
-function createInboxOption(masterListsArr) {
-	const inbox = masterListsArr.defaultLists[2];
-	const inboxOption = new Option(inbox.title, inbox.id);
-	return inboxOption;
-}
-
-// function getVisibleId() {
-// 	const visibleId = document.querySelector('.list').id;
-// 	if (visibleId < 2) return 2;
-// 	return visibleId;
-// }
-
 function createPriorityForm() {
 	const formPriorityLabel = createLabel('formPriority');
 
-	const formPriority = document.createElement('select');
+	const formPriority = (0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.createPrioritySelector)();
 	formPriority.setAttribute('id', 'formPriority');
 	formPriority.setAttribute('name', 'formPriority');
 	formPriority.className = 'formPriority';
-
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = true;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
-	formPriority.append(placeholderPriority);
-
-	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-		{ value: '', text: 'None' },
-	];
-
-	priorityOptions.forEach((option) => {
-		const optionElement = new Option(option.text, option.value);
-		formPriority.append(optionElement);
-	});
 
 	formPriorityLabel.append(formPriority);
 	return formPriorityLabel;
@@ -8642,20 +8650,171 @@ function createLabel(name) {
 	return label;
 }
 
+// function createInboxOption(masterListsArr) {
+// 	const inbox = masterListsArr.defaultLists[2];
+// 	const inboxOption = new Option(inbox.title, inbox.id);
+// 	return inboxOption;
+// }
+
+// function createListsForm(masterListsArr) {
+// 	const formListLabel = createLabel('formList');
+
+// 	const formList = document.createElement('select');
+// 	formList.setAttribute('id', 'formList');
+// 	formList.setAttribute('name', 'formList');
+// 	formList.className = 'formList';
+// 	// const visibleList = getVisibleId();
+// 	const inbox = createInboxOption(masterListsArr);
+// 	formList.append(inbox);
+
+// 	masterListsArr.customLists.forEach((option) => {
+// 		const optionElement = new Option(option.title, option.id);
+// 		// optionElement.selected = option.id === Number(visibleList) ? true : false;
+// 		formList.append(optionElement);
+// 	});
+
+// 	formListLabel.append(formList);
+// 	return formListLabel;
+// }
+
+// function createInboxOption(masterListsArr) {
+// 	const inbox = masterListsArr.defaultLists[2];
+// 	const inboxOption = new Option(inbox.title, inbox.id);
+// 	return inboxOption;
+// }
+
+// function getVisibleId() {
+// 	const visibleId = document.querySelector('.list').id;
+// 	if (visibleId < 2) return 2;
+// 	return visibleId;
+// }
+
+// function createPriorityForm() {
+// 	const formPriorityLabel = createLabel('formPriority');
+
+// 	const formPriority = document.createElement('select');
+// 	formPriority.setAttribute('id', 'formPriority');
+// 	formPriority.setAttribute('name', 'formPriority');
+// 	formPriority.className = 'formPriority';
+
+// 	const placeholderPriority = new Option('Priority', '');
+// 	placeholderPriority.className = 'placeholderPri';
+// 	placeholderPriority.selected = true;
+// 	placeholderPriority.disabled = true;
+// 	placeholderPriority.hidden = true;
+// 	formPriority.append(placeholderPriority);
+
+// 	const priorityOptions = [
+// 		{ value: 'high', text: 'High' },
+// 		{ value: 'medium', text: 'Medium' },
+// 		{ value: 'low', text: 'Low' },
+// 		{ value: '', text: 'None' },
+// 	];
+
+// 	priorityOptions.forEach((option) => {
+// 		const optionElement = new Option(option.text, option.value);
+// 		formPriority.append(optionElement);
+// 	});
+
+// 	formPriorityLabel.append(formPriority);
+// 	return formPriorityLabel;
+// }
+
 
 /***/ }),
 
-/***/ "./src/components/todo/interface/visualizePriority.js":
-/*!************************************************************!*\
-  !*** ./src/components/todo/interface/visualizePriority.js ***!
-  \************************************************************/
+/***/ "./src/components/todo/interface/helperFunctions.js":
+/*!**********************************************************!*\
+  !*** ./src/components/todo/interface/helperFunctions.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ visualizePriority)
+/* harmony export */   createListSelector: () => (/* binding */ createListSelector),
+/* harmony export */   createPrioritySelector: () => (/* binding */ createPrioritySelector),
+/* harmony export */   visualizePriority: () => (/* binding */ visualizePriority)
 /* harmony export */ });
-function visualizePriority(todo, card) {
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
+
+
+// List Selector
+// selectedId - displayed List ID / todo List ID
+function createListSelector(selectedId = 2) {
+	// Div
+	const listSelector = document.createElement('select');
+
+	createInboxOption(listSelector);
+	populateListSelector(listSelector, selectedId);
+
+	return listSelector;
+}
+
+function createInboxOption(div) {
+	const inbox = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterListsArr.defaultLists[2];
+	div.append(new Option(inbox.title, inbox.id));
+}
+
+function populateListSelector(div, selectedId) {
+	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterListsArr.customLists.forEach((option) => {
+		const optionElement = new Option(option.title, option.id);
+		optionElement.selected = option.id === selectedId ? true : false;
+		div.append(optionElement);
+	});
+}
+
+// Priority Selector
+function createPrioritySelector(
+	withPlaceholder = true,
+	currentPriority = false
+) {
+	// Div
+	const prioritySelector = document.createElement('select');
+
+	// Placeholder
+	const placeholderPriority = new Option('Priority', '');
+	placeholderPriority.className = 'placeholderPri';
+	placeholderPriority.selected = withPlaceholder;
+	placeholderPriority.disabled = true;
+	placeholderPriority.hidden = true;
+	prioritySelector.append(placeholderPriority);
+
+	// const withPlaceholder = !todo.priority ? true : false;
+	//* Card
+	// placeholderPriority.selected = !todo.priority ? true : false;
+	//* Form
+	// placeholderPriority.selected = true;
+	//* Solution
+
+	// Options
+	const priorityOptions = [
+		{ value: 'high', text: 'High' },
+		{ value: 'medium', text: 'Medium' },
+		{ value: 'low', text: 'Low' },
+		{ value: '', text: 'None' },
+	];
+
+	// Append Options
+
+	priorityOptions.forEach((option) => {
+		const optionElement = new Option(option.text, option.value);
+
+		//* Card
+
+		// optionElement.selected = option.value === todo.priority ? true : false;
+		if (currentPriority) {
+			optionElement.selected = option.value === currentPriority ? true : false;
+		}
+
+		prioritySelector.append(optionElement);
+	});
+
+	return prioritySelector;
+}
+
+// Display Priority
+function visualizePriority(priority = '', card) {
+	const priorityValue = priority.toLowerCase();
 	const priorityClassMap = {
 		high: 'high',
 		medium: 'medium',
@@ -8663,11 +8822,12 @@ function visualizePriority(todo, card) {
 		none: '',
 	};
 	card.classList.remove('high', 'medium', 'low');
-	const priorityClass = priorityClassMap[todo.priority];
+	const priorityClass = priorityClassMap[priorityValue];
 	if (priorityClass && priorityClass !== '') {
 		card.classList.add(priorityClass);
 	}
 }
+
 
 /***/ }),
 
@@ -8681,7 +8841,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
 /* harmony export */ });
+let id = parseInt(localStorage.getItem('todoId')) || 0;
+
+function incrementAndStoreId() {
+	id++;
+	// localStorage.setItem('listId', id.toString());
+}
+
 function createTodo(title, notes, dueDate, priority) {
+	let _todoId = id;
+	incrementAndStoreId();
 	let _done = false;
 	let _dateList = null;
 	let _listId = 0;
@@ -8691,26 +8860,27 @@ function createTodo(title, notes, dueDate, priority) {
 		notes,
 		dueDate,
 		priority,
-		// get coreInformation() {
-		// 	return { title, notes, dueDate, priority, _done, _dateList, _listId };
-		// },
+		
+		get id() {
+			return _todoId;
+		},
 		get done() {
 			return _done;
 		},
 		toggleDone() {
 			_done = !_done;
 		},
-		get dateList() {
-			return _dateList;
-		},
-		set dateList(newDateList) {
-			_dateList = newDateList;
-		},
 		get listId() {
 			return _listId;
 		},
 		set listId(newListId) {
 			_listId = newListId;
+		},
+		get dateList() {
+			return _dateList;
+		},
+		set dateList(newDateList) {
+			_dateList = newDateList;
 		},
 	};
 }
@@ -8754,7 +8924,7 @@ function firstSetup(masterListsArr) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ screenController),
+/* harmony export */   "default": () => (/* binding */ masterController),
 /* harmony export */   inboxDisplay: () => (/* binding */ inboxDisplay),
 /* harmony export */   masterListsArr: () => (/* binding */ masterListsArr),
 /* harmony export */   requestForm: () => (/* binding */ requestForm),
@@ -8766,8 +8936,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/todo/interface/displayForm.js */ "./src/components/todo/interface/displayForm.js");
 /* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
 /* harmony import */ var _components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/todo/interface/displayCard.js */ "./src/components/todo/interface/displayCard.js");
-/* harmony import */ var _components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/list/interface/displayList.js */ "./src/components/list/interface/displayList.js");
-/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
+/* harmony import */ var _components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/todo/controller/controlCard.js */ "./src/components/todo/controller/controlCard.js");
+/* harmony import */ var _components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/interface/displayList.js */ "./src/components/list/interface/displayList.js");
+/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
 
 
 
@@ -8780,15 +8951,83 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+//* Master List
 const masterListsArr = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 (0,_firstRun_js__WEBPACK_IMPORTED_MODULE_0__["default"])(masterListsArr);
 const inbox = masterListsArr.findList(2);
 
-const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_6__["default"])(masterListsArr);
-const inboxDisplay = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_5__["default"])(inbox);
 
-function screenController() {}
+function masterController(masterListsArr) {
+	// Find List
+	// Find dateList
+	// Refresh
 
+	return {
+		createTodo() {
+			// Create Form
+			// Use form data
+			// Date List?
+			// Find List
+			// Add todo
+		},
+		completeTodo(todo) {
+			// Unfinished todo
+			// Remove unfinished
+			// Add finished
+			// Refresh
+		},
+		addTodo(todo) {
+			// Find List
+			// Date List?
+			// Add Todo
+			// Refresh
+		},
+		removeTodo(todo) {
+			// Find List
+			// Date List?
+			// Remove Todo
+			// Refresh
+		},
+		updateTodo(oldTodo, updatedTodo) {
+			// Find List
+			// Date List?
+			// Update todo
+			// Display Card
+			// Refresh
+		},
+		moveTodo(oldTodo, updatedTodo) {
+			// Find List
+			// Date List?
+			// Add new Todo
+			// Remove old Todo
+			// Refresh
+		},
+	};
+}
+
+
+//* Sidebar
+const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_7__["default"])(masterListsArr);
+const inboxDisplay = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_6__["default"])(inbox);
+
+function toggleSidebar() {
+	const sidebar = document.querySelector('.sidebar');
+
+	if (sidebar.classList.contains('showSidebar')) {
+		sidebar.classList.remove('showSidebar');
+	} else {
+		sidebar.classList.add('showSidebar');
+	}
+}
+
+function sidebarButtonHandleClick(list) {
+	refreshList(list);
+}
+
+//* List
+
+//* Todo
 function requestForm() {
 	const container = document.querySelector('div.container');
 	const activeForm = document.querySelector('#todoForm');
@@ -8815,26 +9054,20 @@ function formReturn(formData) {
 	refreshActiveList(inbox);
 }
 
-function toggleSidebar() {
-	const sidebar = document.querySelector('.sidebar');
+//* Memory
 
-	if (sidebar.classList.contains('showSidebar')) {
-		sidebar.classList.remove('showSidebar');
-	} else {
-		sidebar.classList.add('showSidebar');
-	}
-}
-
-function sidebarButtonHandleClick(list) {
-	refreshList(list);
-}
-
+//* Screen
 function refreshActiveList(list) {
 	const newSubListDiv = document.createElement('div');
 	// newVisual.className = listClass;
 
 	list.activeTodos.forEach((todo) => {
-		newSubListDiv.appendChild((0,_components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__["default"])(todo));
+		// const list = masterListsArr.findList(todo.listId);
+		console.log(list);
+		const todoCard = (0,_components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__["default"])(todo);
+		(0,_components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__["default"])(todo, todoCard, list);
+
+		newSubListDiv.appendChild(todoCard);
 	});
 
 	// const oldUl = document.querySelector(`.${listClass}`);
@@ -8866,8 +9099,6 @@ function refreshCompletedList(list) {
 // 	const subList = nextStep;
 // 	const sortedList = sortList(subList);
 
-//
-
 // function checkSubList(list) {
 // 	if (list.activeTodos.length > 0) refreshSubList(list.activeTodos[0]);
 // 	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
@@ -8896,7 +9127,7 @@ function replaceOldList(list) {
 	const visibleList = document.querySelector('.list');
 	if (Number(visibleList.id) === list.id) return;
 
-	const newList = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_5__["default"])(list);
+	const newList = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_6__["default"])(list);
 	visibleList.replaceWith(newList);
 }
 
@@ -8904,10 +9135,6 @@ function refreshSideLists() {
 	const currentLists = document.querySelector('.customLists');
 	currentLists.replaceWith(createCustomLists(customListsArr));
 }
-
-// Refresh Screen
-// Show new list
-// Screen controller?
 
 
 /***/ }),

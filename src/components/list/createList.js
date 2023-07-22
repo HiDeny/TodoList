@@ -11,15 +11,25 @@ export default function createList(title, description) {
 	let _activeTodos = [];
 	let _completedTodos = [];
 
-	function removeTodo(todo) {
-		if (todo.done === false) {
-			_activeTodos.splice(_activeTodos.indexOf(todo), 1);
-		} else {
-			_completedTodos.splice(_completedTodos.indexOf(todo), 1);
-		}
+	// Find
+	function findTodo(todo) {
+		const subList = getSubList(todo);
+		const foundTodo = subList.find((currentTodo) => currentTodo.id === todo.id);
+		return foundTodo;
+	}
+
+	function findTodoIndex(todo) {
+		const subList = getSubList(todo);
+	}
+
+	// SubList
+	function getSubList(todo) {
+		if (!todo.done) return _activeTodos;
+		if (todo.done) return _completedTodos;
 	}
 
 	return {
+		//* LIST
 		title,
 		description,
 		// Get
@@ -32,26 +42,7 @@ export default function createList(title, description) {
 		get completedTodos() {
 			return _completedTodos;
 		},
-		// Add
-		addTodo(todo) {
-			if (todo.done === false) {
-				_activeTodos.push(todo);
-			} else {
-				_completedTodos.push(todo);
-			}
-		},
-		// Remove
-		removeTodo,
-		updateTodo(oldTodo, updatedTodo) {
-			if (todo.done === false)
-				_activeTodos.splice(_activeTodos.indexOf(oldTodo), 1, updatedTodo);
-			if (todo.done === true)
-				_completedTodos.splice(
-					_completedTodos.indexOf(oldTodo),
-					1,
-					updatedTodo
-				);
-		},
+		// Clear SubList
 		clearSubLists(shouldClear) {
 			if (shouldClear === true) {
 				while (_activeTodos.length > 0) {
@@ -62,9 +53,26 @@ export default function createList(title, description) {
 				}
 			}
 		},
+		// Sort
 		sortList() {
 			_activeTodos.sort(compareTodos);
 			_completedTodos.sort(compareTodos);
+		},
+
+		//* TODO
+		// Add
+		addTodo(todo) {
+			const subList = getSubList(todo);
+			subList.push(todo);
+		},
+		// Remove
+		removeTodo(todo) {
+			const subList = getSubList(todo);
+			subList.splice(subList.indexOf(todo), 1);
+		},
+		updateTodo(updatedTodo) {
+			const oldTodo = findTodo(updatedTodo);
+			if (oldTodo) Object.assign(oldTodo, updatedTodo);
 		},
 	};
 }

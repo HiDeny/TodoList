@@ -1,3 +1,5 @@
+import { visualizePriority } from '../interface/helperFunctions';
+
 export default function controlForm(todoForm, formReturn) {
 	const handleMouseClick = (event) => {
 		const insideContainer = todoForm.contains(event.target);

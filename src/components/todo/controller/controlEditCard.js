@@ -1,118 +1,138 @@
-// import { addTodo, removeTodo, replaceOldTodo } from '../../list/updateList';
+import masterController from '../../../masterController';
 
 export default function controlEditCard(todo, todoCardEdit) {
-	const originalTodo = { ...todo };
-	const editedTodo = { ...todo };
+	const updatedTodo = { ...todo };
 
-	// Handle events
+	//* Handle Mouse Event
 	const handleMouseClick = (event) => {
 		const insideContainer = todoCardEdit.contains(event.target);
 
 		if (!insideContainer) {
 			if (
-				todo.listId === editedTodo.listId &&
-				todo.dueDate === editedTodo.dueDate
+				todo.listId !== updatedTodo.listId ||
+				todo.dueDate !== updatedTodo.dueDate
 			) {
-				// replaceOldTodo(todo, editedTodo);
+				masterController.moveTodo(todo, updatedTodo);
 				removeListeners();
 			} else {
-				// addTodo(editedTodo);
-				// removeTodo(todo);
+				masterController.updatedTodo(todo, updatedTodo);
 				removeListeners();
 			}
 		}
 		if (insideContainer) {
 			if (event.target.type === 'checkbox') {
-				editedTodo.toggleDone;
-				// Remove list control
-				// addTodo(editedTodo);
-				// removeTodo(todo);
-				//
+				updatedTodo.toggleDone;
+				masterController.completeTodo(todo);
 				removeListeners();
 			}
 			if (event.target.className === 'deleteTodoEdit') {
-				// Remove list control
-				// removeTodo(todo);
+				masterController.removeTodo(todo);
 				removeListeners();
 			}
 		}
 	};
 
-	function removeListeners() {
-		document.removeEventListener('keydown', handleKeyDown);
-		document.removeEventListener('click', handleMouseClick);
-	}
-
+	//* Handle Key Event
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey) {
-			removeTodo(todo);
-			addTodo(editedTodo);
+			masterController.updatedTodo(todo, updatedTodo);
 			removeListeners();
 		}
 
 		if (event.code === 'Escape') {
-			removeTodo(todo);
-			addTodo(originalTodo);
+			masterController.updatedTodo(todo, todo);
 			removeListeners();
 		}
 	};
 
+	//! Add Listeners
+	(() => {
+		// Title
+		const title = document.querySelector('.todoTitleEdit');
+		title.addEventListener('input', (event) => {
+			updatedTodo.title = event.target.value;
+		});
+
+		// Notes
+		const notes = document.querySelector('.todoNotesEdit');
+		notes.addEventListener('input', (event) => {
+			updatedTodo.notes = event.target.value;
+		});
+
+		// Date
+		const dueDate = document.querySelector('.todoDueDateEdit');
+		dueDate.addEventListener('input', (event) => {
+			updatedTodo.dueDate = event.target.value;
+		});
+
+		// List
+		const list = document.querySelector('.todoListEdit');
+		list.addEventListener('input', (event) => {
+			updatedTodo.listId = event.target.value;
+		});
+
+		// Priority
+		const priority = document.querySelector('.todoPriorityEdit');
+		priority.addEventListener('input', (event) => {
+			updatedTodo.priority = event.target.value;
+		});
+	})();
+
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
 
-	(() => {
-		const title = document.querySelector('.todoTitleEdit');
-
-		title.addEventListener('input', (event) => {
-			editedTodo.title = event.target.value;
-		});
-	})();
-	notesEventListener(editedTodo);
-	dueDateEventListener(editedTodo);
-	listEventListener(editedTodo);
-	priorityEventListener(editedTodo);
+	// Remove Listeners
+	function removeListeners() {
+		document.removeEventListener('keydown', handleKeyDown);
+		document.removeEventListener('click', handleMouseClick);
+	}
 }
 
-const notesEventListener = (editedTodo) => {
-	const notes = document.querySelector('.todoNotesEdit');
+// notesEventListener(updatedTodo);
+// dueDateEventListener(updatedTodo);
+// listEventListener(updatedTodo);
+// priorityEventListener(updatedTodo);
 
-	const handleNotesInput = (event) => {
-		const newNotes = event.target.value;
-		editedTodo.notes = newNotes;
-	};
+// const notesEventListener = (updatedTodo) => {
+// 	const notes = document.querySelector('.todoNotesEdit');
 
-	notes.addEventListener('input', handleNotesInput);
-};
+// 	const handleNotesInput = (event) => {
+// 		const newNotes = event.target.value;
+// 		updatedTodo.notes = newNotes;
+// 	};
 
-const dueDateEventListener = (editedTodo) => {
-	const dueDate = document.querySelector('.todoDueDateEdit');
+// 	notes.addEventListener('input', handleNotesInput);
+// };
 
-	const handleDateInput = (event) => {
-		const newDate = event.target.value;
-		editedTodo.dueDate = newDate;
-	};
+// const dueDateEventListener = (updatedTodo) => {
+// 	const dueDate = document.querySelector('.todoDueDateEdit');
 
-	dueDate.addEventListener('input', handleDateInput);
-};
+// 	const handleDateInput = (event) => {
+// 		const newDate = event.target.value;
+// 		updatedTodo.dueDate = newDate;
+// 	};
 
-const listEventListener = (editedTodo) => {
-	const list = document.querySelector('.todoListEdit');
+// 	dueDate.addEventListener('input', handleDateInput);
+// };
 
-	const handleListIdInput = (event) => {
-		const newListId = event.target.value;
-		editedTodo.listId = newListId;
-	};
+// const listEventListener = (updatedTodo) => {
+// 	const list = document.querySelector('.todoListEdit');
 
-	list.addEventListener('input', handleListIdInput);
-};
+// 	const handleListIdInput = (event) => {
+// 		const newListId = event.target.value;
+// 		updatedTodo.listId = newListId;
+// 	};
 
-const priorityEventListener = (editedTodo) => {
-	const priority = document.querySelector('.todoPriorityEdit');
+// 	list.addEventListener('input', handleListIdInput);
+// };
 
-	const handlePriorityInput = (event) => {
-		const newPriority = event.target.value;
-		editedTodo.priority = newPriority;
-	};
+// const priorityEventListener = (updatedTodo) => {
+// 	const priority = document.querySelector('.todoPriorityEdit');
 
-	priority.addEventListener('input', handlePriorityInput);
-};
+// 	const handlePriorityInput = (event) => {
+// 		const newPriority = event.target.value;
+// 		updatedTodo.priority = newPriority;
+// 	};
+
+// 	priority.addEventListener('input', handlePriorityInput);
+// };

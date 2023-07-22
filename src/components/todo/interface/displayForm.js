@@ -1,3 +1,5 @@
+import { createListSelector, createPrioritySelector } from './helperFunctions';
+
 import controlForm from '../controller/controlForm';
 
 export default function createForm(masterListsArr, formReturn) {
@@ -25,7 +27,7 @@ export default function createForm(masterListsArr, formReturn) {
 	todoForm.append(submitButton);
 
 	setTimeout(() => {
-		controlForm(todoForm ,formReturn);
+		controlForm(todoForm, formReturn);
 	}, 50);
 
 	return todoForm;
@@ -90,65 +92,25 @@ function createDateForm() {
 	return formDateLabel;
 }
 
-function createListsForm(masterListsArr) {
+function createListsForm() {
 	const formListLabel = createLabel('formList');
 
-	const formList = document.createElement('select');
+	const formList = createListSelector();
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
-	// const visibleList = getVisibleId();
-	const inbox = createInboxOption(masterListsArr);
-	formList.append(inbox);
-
-	masterListsArr.customLists.forEach((option) => {
-		const optionElement = new Option(option.title, option.id);
-		// optionElement.selected = option.id === Number(visibleList) ? true : false;
-		formList.append(optionElement);
-	});
 
 	formListLabel.append(formList);
 	return formListLabel;
 }
 
-function createInboxOption(masterListsArr) {
-	const inbox = masterListsArr.defaultLists[2];
-	const inboxOption = new Option(inbox.title, inbox.id);
-	return inboxOption;
-}
-
-// function getVisibleId() {
-// 	const visibleId = document.querySelector('.list').id;
-// 	if (visibleId < 2) return 2;
-// 	return visibleId;
-// }
-
 function createPriorityForm() {
 	const formPriorityLabel = createLabel('formPriority');
 
-	const formPriority = document.createElement('select');
+	const formPriority = createPrioritySelector();
 	formPriority.setAttribute('id', 'formPriority');
 	formPriority.setAttribute('name', 'formPriority');
 	formPriority.className = 'formPriority';
-
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = true;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
-	formPriority.append(placeholderPriority);
-
-	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-		{ value: '', text: 'None' },
-	];
-
-	priorityOptions.forEach((option) => {
-		const optionElement = new Option(option.text, option.value);
-		formPriority.append(optionElement);
-	});
 
 	formPriorityLabel.append(formPriority);
 	return formPriorityLabel;
@@ -170,3 +132,73 @@ function createLabel(name) {
 
 	return label;
 }
+
+// function createInboxOption(masterListsArr) {
+// 	const inbox = masterListsArr.defaultLists[2];
+// 	const inboxOption = new Option(inbox.title, inbox.id);
+// 	return inboxOption;
+// }
+
+// function createListsForm(masterListsArr) {
+// 	const formListLabel = createLabel('formList');
+
+// 	const formList = document.createElement('select');
+// 	formList.setAttribute('id', 'formList');
+// 	formList.setAttribute('name', 'formList');
+// 	formList.className = 'formList';
+// 	// const visibleList = getVisibleId();
+// 	const inbox = createInboxOption(masterListsArr);
+// 	formList.append(inbox);
+
+// 	masterListsArr.customLists.forEach((option) => {
+// 		const optionElement = new Option(option.title, option.id);
+// 		// optionElement.selected = option.id === Number(visibleList) ? true : false;
+// 		formList.append(optionElement);
+// 	});
+
+// 	formListLabel.append(formList);
+// 	return formListLabel;
+// }
+
+// function createInboxOption(masterListsArr) {
+// 	const inbox = masterListsArr.defaultLists[2];
+// 	const inboxOption = new Option(inbox.title, inbox.id);
+// 	return inboxOption;
+// }
+
+// function getVisibleId() {
+// 	const visibleId = document.querySelector('.list').id;
+// 	if (visibleId < 2) return 2;
+// 	return visibleId;
+// }
+
+// function createPriorityForm() {
+// 	const formPriorityLabel = createLabel('formPriority');
+
+// 	const formPriority = document.createElement('select');
+// 	formPriority.setAttribute('id', 'formPriority');
+// 	formPriority.setAttribute('name', 'formPriority');
+// 	formPriority.className = 'formPriority';
+
+// 	const placeholderPriority = new Option('Priority', '');
+// 	placeholderPriority.className = 'placeholderPri';
+// 	placeholderPriority.selected = true;
+// 	placeholderPriority.disabled = true;
+// 	placeholderPriority.hidden = true;
+// 	formPriority.append(placeholderPriority);
+
+// 	const priorityOptions = [
+// 		{ value: 'high', text: 'High' },
+// 		{ value: 'medium', text: 'Medium' },
+// 		{ value: 'low', text: 'Low' },
+// 		{ value: '', text: 'None' },
+// 	];
+
+// 	priorityOptions.forEach((option) => {
+// 		const optionElement = new Option(option.text, option.value);
+// 		formPriority.append(optionElement);
+// 	});
+
+// 	formPriorityLabel.append(formPriority);
+// 	return formPriorityLabel;
+// }

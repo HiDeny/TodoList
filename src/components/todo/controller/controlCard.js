@@ -1,6 +1,6 @@
-import displayEditCard from "../interface/displayEditCard.js";
+import masterController from '../../../masterController.js';
 
-// import { addTodo, removeTodo } from '../../list/updateList.js';
+import displayEditCard from '../interface/displayEditCard.js';
 
 export default function controlCard(todo, todoCard) {
 	const handleMouseClick = (event) => {
@@ -11,21 +11,20 @@ export default function controlCard(todo, todoCard) {
 			return;
 		} else {
 			if (event.target.className === 'deleteTodo') {
-				// removeTodo(todo);
-				// Update todo
+				masterController.removeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (event.target.type === 'checkbox') {
-				const updatedTodo = { ...todo };
-				updatedTodo.toggleDone;
-				// Remove list control
-				// addTodo(updatedTodo);
-				// removeTodo(todo);
-				//
+				todo.toggleDone;
+				masterController.completeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (insideContainer) {
 				const editCard = displayEditCard(todo);
+				console.log('test');
+
 				todoCard.replaceWith(editCard);
+				controlCard(todo, editCard, list);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
+
 				todoCard.removeEventListener('click', handleMouseClick);
 			}
 		}
