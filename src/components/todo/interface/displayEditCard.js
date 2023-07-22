@@ -45,7 +45,7 @@ function createTodoCardEdit(todo) {
 	todoCardEdit.setAttribute('tabindex', '1');
 	todoCardEdit.className = 'editCard';
 
-	visualizePriority(todo, todoCardEdit);
+	visualizePriority(todoCardEdit, todo.priority);
 
 	return todoCardEdit;
 }

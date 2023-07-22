@@ -1,8 +1,12 @@
-import { createListSelector, createPrioritySelector } from './helperFunctions';
+import {
+	createListSelector,
+	createPrioritySelector,
+	visualizePriority,
+} from './helperFunctions';
 
 import controlForm from '../controller/controlForm';
 
-export default function createForm(masterListsArr, formReturn) {
+export default function createForm(formReturn) {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -17,7 +21,7 @@ export default function createForm(masterListsArr, formReturn) {
 	const dueDateForm = createDateForm();
 	todoForm.append(dueDateForm);
 
-	const listsFrom = createListsForm(masterListsArr);
+	const listsFrom = createListsForm();
 	todoForm.append(listsFrom);
 
 	const priorityForm = createPriorityForm();
@@ -29,6 +33,8 @@ export default function createForm(masterListsArr, formReturn) {
 	setTimeout(() => {
 		controlForm(todoForm, formReturn);
 	}, 50);
+
+	visualizePriority(todoForm);
 
 	return todoForm;
 }

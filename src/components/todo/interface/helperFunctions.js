@@ -41,19 +41,12 @@ export function createPrioritySelector(
 	placeholderPriority.hidden = true;
 	prioritySelector.append(placeholderPriority);
 
-	// const withPlaceholder = !todo.priority ? true : false;
-	//* Card
-	// placeholderPriority.selected = !todo.priority ? true : false;
-	//* Form
-	// placeholderPriority.selected = true;
-	//* Solution
-
 	// Options
 	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-		{ value: '', text: 'None' },
+		{ text: 'High', value: 'high' },
+		{ text: 'Medium', value: 'medium' },
+		{ text: 'Low', value: 'low' },
+		{ text: 'None', value: 'none' },
 	];
 
 	// Append Options
@@ -61,9 +54,6 @@ export function createPrioritySelector(
 	priorityOptions.forEach((option) => {
 		const optionElement = new Option(option.text, option.value);
 
-		//* Card
-
-		// optionElement.selected = option.value === todo.priority ? true : false;
 		if (currentPriority) {
 			optionElement.selected = option.value === currentPriority ? true : false;
 		}
@@ -75,15 +65,15 @@ export function createPrioritySelector(
 }
 
 // Display Priority
-export function visualizePriority(priority = '', card) {
+export function visualizePriority(card, priority = 'none') {
 	const priorityValue = priority.toLowerCase();
 	const priorityClassMap = {
 		high: 'high',
 		medium: 'medium',
 		low: 'low',
-		none: '',
+		none: 'none',
 	};
-	card.classList.remove('high', 'medium', 'low');
+	card.classList.remove('high', 'medium', 'low', 'none');
 	const priorityClass = priorityClassMap[priorityValue];
 	if (priorityClass && priorityClass !== '') {
 		card.classList.add(priorityClass);

@@ -4,6 +4,6 @@ import '../src/style.css';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-import mainPage from './components/mainScreen/interface/displayMainPage';
+import mainPage from './components/mainScreen/mainPage';
 
 mainPage();

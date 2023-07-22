@@ -1,4 +1,4 @@
-import masterController from '../../../masterController.js';
+import { masterController } from '../../../masterController.js';
 
 import displayEditCard from '../interface/displayEditCard.js';
 
@@ -14,15 +14,13 @@ export default function controlCard(todo, todoCard) {
 				masterController.removeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (event.target.type === 'checkbox') {
-				todo.toggleDone;
 				masterController.completeTodo(todo);
 				todoCard.removeEventListener('click', handleMouseClick);
 			} else if (insideContainer) {
 				const editCard = displayEditCard(todo);
-				console.log('test');
 
 				todoCard.replaceWith(editCard);
-				controlCard(todo, editCard, list);
+				controlCard(todo, editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
 
 				todoCard.removeEventListener('click', handleMouseClick);

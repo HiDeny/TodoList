@@ -1,16 +1,14 @@
-export default function displaySidebar(masterListsArr) {
+export default function displaySidebar() {
 	const displaySidebar = createSidebar();
 
-	const defaultLists = createDefaultLists();
-	displaySidebar.append(defaultLists);
+	const defaultSideLists = createdefaultSideLists();
+	displaySidebar.append(defaultSideLists);
 
-	const customLists = createCustomLists();
-	displaySidebar.append(customLists);
-
-	populateSidebar(defaultLists, customLists, masterListsArr);
+	const customSideLists = createcustomSideLists();
+	displaySidebar.append(customSideLists);
 
 	const addListButton = createAddListButton();
-	customLists.append(addListButton);
+	customSideLists.append(addListButton);
 
 	return displaySidebar;
 }
@@ -22,18 +20,18 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createDefaultLists() {
-	const defaultLists = document.createElement('div');
-	defaultLists.className = 'defaultLists';
+function createdefaultSideLists() {
+	const defaultSideLists = document.createElement('div');
+	defaultSideLists.className = 'defaultSideLists';
 
-	return defaultLists;
+	return defaultSideLists;
 }
 
-function createCustomLists() {
-	const customLists = document.createElement('div');
-	customLists.className = 'customLists';
+function createcustomSideLists() {
+	const customSideLists = document.createElement('div');
+	customSideLists.className = 'customSideLists';
 
-	return customLists;
+	return customSideLists;
 }
 
 function createAddListButton() {
@@ -44,22 +42,3 @@ function createAddListButton() {
 
 	return addListButton;
 }
-
-function populateSidebar(defaultLists, customLists, arr) {
-	arr.allLists.forEach((list) => {
-		console.log(list);
-		const listButton = document.createElement('button');
-		listButton.className = 'sidebarButton';
-		listButton.setAttribute('id', list.id);
-		listButton.textContent = list.title || `New List ${arr.indexOf(list) - 2}`;
-		console.log(list.id);
-		if (list.id <= 2) {
-			defaultLists.append(listButton);
-			if (list.id === 2) defaultLists.prepend(listButton);
-		} else {
-			customLists.append(listButton);
-		}
-	});
-}
-
-

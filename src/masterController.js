@@ -7,6 +7,7 @@ import createTodo from './components/todo/todo.js';
 import displayCard from './components/todo/interface/displayCard.js';
 import controlCard from './components/todo/controller/controlCard.js';
 
+import createList from './components/list/createList.js';
 import displayList from './components/list/interface/displayList.js';
 
 import displaySidebar from './components/sidebar/interface/displaySidebar.js';
@@ -14,85 +15,141 @@ import displaySidebar from './components/sidebar/interface/displaySidebar.js';
 //* Master List
 export const masterListsArr = allListsController();
 firstSetup(masterListsArr);
+
 const inbox = masterListsArr.findList(2);
 
+export const masterController = createMasterController(masterListsArr);
 
-export default function masterController(masterListsArr) {
+export default function createMasterController(masterListsArr) {
 	// Find List
+	function getList(id) {
+		return masterListsArr.findList(id);
+	}
 	// Find dateList
 	// Refresh
+	function refreshList(list) {
+		replaceOldList(list);
+		refreshSubLists(list);
+	}
 
 	return {
 		createTodo() {
-			// Create Form
-			// Use form data
+			requestForm();
 			// Date List?
-			// Find List
-			// Add todo
 		},
 		completeTodo(todo) {
-			// Unfinished todo
-			// Remove unfinished
-			// Add finished
-			// Refresh
+			const list = getList(todo.listId);
+
+			list.removeTodo(todo);
+
+			todo.toggleDone();
+
+			list.addTodo(todo);
+
+			refreshSubLists(list);
 		},
-		addTodo(todo) {
-			// Find List
-			// Date List?
-			// Add Todo
-			// Refresh
-		},
-		removeTodo(todo) {
-			// Find List
-			// Date List?
-			// Remove Todo
-			// Refresh
-		},
-		updateTodo(oldTodo, updatedTodo) {
-			// Find List
+		updateTodo(oldTodo, todo) {
+			const list = getList(todo.listId);
 			// Date List?
 			// Update todo
-			// Display Card
+			list.updateTodo(oldTodo, todo);
+
 			// Refresh
+			refreshSubLists(list);
 		},
-		moveTodo(oldTodo, updatedTodo) {
-			// Find List
+		moveTodo(oldTodo, todo) {
+			const oldList = getList(oldTodo.listId);
+			const newList = getList(todo.listId);
 			// Date List?
-			// Add new Todo
-			// Remove old Todo
+			oldList.removeTodo(oldTodo);
+			newList.addTodo(todo);
 			// Refresh
+			refreshSubLists(oldList);
 		},
+		newList() {
+			const newList = createNewList();
+			masterListsArr.addList(newList);
+			refreshList(newList);
+		},
+		showList(id) {
+			const list = getList(id);
+			console.log(list);
+			refreshList(list);
+		}
 	};
 }
 
+//* Screen
+
+function replaceOldList(list) {
+	const visibleList = document.querySelector('.list');
+	// if (Number(visibleList.id) === list.id) return;
+
+	const newList = displayList(list);
+	visibleList.replaceWith(newList);
+}
+
+function refreshSubLists(list) {
+	refreshSubList(list.activeTodos);
+	refreshSubList(list.completedTodos, false);
+}
+
+function refreshSubList(subList, active = true) {
+	let subListClass = active ? 'activeTodos' : 'completedTodos';
+	console.log(subListClass);
+
+	const freshSubList = getFreshSubList(subList);
+	freshSubList.className = subListClass;
+
+	const oldUl = document.querySelector(`.${subListClass}`);
+	oldUl.replaceWith(freshSubList);
+}
+
+function getFreshSubList(subList) {
+	const freshSubList = document.createElement('div');
+
+	subList.forEach((todo) => {
+		const todoCard = displayCard(todo);
+		controlCard(todo, todoCard);
+		freshSubList.appendChild(todoCard);
+	});
+
+	return freshSubList;
+}
 
 //* Sidebar
-export const sidebarDisplay = displaySidebar(masterListsArr);
 export const inboxDisplay = displayList(inbox);
+export const sidebarDisplay = displaySidebar();
 
-export function toggleSidebar() {
-	const sidebar = document.querySelector('.sidebar');
+export function populateSidebar() {
+	const defaultSideLists = document.querySelector('.defaultSideLists');
+	const customSideLists = document.querySelector('.customSideLists');
 
-	if (sidebar.classList.contains('showSidebar')) {
-		sidebar.classList.remove('showSidebar');
-	} else {
-		sidebar.classList.add('showSidebar');
-	}
+	masterListsArr.allLists.forEach((list) => {
+		const listButton = document.createElement('button');
+		listButton.className = 'sidebarButton';
+		listButton.setAttribute('id', list.id);
+		listButton.textContent = list.title || `New List ${arr.indexOf(list) - 2}`;
+		// console.log(list.id);
+		if (list.id <= 2) {
+			defaultSideLists.append(listButton);
+			if (list.id === 2) defaultSideLists.prepend(listButton);
+		} else {
+			customSideLists.append(listButton);
+		}
+	});
 }
 
-function sidebarButtonHandleClick(list) {
-	refreshList(list);
-}
-
-//* List
-
+// function sidebarButtonHandleClick(list) {
+// 	refreshList(list);
+// }
 //* Todo
-export function requestForm() {
+function requestForm() {
 	const container = document.querySelector('div.container');
 	const activeForm = document.querySelector('#todoForm');
 
 	if (!activeForm) {
-		const newTaskForm = createForm(masterListsArr, formReturn);
+		const newTaskForm = createForm(formReturn);
 
 		container.appendChild(newTaskForm);
 		const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
@@ -100,55 +157,26 @@ export function requestForm() {
 	}
 }
 
-function formReturn(formData) {
-	const newTodo = createTodo(
-		formData.title,
-		formData.notes,
-		formData.dueDate,
-		formData.priority
-	);
-	// const newTodo = createTodo({title, notes, dueDate, priority});
-	inbox.addTodo(newTodo);
-	console.log(newTodo);
-	refreshActiveList(inbox);
+function formReturn({ title, notes, dueDate, priority, listId }) {
+	const list = masterListsArr.findList(listId);
+	const newTodo = createTodo(title, notes, dueDate, priority);
+	newTodo.listId = listId;
+
+	list.addTodo(newTodo);
+	refreshSubList(list.activeTodos);
+}
+
+//* List
+function createNewList() {
+	const newList = createList();
+	const displayNewList = displayList(newList);
+
+	return displayNewList;
 }
 
 //* Memory
 
-//* Screen
-function refreshActiveList(list) {
-	const newSubListDiv = document.createElement('div');
-	// newVisual.className = listClass;
-
-	list.activeTodos.forEach((todo) => {
-		// const list = masterListsArr.findList(todo.listId);
-		console.log(list);
-		const todoCard = displayCard(todo);
-		controlCard(todo, todoCard, list);
-
-		newSubListDiv.appendChild(todoCard);
-	});
-
-	// const oldUl = document.querySelector(`.${listClass}`);
-	const oldUl = document.querySelector(`.activeTodos`);
-	oldUl.replaceWith(newSubListDiv);
-}
-
-function refreshCompletedList(list) {
-	const newSubListDiv = document.createElement('div');
-	// newVisual.className = listClass;
-
-	list.activeTodos.forEach((todo) => {
-		newSubListDiv.appendChild(displayCard(todo));
-	});
-	list.activeTodos.forEach((todo) => {
-		newSubListDiv.appendChild(displayCard(todo));
-	});
-
-	const oldUl = document.querySelector(`.${listClass}`);
-	oldUl.replaceWith(newVisual);
-}
-
+// Old Screen
 // 	const visibleList = document.querySelector('.list');
 
 // 	const nextStep = refreshConditions(visibleList, todo);
@@ -176,21 +204,7 @@ function refreshCompletedList(list) {
 // updateCustomList(list);
 // refreshSideLists();
 
-function refreshScreen(list) {
-	// replaceOldList(list);
-	// focusTitle();
-	// checkSubList(list);
-}
-
-function replaceOldList(list) {
-	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) === list.id) return;
-
-	const newList = displayList(list);
-	visibleList.replaceWith(newList);
-}
-
-function refreshSideLists() {
-	const currentLists = document.querySelector('.customLists');
-	currentLists.replaceWith(createCustomLists(customListsArr));
-}
+// function refreshSideLists() {
+// 	const currentLists = document.querySelector('.customLists');
+// 	currentLists.replaceWith(createCustomLists(customListsArr));
+// }

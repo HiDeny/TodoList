@@ -21,11 +21,11 @@ export default function allListsController() {
 				_customListsArr.push(list);
 			}
 		},
-		updateList(updatedList) {
+		updateList(list) {
 			const listToUpdate = _customListsArr.find(
-				(list) => list.id === updatedList.id
+				(list) => list.id === list.id
 			);
-			if (listToUpdate) Object.assign(listToUpdate, updatedList);
+			if (listToUpdate) Object.assign(listToUpdate, list);
 		},
 		// Remove
 		deleteList(list, shouldDelete) {
@@ -39,7 +39,7 @@ export default function allListsController() {
 		},
 		// Find
 		findList(listId) {
-			return this.allLists.find((list) => list.id === listId);
+			return this.allLists.find((list) => list.id === Number(listId));
 		},
 	};
 }

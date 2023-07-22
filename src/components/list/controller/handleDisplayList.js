@@ -1,5 +1,5 @@
 export default function handleDisplayList(list, masterListsController) {
-	const updatedList = { ...list };
+	const oldList = { ...list };
 
 	(() => {
 		const deleteButton = document.querySelector('#deleteListButton');
@@ -18,9 +18,9 @@ export default function handleDisplayList(list, masterListsController) {
 		const descriptionList = document.querySelector('.customDescription');
 
 		descriptionList.addEventListener('input', (event) => {
-			updatedList.description = event.target.value;
+			list.description = event.target.value;
 			// Master List?
-			masterListsController.updateList(updatedList);
+			masterListsController.updateList(list);
 		});
 	})();
 
@@ -28,9 +28,9 @@ export default function handleDisplayList(list, masterListsController) {
 		const titleList = document.querySelector('.customTitle');
 
 		titleList.addEventListener('input', (event) => {
-			updatedList.title = event.target.value;
+			list.title = event.target.value;
 			// Master List?
-			masterListsController.updateList(updatedList);
+			masterListsController.updateList(list);
 		});
 	})();
 
@@ -44,9 +44,9 @@ export default function handleDisplayList(list, masterListsController) {
 		const titleList = document.querySelector('.customTitle');
 
 		titleList.addEventListener('input', (event) => {
-			updatedList.title = event.target.value;
+			list.title = event.target.value;
 			// Master List?
-			masterListsController.updateList(updatedList);
+			masterListsController.updateList(list);
 		});
 	})();
 }

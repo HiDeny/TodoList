@@ -27,13 +27,6 @@ export default function controlForm(todoForm, formReturn) {
 		}
 	};
 
-	document.addEventListener('click', handleMouseClick);
-	document.addEventListener('keydown', handleKeyDown);
-	todoForm.addEventListener('submit', (event) => {
-		event.preventDefault();
-		handleSubmit();
-	});
-
 	function handleSubmit() {
 		const title = todoForm.elements['formTitle'].value;
 		const notes = todoForm.elements['formNotes'].value;
@@ -51,4 +44,18 @@ export default function controlForm(todoForm, formReturn) {
 		document.removeEventListener('click', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
 	}
+
+	document.addEventListener('click', handleMouseClick);
+	document.addEventListener('keydown', handleKeyDown);
+	todoForm.addEventListener('submit', (event) => {
+		event.preventDefault();
+		handleSubmit();
+	});
+
+	(() => {
+		const formPriority = document.querySelector('.formPriority');
+		formPriority.addEventListener('input', (event) => {
+			visualizePriority(todoForm, event.target.value);
+		});
+	})();
 }

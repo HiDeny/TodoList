@@ -1,4 +1,13 @@
-import controlMainPage from '../controller/controlMainPage';
+// import controlMainPage from '../controller/controlMainPage';
+
+import {
+	masterController,
+	sidebarDisplay,
+	toggleSidebar,
+	inboxDisplay,
+	populateSidebar,
+} from '../../masterController';
+import controlSidebar from '../sidebar/controller/controlSidebar';
 
 export default function mainPage() {
 	// Header
@@ -9,6 +18,7 @@ export default function mainPage() {
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
 	addTodoBtn.textContent = '+';
+	addTodoBtn.addEventListener('click', masterController.createTodo);
 
 	headerDiv.prepend(addTodoBtn);
 
@@ -16,6 +26,7 @@ export default function mainPage() {
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
+	menuButton.addEventListener('click', toggleSidebar);
 
 	headerDiv.append(menuButton);
 
@@ -26,18 +37,12 @@ export default function mainPage() {
 	document.body.appendChild(container);
 
 	// List
-	const mainList = document.createElement('div');
-	mainList.className = 'list';
-
-	container.append(mainList);
+	container.append(inboxDisplay);
 
 	// Sidebar
-	const sidebar = document.createElement('div');
-	sidebar.className = 'sidebar';
-
-	container.append(sidebar);
-
+	container.append(sidebarDisplay);
+	populateSidebar();
 	setTimeout(() => {
-		controlMainPage();
+		controlSidebar();
 	}, 50);
 }

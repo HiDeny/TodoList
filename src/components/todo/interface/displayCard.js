@@ -1,8 +1,7 @@
 import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
 // import controlCard from '../controller/controlCard';
-
-import visualizePriority from './helperFunctions';
+import { visualizePriority } from './helperFunctions';
 
 export default function displayCard(todo) {
 	const todoCard = createCard();
@@ -23,12 +22,8 @@ export default function displayCard(todo) {
 	const dueDate = createDueDate(todo);
 	todoCard.append(dueDate);
 
-	visualizePriority(todo, todoCard);
+	visualizePriority(todoCard, todo.priority);
 	removeFlatpickrDiv();
-
-	// setTimeout(() => {
-	// 	controlCard(todo, todoCard);
-	// }, 50);
 
 	return todoCard;
 }

@@ -125,8 +125,8 @@ header {
 	transform: translateX(-150%);
 }
 
-.defaultLists,
-.customLists {
+.defaultSideLists,
+.customSideLists {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
@@ -144,8 +144,8 @@ header {
 	color: gray;
 }
 
-.defaultLists > .sidebarButton:last-child,
-.customLists > .sidebarButton:last-child {
+.defaultSideLists > .sidebarButton:last-child,
+.customSideLists > .sidebarButton:last-child {
 	border: 0;
 }
 
@@ -304,12 +304,9 @@ header {
 	margin: auto;
 	padding: 15px 13px;
 
-	border: 1px solid gray;
-	border-bottom: 5px solid #9f9b9bd1;
 	border-radius: 20px;
 	background: #b4b4b436;
 	backdrop-filter: blur(15px);
-	box-shadow: 5px 5px 12px 1px #80808057;
 	text-overflow: ellipsis;
 }
 
@@ -560,7 +557,7 @@ textarea {
 	width: 85%;
 }
 
-.done > .todoCard > * {
+.done > * {
 	color: #8080807d;
 	text-decoration: line-through;
 	color: rgba(128, 128, 128, 0.64);
@@ -583,4 +580,10 @@ textarea {
 	border: 1px solid #ff5b5b;
 	border-bottom: 5px solid #ff5b5b;
 	box-shadow: 3px 5px 12px 0px #db020259;
+}
+
+.none {
+	border: 1px solid gray;
+	border-bottom: 5px solid #9f9b9bd1;
+	box-shadow: 5px 5px 12px 1px #80808057;
 }

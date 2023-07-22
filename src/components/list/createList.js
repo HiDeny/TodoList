@@ -18,10 +18,6 @@ export default function createList(title, description) {
 		return foundTodo;
 	}
 
-	function findTodoIndex(todo) {
-		const subList = getSubList(todo);
-	}
-
 	// SubList
 	function getSubList(todo) {
 		if (!todo.done) return _activeTodos;
@@ -70,9 +66,9 @@ export default function createList(title, description) {
 			const subList = getSubList(todo);
 			subList.splice(subList.indexOf(todo), 1);
 		},
-		updateTodo(updatedTodo) {
-			const oldTodo = findTodo(updatedTodo);
-			if (oldTodo) Object.assign(oldTodo, updatedTodo);
+		updateTodo(oldTodo, todo) {
+			const subList = getSubList(oldTodo);
+			subList.splice(subList.indexOf(oldTodo), 1, todo);
 		},
 	};
 }
