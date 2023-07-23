@@ -7455,7 +7455,8 @@ function allListsController() {
 		},
 		// Add
 		addDefaultList(list) {
-			if (list.id <= 2) _defaultListsArr.push(list);
+			if (list.id > 2) console.log(`Not default list ${list}`);
+			_defaultListsArr.push(list);
 		},
 		addList(list) {
 			_customListsArr.push(list);
@@ -7480,10 +7481,10 @@ function allListsController() {
 
 /***/ }),
 
-/***/ "./src/components/list/controller/handleDisplayList.js":
-/*!*************************************************************!*\
-  !*** ./src/components/list/controller/handleDisplayList.js ***!
-  \*************************************************************/
+/***/ "./src/components/list/controller/controlListElement.js":
+/*!**************************************************************!*\
+  !*** ./src/components/list/controller/controlListElement.js ***!
+  \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -7626,40 +7627,39 @@ function compareTodos(a, b) {
 
 /***/ }),
 
-/***/ "./src/components/list/interface/displayList.js":
+/***/ "./src/components/list/interface/listElement.js":
 /*!******************************************************!*\
-  !*** ./src/components/list/interface/displayList.js ***!
+  !*** ./src/components/list/interface/listElement.js ***!
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ displayList)
+/* harmony export */   "default": () => (/* binding */ createListElement)
 /* harmony export */ });
-/* harmony import */ var _controller_handleDisplayList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/handleDisplayList */ "./src/components/list/controller/handleDisplayList.js");
+/* harmony import */ var _controller_controlListElement__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlListElement */ "./src/components/list/controller/controlListElement.js");
 
 
-function displayList(list) {
-	const displayList = createDisplayList(list);
+function createListElement(list) {
+	const listElement = createListDiv(list);
 
 	const listHead = createListHead(list);
-	displayList.append(listHead);
-	console.log(listHead);
+	listElement.append(listHead);
 
 	const activeTodos = createActiveTodos();
-	displayList.append(activeTodos);
+	listElement.append(activeTodos);
 
 	const completedTodosTitle = createCompletedTodosTitle();
-	displayList.append(completedTodosTitle);
+	listElement.append(completedTodosTitle);
 
 	const completedTodos = createCompletedTodos();
-	displayList.append(completedTodos);
+	listElement.append(completedTodos);
 
-	return displayList;
+	return listElement;
 }
 
-function createDisplayList(list) {
+function createListDiv(list) {
 	const displayList = document.createElement('div');
 	displayList.className = 'list';
 	displayList.setAttribute('id', list.id);
@@ -7716,7 +7716,7 @@ function createCustomListHead(list) {
 	const description = createCustomListDescription(list);
 	headDiv.append(description);
 
-	(0,_controller_handleDisplayList__WEBPACK_IMPORTED_MODULE_0__["default"])(list, deleteButton, title, description);
+	(0,_controller_controlListElement__WEBPACK_IMPORTED_MODULE_0__["default"])(list, deleteButton, title, description);
 
 	setTimeout(() => {
 		if (title.value === '') title.focus();
@@ -7790,7 +7790,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ mainPage)
 /* harmony export */ });
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../masterController */ "./src/masterController.js");
+/* harmony import */ var _sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidebar/controller/controlSidebar */ "./src/components/sidebar/controller/controlSidebar.js");
 // import controlMainPage from '../controller/controlMainPage';
+
+
 
 
 
@@ -7812,7 +7815,7 @@ function mainPage() {
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
-	menuButton.addEventListener('click', _masterController__WEBPACK_IMPORTED_MODULE_0__.toggleSidebar);
+	menuButton.addEventListener('click', _sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_1__.toggleSidebar);
 
 	headerDiv.append(menuButton);
 
@@ -7945,38 +7948,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _masterController_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController.js */ "./src/masterController.js");
 /* harmony import */ var _interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interface/displayEditCard.js */ "./src/components/todo/interface/displayEditCard.js");
+/* harmony import */ var _controlEditCard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controlEditCard.js */ "./src/components/todo/controller/controlEditCard.js");
+
 
 
 
 
 function controlCard(todo, todoCard) {
-	const handleMouseClick = (event) => {
-		const insideContainer = todoCard.contains(event.target);
+	const todoCardClick = (event) => {
+		const target = event.target;
+		const insideContainer = todoCard.contains(target);
 		const activeEdit = document.querySelector('.editCard');
 
-		if (activeEdit) {
-			return;
-		} else {
-			if (event.target.className === 'deleteTodo') {
-				_masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
-				todoCard.removeEventListener('click', handleMouseClick);
-			} else if (event.target.type === 'checkbox') {
-				_masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
-				todoCard.removeEventListener('click', handleMouseClick);
-			} else if (insideContainer) {
+		if (activeEdit) return;
+		if (insideContainer) {
+			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
 				const editCard = (0,_interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(todo);
-
 				todoCard.replaceWith(editCard);
-				controlCard(todo, editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
-
-				todoCard.removeEventListener('click', handleMouseClick);
 			}
+			if (target.className === 'deleteTodo') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
+			if (target.type === 'checkbox') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
 		}
 	};
 
 	// Change to edit form
-	todoCard.addEventListener('click', handleMouseClick);
+	todoCard.addEventListener('click', todoCardClick);
 }
 
 
@@ -7998,80 +7995,77 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function controlEditCard(todo, todoCardEdit) {
+function controlEditCard(
+	todo,
+	editCard,
+	title,
+	notes,
+	dueDate,
+	list,
+	priority
+) {
 	const oldTodo = { ...todo };
 
 	//* Handle Mouse Event
 	const handleMouseClick = (event) => {
-		const insideContainer = todoCardEdit.contains(event.target);
+		const target = event.target;
+		const insideContainer = editCard.contains(target);
 
-		if (!insideContainer) {
-			if (oldTodo.listId !== todo.listId || oldTodo.dueDate !== todo.dueDate) {
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
-				removeListeners();
-			} else {
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(oldTodo, todo);
-				removeListeners();
-			}
-		}
 		if (insideContainer) {
-			if (event.target.type === 'checkbox') {
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
-				removeListeners();
-			}
-			if (event.target.className === 'deleteTodoEdit') {
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
-				removeListeners();
-			}
+			const isCheckbox = target.type === 'checkbox';
+			const isDeleteButton = target.className === 'deleteTodoEdit';
+
+			if (!isCheckbox || !isDeleteButton) return;
+			if (isCheckbox) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+			if (isDeleteButton) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
+			removeListeners();
+		}
+		if (!insideContainer) {
+			const sameList = oldTodo.listId === todo.listId;
+			// const sameDate = oldTodo.dueDate === todo.dueDate;
+
+			if (!sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
+			if (sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo, todo);
+			removeListeners();
 		}
 	};
 
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
+		if (event.code === 'Enter' && !event.shiftKey)
 			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(oldTodo, todo);
-			removeListeners();
-		}
 
 		if (event.code === 'Escape') {
 			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo, todo);
-			removeListeners();
 		}
 	};
 
 	//! Add Listeners
-	(() => {
-		// Title
-		const title = document.querySelector('.todoTitleEdit');
-		title.addEventListener('input', (event) => {
-			todo.title = event.target.value;
-		});
+	// Title
+	title.addEventListener('input', (event) => {
+		todo.title = event.target.value;
+	});
 
-		// Notes
-		const notes = document.querySelector('.todoNotesEdit');
-		notes.addEventListener('input', (event) => {
-			todo.notes = event.target.value;
-		});
+	// Notes
+	notes.addEventListener('input', (event) => {
+		todo.notes = event.target.value;
+	});
 
-		// Date
-		const dueDate = document.querySelector('.todoDueDateEdit');
-		dueDate.addEventListener('input', (event) => {
-			todo.dueDate = event.target.value;
-		});
+	// Date
+	dueDate.addEventListener('input', (event) => {
+		todo.dueDate = event.target.value;
+	});
 
-		// List
-		const list = document.querySelector('.todoListEdit');
-		list.addEventListener('input', (event) => {
-			todo.listId = event.target.value;
-		});
+	// List
+	list.addEventListener('input', (event) => {
+		todo.listId = event.target.value;
+	});
 
-		// Priority
-		const priority = document.querySelector('.todoPriorityEdit');
-		priority.addEventListener('input', (event) => {
-			todo.priority = event.target.value;
-			(0,_interface_helperFunctions__WEBPACK_IMPORTED_MODULE_1__.visualizePriority)(todoCardEdit, todo.priority);
-		});
-	})();
+	// Priority
+	priority.addEventListener('input', (event) => {
+		todo.priority = event.target.value;
+		(0,_interface_helperFunctions__WEBPACK_IMPORTED_MODULE_1__.visualizePriority)(editCard, todo.priority);
+	});
 
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
@@ -8097,35 +8091,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlForm)
 /* harmony export */ });
-/* harmony import */ var _interface_helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../interface/helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
-
-
-
-function controlForm(todoForm, formReturn) {
+function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
-		const insideContainer = todoForm.contains(event.target);
+		const target = event.target;
+		const insideContainer = todoForm.contains(target);
 
-		if (!insideContainer) {
-			removeListeners();
-			todoForm.remove();
-		}
-		if (insideContainer) {
-			if (event.target.className === 'deleteTodoEdit') {
-				removeListeners();
-				todoForm.remove();
-			}
+		if (!insideContainer || target.className === 'deleteTodoEdit') {
+			removeForm();
 		}
 	};
 
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
-			handleSubmit();
-		}
-
-		if (event.code === 'Escape') {
-			removeListeners();
-			todoForm.remove();
-		}
+		if (event.code === 'Enter' && !event.shiftKey) handleSubmit();
+		if (event.code === 'Escape') removeForm();
 	};
 
 	function handleSubmit() {
@@ -8135,30 +8113,24 @@ function controlForm(todoForm, formReturn) {
 		const priority = todoForm.elements['formPriority'].value;
 		const listId = Number(todoForm.elements['formList'].value);
 
-		removeListeners();
-		todoForm.remove();
+		callBack({ title, notes, dueDate, priority, listId });
 
-		formReturn({ title, notes, dueDate, priority, listId });
+		removeForm();
 	}
 
-	function removeListeners() {
+	function removeForm() {
 		document.removeEventListener('click', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
+		todoForm.remove();
 	}
 
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
+
 	todoForm.addEventListener('submit', (event) => {
 		event.preventDefault();
 		handleSubmit();
 	});
-
-	(() => {
-		const formPriority = document.querySelector('.formPriority');
-		formPriority.addEventListener('input', (event) => {
-			(0,_interface_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.visualizePriority)(todoForm, event.target.value);
-		});
-	})();
 }
 
 
@@ -8282,8 +8254,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displayEditCard)
 /* harmony export */ });
-/* harmony import */ var _controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlEditCard.js */ "./src/components/todo/controller/controlEditCard.js");
-/* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helperFunctions.js */ "./src/components/todo/interface/helperFunctions.js");
+/* harmony import */ var _helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helperFunctions.js */ "./src/components/todo/interface/helperFunctions.js");
+/* harmony import */ var _controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controller/controlEditCard.js */ "./src/components/todo/controller/controlEditCard.js");
+
 
 
 
@@ -8293,12 +8266,12 @@ function displayEditCard(todo) {
 	const cancelButton = createCancelButton();
 	todoCardEdit.append(cancelButton);
 
-	const checkBox = createCheckBox(todo);
-	todoCardEdit.append(checkBox);
+	const checkBox = createCheckBox();
 	if (todo.done) {
 		checkBox.setAttribute('checked', true);
 		todoCardEdit.classList.add('done');
 	}
+	todoCardEdit.append(checkBox);
 
 	const editTitle = createTitle(todo);
 	todoCardEdit.append(editTitle);
@@ -8312,11 +8285,19 @@ function displayEditCard(todo) {
 	const editList = createListSelector(todo);
 	todoCardEdit.append(editList);
 
-	const editPriority = createPrioritySelector(todo, todoCardEdit);
+	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
 
 	setTimeout(() => {
-		(0,_controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_0__["default"])(todo, todoCardEdit);
+		(0,_controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
+			todo,
+			todoCardEdit,
+			editTitle,
+			editNotes,
+			editDate,
+			editList,
+			editPriority
+		);
 	}, 50);
 
 	return todoCardEdit;
@@ -8327,7 +8308,7 @@ function createTodoCardEdit(todo) {
 	todoCardEdit.setAttribute('tabindex', '1');
 	todoCardEdit.className = 'editCard';
 
-	(0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.visualizePriority)(todoCardEdit, todo.priority);
+	(0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.visualizePriority)(todoCardEdit, todo.priority);
 
 	return todoCardEdit;
 }
@@ -8340,7 +8321,7 @@ function createCancelButton() {
 	return cancelButton;
 }
 
-function createCheckBox(todo) {
+function createCheckBox() {
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheckEdit';
@@ -8382,18 +8363,19 @@ function createDueDate(todo) {
 }
 
 function createListSelector(todo) {
-	const editList = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.createListSelector)(todo.listId);
+	const editList = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createListSelector)(todo.listId);
 	editList.className = 'todoListEdit';
 
 	return editList;
 }
 
 function createPrioritySelector(todo) {
-	const editPriority = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_1__.createPrioritySelector)(!todo.priority, todo.priority);
+	const editPriority = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createPrioritySelector)(!todo.priority, todo.priority);
 	editPriority.className = 'todoPriorityEdit';
 
 	return editPriority;
 }
+
 
 /***/ }),
 
@@ -8406,15 +8388,12 @@ function createPrioritySelector(todo) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createForm)
+/* harmony export */   "default": () => (/* binding */ createNewTodoForm)
 /* harmony export */ });
 /* harmony import */ var _helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
-/* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../controller/controlForm */ "./src/components/todo/controller/controlForm.js");
 
 
-
-
-function createForm(formReturn) {
+function createNewTodoForm() {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -8437,10 +8416,6 @@ function createForm(formReturn) {
 
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
-
-	setTimeout(() => {
-		(0,_controller_controlForm__WEBPACK_IMPORTED_MODULE_1__["default"])(todoForm, formReturn);
-	}, 50);
 
 	(0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.visualizePriority)(todoForm);
 
@@ -8546,6 +8521,7 @@ function createLabel(name) {
 
 	return label;
 }
+
 
 /***/ }),
 
@@ -8679,7 +8655,7 @@ function createTodo(title, notes, dueDate, priority) {
 		notes,
 		dueDate,
 		priority,
-		
+
 		get id() {
 			return _todoId;
 		},
@@ -8736,13 +8712,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_firstRun_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
 /* harmony import */ var _components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/todo/interface/displayForm.js */ "./src/components/todo/interface/displayForm.js");
-/* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
-/* harmony import */ var _components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/todo/interface/displayCard.js */ "./src/components/todo/interface/displayCard.js");
-/* harmony import */ var _components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/todo/controller/controlCard.js */ "./src/components/todo/controller/controlCard.js");
-/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
-/* harmony import */ var _components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/list/interface/displayList.js */ "./src/components/list/interface/displayList.js");
-/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
-/* harmony import */ var _components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/sidebar/controller/controlSidebar.js */ "./src/components/sidebar/controller/controlSidebar.js");
+/* harmony import */ var _components_todo_controller_controlForm_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/controller/controlForm.js */ "./src/components/todo/controller/controlForm.js");
+/* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
+/* harmony import */ var _components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/todo/interface/displayCard.js */ "./src/components/todo/interface/displayCard.js");
+/* harmony import */ var _components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/todo/controller/controlCard.js */ "./src/components/todo/controller/controlCard.js");
+/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/list/interface/listElement.js */ "./src/components/list/interface/listElement.js");
+/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
+/* harmony import */ var _components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/sidebar/controller/controlSidebar.js */ "./src/components/sidebar/controller/controlSidebar.js");
+
+
 
 
 
@@ -8763,11 +8742,11 @@ __webpack_require__.r(__webpack_exports__);
 const masterController = createMasterController();
 
 // First Run
-const today = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('🌤️ Today', "Todos with today's date");
+const today = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__["default"])('🌤️ Today', "Todos with today's date");
 today.id = 0;
-const upcoming = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('📆 Upcoming', 'Todos with future dates');
+const upcoming = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__["default"])('📆 Upcoming', 'Todos with future dates');
 upcoming.id = 1;
-const inbox = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('📥 Inbox', 'Default list');
+const inbox = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__["default"])('📥 Inbox', 'Default list');
 inbox.id = 2;
 
 masterController.listsControl.addDefaultList(today);
@@ -8776,7 +8755,12 @@ masterController.listsControl.addDefaultList(inbox);
 
 function createMasterController() {
 	const listsControl = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
-	console.log(listsControl);
+
+	function setListIds() {
+		listsControl.customLists.forEach((list) => {
+			list.id = listsControl.customLists.indexOf(list) + 2;
+		});
+	}
 
 	// Find List
 	function getList(id) {
@@ -8795,16 +8779,25 @@ function createMasterController() {
 		const activeForm = document.querySelector('#todoForm');
 
 		if (!activeForm) {
-			const newTaskForm = (0,_components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__["default"])(handleFormReturn);
-
+			const newTaskForm = (0,_components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
 			container.appendChild(newTaskForm);
-			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-			titleInput.focus();
+
+			// Visualize priority on change.
+			const formPriority = document.querySelector('.formPriority');
+			formPriority.addEventListener('input', (event) => {
+				visualizePriority(newTaskForm, event.target.value);
+			});
+			setTimeout(() => {
+				(0,_components_todo_controller_controlForm_js__WEBPACK_IMPORTED_MODULE_3__["default"])(newTaskForm, handleFormReturn);
+				// Focus title on opening
+				const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
+				titleInput.focus();
+			}, 50);
 		}
 
 		function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 			const list = getList(listId);
-			const newTodo = (0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
+			const newTodo = (0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_4__["default"])(title, notes, dueDate, priority);
 			newTodo.listId = listId;
 
 			list.addTodo(newTodo);
@@ -8828,6 +8821,13 @@ function createMasterController() {
 		//* Todos
 		createTodo() {
 			newTodoForm();
+		},
+		removeTodo(todo) {
+			const list = getList(todo.listId);
+
+			list.removeTodo(todo);
+
+			refreshSubLists(list);
 		},
 		completeTodo(todo) {
 			const list = getList(todo.listId);
@@ -8860,10 +8860,11 @@ function createMasterController() {
 		},
 		//* Lists
 		addList() {
-			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
+			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
+
 			listsControl.addList(newList);
-			newList.id = listsControl.allLists.indexOf(newList);
-			console.log(listsControl.customLists);
+			setListIds();
+
 			refreshList(newList);
 			freshCustomSideLists();
 		},
@@ -8873,6 +8874,7 @@ function createMasterController() {
 			);
 			if (!check) return;
 			listsControl.deleteList(list, check);
+			setListIds();
 			refreshList(inbox);
 			freshCustomSideLists();
 		},
@@ -8887,7 +8889,7 @@ function createMasterController() {
 	};
 }
 
-console.log(masterController);
+// console.log(masterController);
 
 //* Screen
 
@@ -8895,7 +8897,7 @@ function replaceOldList(list) {
 	const visibleList = document.querySelector('.list');
 	if (Number(visibleList.id) === list.id) return;
 
-	const newList = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(list);
+	const newList = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_8__["default"])(list);
 	visibleList.replaceWith(newList);
 }
 
@@ -8906,7 +8908,6 @@ function refreshSubLists(list) {
 
 function refreshSubList(subList, active = true) {
 	let subListClass = active ? 'activeTodos' : 'completedTodos';
-	console.log(subListClass);
 
 	const freshSubList = getFreshSubList(subList);
 	freshSubList.className = subListClass;
@@ -8919,8 +8920,10 @@ function getFreshSubList(subList) {
 	const freshSubList = document.createElement('div');
 
 	subList.forEach((todo) => {
-		const todoCard = (0,_components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__["default"])(todo);
-		(0,_components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__["default"])(todo, todoCard);
+		const todoCard = (0,_components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_5__["default"])(todo);
+		setTimeout(() => {
+			(0,_components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_6__["default"])(todo, todoCard);
+		}, 10);
 		freshSubList.appendChild(todoCard);
 	});
 
@@ -8929,8 +8932,8 @@ function getFreshSubList(subList) {
 
 //* Sidebar
 
-const inboxDisplay = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(masterController.getInbox());
-const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
+const inboxDisplay = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_8__["default"])(masterController.getInbox());
+const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_9__["default"])();
 
 function populateSidebar() {
 	const defaultSideLists = document.querySelector('.defaultSideLists');
@@ -8952,7 +8955,7 @@ function populateSidebar() {
 	});
 
 	setTimeout(() => {
-		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__.controlSideBarButtons)();
+		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_10__.controlSideBarButtons)();
 	}, 50);
 
 	customSideLists.append(addListButton);
@@ -8979,7 +8982,7 @@ function freshCustomSideLists() {
 	freshSideList.append(addListButton);
 
 	setTimeout(() => {
-		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__.controlSideBarButtons)();
+		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_10__.controlSideBarButtons)();
 	}, 50);
 
 	oldSideLists.replaceWith(freshSideList);
@@ -9000,8 +9003,8 @@ function createAddListButton() {
 
 //* List
 function createNewList() {
-	const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
-	const displayNewList = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(newList);
+	const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
+	const displayNewList = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_8__["default"])(newList);
 
 	return displayNewList;
 }
