@@ -1,10 +1,11 @@
-import handleDisplayList from '../controller/handleDisplayList';
+import handleCustomDisplayList from '../controller/handleDisplayList';
 
 export default function displayList(list) {
 	const displayList = createDisplayList(list);
 
 	const listHead = createListHead(list);
 	displayList.append(listHead);
+	console.log(listHead);
 
 	const activeTodos = createActiveTodos();
 	displayList.append(activeTodos);
@@ -14,12 +15,6 @@ export default function displayList(list) {
 
 	const completedTodos = createCompletedTodos();
 	displayList.append(completedTodos);
-
-	if (list.id > 2) {
-		setTimeout(() => {
-			handleDisplayList(list);
-		}, 50);
-	}
 
 	return displayList;
 }
@@ -33,11 +28,9 @@ function createDisplayList(list) {
 }
 
 function createListHead(list) {
-	if (list.id <= 2) {
-		return createDefaultListHead(list);
-	} else {
-		return createCustomListHead(list);
-	}
+	if (list.id <= 2) return createDefaultListHead(list);
+
+	return createCustomListHead(list);
 }
 
 //* Default List
@@ -73,15 +66,21 @@ function createDefaultListDescription(list) {
 function createCustomListHead(list) {
 	const headDiv = document.createElement('div');
 
+	const deleteButton = createDeleteButton(list);
+	headDiv.append(deleteButton);
+
 	const title = createCustomListTitle(list);
 	title.classList.add('listTitle');
 	headDiv.append(title);
 
-	const deleteButton = createDeleteButton(list);
-	headDiv.append(deleteButton);
-
 	const description = createCustomListDescription(list);
 	headDiv.append(description);
+
+	handleCustomDisplayList(list, deleteButton, title, description);
+
+	setTimeout(() => {
+		if (title.value === '') title.focus();
+	}, 100);
 
 	return headDiv;
 }

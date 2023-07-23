@@ -1,14 +1,11 @@
 export default function displaySidebar() {
 	const displaySidebar = createSidebar();
 
-	const defaultSideLists = createdefaultSideLists();
+	const defaultSideLists = createDefaultSideLists();
 	displaySidebar.append(defaultSideLists);
 
-	const customSideLists = createcustomSideLists();
+	const customSideLists = createCustomSideLists();
 	displaySidebar.append(customSideLists);
-
-	const addListButton = createAddListButton();
-	customSideLists.append(addListButton);
 
 	return displaySidebar;
 }
@@ -20,25 +17,16 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createdefaultSideLists() {
+function createDefaultSideLists() {
 	const defaultSideLists = document.createElement('div');
 	defaultSideLists.className = 'defaultSideLists';
 
 	return defaultSideLists;
 }
 
-function createcustomSideLists() {
+function createCustomSideLists() {
 	const customSideLists = document.createElement('div');
 	customSideLists.className = 'customSideLists';
 
 	return customSideLists;
-}
-
-function createAddListButton() {
-	const addListButton = document.createElement('button');
-	addListButton.className = 'sidebarButton';
-	addListButton.setAttribute('id', 'addListButton');
-	addListButton.textContent = '+ New List';
-
-	return addListButton;
 }

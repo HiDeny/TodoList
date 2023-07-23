@@ -5,7 +5,7 @@ import {
 	visualizePriority,
 } from './helperFunctions.js';
 
-export default function displayEditCard(todo, masterListsArr) {
+export default function displayEditCard(todo) {
 	const todoCardEdit = createTodoCardEdit(todo);
 
 	const cancelButton = createCancelButton();
@@ -27,7 +27,7 @@ export default function displayEditCard(todo, masterListsArr) {
 	const editDate = createDueDate(todo);
 	todoCardEdit.append(editDate);
 
-	const editList = createListSelector(todo, masterListsArr);
+	const editList = createListSelector(todo);
 	todoCardEdit.append(editList);
 
 	const editPriority = createPrioritySelector(todo, todoCardEdit);
@@ -112,51 +112,3 @@ function createPrioritySelector(todo) {
 
 	return editPriority;
 }
-
-// function createListSelector(todo, masterListsArr) {
-// 	const editList = document.createElement('select');
-// 	editList.className = 'todoListEdit';
-// 	const inbox = createInboxOption(masterListsArr);
-// 	editList.append(inbox);
-
-// 	masterListsArr.customLists.forEach((option) => {
-// 		const optionElement = new Option(option.title, option.id);
-// 		optionElement.selected = option.id === todo.listId ? true : false;
-// 		editList.append(optionElement);
-// 	});
-
-// 	return editList;
-// }
-
-// function createInboxOption(masterListsArr) {
-// 	const inbox = masterListsArr.defaultLists[2];
-// 	const inboxOption = new Option(inbox.title, inbox.id);
-// 	return inboxOption;
-// }
-
-// function createPrioritySelector(todo) {
-// 	const editPriority = document.createElement('select');
-// 	editPriority.className = 'todoPriorityEdit';
-
-// 	const priorityOptions = [
-// 		{ value: 'high', text: 'High' },
-// 		{ value: 'medium', text: 'Medium' },
-// 		{ value: 'low', text: 'Low' },
-// 		{ value: '', text: 'None' },
-// 	];
-
-// 	priorityOptions.forEach((option) => {
-// 		const optionElement = new Option(option.text, option.value);
-// 		optionElement.selected = option.value === todo.priority ? true : false;
-// 		editPriority.append(optionElement);
-// 	});
-
-// 	const placeholderPriority = new Option('Priority', '');
-// 	placeholderPriority.className = 'placeholderPri';
-// 	placeholderPriority.selected = !todo.priority ? true : false;
-// 	placeholderPriority.disabled = true;
-// 	placeholderPriority.hidden = true;
-// 	editPriority.append(placeholderPriority);
-
-// 	return editPriority;
-// }

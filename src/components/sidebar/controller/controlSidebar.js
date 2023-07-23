@@ -1,30 +1,23 @@
 import { masterController } from '../../../masterController';
 
-export default function controlSidebar() {
+export function controlSideBarButtons() {
 	(() => {
 		const addListButton = document.getElementById('addListButton');
-		console.log(addListButton);
-		addListButton.addEventListener('click', () => {
-			const newList = masterController.newList();
-		});
+		(() => {
+			addListButton.addEventListener('click', createNewList);
+		})();
 
 		const sidebarButtons = document.getElementsByClassName('sidebarButton');
 
-		console.log(sidebarButtons);
 		for (let button of sidebarButtons) {
 			if (button.id === 'addListButton') return;
 			button.addEventListener('click', () => {
-				console.log(button.id);
 				masterController.showList(button.id);
 			});
 		}
 	})();
 }
 
-// Sidebar
-
-// #addListButton
-//
 export function toggleSidebar() {
 	const sidebar = document.querySelector('.sidebar');
 
@@ -34,3 +27,8 @@ export function toggleSidebar() {
 		sidebar.classList.add('showSidebar');
 	}
 }
+
+const createNewList = () => {
+	masterController.addList();
+	addListButton.removeEventListener('click', createNewList);
+};

@@ -1,52 +1,27 @@
-export default function handleDisplayList(list, masterListsController) {
+import { masterController } from '../../../masterController';
+
+export default function handleCustomDisplayList(
+	list,
+	deleteButton,
+	title,
+	description
+) {
 	const oldList = { ...list };
 
-	(() => {
-		const deleteButton = document.querySelector('#deleteListButton');
+	// DeleteButton
+	deleteButton.addEventListener('click', () => {
+		masterController.deleteList(list);
+	});
 
-		deleteButton.addEventListener('click', () => {
-			const check = confirm(
-				`Do you really want to delete ${list.title.toUpperCase()}?`
-			);
-			if (check) {
-				masterListsController.deleteList(list, check);
-			}
-		});
-	})();
+	// Title
+	title.addEventListener('input', (event) => {
+		list.title = event.target.value;
+		masterController.updateList(oldList, list);
+	});
 
-	(() => {
-		const descriptionList = document.querySelector('.customDescription');
-
-		descriptionList.addEventListener('input', (event) => {
-			list.description = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
-
-	(() => {
-		const titleList = document.querySelector('.customTitle');
-
-		titleList.addEventListener('input', (event) => {
-			list.title = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
-
-	(() => {
-		const titleName = document.querySelector('.customTitle');
-		const titleValue = titleName ? titleName.value : null;
-		if (titleValue === '') titleName.focus();
-	})();
-
-	(() => {
-		const titleList = document.querySelector('.customTitle');
-
-		titleList.addEventListener('input', (event) => {
-			list.title = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
+	// Description
+	description.addEventListener('input', (event) => {
+		list.description = event.target.value;
+		masterController.updateList(oldList, list);
+	});
 }

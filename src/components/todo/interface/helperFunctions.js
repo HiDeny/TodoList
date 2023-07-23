@@ -1,4 +1,4 @@
-import { masterListsArr } from '../../../masterController';
+import { masterController } from '../../../masterController';
 
 // List Selector
 // selectedId - displayed List ID / todo List ID
@@ -13,12 +13,13 @@ export function createListSelector(selectedId = 2) {
 }
 
 function createInboxOption(div) {
-	const inbox = masterListsArr.defaultLists[2];
+	const inbox = masterController.getInbox();
 	div.append(new Option(inbox.title, inbox.id));
 }
 
 function populateListSelector(div, selectedId) {
-	masterListsArr.customLists.forEach((option) => {
+	masterController.listsControl.customLists.forEach((option) => {
+		console.log(option.id);
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);

@@ -1,22 +1,9 @@
-let id = parseInt(localStorage.getItem('listId')) || 0;
-
-function incrementAndStoreId() {
-	id++;
-	// localStorage.setItem('listId', id.toString());
-}
-
 export default function createList(title, description) {
-	let _listId = id;
-	incrementAndStoreId();
+	let listTitle = title || '';
+	let listDescription = description || '';
 	let _activeTodos = [];
 	let _completedTodos = [];
-
-	// Find
-	function findTodo(todo) {
-		const subList = getSubList(todo);
-		const foundTodo = subList.find((currentTodo) => currentTodo.id === todo.id);
-		return foundTodo;
-	}
+	let _listId;
 
 	// SubList
 	function getSubList(todo) {
@@ -26,11 +13,25 @@ export default function createList(title, description) {
 
 	return {
 		//* LIST
-		title,
-		description,
+		// Basics
+		get title() {
+			return listTitle;
+		},
+		set title(newTitle) {
+			listTitle = newTitle;
+		},
+		get description() {
+			return listDescription;
+		},
+		set description(newDescription) {
+			listDescription = newDescription;
+		},
 		// Get
 		get id() {
 			return _listId;
+		},
+		set id(newId) {
+			_listId = newId;
 		},
 		get activeTodos() {
 			return _activeTodos;

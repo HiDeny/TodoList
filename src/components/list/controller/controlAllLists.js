@@ -14,18 +14,15 @@ export default function allListsController() {
 			return [..._defaultListsArr, ..._customListsArr];
 		},
 		// Add
-		addList(list) {
-			if (list.id <= 2) {
-				_defaultListsArr.push(list);
-			} else {
-				_customListsArr.push(list);
-			}
+		addDefaultList(list) {
+			if (list.id <= 2) _defaultListsArr.push(list);
 		},
-		updateList(list) {
-			const listToUpdate = _customListsArr.find(
-				(list) => list.id === list.id
-			);
-			if (listToUpdate) Object.assign(listToUpdate, list);
+		addList(list) {
+			_customListsArr.push(list);
+		},
+		// Update
+		updateList(oldList, list) {
+			_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
 		},
 		// Remove
 		deleteList(list, shouldDelete) {
@@ -37,44 +34,5 @@ export default function allListsController() {
 				}
 			}
 		},
-		// Find
-		findList(listId) {
-			return this.allLists.find((list) => list.id === Number(listId));
-		},
 	};
 }
-
-// function findDateList(todo) {
-// 	if (!todo.dueDate) return null;
-
-// 	const date = new Date(todo.dueDate);
-
-// 	const completeList = isToday(date) ? today : upcoming;
-// 	const subList = !todo.done
-// 		? completeList.activeTodos
-// 		: completeList.completedTodos;
-
-// 	return { completeList, subList };
-// }
-
-// function addDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		todo.dateList = dateList.completeList.id;
-// 		dateList.subList.push(todo);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// Remove
-// function removeDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// import { getLists, updateListMemory } from '../memory/storage';
-// const allLists = getLists();
-// updateListMemory();
