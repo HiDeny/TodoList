@@ -1,5 +1,4 @@
 /******/ (() => { // webpackBootstrap
-/******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/flatpickr/dist/flatpickr.min.css":
@@ -8,6 +7,7 @@
   \*********************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -46,6 +46,7 @@ ___CSS_LOADER_EXPORT___.push([module.id, `.flatpickr-calendar{background:transpa
   \****************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -421,6 +422,7 @@ template {
   \*************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1036,6 +1038,7 @@ textarea {
   \*****************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /*
@@ -1130,6 +1133,7 @@ module.exports = function (cssWithMappingToString) {
   \************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 module.exports = function (item) {
@@ -1155,6 +1159,7 @@ module.exports = function (item) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addLeadingZeros)
@@ -1176,6 +1181,7 @@ function addLeadingZeros(number, targetLength) {
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -1192,6 +1198,7 @@ __webpack_require__.r(__webpack_exports__);
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getDefaultOptions: () => (/* binding */ getDefaultOptions),
@@ -1213,6 +1220,7 @@ function setDefaultOptions(newOptions) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2005,6 +2013,7 @@ function formatTimezone(offset, dirtyDelimiter) {
   \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2099,6 +2108,7 @@ var formatters = {
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -2192,6 +2202,7 @@ var longFormatters = {
   \*********************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getTimezoneOffsetInMilliseconds)
@@ -2221,6 +2232,7 @@ function getTimezoneOffsetInMilliseconds(date) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCDayOfYear)
@@ -2249,6 +2261,7 @@ function getUTCDayOfYear(dirtyDate) {
   \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCISOWeek)
@@ -2281,6 +2294,7 @@ function getUTCISOWeek(dirtyDate) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCISOWeekYear)
@@ -2320,6 +2334,7 @@ function getUTCISOWeekYear(dirtyDate) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCWeek)
@@ -2352,6 +2367,7 @@ function getUTCWeek(dirtyDate, options) {
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ getUTCWeekYear)
@@ -2403,6 +2419,7 @@ function getUTCWeekYear(dirtyDate, options) {
   \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   isProtectedDayOfYearToken: () => (/* binding */ isProtectedDayOfYearToken),
@@ -2437,6 +2454,7 @@ function throwProtectedError(token, format, input) {
   \**************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ requiredArgs)
@@ -2455,6 +2473,7 @@ function requiredArgs(required, args) {
   \*******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCISOWeek)
@@ -2482,6 +2501,7 @@ function startOfUTCISOWeek(dirtyDate) {
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCISOWeekYear)
@@ -2510,6 +2530,7 @@ function startOfUTCISOWeekYear(dirtyDate) {
   \****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCWeek)
@@ -2548,6 +2569,7 @@ function startOfUTCWeek(dirtyDate, options) {
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfUTCWeekYear)
@@ -2583,6 +2605,7 @@ function startOfUTCWeekYear(dirtyDate, options) {
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ toInteger)
@@ -2606,6 +2629,7 @@ function toInteger(dirtyNumber) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addDays)
@@ -2657,6 +2681,7 @@ function addDays(dirtyDate, dirtyAmount) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ addMilliseconds)
@@ -2700,6 +2725,7 @@ function addMilliseconds(dirtyDate, dirtyAmount) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ format)
@@ -3126,6 +3152,7 @@ function cleanEscapedString(input) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isDate)
@@ -3179,6 +3206,7 @@ function isDate(value) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isSameDay)
@@ -3230,6 +3258,7 @@ function isSameDay(dirtyDateLeft, dirtyDateRight) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isSameYear)
@@ -3271,6 +3300,7 @@ function isSameYear(dirtyDateLeft, dirtyDateRight) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isThisYear)
@@ -3313,6 +3343,7 @@ function isThisYear(dirtyDate) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isToday)
@@ -3355,6 +3386,7 @@ function isToday(dirtyDate) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isTomorrow)
@@ -3399,6 +3431,7 @@ function isTomorrow(dirtyDate) {
   \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ isValid)
@@ -3457,6 +3490,7 @@ function isValid(dirtyDate) {
   \**************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildFormatLongFn)
@@ -3479,6 +3513,7 @@ function buildFormatLongFn(args) {
   \************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildLocalizeFn)
@@ -3510,6 +3545,7 @@ function buildLocalizeFn(args) {
   \*********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildMatchFn)
@@ -3565,6 +3601,7 @@ function findIndex(array, predicate) {
   \****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ buildMatchPatternFn)
@@ -3595,6 +3632,7 @@ function buildMatchPatternFn(args) {
   \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3691,6 +3729,7 @@ var formatDistance = function formatDistance(token, count, options) {
   \*************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3739,6 +3778,7 @@ var formatLong = {
   \*****************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3764,6 +3804,7 @@ var formatRelative = function formatRelative(token, _date, _baseDate, _options) 
   \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -3921,6 +3962,7 @@ var localize = {
   \********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4034,6 +4076,7 @@ var match = {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -4079,6 +4122,7 @@ var locale = {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ startOfDay)
@@ -4120,6 +4164,7 @@ function startOfDay(dirtyDate) {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ subMilliseconds)
@@ -4162,6 +4207,7 @@ function subMilliseconds(dirtyDate, dirtyAmount) {
   \***************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ toDate)
@@ -4229,6 +4275,7 @@ function toDate(argument) {
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -6297,6 +6344,7 @@ if (typeof window !== "undefined") {
   \*********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
@@ -6384,6 +6432,7 @@ var english = {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   HOOKS: () => (/* binding */ HOOKS),
@@ -6482,6 +6531,7 @@ var defaults = {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   calculateSecondsSinceMidnight: () => (/* binding */ calculateSecondsSinceMidnight),
@@ -6650,6 +6700,7 @@ function getDefaultHours(config) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   clearNode: () => (/* binding */ clearNode),
@@ -6723,6 +6774,7 @@ function getEventTarget(event) {
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   formats: () => (/* binding */ formats),
@@ -6875,6 +6927,7 @@ var formats = {
   \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   arrayify: () => (/* binding */ arrayify),
@@ -6909,6 +6962,7 @@ var arrayify = function (obj) {
   \************************************************************/
 /***/ (() => {
 
+"use strict";
 
 if (typeof Object.assign !== "function") {
     Object.assign = function (target) {
@@ -6941,6 +6995,7 @@ if (typeof Object.assign !== "function") {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -6995,6 +7050,7 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -7049,6 +7105,7 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
   \***********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
@@ -7103,6 +7160,7 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
   \****************************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var stylesInDOM = [];
@@ -7196,6 +7254,7 @@ module.exports = function (list, options) {
   \********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 var memo = {};
@@ -7239,6 +7298,7 @@ module.exports = insertBySelector;
   \**********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -7258,6 +7318,7 @@ module.exports = insertStyleElement;
   \**********************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -7277,6 +7338,7 @@ module.exports = setAttributesWithoutAttributes;
   \***************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -7347,6 +7409,7 @@ module.exports = domAPI;
   \*********************************************************************/
 /***/ ((module) => {
 
+"use strict";
 
 
 /* istanbul ignore next  */
@@ -7370,6 +7433,7 @@ module.exports = styleTagTransform;
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ allListsController)
@@ -7390,18 +7454,15 @@ function allListsController() {
 			return [..._defaultListsArr, ..._customListsArr];
 		},
 		// Add
-		addList(list) {
-			if (list.id <= 2) {
-				_defaultListsArr.push(list);
-			} else {
-				_customListsArr.push(list);
-			}
+		addDefaultList(list) {
+			if (list.id <= 2) _defaultListsArr.push(list);
 		},
-		updateList(list) {
-			const listToUpdate = _customListsArr.find(
-				(list) => list.id === list.id
-			);
-			if (listToUpdate) Object.assign(listToUpdate, list);
+		addList(list) {
+			_customListsArr.push(list);
+		},
+		// Update
+		updateList(oldList, list) {
+			_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
 		},
 		// Remove
 		deleteList(list, shouldDelete) {
@@ -7413,47 +7474,8 @@ function allListsController() {
 				}
 			}
 		},
-		// Find
-		findList(listId) {
-			return this.allLists.find((list) => list.id === Number(listId));
-		},
 	};
 }
-
-// function findDateList(todo) {
-// 	if (!todo.dueDate) return null;
-
-// 	const date = new Date(todo.dueDate);
-
-// 	const completeList = isToday(date) ? today : upcoming;
-// 	const subList = !todo.done
-// 		? completeList.activeTodos
-// 		: completeList.completedTodos;
-
-// 	return { completeList, subList };
-// }
-
-// function addDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		todo.dateList = dateList.completeList.id;
-// 		dateList.subList.push(todo);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// Remove
-// function removeDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// import { getLists, updateListMemory } from '../memory/storage';
-// const allLists = getLists();
-// updateListMemory();
 
 
 /***/ }),
@@ -7464,61 +7486,38 @@ function allListsController() {
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ handleDisplayList)
+/* harmony export */   "default": () => (/* binding */ handleCustomDisplayList)
 /* harmony export */ });
-function handleDisplayList(list, masterListsController) {
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
+
+
+function handleCustomDisplayList(
+	list,
+	deleteButton,
+	title,
+	description
+) {
 	const oldList = { ...list };
 
-	(() => {
-		const deleteButton = document.querySelector('#deleteListButton');
+	// DeleteButton
+	deleteButton.addEventListener('click', () => {
+		_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.deleteList(list);
+	});
 
-		deleteButton.addEventListener('click', () => {
-			const check = confirm(
-				`Do you really want to delete ${list.title.toUpperCase()}?`
-			);
-			if (check) {
-				masterListsController.deleteList(list, check);
-			}
-		});
-	})();
+	// Title
+	title.addEventListener('input', (event) => {
+		list.title = event.target.value;
+		_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateList(oldList, list);
+	});
 
-	(() => {
-		const descriptionList = document.querySelector('.customDescription');
-
-		descriptionList.addEventListener('input', (event) => {
-			list.description = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
-
-	(() => {
-		const titleList = document.querySelector('.customTitle');
-
-		titleList.addEventListener('input', (event) => {
-			list.title = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
-
-	(() => {
-		const titleName = document.querySelector('.customTitle');
-		const titleValue = titleName ? titleName.value : null;
-		if (titleValue === '') titleName.focus();
-	})();
-
-	(() => {
-		const titleList = document.querySelector('.customTitle');
-
-		titleList.addEventListener('input', (event) => {
-			list.title = event.target.value;
-			// Master List?
-			masterListsController.updateList(list);
-		});
-	})();
+	// Description
+	description.addEventListener('input', (event) => {
+		list.description = event.target.value;
+		_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateList(oldList, list);
+	});
 }
 
 
@@ -7530,29 +7529,17 @@ function handleDisplayList(list, masterListsController) {
   \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createList)
 /* harmony export */ });
-let id = parseInt(localStorage.getItem('listId')) || 0;
-
-function incrementAndStoreId() {
-	id++;
-	// localStorage.setItem('listId', id.toString());
-}
-
 function createList(title, description) {
-	let _listId = id;
-	incrementAndStoreId();
+	let listTitle = title || '';
+	let listDescription = description || '';
 	let _activeTodos = [];
 	let _completedTodos = [];
-
-	// Find
-	function findTodo(todo) {
-		const subList = getSubList(todo);
-		const foundTodo = subList.find((currentTodo) => currentTodo.id === todo.id);
-		return foundTodo;
-	}
+	let _listId;
 
 	// SubList
 	function getSubList(todo) {
@@ -7562,11 +7549,25 @@ function createList(title, description) {
 
 	return {
 		//* LIST
-		title,
-		description,
+		// Basics
+		get title() {
+			return listTitle;
+		},
+		set title(newTitle) {
+			listTitle = newTitle;
+		},
+		get description() {
+			return listDescription;
+		},
+		set description(newDescription) {
+			listDescription = newDescription;
+		},
 		// Get
 		get id() {
 			return _listId;
+		},
+		set id(newId) {
+			_listId = newId;
 		},
 		get activeTodos() {
 			return _activeTodos;
@@ -7631,6 +7632,7 @@ function compareTodos(a, b) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displayList)
@@ -7643,6 +7645,7 @@ function displayList(list) {
 
 	const listHead = createListHead(list);
 	displayList.append(listHead);
+	console.log(listHead);
 
 	const activeTodos = createActiveTodos();
 	displayList.append(activeTodos);
@@ -7652,12 +7655,6 @@ function displayList(list) {
 
 	const completedTodos = createCompletedTodos();
 	displayList.append(completedTodos);
-
-	if (list.id > 2) {
-		setTimeout(() => {
-			(0,_controller_handleDisplayList__WEBPACK_IMPORTED_MODULE_0__["default"])(list);
-		}, 50);
-	}
 
 	return displayList;
 }
@@ -7671,11 +7668,9 @@ function createDisplayList(list) {
 }
 
 function createListHead(list) {
-	if (list.id <= 2) {
-		return createDefaultListHead(list);
-	} else {
-		return createCustomListHead(list);
-	}
+	if (list.id <= 2) return createDefaultListHead(list);
+
+	return createCustomListHead(list);
 }
 
 //* Default List
@@ -7711,15 +7706,21 @@ function createDefaultListDescription(list) {
 function createCustomListHead(list) {
 	const headDiv = document.createElement('div');
 
+	const deleteButton = createDeleteButton(list);
+	headDiv.append(deleteButton);
+
 	const title = createCustomListTitle(list);
 	title.classList.add('listTitle');
 	headDiv.append(title);
 
-	const deleteButton = createDeleteButton(list);
-	headDiv.append(deleteButton);
-
 	const description = createCustomListDescription(list);
 	headDiv.append(description);
+
+	(0,_controller_handleDisplayList__WEBPACK_IMPORTED_MODULE_0__["default"])(list, deleteButton, title, description);
+
+	setTimeout(() => {
+		if (title.value === '') title.focus();
+	}, 100);
 
 	return headDiv;
 }
@@ -7783,12 +7784,12 @@ function createCompletedTodos() {
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ mainPage)
 /* harmony export */ });
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../masterController */ "./src/masterController.js");
-/* harmony import */ var _sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../sidebar/controller/controlSidebar */ "./src/components/sidebar/controller/controlSidebar.js");
 // import controlMainPage from '../controller/controlMainPage';
 
 
@@ -7827,9 +7828,7 @@ function mainPage() {
 	// Sidebar
 	container.append(_masterController__WEBPACK_IMPORTED_MODULE_0__.sidebarDisplay);
 	(0,_masterController__WEBPACK_IMPORTED_MODULE_0__.populateSidebar)();
-	setTimeout(() => {
-		(0,_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_1__["default"])();
-	}, 50);
+
 }
 
 
@@ -7841,39 +7840,33 @@ function mainPage() {
   \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ controlSidebar),
+/* harmony export */   controlSideBarButtons: () => (/* binding */ controlSideBarButtons),
 /* harmony export */   toggleSidebar: () => (/* binding */ toggleSidebar)
 /* harmony export */ });
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
 
 
-function controlSidebar() {
+function controlSideBarButtons() {
 	(() => {
 		const addListButton = document.getElementById('addListButton');
-		console.log(addListButton);
-		addListButton.addEventListener('click', () => {
-			const newList = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.newList();
-		});
+		(() => {
+			addListButton.addEventListener('click', createNewList);
+		})();
 
 		const sidebarButtons = document.getElementsByClassName('sidebarButton');
 
-		console.log(sidebarButtons);
 		for (let button of sidebarButtons) {
 			if (button.id === 'addListButton') return;
 			button.addEventListener('click', () => {
-				console.log(button.id);
 				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(button.id);
 			});
 		}
 	})();
 }
 
-// Sidebar
-
-// #addListButton
-//
 function toggleSidebar() {
 	const sidebar = document.querySelector('.sidebar');
 
@@ -7884,6 +7877,11 @@ function toggleSidebar() {
 	}
 }
 
+const createNewList = () => {
+	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.addList();
+	addListButton.removeEventListener('click', createNewList);
+};
+
 
 /***/ }),
 
@@ -7893,6 +7891,7 @@ function toggleSidebar() {
   \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displaySidebar)
@@ -7900,14 +7899,11 @@ __webpack_require__.r(__webpack_exports__);
 function displaySidebar() {
 	const displaySidebar = createSidebar();
 
-	const defaultSideLists = createdefaultSideLists();
+	const defaultSideLists = createDefaultSideLists();
 	displaySidebar.append(defaultSideLists);
 
-	const customSideLists = createcustomSideLists();
+	const customSideLists = createCustomSideLists();
 	displaySidebar.append(customSideLists);
-
-	const addListButton = createAddListButton();
-	customSideLists.append(addListButton);
 
 	return displaySidebar;
 }
@@ -7919,27 +7915,18 @@ function createSidebar() {
 	return sidebar;
 }
 
-function createdefaultSideLists() {
+function createDefaultSideLists() {
 	const defaultSideLists = document.createElement('div');
 	defaultSideLists.className = 'defaultSideLists';
 
 	return defaultSideLists;
 }
 
-function createcustomSideLists() {
+function createCustomSideLists() {
 	const customSideLists = document.createElement('div');
 	customSideLists.className = 'customSideLists';
 
 	return customSideLists;
-}
-
-function createAddListButton() {
-	const addListButton = document.createElement('button');
-	addListButton.className = 'sidebarButton';
-	addListButton.setAttribute('id', 'addListButton');
-	addListButton.textContent = '+ New List';
-
-	return addListButton;
 }
 
 
@@ -7951,6 +7938,7 @@ function createAddListButton() {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlCard)
@@ -8000,6 +7988,7 @@ function controlCard(todo, todoCard) {
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlEditCard)
@@ -8103,11 +8092,13 @@ function controlEditCard(todo, todoCardEdit) {
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ controlForm)
 /* harmony export */ });
 /* harmony import */ var _interface_helperFunctions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../interface/helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
+
 
 
 function controlForm(todoForm, formReturn) {
@@ -8179,6 +8170,7 @@ function controlForm(todoForm, formReturn) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displayCard)
@@ -8285,6 +8277,7 @@ function removeFlatpickrDiv() {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displayEditCard)
@@ -8294,7 +8287,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function displayEditCard(todo, masterListsArr) {
+function displayEditCard(todo) {
 	const todoCardEdit = createTodoCardEdit(todo);
 
 	const cancelButton = createCancelButton();
@@ -8316,7 +8309,7 @@ function displayEditCard(todo, masterListsArr) {
 	const editDate = createDueDate(todo);
 	todoCardEdit.append(editDate);
 
-	const editList = createListSelector(todo, masterListsArr);
+	const editList = createListSelector(todo);
 	todoCardEdit.append(editList);
 
 	const editPriority = createPrioritySelector(todo, todoCardEdit);
@@ -8402,55 +8395,6 @@ function createPrioritySelector(todo) {
 	return editPriority;
 }
 
-// function createListSelector(todo, masterListsArr) {
-// 	const editList = document.createElement('select');
-// 	editList.className = 'todoListEdit';
-// 	const inbox = createInboxOption(masterListsArr);
-// 	editList.append(inbox);
-
-// 	masterListsArr.customLists.forEach((option) => {
-// 		const optionElement = new Option(option.title, option.id);
-// 		optionElement.selected = option.id === todo.listId ? true : false;
-// 		editList.append(optionElement);
-// 	});
-
-// 	return editList;
-// }
-
-// function createInboxOption(masterListsArr) {
-// 	const inbox = masterListsArr.defaultLists[2];
-// 	const inboxOption = new Option(inbox.title, inbox.id);
-// 	return inboxOption;
-// }
-
-// function createPrioritySelector(todo) {
-// 	const editPriority = document.createElement('select');
-// 	editPriority.className = 'todoPriorityEdit';
-
-// 	const priorityOptions = [
-// 		{ value: 'high', text: 'High' },
-// 		{ value: 'medium', text: 'Medium' },
-// 		{ value: 'low', text: 'Low' },
-// 		{ value: '', text: 'None' },
-// 	];
-
-// 	priorityOptions.forEach((option) => {
-// 		const optionElement = new Option(option.text, option.value);
-// 		optionElement.selected = option.value === todo.priority ? true : false;
-// 		editPriority.append(optionElement);
-// 	});
-
-// 	const placeholderPriority = new Option('Priority', '');
-// 	placeholderPriority.className = 'placeholderPri';
-// 	placeholderPriority.selected = !todo.priority ? true : false;
-// 	placeholderPriority.disabled = true;
-// 	placeholderPriority.hidden = true;
-// 	editPriority.append(placeholderPriority);
-
-// 	return editPriority;
-// }
-
-
 /***/ }),
 
 /***/ "./src/components/todo/interface/displayForm.js":
@@ -8459,6 +8403,7 @@ function createPrioritySelector(todo) {
   \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createForm)
@@ -8602,77 +8547,6 @@ function createLabel(name) {
 	return label;
 }
 
-// function createInboxOption(masterListsArr) {
-// 	const inbox = masterListsArr.defaultLists[2];
-// 	const inboxOption = new Option(inbox.title, inbox.id);
-// 	return inboxOption;
-// }
-
-// function createListsForm(masterListsArr) {
-// 	const formListLabel = createLabel('formList');
-
-// 	const formList = document.createElement('select');
-// 	formList.setAttribute('id', 'formList');
-// 	formList.setAttribute('name', 'formList');
-// 	formList.className = 'formList';
-// 	// const visibleList = getVisibleId();
-// 	const inbox = createInboxOption(masterListsArr);
-// 	formList.append(inbox);
-
-// 	masterListsArr.customLists.forEach((option) => {
-// 		const optionElement = new Option(option.title, option.id);
-// 		// optionElement.selected = option.id === Number(visibleList) ? true : false;
-// 		formList.append(optionElement);
-// 	});
-
-// 	formListLabel.append(formList);
-// 	return formListLabel;
-// }
-
-// function createInboxOption(masterListsArr) {
-// 	const inbox = masterListsArr.defaultLists[2];
-// 	const inboxOption = new Option(inbox.title, inbox.id);
-// 	return inboxOption;
-// }
-
-// function getVisibleId() {
-// 	const visibleId = document.querySelector('.list').id;
-// 	if (visibleId < 2) return 2;
-// 	return visibleId;
-// }
-
-// function createPriorityForm() {
-// 	const formPriorityLabel = createLabel('formPriority');
-
-// 	const formPriority = document.createElement('select');
-// 	formPriority.setAttribute('id', 'formPriority');
-// 	formPriority.setAttribute('name', 'formPriority');
-// 	formPriority.className = 'formPriority';
-
-// 	const placeholderPriority = new Option('Priority', '');
-// 	placeholderPriority.className = 'placeholderPri';
-// 	placeholderPriority.selected = true;
-// 	placeholderPriority.disabled = true;
-// 	placeholderPriority.hidden = true;
-// 	formPriority.append(placeholderPriority);
-
-// 	const priorityOptions = [
-// 		{ value: 'high', text: 'High' },
-// 		{ value: 'medium', text: 'Medium' },
-// 		{ value: 'low', text: 'Low' },
-// 		{ value: '', text: 'None' },
-// 	];
-
-// 	priorityOptions.forEach((option) => {
-// 		const optionElement = new Option(option.text, option.value);
-// 		formPriority.append(optionElement);
-// 	});
-
-// 	formPriorityLabel.append(formPriority);
-// 	return formPriorityLabel;
-// }
-
-
 /***/ }),
 
 /***/ "./src/components/todo/interface/helperFunctions.js":
@@ -8681,6 +8555,7 @@ function createLabel(name) {
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createListSelector: () => (/* binding */ createListSelector),
@@ -8703,12 +8578,13 @@ function createListSelector(selectedId = 2) {
 }
 
 function createInboxOption(div) {
-	const inbox = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterListsArr.defaultLists[2];
+	const inbox = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.getInbox();
 	div.append(new Option(inbox.title, inbox.id));
 }
 
 function populateListSelector(div, selectedId) {
-	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterListsArr.customLists.forEach((option) => {
+	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists.forEach((option) => {
+		console.log(option.id);
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);
@@ -8779,6 +8655,7 @@ function visualizePriority(card, priority = 'none') {
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
@@ -8834,26 +8711,9 @@ function createTodo(title, notes, dueDate, priority) {
 /*!*************************!*\
   !*** ./src/firstRun.js ***!
   \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ (() => {
 
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ firstSetup)
-/* harmony export */ });
-/* harmony import */ var _components_list_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/list/createList */ "./src/components/list/createList.js");
-/* harmony import */ var _components_list_interface_displayList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/interface/displayList */ "./src/components/list/interface/displayList.js");
-
-
-
-function firstSetup(masterListsArr) {
-	const today = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('🌤️ Today', "Todos with today's date");
-	const upcoming = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📆 Upcoming', 'Todos with future dates');
-	const inbox = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📥 Inbox', 'Default list');
-
-	masterListsArr.addList(today);
-	masterListsArr.addList(upcoming);
-	masterListsArr.addList(inbox);
-}
+// 
 
 
 /***/ }),
@@ -8864,16 +8724,16 @@ function firstSetup(masterListsArr) {
   \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createMasterController),
 /* harmony export */   inboxDisplay: () => (/* binding */ inboxDisplay),
 /* harmony export */   masterController: () => (/* binding */ masterController),
-/* harmony export */   masterListsArr: () => (/* binding */ masterListsArr),
 /* harmony export */   populateSidebar: () => (/* binding */ populateSidebar),
 /* harmony export */   sidebarDisplay: () => (/* binding */ sidebarDisplay)
 /* harmony export */ });
 /* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firstRun.js */ "./src/firstRun.js");
+/* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_firstRun_js__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
 /* harmony import */ var _components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/todo/interface/displayForm.js */ "./src/components/todo/interface/displayForm.js");
 /* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
@@ -8882,6 +8742,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
 /* harmony import */ var _components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/list/interface/displayList.js */ "./src/components/list/interface/displayList.js");
 /* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
+/* harmony import */ var _components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/sidebar/controller/controlSidebar.js */ "./src/components/sidebar/controller/controlSidebar.js");
+
 
 
 
@@ -8897,17 +8759,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //* Master List
-const masterListsArr = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
-(0,_firstRun_js__WEBPACK_IMPORTED_MODULE_0__["default"])(masterListsArr);
 
-const inbox = masterListsArr.findList(2);
+const masterController = createMasterController();
 
-const masterController = createMasterController(masterListsArr);
+// First Run
+const today = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('🌤️ Today', "Todos with today's date");
+today.id = 0;
+const upcoming = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('📆 Upcoming', 'Todos with future dates');
+upcoming.id = 1;
+const inbox = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])('📥 Inbox', 'Default list');
+inbox.id = 2;
 
-function createMasterController(masterListsArr) {
+masterController.listsControl.addDefaultList(today);
+masterController.listsControl.addDefaultList(upcoming);
+masterController.listsControl.addDefaultList(inbox);
+
+function createMasterController() {
+	const listsControl = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+	console.log(listsControl);
+
 	// Find List
 	function getList(id) {
-		return masterListsArr.findList(id);
+		return listsControl.allLists.find((list) => list.id === Number(id));
 	}
 	// Find dateList
 	// Refresh
@@ -8916,10 +8789,45 @@ function createMasterController(masterListsArr) {
 		refreshSubLists(list);
 	}
 
+	//* Todo
+	function newTodoForm() {
+		const container = document.querySelector('div.container');
+		const activeForm = document.querySelector('#todoForm');
+
+		if (!activeForm) {
+			const newTaskForm = (0,_components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__["default"])(handleFormReturn);
+
+			container.appendChild(newTaskForm);
+			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
+			titleInput.focus();
+		}
+
+		function handleFormReturn({ title, notes, dueDate, priority, listId }) {
+			const list = getList(listId);
+			const newTodo = (0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
+			newTodo.listId = listId;
+
+			list.addTodo(newTodo);
+			refreshSubList(list.activeTodos);
+		}
+	}
+
 	return {
+		listsControl,
+		// Defaults
+		getInbox() {
+			return inbox;
+		},
+		getToday() {
+			return today;
+		},
+		getUpcoming() {
+			return upcoming;
+		},
+
+		//* Todos
 		createTodo() {
-			requestForm();
-			// Date List?
+			newTodoForm();
 		},
 		completeTodo(todo) {
 			const list = getList(todo.listId);
@@ -8950,24 +8858,42 @@ function createMasterController(masterListsArr) {
 			// Refresh
 			refreshSubLists(oldList);
 		},
-		newList() {
-			const newList = createNewList();
-			masterListsArr.addList(newList);
+		//* Lists
+		addList() {
+			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
+			listsControl.addList(newList);
+			newList.id = listsControl.allLists.indexOf(newList);
+			console.log(listsControl.customLists);
 			refreshList(newList);
+			freshCustomSideLists();
+		},
+		deleteList(list) {
+			const check = confirm(
+				`Do you really want to delete ${list.title.toUpperCase()}?`
+			);
+			if (!check) return;
+			listsControl.deleteList(list, check);
+			refreshList(inbox);
+			freshCustomSideLists();
+		},
+		updateList(oldList, list) {
+			listsControl.updateList(oldList, list);
+			freshCustomSideLists();
 		},
 		showList(id) {
 			const list = getList(id);
-			console.log(list);
 			refreshList(list);
-		}
+		},
 	};
 }
+
+console.log(masterController);
 
 //* Screen
 
 function replaceOldList(list) {
 	const visibleList = document.querySelector('.list');
-	// if (Number(visibleList.id) === list.id) return;
+	if (Number(visibleList.id) === list.id) return;
 
 	const newList = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(list);
 	visibleList.replaceWith(newList);
@@ -9002,14 +8928,16 @@ function getFreshSubList(subList) {
 }
 
 //* Sidebar
-const inboxDisplay = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(inbox);
+
+const inboxDisplay = (0,_components_list_interface_displayList_js__WEBPACK_IMPORTED_MODULE_7__["default"])(masterController.getInbox());
 const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
 
 function populateSidebar() {
 	const defaultSideLists = document.querySelector('.defaultSideLists');
 	const customSideLists = document.querySelector('.customSideLists');
+	const addListButton = createAddListButton();
 
-	masterListsArr.allLists.forEach((list) => {
+	masterController.listsControl.allLists.forEach((list) => {
 		const listButton = document.createElement('button');
 		listButton.className = 'sidebarButton';
 		listButton.setAttribute('id', list.id);
@@ -9022,33 +8950,53 @@ function populateSidebar() {
 			customSideLists.append(listButton);
 		}
 	});
+
+	setTimeout(() => {
+		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__.controlSideBarButtons)();
+	}, 50);
+
+	customSideLists.append(addListButton);
+}
+
+function freshCustomSideLists() {
+	const oldSideLists = document.querySelector('.customSideLists');
+
+	const freshSideList = document.createElement('div');
+	freshSideList.className = 'customSideLists';
+	const addListButton = createAddListButton();
+
+	masterController.listsControl.customLists.forEach((sideList) => {
+		const listButton = document.createElement('button');
+		listButton.className = 'sidebarButton';
+		listButton.setAttribute('id', sideList.id);
+		listButton.textContent =
+			sideList.title ||
+			`New List ${masterController.listsControl.customLists.indexOf(sideList)}`;
+		// console.log(list.id);
+		freshSideList.append(listButton);
+	});
+
+	freshSideList.append(addListButton);
+
+	setTimeout(() => {
+		(0,_components_sidebar_controller_controlSidebar_js__WEBPACK_IMPORTED_MODULE_9__.controlSideBarButtons)();
+	}, 50);
+
+	oldSideLists.replaceWith(freshSideList);
+}
+
+function createAddListButton() {
+	const addListButton = document.createElement('button');
+	addListButton.className = 'sidebarButton';
+	addListButton.setAttribute('id', 'addListButton');
+	addListButton.textContent = '+ New List';
+
+	return addListButton;
 }
 
 // function sidebarButtonHandleClick(list) {
 // 	refreshList(list);
 // }
-//* Todo
-function requestForm() {
-	const container = document.querySelector('div.container');
-	const activeForm = document.querySelector('#todoForm');
-
-	if (!activeForm) {
-		const newTaskForm = (0,_components_todo_interface_displayForm_js__WEBPACK_IMPORTED_MODULE_2__["default"])(formReturn);
-
-		container.appendChild(newTaskForm);
-		const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-		titleInput.focus();
-	}
-}
-
-function formReturn({ title, notes, dueDate, priority, listId }) {
-	const list = masterListsArr.findList(listId);
-	const newTodo = (0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
-	newTodo.listId = listId;
-
-	list.addTodo(newTodo);
-	refreshSubList(list.activeTodos);
-}
 
 //* List
 function createNewList() {
@@ -9092,6 +9040,40 @@ function createNewList() {
 // 	const currentLists = document.querySelector('.customLists');
 // 	currentLists.replaceWith(createCustomLists(customListsArr));
 // }
+// function findDateList(todo) {
+// 	if (!todo.dueDate) return null;
+
+// 	const date = new Date(todo.dueDate);
+
+// 	const completeList = isToday(date) ? today : upcoming;
+// 	const subList = !todo.done
+// 		? completeList.activeTodos
+// 		: completeList.completedTodos;
+
+// 	return { completeList, subList };
+// }
+
+// function addDateList(todo) {
+// 	const dateList = findDateList(todo);
+// 	if (dateList) {
+// 		todo.dateList = dateList.completeList.id;
+// 		dateList.subList.push(todo);
+// 		updateListMemory(dateList.completeList);
+// 	}
+// }
+
+// Remove
+// function removeDateList(todo) {
+// 	const dateList = findDateList(todo);
+// 	if (dateList) {
+// 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
+// 		updateListMemory(dateList.completeList);
+// 	}
+// }
+
+// import { getLists, updateListMemory } from '../memory/storage';
+// const allLists = getLists();
+// updateListMemory();
 
 
 /***/ }),
@@ -9102,6 +9084,7 @@ function createNewList() {
   \***********************************************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
+"use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ _typeof)
@@ -9192,8 +9175,9 @@ function _typeof(obj) {
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
+"use strict";
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
