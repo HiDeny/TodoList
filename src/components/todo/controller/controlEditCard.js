@@ -1,80 +1,77 @@
 import { masterController } from '../../../masterController';
 import { visualizePriority } from '../interface/helperFunctions';
 
-export default function controlEditCard(todo, todoCardEdit) {
+export default function controlEditCard(
+	todo,
+	editCard,
+	title,
+	notes,
+	dueDate,
+	list,
+	priority
+) {
 	const oldTodo = { ...todo };
 
 	//* Handle Mouse Event
 	const handleMouseClick = (event) => {
-		const insideContainer = todoCardEdit.contains(event.target);
+		const target = event.target;
+		const insideContainer = editCard.contains(target);
 
-		if (!insideContainer) {
-			if (oldTodo.listId !== todo.listId || oldTodo.dueDate !== todo.dueDate) {
-				masterController.moveTodo(oldTodo, todo);
-				removeListeners();
-			} else {
-				masterController.updateTodo(oldTodo, todo);
-				removeListeners();
-			}
-		}
 		if (insideContainer) {
-			if (event.target.type === 'checkbox') {
-				masterController.completeTodo(todo);
-				removeListeners();
-			}
-			if (event.target.className === 'deleteTodoEdit') {
-				masterController.removeTodo(todo);
-				removeListeners();
-			}
+			const isCheckbox = target.type === 'checkbox';
+			const isDeleteButton = target.className === 'deleteTodoEdit';
+
+			if (!isCheckbox || !isDeleteButton) return;
+			if (isCheckbox) masterController.completeTodo(todo);
+			if (isDeleteButton) masterController.removeTodo(todo);
+			removeListeners();
+		}
+		if (!insideContainer) {
+			const sameList = oldTodo.listId === todo.listId;
+			// const sameDate = oldTodo.dueDate === todo.dueDate;
+
+			if (!sameList) masterController.moveTodo(oldTodo, todo);
+			if (sameList) masterController.updateTodo(todo, todo);
+			removeListeners();
 		}
 	};
 
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
+		if (event.code === 'Enter' && !event.shiftKey)
 			masterController.updateTodo(oldTodo, todo);
-			removeListeners();
-		}
 
 		if (event.code === 'Escape') {
 			masterController.updateTodo(todo, todo);
-			removeListeners();
 		}
 	};
 
 	//! Add Listeners
-	(() => {
-		// Title
-		const title = document.querySelector('.todoTitleEdit');
-		title.addEventListener('input', (event) => {
-			todo.title = event.target.value;
-		});
+	// Title
+	title.addEventListener('input', (event) => {
+		todo.title = event.target.value;
+	});
 
-		// Notes
-		const notes = document.querySelector('.todoNotesEdit');
-		notes.addEventListener('input', (event) => {
-			todo.notes = event.target.value;
-		});
+	// Notes
+	notes.addEventListener('input', (event) => {
+		todo.notes = event.target.value;
+	});
 
-		// Date
-		const dueDate = document.querySelector('.todoDueDateEdit');
-		dueDate.addEventListener('input', (event) => {
-			todo.dueDate = event.target.value;
-		});
+	// Date
+	dueDate.addEventListener('input', (event) => {
+		todo.dueDate = event.target.value;
+	});
 
-		// List
-		const list = document.querySelector('.todoListEdit');
-		list.addEventListener('input', (event) => {
-			todo.listId = event.target.value;
-		});
+	// List
+	list.addEventListener('input', (event) => {
+		todo.listId = event.target.value;
+	});
 
-		// Priority
-		const priority = document.querySelector('.todoPriorityEdit');
-		priority.addEventListener('input', (event) => {
-			todo.priority = event.target.value;
-			visualizePriority(todoCardEdit, todo.priority);
-		});
-	})();
+	// Priority
+	priority.addEventListener('input', (event) => {
+		todo.priority = event.target.value;
+		visualizePriority(editCard, todo.priority);
+	});
 
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);

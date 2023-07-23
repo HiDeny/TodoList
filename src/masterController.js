@@ -3,12 +3,14 @@ import firstSetup from './firstRun.js';
 import allListsController from './components/list/controller/controlAllLists.js';
 
 import createForm from './components/todo/interface/displayForm.js';
+import controlForm from './components/todo/controller/controlForm.js';
+
 import createTodo from './components/todo/todo.js';
 import displayCard from './components/todo/interface/displayCard.js';
 import controlCard from './components/todo/controller/controlCard.js';
 
 import createList from './components/list/createList.js';
-import displayList from './components/list/interface/displayList.js';
+import createListElement from './components/list/interface/listElement.js';
 
 import displaySidebar from './components/sidebar/interface/displaySidebar.js';
 import { controlSideBarButtons } from './components/sidebar/controller/controlSidebar.js';
@@ -31,7 +33,12 @@ masterController.listsControl.addDefaultList(inbox);
 
 function createMasterController() {
 	const listsControl = allListsController();
-	console.log(listsControl);
+
+	function setListIds() {
+		listsControl.customLists.forEach((list) => {
+			list.id = listsControl.customLists.indexOf(list) + 2;
+		});
+	}
 
 	// Find List
 	function getList(id) {
@@ -50,11 +57,20 @@ function createMasterController() {
 		const activeForm = document.querySelector('#todoForm');
 
 		if (!activeForm) {
-			const newTaskForm = createForm(handleFormReturn);
-
+			const newTaskForm = createForm();
 			container.appendChild(newTaskForm);
-			const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-			titleInput.focus();
+
+			// Visualize priority on change.
+			const formPriority = document.querySelector('.formPriority');
+			formPriority.addEventListener('input', (event) => {
+				visualizePriority(newTaskForm, event.target.value);
+			});
+			setTimeout(() => {
+				controlForm(newTaskForm, handleFormReturn);
+				// Focus title on opening
+				const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
+				titleInput.focus();
+			}, 50);
 		}
 
 		function handleFormReturn({ title, notes, dueDate, priority, listId }) {
@@ -83,6 +99,13 @@ function createMasterController() {
 		//* Todos
 		createTodo() {
 			newTodoForm();
+		},
+		removeTodo(todo) {
+			const list = getList(todo.listId);
+
+			list.removeTodo(todo);
+
+			refreshSubLists(list);
 		},
 		completeTodo(todo) {
 			const list = getList(todo.listId);
@@ -116,9 +139,10 @@ function createMasterController() {
 		//* Lists
 		addList() {
 			const newList = createList();
+
 			listsControl.addList(newList);
-			newList.id = listsControl.allLists.indexOf(newList);
-			console.log(listsControl.customLists);
+			setListIds();
+
 			refreshList(newList);
 			freshCustomSideLists();
 		},
@@ -128,6 +152,7 @@ function createMasterController() {
 			);
 			if (!check) return;
 			listsControl.deleteList(list, check);
+			setListIds();
 			refreshList(inbox);
 			freshCustomSideLists();
 		},
@@ -142,7 +167,7 @@ function createMasterController() {
 	};
 }
 
-console.log(masterController);
+// console.log(masterController);
 
 //* Screen
 
@@ -150,7 +175,7 @@ function replaceOldList(list) {
 	const visibleList = document.querySelector('.list');
 	if (Number(visibleList.id) === list.id) return;
 
-	const newList = displayList(list);
+	const newList = createListElement(list);
 	visibleList.replaceWith(newList);
 }
 
@@ -161,7 +186,6 @@ function refreshSubLists(list) {
 
 function refreshSubList(subList, active = true) {
 	let subListClass = active ? 'activeTodos' : 'completedTodos';
-	console.log(subListClass);
 
 	const freshSubList = getFreshSubList(subList);
 	freshSubList.className = subListClass;
@@ -175,7 +199,9 @@ function getFreshSubList(subList) {
 
 	subList.forEach((todo) => {
 		const todoCard = displayCard(todo);
-		controlCard(todo, todoCard);
+		setTimeout(() => {
+			controlCard(todo, todoCard);
+		}, 10);
 		freshSubList.appendChild(todoCard);
 	});
 
@@ -184,7 +210,7 @@ function getFreshSubList(subList) {
 
 //* Sidebar
 
-export const inboxDisplay = displayList(masterController.getInbox());
+export const inboxDisplay = createListElement(masterController.getInbox());
 export const sidebarDisplay = displaySidebar();
 
 export function populateSidebar() {
@@ -256,7 +282,7 @@ function createAddListButton() {
 //* List
 function createNewList() {
 	const newList = createList();
-	const displayNewList = displayList(newList);
+	const displayNewList = createListElement(newList);
 
 	return displayNewList;
 }

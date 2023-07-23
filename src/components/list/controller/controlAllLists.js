@@ -15,7 +15,8 @@ export default function allListsController() {
 		},
 		// Add
 		addDefaultList(list) {
-			if (list.id <= 2) _defaultListsArr.push(list);
+			if (list.id > 2) console.log(`Not default list ${list}`);
+			_defaultListsArr.push(list);
 		},
 		addList(list) {
 			_customListsArr.push(list);

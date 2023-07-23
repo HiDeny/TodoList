@@ -1,25 +1,24 @@
-import handleCustomDisplayList from '../controller/handleDisplayList';
+import handleCustomDisplayList from '../controller/controlListElement';
 
-export default function displayList(list) {
-	const displayList = createDisplayList(list);
+export default function createListElement(list) {
+	const listElement = createListDiv(list);
 
 	const listHead = createListHead(list);
-	displayList.append(listHead);
-	console.log(listHead);
+	listElement.append(listHead);
 
 	const activeTodos = createActiveTodos();
-	displayList.append(activeTodos);
+	listElement.append(activeTodos);
 
 	const completedTodosTitle = createCompletedTodosTitle();
-	displayList.append(completedTodosTitle);
+	listElement.append(completedTodosTitle);
 
 	const completedTodos = createCompletedTodos();
-	displayList.append(completedTodos);
+	listElement.append(completedTodos);
 
-	return displayList;
+	return listElement;
 }
 
-function createDisplayList(list) {
+function createListDiv(list) {
 	const displayList = document.createElement('div');
 	displayList.className = 'list';
 	displayList.setAttribute('id', list.id);

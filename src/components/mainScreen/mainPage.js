@@ -3,10 +3,12 @@
 import {
 	masterController,
 	sidebarDisplay,
-	toggleSidebar,
+	
 	inboxDisplay,
 	populateSidebar,
 } from '../../masterController';
+
+import { toggleSidebar } from '../sidebar/controller/controlSidebar';
 
 
 export default function mainPage() {

@@ -4,9 +4,7 @@ import {
 	visualizePriority,
 } from './helperFunctions';
 
-import controlForm from '../controller/controlForm';
-
-export default function createForm(formReturn) {
+export default function createNewTodoForm() {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
@@ -29,10 +27,6 @@ export default function createForm(formReturn) {
 
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
-
-	setTimeout(() => {
-		controlForm(todoForm, formReturn);
-	}, 50);
 
 	visualizePriority(todoForm);
 

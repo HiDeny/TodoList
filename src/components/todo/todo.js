@@ -17,7 +17,7 @@ export default function createTodo(title, notes, dueDate, priority) {
 		notes,
 		dueDate,
 		priority,
-		
+
 		get id() {
 			return _todoId;
 		},

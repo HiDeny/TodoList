@@ -1,33 +1,26 @@
 import { masterController } from '../../../masterController.js';
 
 import displayEditCard from '../interface/displayEditCard.js';
+import controlEditCard from './controlEditCard.js';
 
 export default function controlCard(todo, todoCard) {
-	const handleMouseClick = (event) => {
-		const insideContainer = todoCard.contains(event.target);
+	const todoCardClick = (event) => {
+		const target = event.target;
+		const insideContainer = todoCard.contains(target);
 		const activeEdit = document.querySelector('.editCard');
 
-		if (activeEdit) {
-			return;
-		} else {
-			if (event.target.className === 'deleteTodo') {
-				masterController.removeTodo(todo);
-				todoCard.removeEventListener('click', handleMouseClick);
-			} else if (event.target.type === 'checkbox') {
-				masterController.completeTodo(todo);
-				todoCard.removeEventListener('click', handleMouseClick);
-			} else if (insideContainer) {
+		if (activeEdit) return;
+		if (insideContainer) {
+			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
 				const editCard = displayEditCard(todo);
-
 				todoCard.replaceWith(editCard);
-				controlCard(todo, editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
-
-				todoCard.removeEventListener('click', handleMouseClick);
 			}
+			if (target.className === 'deleteTodo') masterController.removeTodo(todo);
+			if (target.type === 'checkbox') masterController.completeTodo(todo);
 		}
 	};
 
 	// Change to edit form
-	todoCard.addEventListener('click', handleMouseClick);
+	todoCard.addEventListener('click', todoCardClick);
 }

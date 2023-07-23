@@ -1,31 +1,16 @@
-
-import { visualizePriority } from '../interface/helperFunctions';
-
-export default function controlForm(todoForm, formReturn) {
+export default function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
-		const insideContainer = todoForm.contains(event.target);
+		const target = event.target;
+		const insideContainer = todoForm.contains(target);
 
-		if (!insideContainer) {
-			removeListeners();
-			todoForm.remove();
-		}
-		if (insideContainer) {
-			if (event.target.className === 'deleteTodoEdit') {
-				removeListeners();
-				todoForm.remove();
-			}
+		if (!insideContainer || target.className === 'deleteTodoEdit') {
+			removeForm();
 		}
 	};
 
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
-			handleSubmit();
-		}
-
-		if (event.code === 'Escape') {
-			removeListeners();
-			todoForm.remove();
-		}
+		if (event.code === 'Enter' && !event.shiftKey) handleSubmit();
+		if (event.code === 'Escape') removeForm();
 	};
 
 	function handleSubmit() {
@@ -35,28 +20,22 @@ export default function controlForm(todoForm, formReturn) {
 		const priority = todoForm.elements['formPriority'].value;
 		const listId = Number(todoForm.elements['formList'].value);
 
-		removeListeners();
-		todoForm.remove();
+		callBack({ title, notes, dueDate, priority, listId });
 
-		formReturn({ title, notes, dueDate, priority, listId });
+		removeForm();
 	}
 
-	function removeListeners() {
+	function removeForm() {
 		document.removeEventListener('click', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
+		todoForm.remove();
 	}
 
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
+
 	todoForm.addEventListener('submit', (event) => {
 		event.preventDefault();
 		handleSubmit();
 	});
-
-	(() => {
-		const formPriority = document.querySelector('.formPriority');
-		formPriority.addEventListener('input', (event) => {
-			visualizePriority(todoForm, event.target.value);
-		});
-	})();
 }

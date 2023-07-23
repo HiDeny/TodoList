@@ -1,9 +1,10 @@
-import controlEditCard from '../controller/controlEditCard.js';
 import {
 	createListSelector as listSelector,
 	createPrioritySelector as prioritySelector,
 	visualizePriority,
 } from './helperFunctions.js';
+
+import controlEditCard from '../controller/controlEditCard.js';
 
 export default function displayEditCard(todo) {
 	const todoCardEdit = createTodoCardEdit(todo);
@@ -11,12 +12,12 @@ export default function displayEditCard(todo) {
 	const cancelButton = createCancelButton();
 	todoCardEdit.append(cancelButton);
 
-	const checkBox = createCheckBox(todo);
-	todoCardEdit.append(checkBox);
+	const checkBox = createCheckBox();
 	if (todo.done) {
 		checkBox.setAttribute('checked', true);
 		todoCardEdit.classList.add('done');
 	}
+	todoCardEdit.append(checkBox);
 
 	const editTitle = createTitle(todo);
 	todoCardEdit.append(editTitle);
@@ -30,11 +31,19 @@ export default function displayEditCard(todo) {
 	const editList = createListSelector(todo);
 	todoCardEdit.append(editList);
 
-	const editPriority = createPrioritySelector(todo, todoCardEdit);
+	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
 
 	setTimeout(() => {
-		controlEditCard(todo, todoCardEdit);
+		controlEditCard(
+			todo,
+			todoCardEdit,
+			editTitle,
+			editNotes,
+			editDate,
+			editList,
+			editPriority
+		);
 	}, 50);
 
 	return todoCardEdit;
@@ -58,7 +67,7 @@ function createCancelButton() {
 	return cancelButton;
 }
 
-function createCheckBox(todo) {
+function createCheckBox() {
 	const checkBox = document.createElement('input');
 	checkBox.setAttribute('type', 'checkbox');
 	checkBox.className = 'todoCheckEdit';
