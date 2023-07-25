@@ -7812,8 +7812,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _masterController_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController.js */ "./src/masterController.js");
 /* harmony import */ var _interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../interface/displayEditCard.js */ "./src/components/todo/interface/displayEditCard.js");
-/* harmony import */ var _controlEditCard_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controlEditCard.js */ "./src/components/todo/controller/controlEditCard.js");
-
 
 
 
@@ -7826,6 +7824,7 @@ function controlCard(todo, todoCard) {
 
 		if (activeEdit) return;
 		if (insideContainer) {
+			console.log(target);
 			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
 				const editCard = (0,_interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(todo);
 				todoCard.replaceWith(editCard);
@@ -7990,8 +7989,10 @@ function controlForm(todoForm, callBack) {
 		todoForm.remove();
 	}
 
-	document.addEventListener('click', handleMouseClick);
-	document.addEventListener('keydown', handleKeyDown);
+	setTimeout(() => {
+		document.addEventListener('click', handleMouseClick);
+		document.addEventListener('keydown', handleKeyDown);
+	}, 10);
 
 	todoForm.elements['formTitle'].focus();
 	// Visualize priority on change.
@@ -8003,6 +8004,63 @@ function controlForm(todoForm, callBack) {
 		event.preventDefault();
 		handleSubmit();
 	});
+}
+
+
+/***/ }),
+
+/***/ "./src/components/todo/createTodo.js":
+/*!*******************************************!*\
+  !*** ./src/components/todo/createTodo.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createTodo)
+/* harmony export */ });
+let id = parseInt(localStorage.getItem('todoId')) || 0;
+
+function incrementAndStoreId() {
+	id++;
+	// localStorage.setItem('listId', id.toString());
+}
+
+function createTodo(title, notes, dueDate, priority) {
+	let _todoId = id;
+	incrementAndStoreId();
+	let _done = false;
+	let _dateList = null;
+	let _listId = 0;
+
+	return {
+		title,
+		notes,
+		dueDate,
+		priority,
+
+		get id() {
+			return _todoId;
+		},
+		get done() {
+			return _done;
+		},
+		toggleDone() {
+			_done = !_done;
+		},
+		get listId() {
+			return _listId;
+		},
+		set listId(newListId) {
+			_listId = newListId;
+		},
+		get dateList() {
+			return _dateList;
+		},
+		set dateList(newDateList) {
+			_dateList = newDateList;
+		},
+	};
 }
 
 
@@ -8157,6 +8215,10 @@ function displayEditCard(todo) {
 
 	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
+
+
+	// console.log(todoCardEdit)
+	// console.log(todoCardEdit.elements['todoTitleEdit'])
 
 	setTimeout(() => {
 		(0,_controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
@@ -8500,67 +8562,24 @@ function visualizePriority(card, priority = 'none') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createTodo)
-/* harmony export */ });
-let id = parseInt(localStorage.getItem('todoId')) || 0;
-
-function incrementAndStoreId() {
-	id++;
-	// localStorage.setItem('listId', id.toString());
-}
-
-function createTodo(title, notes, dueDate, priority) {
-	let _todoId = id;
-	incrementAndStoreId();
-	let _done = false;
-	let _dateList = null;
-	let _listId = 0;
-
-	return {
-		title,
-		notes,
-		dueDate,
-		priority,
-
-		get id() {
-			return _todoId;
-		},
-		get done() {
-			return _done;
-		},
-		toggleDone() {
-			_done = !_done;
-		},
-		get listId() {
-			return _listId;
-		},
-		set listId(newListId) {
-			_listId = newListId;
-		},
-		get dateList() {
-			return _dateList;
-		},
-		set dateList(newDateList) {
-			_dateList = newDateList;
-		},
-	};
-}
-
-
-/***/ }),
-
-/***/ "./src/components/todo/todoForm.js":
-/*!*****************************************!*\
-  !*** ./src/components/todo/todoForm.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ createTodoForm)
+/* harmony export */   createTodoCard: () => (/* binding */ createTodoCard),
+/* harmony export */   createTodoForm: () => (/* binding */ createTodoForm)
 /* harmony export */ });
 /* harmony import */ var _interface_displayForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./interface/displayForm */ "./src/components/todo/interface/displayForm.js");
 /* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controller/controlForm */ "./src/components/todo/controller/controlForm.js");
+/* harmony import */ var _interface_displayCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/displayCard */ "./src/components/todo/interface/displayCard.js");
+/* harmony import */ var _controller_controlCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controller/controlCard */ "./src/components/todo/controller/controlCard.js");
+/* harmony import */ var _interface_displayEditCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./interface/displayEditCard */ "./src/components/todo/interface/displayEditCard.js");
+/* harmony import */ var _controller_controlEditCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./controller/controlEditCard */ "./src/components/todo/controller/controlEditCard.js");
+/* harmony import */ var _interface_helperFunctions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./interface/helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
+
+
+
+
+
+
+
+
 
 
 
@@ -8572,10 +8591,17 @@ function createTodoForm(handleFormReturn) {
 	const newTaskForm = (0,_interface_displayForm__WEBPACK_IMPORTED_MODULE_0__["default"])();
 	container.appendChild(newTaskForm);
 
-	setTimeout(() => {
-		(0,_controller_controlForm__WEBPACK_IMPORTED_MODULE_1__["default"])(newTaskForm, handleFormReturn);
-	}, 50);
+	(0,_controller_controlForm__WEBPACK_IMPORTED_MODULE_1__["default"])(newTaskForm, handleFormReturn);
 }
+
+function createTodoCard(todo) {
+    const newCard = (0,_interface_displayCard__WEBPACK_IMPORTED_MODULE_2__["default"])(todo);
+    (0,_controller_controlCard__WEBPACK_IMPORTED_MODULE_3__["default"])(todo, newCard);
+
+    return newCard;
+}
+
+
 
 
 /***/ }),
@@ -8680,15 +8706,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firstRun.js */ "./src/firstRun.js");
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
-/* harmony import */ var _components_todo_todoForm_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/todo/todoForm.js */ "./src/components/todo/todoForm.js");
-/* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
-/* harmony import */ var _components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/todo/interface/displayCard.js */ "./src/components/todo/interface/displayCard.js");
-/* harmony import */ var _components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/todo/controller/controlCard.js */ "./src/components/todo/controller/controlCard.js");
-/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
-/* harmony import */ var _components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/list/interface/listElement.js */ "./src/components/list/interface/listElement.js");
-/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
-
-
+/* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
+/* harmony import */ var _components_todo_createTodo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/createTodo.js */ "./src/components/todo/createTodo.js");
+/* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
+/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/interface/listElement.js */ "./src/components/list/interface/listElement.js");
+/* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
 
 
 
@@ -8707,6 +8730,7 @@ __webpack_require__.r(__webpack_exports__);
 const masterController = createMasterController();
 
 function createMasterController() {
+	const screenControl = (0,_screenController_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
 	const listsControl = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
 	(0,_firstRun_js__WEBPACK_IMPORTED_MODULE_0__["default"])(listsControl);
 
@@ -8715,22 +8739,18 @@ function createMasterController() {
 	const upcoming = listsControl.defaultLists[2];
 
 	// Find dateList
-	// Refresh
-	function refreshList(list) {
-		replaceOldList(list);
-		refreshSubLists(list);
-	}
 
 	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 		const list = listsControl.getList(listId);
-		const newTodo = (0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
+		const newTodo = (0,_components_todo_createTodo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
 		newTodo.listId = listId;
 
 		list.addTodo(newTodo);
-		refreshSubList(list.activeTodos);
+		screenControl.refreshSubList(list);
 	}
 
 	return {
+		screenControl,
 		listsControl,
 		// Defaults
 		getInbox() {
@@ -8745,14 +8765,14 @@ function createMasterController() {
 
 		//* Todos
 		createTodo() {
-			(0,_components_todo_todoForm_js__WEBPACK_IMPORTED_MODULE_2__["default"])(handleFormReturn);
+			(0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_4__.createTodoForm)(handleFormReturn);
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 
 			list.removeTodo(todo);
 
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		completeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -8763,7 +8783,7 @@ function createMasterController() {
 
 			list.addTodo(todo);
 
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		updateTodo(oldTodo, todo) {
 			const list = listsControl.getList(todo.listId);
@@ -8772,7 +8792,7 @@ function createMasterController() {
 			list.updateTodo(oldTodo, todo);
 
 			// Refresh
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		moveTodo(oldTodo, todo) {
 			const oldList = listsControl.getList(oldTodo.listId);
@@ -8781,16 +8801,16 @@ function createMasterController() {
 			oldList.removeTodo(oldTodo);
 			newList.addTodo(todo);
 			// Refresh
-			refreshSubLists(oldList);
+			screenControl.refreshSubList(oldList);
 		},
 		//* Lists
 		addList() {
-			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_6__["default"])();
+			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_5__["default"])();
 			listsControl.addList(newList);
 			console.log(newList.id);
 
-			refreshList(newList);
-			freshCustomSideLists();
+			screenControl.replaceCurrentList(newList);
+			screenControl.refreshSideBar();
 		},
 		deleteList(list) {
 			const check = confirm(
@@ -8799,63 +8819,24 @@ function createMasterController() {
 			if (!check) return;
 			listsControl.deleteList(list, check);
 
-			refreshList(inbox);
-			freshCustomSideLists();
+			screenControl.replaceCurrentList(inbox);
+			screenControl.refreshSideBar();
 		},
 		updateList(oldList, list) {
 			listsControl.updateList(oldList, list);
-			freshCustomSideLists();
+			screenControl.updateSideList(list);
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
-			refreshList(list);
+			screenControl.replaceCurrentList(list);
 		},
 	};
 }
 
-//* Screen
-
-function replaceOldList(list) {
-	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) === list.id) return;
-
-	const newList = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_7__["default"])(list);
-	visibleList.replaceWith(newList);
-}
-
-function refreshSubLists(list) {
-	refreshSubList(list.activeTodos);
-	refreshSubList(list.completedTodos, false);
-}
-
-function refreshSubList(subList, active = true) {
-	let subListClass = active ? 'activeTodos' : 'completedTodos';
-
-	const freshSubList = getFreshSubList(subList);
-	freshSubList.className = subListClass;
-
-	const oldUl = document.querySelector(`.${subListClass}`);
-	oldUl.replaceWith(freshSubList);
-}
-
-function getFreshSubList(subList) {
-	const freshSubList = document.createElement('div');
-
-	subList.forEach((todo) => {
-		const todoCard = (0,_components_todo_interface_displayCard_js__WEBPACK_IMPORTED_MODULE_4__["default"])(todo);
-		setTimeout(() => {
-			(0,_components_todo_controller_controlCard_js__WEBPACK_IMPORTED_MODULE_5__["default"])(todo, todoCard);
-		}, 10);
-		freshSubList.appendChild(todoCard);
-	});
-
-	return freshSubList;
-}
-
 //* Sidebar
 
-const inboxDisplay = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_7__["default"])(masterController.getInbox());
-const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_8__["default"])();
+const inboxDisplay = (0,_components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_6__["default"])(masterController.getInbox());
+const sidebarDisplay = (0,_components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_7__["default"])();
 
 function populateSidebar() {
 	const defaultSideLists = document.querySelector('.defaultSideLists');
@@ -8869,10 +8850,10 @@ function populateSidebar() {
 	allListsArr.forEach((list) => {
 		const sideListButton = document.createElement('button');
 		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', list.id);
+		sideListButton.setAttribute('id', `id${list.id}`);
 		sideListButton.textContent =
 			list.title || `New List ${arr.indexOf(list) - 2}`;
-		sideListButton.onclick = () => masterController.showList(sideListButton.id);
+		sideListButton.onclick = () => masterController.showList(list.id);
 		// console.log(list.id);
 		if (list.id <= 2) {
 			defaultSideLists.append(sideListButton);
@@ -8883,32 +8864,6 @@ function populateSidebar() {
 	});
 
 	customSideLists.append(addListButton);
-}
-
-function freshCustomSideLists() {
-	const oldSideLists = document.querySelector('.customSideLists');
-	const freshSideList = document.createElement('div');
-	freshSideList.className = 'customSideLists';
-
-	const addListButton = createAddListButton();
-	addListButton.onclick = () => masterController.addList();
-
-	const customLists = masterController.listsControl.customLists;
-
-	customLists.forEach((sideList) => {
-		const sideListButton = document.createElement('button');
-		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', sideList.id);
-		sideListButton.textContent =
-			sideList.title || `New List ${sideList.id - 2}`;
-		sideListButton.onclick = () => masterController.showList(sideListButton.id);
-		// console.log(list.id);
-		freshSideList.append(sideListButton);
-	});
-
-	freshSideList.append(addListButton);
-
-	oldSideLists.replaceWith(freshSideList);
 }
 
 function createAddListButton() {
@@ -8988,6 +8943,126 @@ function createAddListButton() {
 // import { listsControl.getLists, updateListMemory } from '../memory/storage';
 // const allLists = listsControl.getLists();
 // updateListMemory();
+
+
+/***/ }),
+
+/***/ "./src/screenController.js":
+/*!*********************************!*\
+  !*** ./src/screenController.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ createScreenController)
+/* harmony export */ });
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./masterController */ "./src/masterController.js");
+/* harmony import */ var _components_todo_todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/todo/todo */ "./src/components/todo/todo.js");
+/* harmony import */ var _components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/list/interface/listElement */ "./src/components/list/interface/listElement.js");
+
+
+
+
+function createScreenController() {
+	function refreshSubList(list) {
+		const activeSubList = list.activeTodos.length > 0;
+		const completedSubList = list.completedTodos.length > 0;
+
+		if (activeSubList) refreshActiveSub(list.activeTodos);
+		if (completedSubList) refreshCompletedSub(list.completedTodos);
+	}
+
+	return {
+		// List
+		replaceCurrentList(list) {
+			const currentList = document.querySelector('.list');
+			const newList = (0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_2__["default"])(list);
+			currentList.replaceWith(newList);
+			refreshSubList(list);
+		},
+		refreshSubList,
+		// Sidebar
+		updateSideList(list) {
+			console.log(`.sidebarButton.${list.id}`);
+
+			const buttonToUpdate = document.querySelector(
+				`.sidebarButton#id${list.id}`
+			);
+
+			console.log(buttonToUpdate);
+			buttonToUpdate.textContent = list.title;
+		},
+		refreshSideBar() {
+			const oldSideLists = document.querySelector('.customSideLists');
+			const freshSideList = freshCustomSideLists();
+			console.log(freshSideList);
+
+			oldSideLists.replaceWith(freshSideList);
+		},
+	};
+}
+
+//* Screen
+
+// Sub List
+function refreshActiveSub(subList) {
+	const activeSubList = document.createElement('div');
+	activeSubList.classList = 'activeTodos';
+
+	subList.forEach((todo) => activeSubList.appendChild((0,_components_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodoCard)(todo)));
+
+	const oldUl = document.querySelector('.activeTodos');
+	oldUl.replaceWith(activeSubList);
+}
+
+function refreshCompletedSub(subList) {
+	const completedSubList = document.createElement('div');
+	completedSubList.classList = 'completedTodos';
+
+	subList.forEach((todo) => completedSubList.appendChild((0,_components_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodoCard)(todo)));
+
+	const oldUl = document.querySelector('.completedTodos');
+	oldUl.replaceWith(completedSubList);
+}
+
+// Sidebar
+function freshCustomSideLists() {
+	const freshSideList = document.createElement('div');
+	freshSideList.className = 'customSideLists';
+
+	const customLists = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists;
+
+	customLists.forEach((sideList) => {
+		freshSideList.append(createSideListButton(sideList));
+	});
+
+	const addListButton = createAddListButton();
+	addListButton.onclick = () => _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.addList();
+
+	freshSideList.append(addListButton);
+
+	return freshSideList;
+}
+
+function createSideListButton(sideList) {
+	const sideListButton = document.createElement('button');
+	sideListButton.className = 'sidebarButton';
+	sideListButton.setAttribute('id', `id${sideList.id}`);
+	sideListButton.textContent = sideList.title || `New List ${sideList.id - 2}`;
+	sideListButton.onclick = () => _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(sideList.id);
+
+	return sideListButton;
+}
+
+function createAddListButton() {
+	const addListButton = document.createElement('button');
+	addListButton.className = 'sidebarButton';
+	addListButton.setAttribute('id', 'addListButton');
+	addListButton.textContent = '+ New List';
+
+	return addListButton;
+}
 
 
 /***/ }),

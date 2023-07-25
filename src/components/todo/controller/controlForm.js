@@ -33,8 +33,10 @@ export default function controlForm(todoForm, callBack) {
 		todoForm.remove();
 	}
 
-	document.addEventListener('click', handleMouseClick);
-	document.addEventListener('keydown', handleKeyDown);
+	setTimeout(() => {
+		document.addEventListener('click', handleMouseClick);
+		document.addEventListener('keydown', handleKeyDown);
+	}, 10);
 
 	todoForm.elements['formTitle'].focus();
 	// Visualize priority on change.

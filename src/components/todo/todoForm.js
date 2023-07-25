@@ -9,7 +9,5 @@ export default function createTodoForm(handleFormReturn) {
 	const newTaskForm = createNewTodoForm();
 	container.appendChild(newTaskForm);
 
-	setTimeout(() => {
-		controlForm(newTaskForm, handleFormReturn);
-	}, 50);
+	controlForm(newTaskForm, handleFormReturn);
 }

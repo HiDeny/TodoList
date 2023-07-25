@@ -1,12 +1,10 @@
 import setupDefaultLists from './firstRun.js';
 
 import allListsController from './components/list/controller/controlAllLists.js';
+import createScreenController from './screenController.js';
 
-import createTodoForm from './components/todo/todoForm.js';
-
-import createTodo from './components/todo/todo.js';
-import displayCard from './components/todo/interface/displayCard.js';
-import controlCard from './components/todo/controller/controlCard.js';
+import createTodo from './components/todo/createTodo.js';
+import { createTodoCard, createTodoForm } from './components/todo/todo.js';
 
 import createList from './components/list/createList.js';
 import createListElement from './components/list/interface/listElement.js';
@@ -18,6 +16,7 @@ import displaySidebar from './components/sidebar/interface/displaySidebar.js';
 export const masterController = createMasterController();
 
 function createMasterController() {
+	const screenControl = createScreenController();
 	const listsControl = allListsController();
 	setupDefaultLists(listsControl);
 
@@ -26,11 +25,6 @@ function createMasterController() {
 	const upcoming = listsControl.defaultLists[2];
 
 	// Find dateList
-	// Refresh
-	function refreshList(list) {
-		replaceOldList(list);
-		refreshSubLists(list);
-	}
 
 	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 		const list = listsControl.getList(listId);
@@ -38,10 +32,11 @@ function createMasterController() {
 		newTodo.listId = listId;
 
 		list.addTodo(newTodo);
-		refreshSubList(list.activeTodos);
+		screenControl.refreshSubList(list);
 	}
 
 	return {
+		screenControl,
 		listsControl,
 		// Defaults
 		getInbox() {
@@ -63,7 +58,7 @@ function createMasterController() {
 
 			list.removeTodo(todo);
 
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		completeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -74,7 +69,7 @@ function createMasterController() {
 
 			list.addTodo(todo);
 
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		updateTodo(oldTodo, todo) {
 			const list = listsControl.getList(todo.listId);
@@ -83,7 +78,7 @@ function createMasterController() {
 			list.updateTodo(oldTodo, todo);
 
 			// Refresh
-			refreshSubLists(list);
+			screenControl.refreshSubList(list);
 		},
 		moveTodo(oldTodo, todo) {
 			const oldList = listsControl.getList(oldTodo.listId);
@@ -92,7 +87,7 @@ function createMasterController() {
 			oldList.removeTodo(oldTodo);
 			newList.addTodo(todo);
 			// Refresh
-			refreshSubLists(oldList);
+			screenControl.refreshSubList(oldList);
 		},
 		//* Lists
 		addList() {
@@ -100,8 +95,8 @@ function createMasterController() {
 			listsControl.addList(newList);
 			console.log(newList.id);
 
-			refreshList(newList);
-			freshCustomSideLists();
+			screenControl.replaceCurrentList(newList);
+			screenControl.refreshSideBar();
 		},
 		deleteList(list) {
 			const check = confirm(
@@ -110,57 +105,18 @@ function createMasterController() {
 			if (!check) return;
 			listsControl.deleteList(list, check);
 
-			refreshList(inbox);
-			freshCustomSideLists();
+			screenControl.replaceCurrentList(inbox);
+			screenControl.refreshSideBar();
 		},
 		updateList(oldList, list) {
 			listsControl.updateList(oldList, list);
-			freshCustomSideLists();
+			screenControl.updateSideList(list);
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
-			refreshList(list);
+			screenControl.replaceCurrentList(list);
 		},
 	};
-}
-
-//* Screen
-
-function replaceOldList(list) {
-	const visibleList = document.querySelector('.list');
-	if (Number(visibleList.id) === list.id) return;
-
-	const newList = createListElement(list);
-	visibleList.replaceWith(newList);
-}
-
-function refreshSubLists(list) {
-	refreshSubList(list.activeTodos);
-	refreshSubList(list.completedTodos, false);
-}
-
-function refreshSubList(subList, active = true) {
-	let subListClass = active ? 'activeTodos' : 'completedTodos';
-
-	const freshSubList = getFreshSubList(subList);
-	freshSubList.className = subListClass;
-
-	const oldUl = document.querySelector(`.${subListClass}`);
-	oldUl.replaceWith(freshSubList);
-}
-
-function getFreshSubList(subList) {
-	const freshSubList = document.createElement('div');
-
-	subList.forEach((todo) => {
-		const todoCard = displayCard(todo);
-		setTimeout(() => {
-			controlCard(todo, todoCard);
-		}, 10);
-		freshSubList.appendChild(todoCard);
-	});
-
-	return freshSubList;
 }
 
 //* Sidebar
@@ -180,10 +136,10 @@ export function populateSidebar() {
 	allListsArr.forEach((list) => {
 		const sideListButton = document.createElement('button');
 		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', list.id);
+		sideListButton.setAttribute('id', `id${list.id}`);
 		sideListButton.textContent =
 			list.title || `New List ${arr.indexOf(list) - 2}`;
-		sideListButton.onclick = () => masterController.showList(sideListButton.id);
+		sideListButton.onclick = () => masterController.showList(list.id);
 		// console.log(list.id);
 		if (list.id <= 2) {
 			defaultSideLists.append(sideListButton);
@@ -194,32 +150,6 @@ export function populateSidebar() {
 	});
 
 	customSideLists.append(addListButton);
-}
-
-function freshCustomSideLists() {
-	const oldSideLists = document.querySelector('.customSideLists');
-	const freshSideList = document.createElement('div');
-	freshSideList.className = 'customSideLists';
-
-	const addListButton = createAddListButton();
-	addListButton.onclick = () => masterController.addList();
-
-	const customLists = masterController.listsControl.customLists;
-
-	customLists.forEach((sideList) => {
-		const sideListButton = document.createElement('button');
-		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', sideList.id);
-		sideListButton.textContent =
-			sideList.title || `New List ${sideList.id - 2}`;
-		sideListButton.onclick = () => masterController.showList(sideListButton.id);
-		// console.log(list.id);
-		freshSideList.append(sideListButton);
-	});
-
-	freshSideList.append(addListButton);
-
-	oldSideLists.replaceWith(freshSideList);
 }
 
 function createAddListButton() {

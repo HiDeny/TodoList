@@ -34,6 +34,10 @@ export default function displayEditCard(todo) {
 	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
 
+
+	// console.log(todoCardEdit)
+	// console.log(todoCardEdit.elements['todoTitleEdit'])
+
 	setTimeout(() => {
 		controlEditCard(
 			todo,

@@ -1,7 +1,6 @@
 import { masterController } from '../../../masterController.js';
 
 import displayEditCard from '../interface/displayEditCard.js';
-import controlEditCard from './controlEditCard.js';
 
 export default function controlCard(todo, todoCard) {
 	const todoCardClick = (event) => {
@@ -11,6 +10,7 @@ export default function controlCard(todo, todoCard) {
 
 		if (activeEdit) return;
 		if (insideContainer) {
+			console.log(target);
 			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
 				const editCard = displayEditCard(todo);
 				todoCard.replaceWith(editCard);
