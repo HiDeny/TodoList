@@ -36,7 +36,7 @@ function createMasterController() {
 
 	function setListIds() {
 		listsControl.customLists.forEach((list) => {
-			list.id = listsControl.customLists.indexOf(list) + 2;
+			list.id = listsControl.customLists.indexOf(list) + 3;
 		});
 	}
 

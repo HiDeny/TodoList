@@ -16,6 +16,7 @@ export default function controlCard(todo, todoCard) {
 				todoCard.replaceWith(editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
 			}
+
 			if (target.className === 'deleteTodo') masterController.removeTodo(todo);
 			if (target.type === 'checkbox') masterController.completeTodo(todo);
 		}

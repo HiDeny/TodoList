@@ -19,7 +19,6 @@ function createInboxOption(div) {
 
 function populateListSelector(div, selectedId) {
 	masterController.listsControl.customLists.forEach((option) => {
-		console.log(option.id);
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);

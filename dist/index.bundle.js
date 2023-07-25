@@ -7669,7 +7669,6 @@ function createListDiv(list) {
 
 function createListHead(list) {
 	if (list.id <= 2) return createDefaultListHead(list);
-
 	return createCustomListHead(list);
 }
 
@@ -7853,21 +7852,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function controlSideBarButtons() {
-	(() => {
-		const addListButton = document.getElementById('addListButton');
-		(() => {
-			addListButton.addEventListener('click', createNewList);
-		})();
+	const sidebarButtons = document.getElementsByClassName('sidebarButton');
 
-		const sidebarButtons = document.getElementsByClassName('sidebarButton');
-
-		for (let button of sidebarButtons) {
-			if (button.id === 'addListButton') return;
-			button.addEventListener('click', () => {
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(button.id);
-			});
-		}
-	})();
+	for (let button of sidebarButtons) {
+		button.addEventListener('click', () => {
+			if (button.id === 'addListButton') _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.addList();
+			if (button.id !== 'addListButton') _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(button.id);
+		});
+	}
 }
 
 function toggleSidebar() {
@@ -7879,11 +7871,6 @@ function toggleSidebar() {
 		sidebar.classList.add('showSidebar');
 	}
 }
-
-const createNewList = () => {
-	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.addList();
-	addListButton.removeEventListener('click', createNewList);
-};
 
 
 /***/ }),
@@ -7967,6 +7954,7 @@ function controlCard(todo, todoCard) {
 				todoCard.replaceWith(editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
 			}
+
 			if (target.className === 'deleteTodo') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
 			if (target.type === 'checkbox') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
 		}
@@ -8560,7 +8548,6 @@ function createInboxOption(div) {
 
 function populateListSelector(div, selectedId) {
 	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists.forEach((option) => {
-		console.log(option.id);
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);
@@ -8758,7 +8745,7 @@ function createMasterController() {
 
 	function setListIds() {
 		listsControl.customLists.forEach((list) => {
-			list.id = listsControl.customLists.indexOf(list) + 2;
+			list.id = listsControl.customLists.indexOf(list) + 3;
 		});
 	}
 

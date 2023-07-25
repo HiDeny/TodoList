@@ -28,7 +28,6 @@ function createListDiv(list) {
 
 function createListHead(list) {
 	if (list.id <= 2) return createDefaultListHead(list);
-
 	return createCustomListHead(list);
 }
 
