@@ -2,6 +2,16 @@ export default function allListsController() {
 	let _defaultListsArr = [];
 	let _customListsArr = [];
 
+	function getAllLists() {
+		return [..._defaultListsArr, ..._customListsArr];
+	}
+
+	function setListIds() {
+		_customListsArr.forEach((list) => {
+			list.id = _customListsArr.indexOf(list) + 3;
+		});
+	}
+
 	return {
 		// Get
 		get defaultLists() {
@@ -10,9 +20,7 @@ export default function allListsController() {
 		get customLists() {
 			return [..._customListsArr];
 		},
-		get allLists() {
-			return [..._defaultListsArr, ..._customListsArr];
-		},
+		getAllLists,
 		// Add
 		addDefaultList(list) {
 			if (list.id > 2) console.log(`Not default list ${list}`);
@@ -20,6 +28,7 @@ export default function allListsController() {
 		},
 		addList(list) {
 			_customListsArr.push(list);
+			setListIds();
 		},
 		// Update
 		updateList(oldList, list) {
@@ -32,8 +41,12 @@ export default function allListsController() {
 				const listIndex = _customListsArr.indexOf(list);
 				if (listIndex !== -1) {
 					_customListsArr.splice(listIndex, 1);
+					setListIds();
 				}
 			}
+		},
+		getList(id) {
+			return getAllLists().find((list) => list.id === Number(id));
 		},
 	};
 }

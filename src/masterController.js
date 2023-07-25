@@ -1,9 +1,8 @@
-import firstSetup from './firstRun.js';
+import setupDefaultLists from './firstRun.js';
 
 import allListsController from './components/list/controller/controlAllLists.js';
 
-import createForm from './components/todo/interface/displayForm.js';
-import controlForm from './components/todo/controller/controlForm.js';
+import createTodoForm from './components/todo/todoForm.js';
 
 import createTodo from './components/todo/todo.js';
 import displayCard from './components/todo/interface/displayCard.js';
@@ -13,37 +12,19 @@ import createList from './components/list/createList.js';
 import createListElement from './components/list/interface/listElement.js';
 
 import displaySidebar from './components/sidebar/interface/displaySidebar.js';
-import { controlSideBarButtons } from './components/sidebar/controller/controlSidebar.js';
 
 //* Master List
 
 export const masterController = createMasterController();
 
-// First Run
-const today = createList('🌤️ Today', "Todos with today's date");
-today.id = 0;
-const upcoming = createList('📆 Upcoming', 'Todos with future dates');
-upcoming.id = 1;
-const inbox = createList('📥 Inbox', 'Default list');
-inbox.id = 2;
-
-masterController.listsControl.addDefaultList(today);
-masterController.listsControl.addDefaultList(upcoming);
-masterController.listsControl.addDefaultList(inbox);
-
 function createMasterController() {
 	const listsControl = allListsController();
+	setupDefaultLists(listsControl);
 
-	function setListIds() {
-		listsControl.customLists.forEach((list) => {
-			list.id = listsControl.customLists.indexOf(list) + 3;
-		});
-	}
+	const inbox = listsControl.defaultLists[0];
+	const today = listsControl.defaultLists[1];
+	const upcoming = listsControl.defaultLists[2];
 
-	// Find List
-	function getList(id) {
-		return listsControl.allLists.find((list) => list.id === Number(id));
-	}
 	// Find dateList
 	// Refresh
 	function refreshList(list) {
@@ -51,36 +32,13 @@ function createMasterController() {
 		refreshSubLists(list);
 	}
 
-	//* Todo
-	function newTodoForm() {
-		const container = document.querySelector('div.container');
-		const activeForm = document.querySelector('#todoForm');
+	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
+		const list = listsControl.getList(listId);
+		const newTodo = createTodo(title, notes, dueDate, priority);
+		newTodo.listId = listId;
 
-		if (!activeForm) {
-			const newTaskForm = createForm();
-			container.appendChild(newTaskForm);
-
-			// Visualize priority on change.
-			const formPriority = document.querySelector('.formPriority');
-			formPriority.addEventListener('input', (event) => {
-				visualizePriority(newTaskForm, event.target.value);
-			});
-			setTimeout(() => {
-				controlForm(newTaskForm, handleFormReturn);
-				// Focus title on opening
-				const titleInput = newTaskForm.querySelector('input[name="formTitle"]');
-				titleInput.focus();
-			}, 50);
-		}
-
-		function handleFormReturn({ title, notes, dueDate, priority, listId }) {
-			const list = getList(listId);
-			const newTodo = createTodo(title, notes, dueDate, priority);
-			newTodo.listId = listId;
-
-			list.addTodo(newTodo);
-			refreshSubList(list.activeTodos);
-		}
+		list.addTodo(newTodo);
+		refreshSubList(list.activeTodos);
 	}
 
 	return {
@@ -98,17 +56,17 @@ function createMasterController() {
 
 		//* Todos
 		createTodo() {
-			newTodoForm();
+			createTodoForm(handleFormReturn);
 		},
 		removeTodo(todo) {
-			const list = getList(todo.listId);
+			const list = listsControl.getList(todo.listId);
 
 			list.removeTodo(todo);
 
 			refreshSubLists(list);
 		},
 		completeTodo(todo) {
-			const list = getList(todo.listId);
+			const list = listsControl.getList(todo.listId);
 
 			list.removeTodo(todo);
 
@@ -119,7 +77,7 @@ function createMasterController() {
 			refreshSubLists(list);
 		},
 		updateTodo(oldTodo, todo) {
-			const list = getList(todo.listId);
+			const list = listsControl.getList(todo.listId);
 			// Date List?
 			// Update todo
 			list.updateTodo(oldTodo, todo);
@@ -128,8 +86,8 @@ function createMasterController() {
 			refreshSubLists(list);
 		},
 		moveTodo(oldTodo, todo) {
-			const oldList = getList(oldTodo.listId);
-			const newList = getList(todo.listId);
+			const oldList = listsControl.getList(oldTodo.listId);
+			const newList = listsControl.getList(todo.listId);
 			// Date List?
 			oldList.removeTodo(oldTodo);
 			newList.addTodo(todo);
@@ -139,9 +97,8 @@ function createMasterController() {
 		//* Lists
 		addList() {
 			const newList = createList();
-
 			listsControl.addList(newList);
-			setListIds();
+			console.log(newList.id);
 
 			refreshList(newList);
 			freshCustomSideLists();
@@ -152,7 +109,7 @@ function createMasterController() {
 			);
 			if (!check) return;
 			listsControl.deleteList(list, check);
-			setListIds();
+
 			refreshList(inbox);
 			freshCustomSideLists();
 		},
@@ -161,13 +118,11 @@ function createMasterController() {
 			freshCustomSideLists();
 		},
 		showList(id) {
-			const list = getList(id);
+			const list = listsControl.getList(id);
 			refreshList(list);
 		},
 	};
 }
-
-// console.log(masterController);
 
 //* Screen
 
@@ -216,52 +171,53 @@ export const sidebarDisplay = displaySidebar();
 export function populateSidebar() {
 	const defaultSideLists = document.querySelector('.defaultSideLists');
 	const customSideLists = document.querySelector('.customSideLists');
-	const addListButton = createAddListButton();
 
-	masterController.listsControl.allLists.forEach((list) => {
-		const listButton = document.createElement('button');
-		listButton.className = 'sidebarButton';
-		listButton.setAttribute('id', list.id);
-		listButton.textContent = list.title || `New List ${arr.indexOf(list) - 2}`;
+	const addListButton = createAddListButton();
+	addListButton.onclick = () => masterController.addList();
+
+	const allListsArr = masterController.listsControl.getAllLists();
+
+	allListsArr.forEach((list) => {
+		const sideListButton = document.createElement('button');
+		sideListButton.className = 'sidebarButton';
+		sideListButton.setAttribute('id', list.id);
+		sideListButton.textContent =
+			list.title || `New List ${arr.indexOf(list) - 2}`;
+		sideListButton.onclick = () => masterController.showList(sideListButton.id);
 		// console.log(list.id);
 		if (list.id <= 2) {
-			defaultSideLists.append(listButton);
-			if (list.id === 2) defaultSideLists.prepend(listButton);
+			defaultSideLists.append(sideListButton);
+			if (list.id === 2) defaultSideLists.prepend(sideListButton);
 		} else {
-			customSideLists.append(listButton);
+			customSideLists.append(sideListButton);
 		}
 	});
-
-	setTimeout(() => {
-		controlSideBarButtons();
-	}, 50);
 
 	customSideLists.append(addListButton);
 }
 
 function freshCustomSideLists() {
 	const oldSideLists = document.querySelector('.customSideLists');
-
 	const freshSideList = document.createElement('div');
 	freshSideList.className = 'customSideLists';
-	const addListButton = createAddListButton();
 
-	masterController.listsControl.customLists.forEach((sideList) => {
-		const listButton = document.createElement('button');
-		listButton.className = 'sidebarButton';
-		listButton.setAttribute('id', sideList.id);
-		listButton.textContent =
-			sideList.title ||
-			`New List ${masterController.listsControl.customLists.indexOf(sideList)}`;
+	const addListButton = createAddListButton();
+	addListButton.onclick = () => masterController.addList();
+
+	const customLists = masterController.listsControl.customLists;
+
+	customLists.forEach((sideList) => {
+		const sideListButton = document.createElement('button');
+		sideListButton.className = 'sidebarButton';
+		sideListButton.setAttribute('id', sideList.id);
+		sideListButton.textContent =
+			sideList.title || `New List ${sideList.id - 2}`;
+		sideListButton.onclick = () => masterController.showList(sideListButton.id);
 		// console.log(list.id);
-		freshSideList.append(listButton);
+		freshSideList.append(sideListButton);
 	});
 
 	freshSideList.append(addListButton);
-
-	setTimeout(() => {
-		controlSideBarButtons();
-	}, 50);
 
 	oldSideLists.replaceWith(freshSideList);
 }
@@ -273,18 +229,6 @@ function createAddListButton() {
 	addListButton.textContent = '+ New List';
 
 	return addListButton;
-}
-
-// function sidebarButtonHandleClick(list) {
-// 	refreshList(list);
-// }
-
-//* List
-function createNewList() {
-	const newList = createList();
-	const displayNewList = createListElement(newList);
-
-	return displayNewList;
 }
 
 //* Memory
@@ -352,6 +296,6 @@ function createNewList() {
 // 	}
 // }
 
-// import { getLists, updateListMemory } from '../memory/storage';
-// const allLists = getLists();
+// import { listsControl.getLists, updateListMemory } from '../memory/storage';
+// const allLists = listsControl.getLists();
 // updateListMemory();

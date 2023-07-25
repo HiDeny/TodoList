@@ -3,13 +3,11 @@
 import {
 	masterController,
 	sidebarDisplay,
-	
 	inboxDisplay,
 	populateSidebar,
-} from '../../masterController';
+} from './masterController';
 
-import { toggleSidebar } from '../sidebar/controller/controlSidebar';
-
+import { toggleSidebar } from './components/sidebar/controller/controlSidebar';
 
 export default function mainPage() {
 	// Header
@@ -44,5 +42,4 @@ export default function mainPage() {
 	// Sidebar
 	container.append(sidebarDisplay);
 	populateSidebar();
-
 }

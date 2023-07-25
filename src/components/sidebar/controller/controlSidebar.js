@@ -1,16 +1,3 @@
-import { masterController } from '../../../masterController';
-
-export function controlSideBarButtons() {
-	const sidebarButtons = document.getElementsByClassName('sidebarButton');
-
-	for (let button of sidebarButtons) {
-		button.addEventListener('click', () => {
-			if (button.id === 'addListButton') masterController.addList();
-			if (button.id !== 'addListButton') masterController.showList(button.id);
-		});
-	}
-}
-
 export function toggleSidebar() {
 	const sidebar = document.querySelector('.sidebar');
 
@@ -20,3 +7,11 @@ export function toggleSidebar() {
 		sidebar.classList.add('showSidebar');
 	}
 }
+
+// export function controlSideListButton(button) {
+// 	button.onclick = () => masterController.showList(button.id);
+// }
+
+// export function controlAddListButton(button) {
+// 	addListButton.onclick = () => masterController.addList();
+// }

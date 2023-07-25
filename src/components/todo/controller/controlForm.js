@@ -1,3 +1,5 @@
+import { visualizePriority } from '../interface/helperFunctions';
+
 export default function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
 		const target = event.target;
@@ -33,6 +35,12 @@ export default function controlForm(todoForm, callBack) {
 
 	document.addEventListener('click', handleMouseClick);
 	document.addEventListener('keydown', handleKeyDown);
+
+	todoForm.elements['formTitle'].focus();
+	// Visualize priority on change.
+	todoForm.elements['formPriority'].addEventListener('input', (event) => {
+		visualizePriority(todoForm, event.target.value);
+	});
 
 	todoForm.addEventListener('submit', (event) => {
 		event.preventDefault();
