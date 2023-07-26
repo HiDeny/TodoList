@@ -7451,14 +7451,11 @@ function allListsController() {
 			_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
 		},
 		// Remove
-		deleteList(list, shouldDelete) {
-			if (shouldDelete === true) {
-				list.clearSubLists(shouldDelete);
-				const listIndex = _customListsArr.indexOf(list);
-				if (listIndex !== -1) {
-					_customListsArr.splice(listIndex, 1);
-					setListIds();
-				}
+		deleteList(list) {
+			const listIndex = _customListsArr.indexOf(list);
+			if (listIndex !== -1) {
+				_customListsArr.splice(listIndex, 1);
+				setListIds();
 			}
 		},
 		getList(id) {
@@ -7566,17 +7563,6 @@ function createList(title, description) {
 		},
 		get completedTodos() {
 			return _completedTodos;
-		},
-		// Clear SubList
-		clearSubLists(shouldClear) {
-			if (shouldClear === true) {
-				while (_activeTodos.length > 0) {
-					this.removeTodo(_activeTodos[0]);
-				}
-				while (_completedTodos.length > 0) {
-					this.removeTodo(_completedTodos[0]);
-				}
-			}
 		},
 		// Sort
 		sortList() {
@@ -8851,10 +8837,19 @@ function createMasterController() {
 				`Do you really want to delete ${list.title.toUpperCase()}?`
 			);
 			if (!check) return;
-			listsControl.deleteList(list, check);
 
-			screenControl.replaceCurrentList(inbox);
+			if (check) {
+				while (list.activeTodos.length > 0) {
+					this.removeTodo(list.activeTodos[0]);
+				}
+				while (list.completedTodos.length > 0) {
+					this.removeTodo(list.completedTodos[0]);
+				}
+				listsControl.deleteList(list);
+			}
+
 			screenControl.refreshSideBar();
+			screenControl.replaceCurrentList(inbox);
 		},
 		updateList(oldList, list) {
 			listsControl.updateList(oldList, list);

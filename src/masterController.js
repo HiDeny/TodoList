@@ -94,10 +94,19 @@ function createMasterController() {
 				`Do you really want to delete ${list.title.toUpperCase()}?`
 			);
 			if (!check) return;
-			listsControl.deleteList(list, check);
 
-			screenControl.replaceCurrentList(inbox);
+			if (check) {
+				while (list.activeTodos.length > 0) {
+					this.removeTodo(list.activeTodos[0]);
+				}
+				while (list.completedTodos.length > 0) {
+					this.removeTodo(list.completedTodos[0]);
+				}
+				listsControl.deleteList(list);
+			}
+
 			screenControl.refreshSideBar();
+			screenControl.replaceCurrentList(inbox);
 		},
 		updateList(oldList, list) {
 			listsControl.updateList(oldList, list);

@@ -43,17 +43,6 @@ export default function createList(title, description) {
 		get completedTodos() {
 			return _completedTodos;
 		},
-		// Clear SubList
-		clearSubLists(shouldClear) {
-			if (shouldClear === true) {
-				while (_activeTodos.length > 0) {
-					this.removeTodo(_activeTodos[0]);
-				}
-				while (_completedTodos.length > 0) {
-					this.removeTodo(_completedTodos[0]);
-				}
-			}
-		},
 		// Sort
 		sortList() {
 			_activeTodos.sort(compareTodos);

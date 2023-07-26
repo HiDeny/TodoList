@@ -33,14 +33,11 @@ export default function allListsController() {
 			_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
 		},
 		// Remove
-		deleteList(list, shouldDelete) {
-			if (shouldDelete === true) {
-				list.clearSubLists(shouldDelete);
-				const listIndex = _customListsArr.indexOf(list);
-				if (listIndex !== -1) {
-					_customListsArr.splice(listIndex, 1);
-					setListIds();
-				}
+		deleteList(list) {
+			const listIndex = _customListsArr.indexOf(list);
+			if (listIndex !== -1) {
+				_customListsArr.splice(listIndex, 1);
+				setListIds();
 			}
 		},
 		getList(id) {
