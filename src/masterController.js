@@ -29,7 +29,7 @@ function createMasterController() {
 	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 		const list = listsControl.getList(listId);
 		const newTodo = createTodo(title, notes, dueDate, priority);
-		newTodo.listId = listId;
+		newTodo.listId = Number(listId);
 
 		list.addTodo(newTodo);
 		screenControl.refreshSubList(list);
@@ -69,15 +69,15 @@ function createMasterController() {
 
 			list.addTodo(todo);
 
+			list.sortList();
 			screenControl.refreshSubList(list);
 		},
-		updateTodo(oldTodo, todo) {
+		updateTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			// Date List?
-			// Update todo
-			list.updateTodo(oldTodo, todo);
 
 			// Refresh
+			list.sortList();
 			screenControl.refreshSubList(list);
 		},
 		moveTodo(oldTodo, todo) {
@@ -86,6 +86,7 @@ function createMasterController() {
 			// Date List?
 			oldList.removeTodo(oldTodo);
 			newList.addTodo(todo);
+			newList.sortList();
 			// Refresh
 			screenControl.refreshSubList(oldList);
 		},
@@ -93,7 +94,6 @@ function createMasterController() {
 		addList() {
 			const newList = createList();
 			listsControl.addList(newList);
-			console.log(newList.id);
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
@@ -131,12 +131,12 @@ export function populateSidebar() {
 	const addListButton = createAddListButton();
 	addListButton.onclick = () => masterController.addList();
 
-	const allListsArr = masterController.listsControl.getAllLists();
+	const allListsArr = masterController.listsControl.allLists;
 
 	allListsArr.forEach((list) => {
 		const sideListButton = document.createElement('button');
 		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', `id${list.id}`);
+		sideListButton.setAttribute('id', `no${list.id}`);
 		sideListButton.textContent =
 			list.title || `New List ${arr.indexOf(list) - 2}`;
 		sideListButton.onclick = () => masterController.showList(list.id);

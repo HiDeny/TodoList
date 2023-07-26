@@ -11,6 +11,10 @@ export default function createList(title, description) {
 		if (todo.done) return _completedTodos;
 	}
 
+	function findTodo(todo, subList) {
+		return subList.find((todoInList) => todoInList.id === Number(todo.id));
+	}
+
 	return {
 		//* LIST
 		// Basics
@@ -31,7 +35,7 @@ export default function createList(title, description) {
 			return _listId;
 		},
 		set id(newId) {
-			_listId = newId;
+			_listId = Number(newId);
 		},
 		get activeTodos() {
 			return _activeTodos;
@@ -53,10 +57,8 @@ export default function createList(title, description) {
 		// Sort
 		sortList() {
 			_activeTodos.sort(compareTodos);
-			_completedTodos.sort(compareTodos);
 		},
-
-		//* TODO
+		//* TODOS
 		// Add
 		addTodo(todo) {
 			const subList = getSubList(todo);
@@ -65,11 +67,10 @@ export default function createList(title, description) {
 		// Remove
 		removeTodo(todo) {
 			const subList = getSubList(todo);
-			subList.splice(subList.indexOf(todo), 1);
-		},
-		updateTodo(oldTodo, todo) {
-			const subList = getSubList(oldTodo);
-			subList.splice(subList.indexOf(oldTodo), 1, todo);
+			const todoToRemove = findTodo(todo, subList);
+			const todoToRemoveIndex = subList.indexOf(todoToRemove);
+
+			subList.splice(todoToRemoveIndex, 1);
 		},
 	};
 }

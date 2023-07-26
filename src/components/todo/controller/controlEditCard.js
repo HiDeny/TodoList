@@ -21,8 +21,13 @@ export default function controlEditCard(
 			const isCheckbox = target.type === 'checkbox';
 			const isDeleteButton = target.className === 'deleteTodoEdit';
 
-			if (!isCheckbox || !isDeleteButton) return;
-			if (isCheckbox) masterController.completeTodo(todo);
+			if (!isCheckbox && !isDeleteButton) return;
+			if (isCheckbox) {
+				if (oldTodo.listId !== todo.listId)
+					masterController.moveTodo(oldTodo, todo);
+				masterController.completeTodo(todo);
+			}
+
 			if (isDeleteButton) masterController.removeTodo(todo);
 			removeListeners();
 		}
@@ -31,7 +36,7 @@ export default function controlEditCard(
 			// const sameDate = oldTodo.dueDate === todo.dueDate;
 
 			if (!sameList) masterController.moveTodo(oldTodo, todo);
-			if (sameList) masterController.updateTodo(todo, todo);
+			if (sameList) masterController.updateTodo(todo);
 			removeListeners();
 		}
 	};
@@ -39,10 +44,10 @@ export default function controlEditCard(
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey)
-			masterController.updateTodo(oldTodo, todo);
+			masterController.updateTodo(todo);
 
 		if (event.code === 'Escape') {
-			masterController.updateTodo(todo, todo);
+			masterController.updateTodo(todo);
 		}
 	};
 
@@ -64,7 +69,7 @@ export default function controlEditCard(
 
 	// List
 	list.addEventListener('input', (event) => {
-		todo.listId = event.target.value;
+		todo.listId = Number(event.target.value);
 	});
 
 	// Priority

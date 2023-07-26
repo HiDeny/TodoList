@@ -31,7 +31,7 @@ export default function createTodo(title, notes, dueDate, priority) {
 			return _listId;
 		},
 		set listId(newListId) {
-			_listId = newListId;
+			_listId = Number(newListId);
 		},
 		get dateList() {
 			return _dateList;

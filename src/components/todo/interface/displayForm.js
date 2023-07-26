@@ -94,8 +94,9 @@ function createDateForm() {
 
 function createListsForm() {
 	const formListLabel = createLabel('formList');
+	const visibleList = document.querySelector('.list');
 
-	const formList = createListSelector();
+	const formList = createListSelector(Number(visibleList.id));
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';

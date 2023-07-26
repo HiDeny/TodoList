@@ -7378,10 +7378,6 @@ function allListsController() {
 	let _defaultListsArr = [];
 	let _customListsArr = [];
 
-	function getAllLists() {
-		return [..._defaultListsArr, ..._customListsArr];
-	}
-
 	function setListIds() {
 		_customListsArr.forEach((list) => {
 			list.id = _customListsArr.indexOf(list) + 3;
@@ -7396,7 +7392,9 @@ function allListsController() {
 		get customLists() {
 			return [..._customListsArr];
 		},
-		getAllLists,
+		get allLists() {
+			return [..._defaultListsArr, ..._customListsArr];
+		},
 		// Add
 		addDefaultList(list) {
 			if (list.id > 2) console.log(`Not default list ${list}`);
@@ -7422,7 +7420,7 @@ function allListsController() {
 			}
 		},
 		getList(id) {
-			return getAllLists().find((list) => list.id === Number(id));
+			return this.allLists.find((list) => list.id === Number(id));
 		},
 	};
 }
@@ -7495,6 +7493,10 @@ function createList(title, description) {
 		if (todo.done) return _completedTodos;
 	}
 
+	function findTodo(todo, subList) {
+		return subList.find((todoInList) => todoInList.id === Number(todo.id));
+	}
+
 	return {
 		//* LIST
 		// Basics
@@ -7515,7 +7517,7 @@ function createList(title, description) {
 			return _listId;
 		},
 		set id(newId) {
-			_listId = newId;
+			_listId = Number(newId);
 		},
 		get activeTodos() {
 			return _activeTodos;
@@ -7537,10 +7539,8 @@ function createList(title, description) {
 		// Sort
 		sortList() {
 			_activeTodos.sort(compareTodos);
-			_completedTodos.sort(compareTodos);
 		},
-
-		//* TODO
+		//* TODOS
 		// Add
 		addTodo(todo) {
 			const subList = getSubList(todo);
@@ -7549,11 +7549,10 @@ function createList(title, description) {
 		// Remove
 		removeTodo(todo) {
 			const subList = getSubList(todo);
-			subList.splice(subList.indexOf(todo), 1);
-		},
-		updateTodo(oldTodo, todo) {
-			const subList = getSubList(oldTodo);
-			subList.splice(subList.indexOf(oldTodo), 1, todo);
+			const todoToRemove = findTodo(todo, subList);
+			const todoToRemoveIndex = subList.indexOf(todoToRemove);
+
+			subList.splice(todoToRemoveIndex, 1);
 		},
 	};
 }
@@ -7824,8 +7823,7 @@ function controlCard(todo, todoCard) {
 
 		if (activeEdit) return;
 		if (insideContainer) {
-			console.log(target);
-			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
+			if (target.className !== 'deleteTodo' && target.type !== 'checkbox') {
 				const editCard = (0,_interface_displayEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(todo);
 				todoCard.replaceWith(editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
@@ -7878,8 +7876,13 @@ function controlEditCard(
 			const isCheckbox = target.type === 'checkbox';
 			const isDeleteButton = target.className === 'deleteTodoEdit';
 
-			if (!isCheckbox || !isDeleteButton) return;
-			if (isCheckbox) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+			if (!isCheckbox && !isDeleteButton) return;
+			if (isCheckbox) {
+				if (oldTodo.listId !== todo.listId)
+					_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
+				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+			}
+
 			if (isDeleteButton) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
 			removeListeners();
 		}
@@ -7888,7 +7891,7 @@ function controlEditCard(
 			// const sameDate = oldTodo.dueDate === todo.dueDate;
 
 			if (!sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
-			if (sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo, todo);
+			if (sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo);
 			removeListeners();
 		}
 	};
@@ -7896,10 +7899,10 @@ function controlEditCard(
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey)
-			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(oldTodo, todo);
+			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo);
 
 		if (event.code === 'Escape') {
-			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo, todo);
+			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo);
 		}
 	};
 
@@ -7921,7 +7924,7 @@ function controlEditCard(
 
 	// List
 	list.addEventListener('input', (event) => {
-		todo.listId = event.target.value;
+		todo.listId = Number(event.target.value);
 	});
 
 	// Priority
@@ -7961,7 +7964,7 @@ function controlForm(todoForm, callBack) {
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
 
-		if (!insideContainer || target.className === 'deleteTodoEdit') {
+		if (!insideContainer || target.className === 'cancelForm') {
 			removeForm();
 		}
 	};
@@ -8052,7 +8055,7 @@ function createTodo(title, notes, dueDate, priority) {
 			return _listId;
 		},
 		set listId(newListId) {
-			_listId = newListId;
+			_listId = Number(newListId);
 		},
 		get dateList() {
 			return _dateList;
@@ -8295,7 +8298,7 @@ function createDueDate(todo) {
 }
 
 function createListSelector(todo) {
-	const editList = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createListSelector)(todo.listId);
+	const editList = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createListSelector)(Number(todo.listId));
 	editList.className = 'todoListEdit';
 
 	return editList;
@@ -8414,8 +8417,9 @@ function createDateForm() {
 
 function createListsForm() {
 	const formListLabel = createLabel('formList');
+	const visibleList = document.querySelector('.list');
 
-	const formList = (0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.createListSelector)();
+	const formList = (0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.createListSelector)(Number(visibleList.id));
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
@@ -8743,7 +8747,7 @@ function createMasterController() {
 	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 		const list = listsControl.getList(listId);
 		const newTodo = (0,_components_todo_createTodo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
-		newTodo.listId = listId;
+		newTodo.listId = Number(listId);
 
 		list.addTodo(newTodo);
 		screenControl.refreshSubList(list);
@@ -8783,15 +8787,15 @@ function createMasterController() {
 
 			list.addTodo(todo);
 
+			list.sortList();
 			screenControl.refreshSubList(list);
 		},
-		updateTodo(oldTodo, todo) {
+		updateTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			// Date List?
-			// Update todo
-			list.updateTodo(oldTodo, todo);
 
 			// Refresh
+			list.sortList();
 			screenControl.refreshSubList(list);
 		},
 		moveTodo(oldTodo, todo) {
@@ -8800,6 +8804,7 @@ function createMasterController() {
 			// Date List?
 			oldList.removeTodo(oldTodo);
 			newList.addTodo(todo);
+			newList.sortList();
 			// Refresh
 			screenControl.refreshSubList(oldList);
 		},
@@ -8807,7 +8812,6 @@ function createMasterController() {
 		addList() {
 			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_5__["default"])();
 			listsControl.addList(newList);
-			console.log(newList.id);
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
@@ -8845,12 +8849,12 @@ function populateSidebar() {
 	const addListButton = createAddListButton();
 	addListButton.onclick = () => masterController.addList();
 
-	const allListsArr = masterController.listsControl.getAllLists();
+	const allListsArr = masterController.listsControl.allLists;
 
 	allListsArr.forEach((list) => {
 		const sideListButton = document.createElement('button');
 		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', `id${list.id}`);
+		sideListButton.setAttribute('id', `no${list.id}`);
 		sideListButton.textContent =
 			list.title || `New List ${arr.indexOf(list) - 2}`;
 		sideListButton.onclick = () => masterController.showList(list.id);
@@ -8966,11 +8970,10 @@ __webpack_require__.r(__webpack_exports__);
 
 function createScreenController() {
 	function refreshSubList(list) {
-		const activeSubList = list.activeTodos.length > 0;
-		const completedSubList = list.completedTodos.length > 0;
-
-		if (activeSubList) refreshActiveSub(list.activeTodos);
-		if (completedSubList) refreshCompletedSub(list.completedTodos);
+		const visibleList = document.querySelector('.list');
+		if (Number(visibleList.id) !== list.id) return;
+		refreshActiveSub(list.activeTodos);
+		refreshCompletedSub(list.completedTodos);
 	}
 
 	return {
@@ -8984,19 +8987,14 @@ function createScreenController() {
 		refreshSubList,
 		// Sidebar
 		updateSideList(list) {
-			console.log(`.sidebarButton.${list.id}`);
+			const sideListSelector = `.sidebarButton#no${list.id}`;
+			const buttonToUpdate = document.querySelector(sideListSelector);
 
-			const buttonToUpdate = document.querySelector(
-				`.sidebarButton#id${list.id}`
-			);
-
-			console.log(buttonToUpdate);
 			buttonToUpdate.textContent = list.title;
 		},
 		refreshSideBar() {
 			const oldSideLists = document.querySelector('.customSideLists');
 			const freshSideList = freshCustomSideLists();
-			console.log(freshSideList);
 
 			oldSideLists.replaceWith(freshSideList);
 		},
@@ -9048,7 +9046,7 @@ function freshCustomSideLists() {
 function createSideListButton(sideList) {
 	const sideListButton = document.createElement('button');
 	sideListButton.className = 'sidebarButton';
-	sideListButton.setAttribute('id', `id${sideList.id}`);
+	sideListButton.setAttribute('id', `no${sideList.id}`);
 	sideListButton.textContent = sideList.title || `New List ${sideList.id - 2}`;
 	sideListButton.onclick = () => _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(sideList.id);
 

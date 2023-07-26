@@ -4,11 +4,10 @@ import createListElement from './components/list/interface/listElement';
 
 export default function createScreenController() {
 	function refreshSubList(list) {
-		const activeSubList = list.activeTodos.length > 0;
-		const completedSubList = list.completedTodos.length > 0;
-
-		if (activeSubList) refreshActiveSub(list.activeTodos);
-		if (completedSubList) refreshCompletedSub(list.completedTodos);
+		const visibleList = document.querySelector('.list');
+		if (Number(visibleList.id) !== list.id) return;
+		refreshActiveSub(list.activeTodos);
+		refreshCompletedSub(list.completedTodos);
 	}
 
 	return {
@@ -22,19 +21,14 @@ export default function createScreenController() {
 		refreshSubList,
 		// Sidebar
 		updateSideList(list) {
-			console.log(`.sidebarButton.${list.id}`);
+			const sideListSelector = `.sidebarButton#no${list.id}`;
+			const buttonToUpdate = document.querySelector(sideListSelector);
 
-			const buttonToUpdate = document.querySelector(
-				`.sidebarButton#id${list.id}`
-			);
-
-			console.log(buttonToUpdate);
 			buttonToUpdate.textContent = list.title;
 		},
 		refreshSideBar() {
 			const oldSideLists = document.querySelector('.customSideLists');
 			const freshSideList = freshCustomSideLists();
-			console.log(freshSideList);
 
 			oldSideLists.replaceWith(freshSideList);
 		},
@@ -86,7 +80,7 @@ function freshCustomSideLists() {
 function createSideListButton(sideList) {
 	const sideListButton = document.createElement('button');
 	sideListButton.className = 'sidebarButton';
-	sideListButton.setAttribute('id', `id${sideList.id}`);
+	sideListButton.setAttribute('id', `no${sideList.id}`);
 	sideListButton.textContent = sideList.title || `New List ${sideList.id - 2}`;
 	sideListButton.onclick = () => masterController.showList(sideList.id);
 

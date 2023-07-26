@@ -10,8 +10,7 @@ export default function controlCard(todo, todoCard) {
 
 		if (activeEdit) return;
 		if (insideContainer) {
-			console.log(target);
-			if (target.className !== 'deleteTodo' || target.type !== 'checkbox') {
+			if (target.className !== 'deleteTodo' && target.type !== 'checkbox') {
 				const editCard = displayEditCard(todo);
 				todoCard.replaceWith(editCard);
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();

@@ -113,7 +113,7 @@ function createDueDate(todo) {
 }
 
 function createListSelector(todo) {
-	const editList = listSelector(todo.listId);
+	const editList = listSelector(Number(todo.listId));
 	editList.className = 'todoListEdit';
 
 	return editList;

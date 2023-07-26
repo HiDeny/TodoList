@@ -5,7 +5,7 @@ export default function controlForm(todoForm, callBack) {
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
 
-		if (!insideContainer || target.className === 'deleteTodoEdit') {
+		if (!insideContainer || target.className === 'cancelForm') {
 			removeForm();
 		}
 	};
