@@ -1,4 +1,4 @@
-import createTodo from './createTodo';
+import createTodo from './controller/createTodo';
 
 import createNewTodoForm from './interface/displayForm';
 import controlForm from './controller/controlForm';

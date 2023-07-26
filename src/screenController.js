@@ -1,29 +1,31 @@
 import { masterController } from './masterController';
+
 import { createTodoCard } from './components/todo/todo';
+
 import createListElement from './components/list/interface/listElement';
+
 import {
 	createAddListButton,
 	createSideListButton,
-} from './components/sidebar/controller/controlSidebar';
+} from './components/sidebar/controlSidebar';
 
 export default function createScreenController() {
-	function refreshSubList(list) {
-		const visibleList = document.querySelector('.list');
-		if (Number(visibleList.id) !== list.id) return;
-		list.sortList();
-		refreshActiveSub(list.activeTodos);
-		refreshCompletedSub(list.completedTodos);
-	}
-
 	return {
 		// List
 		replaceCurrentList(list) {
 			const currentList = document.querySelector('.list');
-			const newList = createListElement(list);
-			currentList.replaceWith(newList);
-			refreshSubList(list);
+			const newListElement = createListElement(list);
+			currentList.replaceWith(newListElement);
+
+			this.checkSubLists(list);
 		},
-		refreshSubList,
+		checkSubLists(list) {
+			const visibleList = document.querySelector('.list');
+			if (Number(visibleList.id) !== list.id) return;
+			list.sortList();
+			refreshSubList(list.activeTodos, 'activeTodos');
+			refreshSubList(list.completedTodos, 'completedTodos');
+		},
 		// Sidebar
 		updateSideList(list) {
 			const sideListSelector = `.sidebarButton#no${list.id}`;
@@ -40,31 +42,21 @@ export default function createScreenController() {
 	};
 }
 
+// Sub List
+function refreshSubList(subList, className) {
+	const newSubList = document.createElement('div');
+	newSubList.classList = className;
+
+	subList.forEach((todo) => newSubList.appendChild(createTodoCard(todo)));
+
+	const oldSubList = document.querySelector(`.${className}`);
+	oldSubList.replaceWith(newSubList);
+}
+
 // Display changes
 function displayChange() {}
 
 //* Screen
-
-// Sub List
-function refreshActiveSub(subList) {
-	const activeSubList = document.createElement('div');
-	activeSubList.classList = 'activeTodos';
-
-	subList.forEach((todo) => activeSubList.appendChild(createTodoCard(todo)));
-
-	const oldUl = document.querySelector('.activeTodos');
-	oldUl.replaceWith(activeSubList);
-}
-
-function refreshCompletedSub(subList) {
-	const completedSubList = document.createElement('div');
-	completedSubList.classList = 'completedTodos';
-
-	subList.forEach((todo) => completedSubList.appendChild(createTodoCard(todo)));
-
-	const oldUl = document.querySelector('.completedTodos');
-	oldUl.replaceWith(completedSubList);
-}
 
 // Sidebar
 function freshCustomSideLists() {

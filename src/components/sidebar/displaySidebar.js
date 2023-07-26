@@ -1,4 +1,4 @@
-import { populateSidebar } from '../controller/controlSidebar';
+import { populateSidebar } from './controlSidebar';
 
 export default function displaySidebar() {
 	const displaySidebar = createSidebar();

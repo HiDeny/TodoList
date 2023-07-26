@@ -1,6 +1,6 @@
 import { masterController } from '../../../masterController';
 
-export default function handleCustomDisplayList(
+export default function controlListElement(
 	list,
 	deleteButton,
 	title,
@@ -22,4 +22,8 @@ export default function handleCustomDisplayList(
 		list.description = event.target.value;
 		masterController.saveList(list);
 	});
+
+	setTimeout(() => {
+		if (!title.value) title.focus();
+	}, 50);
 }

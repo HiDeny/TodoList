@@ -18,7 +18,9 @@ function createInboxOption(div) {
 }
 
 function populateListSelector(div, selectedId) {
-	masterController.listsControl.customLists.forEach((option) => {
+	const customLists = masterController.listsControl.customLists;
+
+	customLists.forEach((option) => {
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);
@@ -27,18 +29,14 @@ function populateListSelector(div, selectedId) {
 
 // Priority Selector
 export function createPrioritySelector(
-	withPlaceholder = true,
+	isSelected = true,
 	currentPriority = false
 ) {
 	// Div
 	const prioritySelector = document.createElement('select');
 
 	// Placeholder
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = withPlaceholder;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
+	const placeholderPriority = createPriorityPlaceholder(isSelected);
 	prioritySelector.append(placeholderPriority);
 
 	// Options
@@ -50,18 +48,25 @@ export function createPrioritySelector(
 	];
 
 	// Append Options
-
 	priorityOptions.forEach((option) => {
 		const optionElement = new Option(option.text, option.value);
-
 		if (currentPriority) {
-			optionElement.selected = option.value === currentPriority ? true : false;
+			optionElement.selected = option.value === currentPriority;
 		}
-
 		prioritySelector.append(optionElement);
 	});
 
 	return prioritySelector;
+}
+
+function createPriorityPlaceholder(isSelected) {
+	const placeholderPriority = new Option('Priority', '');
+	placeholderPriority.className = 'placeholderPri';
+	placeholderPriority.selected = isSelected;
+	placeholderPriority.disabled = true;
+	placeholderPriority.hidden = true;
+
+	return placeholderPriority;
 }
 
 // Display Priority

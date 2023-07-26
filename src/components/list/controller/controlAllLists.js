@@ -21,18 +21,12 @@ export default function allListsController() {
 		},
 		// Add
 		addDefaultList(list) {
-			if (list.id > 2) console.log(`Not default list ${list}`);
 			_defaultListsArr.push(list);
 		},
 		addList(list) {
 			_customListsArr.push(list);
 			setListIds();
 		},
-		// Update
-		// updateList(oldList, list) {
-		// 	console.log(_customListsArr.indexOf(oldList));
-		// 	_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
-		// },
 		// Remove
 		deleteList(list) {
 			const listIndex = _customListsArr.indexOf(list);

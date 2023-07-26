@@ -1,4 +1,4 @@
-import handleCustomDisplayList from '../controller/controlListElement';
+import controlListElement from '../controller/controlListElement';
 
 export default function createListElement(list) {
 	const listElement = createListDiv(list);
@@ -74,11 +74,7 @@ function createCustomListHead(list) {
 	const description = createCustomListDescription(list);
 	headDiv.append(description);
 
-	handleCustomDisplayList(list, deleteButton, title, description);
-
-	setTimeout(() => {
-		if (title.value === '') title.focus();
-	}, 10);
+	controlListElement(list, deleteButton, title, description);
 
 	return headDiv;
 }

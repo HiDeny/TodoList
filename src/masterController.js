@@ -6,7 +6,7 @@ import createScreenController from './screenController.js';
 
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
-import createList from './components/list/createList.js';
+import createList from './components/list/controller/createList.js';
 
 //* Master List
 export const masterController = createMasterController();
@@ -21,7 +21,6 @@ function createMasterController() {
 	const upcoming = listsControl.defaultLists[2];
 
 	return {
-		screenControl,
 		listsControl,
 		// Defaults
 		get inbox() {
@@ -45,11 +44,11 @@ function createMasterController() {
 			if (dateList) {
 				dateList.addTodo(todo);
 				todo.dateListId = Number(dateList.id);
-				screenControl.refreshSubList(dateList);
+				screenControl.checkSubLists(dateList);
 			}
 
 			list.addTodo(todo);
-			screenControl.refreshSubList(list);
+			screenControl.checkSubLists(list);
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -67,8 +66,8 @@ function createMasterController() {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 			// Refresh
-			screenControl.refreshSubList(list);
-			if (dateList) screenControl.refreshSubList(dateList);
+			screenControl.checkSubLists(list);
+			if (dateList) screenControl.checkSubLists(dateList);
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
