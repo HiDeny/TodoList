@@ -1,10 +1,12 @@
+import { isFuture, isToday } from 'date-fns';
+
 import setupDefaultLists from './firstRun.js';
 
 import allListsController from './components/list/controller/controlAllLists.js';
 import createScreenController from './screenController.js';
 
 import createTodo from './components/todo/createTodo.js';
-import { createTodoCard, createTodoForm } from './components/todo/todo.js';
+import { createTodoForm } from './components/todo/todo.js';
 
 import createList from './components/list/createList.js';
 import createListElement from './components/list/interface/listElement.js';
@@ -24,17 +26,6 @@ function createMasterController() {
 	const today = listsControl.defaultLists[1];
 	const upcoming = listsControl.defaultLists[2];
 
-	// Find dateList
-
-	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
-		const list = listsControl.getList(listId);
-		const newTodo = createTodo(title, notes, dueDate, priority);
-		newTodo.listId = Number(listId);
-
-		list.addTodo(newTodo);
-		screenControl.refreshSubList(list);
-	}
-
 	return {
 		screenControl,
 		listsControl,
@@ -53,42 +44,42 @@ function createMasterController() {
 		createTodo() {
 			createTodoForm(handleFormReturn);
 		},
-		removeTodo(todo) {
+		addTodo(todo) {
 			const list = listsControl.getList(todo.listId);
+			const dateList = findDateList(todo.dueDate);
 
-			list.removeTodo(todo);
-
-			screenControl.refreshSubList(list);
-		},
-		completeTodo(todo) {
-			const list = listsControl.getList(todo.listId);
-
-			list.removeTodo(todo);
-
-			todo.toggleDone();
+			if (dateList) {
+				dateList.addTodo(todo);
+				todo.dateListId = Number(dateList.id);
+				screenControl.refreshSubList(dateList);
+			}
 
 			list.addTodo(todo);
-
-			list.sortList();
 			screenControl.refreshSubList(list);
+		},
+		removeTodo(todo) {
+			const list = listsControl.getList(todo.listId);
+			const dateList = findDateList(todo.dueDate);
+
+			if (dateList) dateList.removeTodo(todo);
+			list.removeTodo(todo);
+		},
+		completeTodo(todo) {
+			this.removeTodo(todo);
+			todo.toggleDone();
+			this.addTodo(todo);
 		},
 		updateTodo(todo) {
 			const list = listsControl.getList(todo.listId);
-			// Date List?
+			const dateList = findDateList(todo.dueDate);
 
 			// Refresh
-			list.sortList();
 			screenControl.refreshSubList(list);
+			if (dateList) screenControl.refreshSubList(dateList);
 		},
 		moveTodo(oldTodo, todo) {
-			const oldList = listsControl.getList(oldTodo.listId);
-			const newList = listsControl.getList(todo.listId);
-			// Date List?
-			oldList.removeTodo(oldTodo);
-			newList.addTodo(todo);
-			newList.sortList();
-			// Refresh
-			screenControl.refreshSubList(oldList);
+			this.removeTodo(oldTodo);
+			this.addTodo(todo);
 		},
 		//* Lists
 		addList() {
@@ -117,6 +108,21 @@ function createMasterController() {
 			screenControl.replaceCurrentList(list);
 		},
 	};
+}
+
+//* Form
+function handleFormReturn({ title, notes, dueDate, priority, listId }) {
+	const newTodo = createTodo(title, notes, dueDate, priority);
+	newTodo.listId = Number(listId);
+
+	masterController.addTodo(newTodo);
+}
+
+//* Date List
+function findDateList(dueDate) {
+	const dateToCheck = new Date(dueDate);
+	if (isToday(dateToCheck)) return masterController.getToday();
+	if (isFuture(dateToCheck)) return masterController.getUpcoming();
 }
 
 //* Sidebar
@@ -169,14 +175,6 @@ function createAddListButton() {
 // 	const nextStep = refreshConditions(visibleList, todo);
 
 // 	if (!nextStep) return;
-
-// 	const subList = nextStep;
-// 	const sortedList = sortList(subList);
-
-// function checkSubList(list) {
-// 	if (list.activeTodos.length > 0) refreshSubList(list.activeTodos[0]);
-// 	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
-// }
 
 // function refreshConditions(visibleList, todo) {
 // 	if (visibleList.id < 2) {

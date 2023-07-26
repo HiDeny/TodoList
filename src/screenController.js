@@ -6,6 +6,7 @@ export default function createScreenController() {
 	function refreshSubList(list) {
 		const visibleList = document.querySelector('.list');
 		if (Number(visibleList.id) !== list.id) return;
+		list.sortList();
 		refreshActiveSub(list.activeTodos);
 		refreshCompletedSub(list.completedTodos);
 	}

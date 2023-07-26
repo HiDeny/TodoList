@@ -9,7 +9,7 @@ export default function createTodo(title, notes, dueDate, priority) {
 	let _todoId = id;
 	incrementAndStoreId();
 	let _done = false;
-	let _dateList = null;
+	let _dateListId = null;
 	let _listId = 0;
 
 	return {
@@ -33,11 +33,11 @@ export default function createTodo(title, notes, dueDate, priority) {
 		set listId(newListId) {
 			_listId = Number(newListId);
 		},
-		get dateList() {
-			return _dateList;
+		get dateListId() {
+			return _dateListId;
 		},
-		set dateList(newDateList) {
-			_dateList = newDateList;
+		set dateListId(newDateListId) {
+			_dateListId = Number(newDateListId);
 		},
 	};
 }

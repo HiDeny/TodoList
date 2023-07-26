@@ -26,18 +26,19 @@ export default function controlEditCard(
 				if (oldTodo.listId !== todo.listId)
 					masterController.moveTodo(oldTodo, todo);
 				masterController.completeTodo(todo);
+				editCard.remove();
 			}
 
-			if (isDeleteButton) masterController.removeTodo(todo);
-			removeListeners();
+			if (isDeleteButton) masterController.removeTodo(oldTodo);
+			removeCard();
 		}
 		if (!insideContainer) {
 			const sameList = oldTodo.listId === todo.listId;
-			// const sameDate = oldTodo.dueDate === todo.dueDate;
+			const sameDate = oldTodo.dueDate === todo.dueDate;
 
-			if (!sameList) masterController.moveTodo(oldTodo, todo);
+			if (!sameDate || !sameDate) masterController.moveTodo(oldTodo, todo);
 			if (sameList) masterController.updateTodo(todo);
-			removeListeners();
+			removeCard();
 		}
 	};
 
@@ -82,8 +83,9 @@ export default function controlEditCard(
 	document.addEventListener('keydown', handleKeyDown);
 
 	// Remove Listeners
-	function removeListeners() {
+	function removeCard() {
 		document.removeEventListener('keydown', handleKeyDown);
 		document.removeEventListener('click', handleMouseClick);
+		editCard.remove();
 	}
 }

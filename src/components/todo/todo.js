@@ -4,11 +4,6 @@ import controlForm from './controller/controlForm';
 import displayCard from './interface/displayCard';
 import controlCard from './controller/controlCard';
 
-import displayEditCard from './interface/displayEditCard';
-import controlEditCard from './controller/controlEditCard';
-
-import { visualizePriority } from './interface/helperFunctions';
-
 export function createTodoForm(handleFormReturn) {
 	const container = document.querySelector('div.container');
 	const activeForm = document.querySelector('#todoForm');
@@ -21,10 +16,8 @@ export function createTodoForm(handleFormReturn) {
 }
 
 export function createTodoCard(todo) {
-    const newCard = displayCard(todo);
-    controlCard(todo, newCard);
+	const newCard = displayCard(todo);
+	controlCard(todo, newCard);
 
-    return newCard;
+	return newCard;
 }
-
-
