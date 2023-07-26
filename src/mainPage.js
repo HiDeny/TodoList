@@ -1,7 +1,4 @@
-import { masterController, inboxDisplay } from './masterController';
-
-import displaySidebar from './components/sidebar/interface/displaySidebar';
-import { toggleSidebar } from './components/sidebar/controller/controlSidebar';
+import controlPage from './controlPage';
 
 export default function mainPage() {
 	// Header
@@ -12,27 +9,18 @@ export default function mainPage() {
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
 	addTodoBtn.textContent = '+';
-	addTodoBtn.addEventListener('click', masterController.createTodo);
-
 	headerDiv.prepend(addTodoBtn);
 
 	// Menu Button
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
-	menuButton.addEventListener('click', toggleSidebar);
-
 	headerDiv.append(menuButton);
 
 	// Container
 	const container = document.createElement('div');
 	container.className = 'container';
-
 	document.body.appendChild(container);
 
-	// List
-	container.append(inboxDisplay);
-
-	// Sidebar
-	container.append(displaySidebar());
+	controlPage(addTodoBtn, menuButton, container);
 }

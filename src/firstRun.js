@@ -1,6 +1,6 @@
 import createList from './components/list/createList';
 
-export default function setupDefaultLists(listsControl) {
+export function setupDefaultLists(listsControl) {
 	const today = createList('🌤️ Today', "Todos with today's date");
 	today.id = 0;
 	const upcoming = createList('📆 Upcoming', 'Todos with future dates');

@@ -1,15 +1,12 @@
 import { isFuture, isToday } from 'date-fns';
 
-import setupDefaultLists from './firstRun.js';
+import { setupDefaultLists } from './firstRun.js';
 import allListsController from './components/list/controller/controlAllLists.js';
 import createScreenController from './screenController.js';
 
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/createList.js';
-import createListElement from './components/list/interface/listElement.js';
-
-import displaySidebar from './components/sidebar/interface/displaySidebar.js';
 
 //* Master List
 export const masterController = createMasterController();
@@ -27,13 +24,13 @@ function createMasterController() {
 		screenControl,
 		listsControl,
 		// Defaults
-		getInbox() {
+		get inbox() {
 			return inbox;
 		},
-		getToday() {
+		get today() {
 			return today;
 		},
-		getUpcoming() {
+		get upcoming() {
 			return upcoming;
 		},
 
@@ -124,72 +121,8 @@ function clearSubList(subList) {
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	if (isToday(dateToCheck)) return masterController.getToday();
-	if (isFuture(dateToCheck)) return masterController.getUpcoming();
+	if (isToday(dateToCheck)) return masterController.today;
+	if (isFuture(dateToCheck)) return masterController.upcoming;
 }
 
-//* Sidebar
-
-export const inboxDisplay = createListElement(masterController.getInbox());
-export const sidebarDisplay = displaySidebar();
-
 //* Memory
-
-// Old Screen
-// 	const visibleList = document.querySelector('.list');
-
-// 	const nextStep = refreshConditions(visibleList, todo);
-
-// 	if (!nextStep) return;
-
-// function refreshConditions(visibleList, todo) {
-// 	if (visibleList.id < 2) {
-// 		if (Number(todo.dateList) !== Number(visibleList.id)) return;
-// 		return findDateList(todo).subList;
-// 	}
-
-// 	if (Number(todo.listId) !== Number(visibleList.id)) return;
-// 	return findList(todo).subList;
-// }
-
-// updateCustomList(list);
-// refreshSideLists();
-
-// function refreshSideLists() {
-// 	const currentLists = document.querySelector('.customLists');
-// 	currentLists.replaceWith(createCustomLists(customListsArr));
-// }
-// function findDateList(todo) {
-// 	if (!todo.dueDate) return null;
-
-// 	const date = new Date(todo.dueDate);
-
-// 	const completeList = isToday(date) ? today : upcoming;
-// 	const subList = !todo.done
-// 		? completeList.activeTodos
-// 		: completeList.completedTodos;
-
-// 	return { completeList, subList };
-// }
-
-// function addDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		todo.dateList = dateList.completeList.id;
-// 		dateList.subList.push(todo);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// Remove
-// function removeDateList(todo) {
-// 	const dateList = findDateList(todo);
-// 	if (dateList) {
-// 		dateList.subList.splice(dateList.subList.indexOf(todo), 1);
-// 		updateListMemory(dateList.completeList);
-// 	}
-// }
-
-// import { listsControl.getLists, updateListMemory } from '../memory/storage';
-// const allLists = listsControl.getLists();
-// updateListMemory();

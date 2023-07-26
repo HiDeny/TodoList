@@ -13,7 +13,7 @@ export function createListSelector(selectedId = 2) {
 }
 
 function createInboxOption(div) {
-	const inbox = masterController.getInbox();
+	const inbox = masterController.inbox;
 	div.append(new Option(inbox.title, inbox.id));
 }
 
