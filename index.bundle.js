@@ -3173,6 +3173,48 @@ function isDate(value) {
 
 /***/ }),
 
+/***/ "./node_modules/date-fns/esm/isFuture/index.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/date-fns/esm/isFuture/index.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ isFuture)
+/* harmony export */ });
+/* harmony import */ var _toDate_index_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../toDate/index.js */ "./node_modules/date-fns/esm/toDate/index.js");
+/* harmony import */ var _lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_lib/requiredArgs/index.js */ "./node_modules/date-fns/esm/_lib/requiredArgs/index.js");
+
+
+/**
+ * @name isFuture
+ * @category Common Helpers
+ * @summary Is the given date in the future?
+ * @pure false
+ *
+ * @description
+ * Is the given date in the future?
+ *
+ * > ⚠️ Please note that this function is not present in the FP submodule as
+ * > it uses `Date.now()` internally hence impure and can't be safely curried.
+ *
+ * @param {Date|Number} date - the date to check
+ * @returns {Boolean} the date is in the future
+ * @throws {TypeError} 1 argument required
+ *
+ * @example
+ * // If today is 6 October 2014, is 31 December 2014 in the future?
+ * const result = isFuture(new Date(2014, 11, 31))
+ * //=> true
+ */
+function isFuture(dirtyDate) {
+  (0,_lib_requiredArgs_index_js__WEBPACK_IMPORTED_MODULE_0__["default"])(1, arguments);
+  return (0,_toDate_index_js__WEBPACK_IMPORTED_MODULE_1__["default"])(dirtyDate).getTime() > Date.now();
+}
+
+/***/ }),
+
 /***/ "./node_modules/date-fns/esm/isSameDay/index.js":
 /*!******************************************************!*\
   !*** ./node_modules/date-fns/esm/isSameDay/index.js ***!
@@ -7529,10 +7571,10 @@ function createList(title, description) {
 		clearSubLists(shouldClear) {
 			if (shouldClear === true) {
 				while (_activeTodos.length > 0) {
-					removeTodo(_activeTodos[0]);
+					this.removeTodo(_activeTodos[0]);
 				}
 				while (_completedTodos.length > 0) {
-					removeTodo(_completedTodos[0]);
+					this.removeTodo(_completedTodos[0]);
 				}
 			}
 		},
@@ -7829,8 +7871,11 @@ function controlCard(todo, todoCard) {
 				editCard.querySelector('input[class="todoTitleEdit"]').focus();
 			}
 
-			if (target.className === 'deleteTodo') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
 			if (target.type === 'checkbox') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+			if (target.className === 'deleteTodo') {
+				_masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
+				todoCard.remove();
+			}
 		}
 	};
 
@@ -7881,18 +7926,19 @@ function controlEditCard(
 				if (oldTodo.listId !== todo.listId)
 					_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
 				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+				editCard.remove();
 			}
 
-			if (isDeleteButton) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
-			removeListeners();
+			if (isDeleteButton) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(oldTodo);
+			removeCard();
 		}
 		if (!insideContainer) {
 			const sameList = oldTodo.listId === todo.listId;
-			// const sameDate = oldTodo.dueDate === todo.dueDate;
+			const sameDate = oldTodo.dueDate === todo.dueDate;
 
-			if (!sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
+			if (!sameDate || !sameDate) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
 			if (sameList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.updateTodo(todo);
-			removeListeners();
+			removeCard();
 		}
 	};
 
@@ -7937,9 +7983,10 @@ function controlEditCard(
 	document.addEventListener('keydown', handleKeyDown);
 
 	// Remove Listeners
-	function removeListeners() {
+	function removeCard() {
 		document.removeEventListener('keydown', handleKeyDown);
 		document.removeEventListener('click', handleMouseClick);
+		editCard.remove();
 	}
 }
 
@@ -8033,7 +8080,7 @@ function createTodo(title, notes, dueDate, priority) {
 	let _todoId = id;
 	incrementAndStoreId();
 	let _done = false;
-	let _dateList = null;
+	let _dateListId = null;
 	let _listId = 0;
 
 	return {
@@ -8057,11 +8104,11 @@ function createTodo(title, notes, dueDate, priority) {
 		set listId(newListId) {
 			_listId = Number(newListId);
 		},
-		get dateList() {
-			return _dateList;
+		get dateListId() {
+			return _dateListId;
 		},
-		set dateList(newDateList) {
-			_dateList = newDateList;
+		set dateListId(newDateListId) {
+			_dateListId = Number(newDateListId);
 		},
 	};
 }
@@ -8573,14 +8620,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./controller/controlForm */ "./src/components/todo/controller/controlForm.js");
 /* harmony import */ var _interface_displayCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./interface/displayCard */ "./src/components/todo/interface/displayCard.js");
 /* harmony import */ var _controller_controlCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./controller/controlCard */ "./src/components/todo/controller/controlCard.js");
-/* harmony import */ var _interface_displayEditCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./interface/displayEditCard */ "./src/components/todo/interface/displayEditCard.js");
-/* harmony import */ var _controller_controlEditCard__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./controller/controlEditCard */ "./src/components/todo/controller/controlEditCard.js");
-/* harmony import */ var _interface_helperFunctions__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./interface/helperFunctions */ "./src/components/todo/interface/helperFunctions.js");
-
-
-
-
-
 
 
 
@@ -8599,13 +8638,11 @@ function createTodoForm(handleFormReturn) {
 }
 
 function createTodoCard(todo) {
-    const newCard = (0,_interface_displayCard__WEBPACK_IMPORTED_MODULE_2__["default"])(todo);
-    (0,_controller_controlCard__WEBPACK_IMPORTED_MODULE_3__["default"])(todo, newCard);
+	const newCard = (0,_interface_displayCard__WEBPACK_IMPORTED_MODULE_2__["default"])(todo);
+	(0,_controller_controlCard__WEBPACK_IMPORTED_MODULE_3__["default"])(todo, newCard);
 
-    return newCard;
+	return newCard;
 }
-
-
 
 
 /***/ }),
@@ -8708,6 +8745,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   populateSidebar: () => (/* binding */ populateSidebar),
 /* harmony export */   sidebarDisplay: () => (/* binding */ sidebarDisplay)
 /* harmony export */ });
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
 /* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firstRun.js */ "./src/firstRun.js");
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
 /* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
@@ -8716,6 +8755,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
 /* harmony import */ var _components_list_interface_listElement_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/list/interface/listElement.js */ "./src/components/list/interface/listElement.js");
 /* harmony import */ var _components_sidebar_interface_displaySidebar_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar.js */ "./src/components/sidebar/interface/displaySidebar.js");
+
+
 
 
 
@@ -8742,17 +8783,6 @@ function createMasterController() {
 	const today = listsControl.defaultLists[1];
 	const upcoming = listsControl.defaultLists[2];
 
-	// Find dateList
-
-	function handleFormReturn({ title, notes, dueDate, priority, listId }) {
-		const list = listsControl.getList(listId);
-		const newTodo = (0,_components_todo_createTodo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
-		newTodo.listId = Number(listId);
-
-		list.addTodo(newTodo);
-		screenControl.refreshSubList(list);
-	}
-
 	return {
 		screenControl,
 		listsControl,
@@ -8771,42 +8801,42 @@ function createMasterController() {
 		createTodo() {
 			(0,_components_todo_todo_js__WEBPACK_IMPORTED_MODULE_4__.createTodoForm)(handleFormReturn);
 		},
-		removeTodo(todo) {
+		addTodo(todo) {
 			const list = listsControl.getList(todo.listId);
+			const dateList = findDateList(todo.dueDate);
 
-			list.removeTodo(todo);
-
-			screenControl.refreshSubList(list);
-		},
-		completeTodo(todo) {
-			const list = listsControl.getList(todo.listId);
-
-			list.removeTodo(todo);
-
-			todo.toggleDone();
+			if (dateList) {
+				dateList.addTodo(todo);
+				todo.dateListId = Number(dateList.id);
+				screenControl.refreshSubList(dateList);
+			}
 
 			list.addTodo(todo);
-
-			list.sortList();
 			screenControl.refreshSubList(list);
+		},
+		removeTodo(todo) {
+			const list = listsControl.getList(todo.listId);
+			const dateList = findDateList(todo.dueDate);
+
+			if (dateList) dateList.removeTodo(todo);
+			list.removeTodo(todo);
+		},
+		completeTodo(todo) {
+			this.removeTodo(todo);
+			todo.toggleDone();
+			this.addTodo(todo);
 		},
 		updateTodo(todo) {
 			const list = listsControl.getList(todo.listId);
-			// Date List?
+			const dateList = findDateList(todo.dueDate);
 
 			// Refresh
-			list.sortList();
 			screenControl.refreshSubList(list);
+			if (dateList) screenControl.refreshSubList(dateList);
 		},
 		moveTodo(oldTodo, todo) {
-			const oldList = listsControl.getList(oldTodo.listId);
-			const newList = listsControl.getList(todo.listId);
-			// Date List?
-			oldList.removeTodo(oldTodo);
-			newList.addTodo(todo);
-			newList.sortList();
-			// Refresh
-			screenControl.refreshSubList(oldList);
+			this.removeTodo(oldTodo);
+			this.addTodo(todo);
 		},
 		//* Lists
 		addList() {
@@ -8835,6 +8865,21 @@ function createMasterController() {
 			screenControl.replaceCurrentList(list);
 		},
 	};
+}
+
+//* Form
+function handleFormReturn({ title, notes, dueDate, priority, listId }) {
+	const newTodo = (0,_components_todo_createTodo_js__WEBPACK_IMPORTED_MODULE_3__["default"])(title, notes, dueDate, priority);
+	newTodo.listId = Number(listId);
+
+	masterController.addTodo(newTodo);
+}
+
+//* Date List
+function findDateList(dueDate) {
+	const dateToCheck = new Date(dueDate);
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_8__["default"])(dateToCheck)) return masterController.getToday();
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_9__["default"])(dateToCheck)) return masterController.getUpcoming();
 }
 
 //* Sidebar
@@ -8887,14 +8932,6 @@ function createAddListButton() {
 // 	const nextStep = refreshConditions(visibleList, todo);
 
 // 	if (!nextStep) return;
-
-// 	const subList = nextStep;
-// 	const sortedList = sortList(subList);
-
-// function checkSubList(list) {
-// 	if (list.activeTodos.length > 0) refreshSubList(list.activeTodos[0]);
-// 	if (list.completedTodos.length > 0) refreshSubList(list.completedTodos[0]);
-// }
 
 // function refreshConditions(visibleList, todo) {
 // 	if (visibleList.id < 2) {
@@ -8972,6 +9009,7 @@ function createScreenController() {
 	function refreshSubList(list) {
 		const visibleList = document.querySelector('.list');
 		if (Number(visibleList.id) !== list.id) return;
+		list.sortList();
 		refreshActiveSub(list.activeTodos);
 		refreshCompletedSub(list.completedTodos);
 	}
