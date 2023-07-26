@@ -7439,18 +7439,12 @@ function allListsController() {
 		},
 		// Add
 		addDefaultList(list) {
-			if (list.id > 2) console.log(`Not default list ${list}`);
 			_defaultListsArr.push(list);
 		},
 		addList(list) {
 			_customListsArr.push(list);
 			setListIds();
 		},
-		// Update
-		// updateList(oldList, list) {
-		// 	console.log(_customListsArr.indexOf(oldList));
-		// 	_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
-		// },
 		// Remove
 		deleteList(list) {
 			const listIndex = _customListsArr.indexOf(list);
@@ -7476,12 +7470,12 @@ function allListsController() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ handleCustomDisplayList)
+/* harmony export */   "default": () => (/* binding */ controlListElement)
 /* harmony export */ });
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
 
 
-function handleCustomDisplayList(
+function controlListElement(
 	list,
 	deleteButton,
 	title,
@@ -7503,15 +7497,19 @@ function handleCustomDisplayList(
 		list.description = event.target.value;
 		_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.saveList(list);
 	});
+
+	setTimeout(() => {
+		if (!title.value) title.focus();
+	}, 50);
 }
 
 
 /***/ }),
 
-/***/ "./src/components/list/createList.js":
-/*!*******************************************!*\
-  !*** ./src/components/list/createList.js ***!
-  \*******************************************/
+/***/ "./src/components/list/controller/createList.js":
+/*!******************************************************!*\
+  !*** ./src/components/list/controller/createList.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7689,10 +7687,6 @@ function createCustomListHead(list) {
 
 	(0,_controller_controlListElement__WEBPACK_IMPORTED_MODULE_0__["default"])(list, deleteButton, title, description);
 
-	setTimeout(() => {
-		if (title.value === '') title.focus();
-	}, 10);
-
 	return headDiv;
 }
 
@@ -7749,31 +7743,10 @@ function createCompletedTodos() {
 
 /***/ }),
 
-/***/ "./src/components/list/list.js":
-/*!*************************************!*\
-  !*** ./src/components/list/list.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createList: () => (/* reexport safe */ _createList__WEBPACK_IMPORTED_MODULE_0__["default"]),
-/* harmony export */   createListElement: () => (/* reexport safe */ _interface_listElement__WEBPACK_IMPORTED_MODULE_1__["default"])
-/* harmony export */ });
-/* harmony import */ var _createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createList */ "./src/components/list/createList.js");
-/* harmony import */ var _interface_listElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interface/listElement */ "./src/components/list/interface/listElement.js");
-
-
-
-
-
-
-/***/ }),
-
-/***/ "./src/components/sidebar/controller/controlSidebar.js":
-/*!*************************************************************!*\
-  !*** ./src/components/sidebar/controller/controlSidebar.js ***!
-  \*************************************************************/
+/***/ "./src/components/sidebar/controlSidebar.js":
+/*!**************************************************!*\
+  !*** ./src/components/sidebar/controlSidebar.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -7783,7 +7756,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   populateSidebar: () => (/* binding */ populateSidebar),
 /* harmony export */   toggleSidebar: () => (/* binding */ toggleSidebar)
 /* harmony export */ });
-/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../masterController */ "./src/masterController.js");
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../masterController */ "./src/masterController.js");
 
 
 function toggleSidebar() {
@@ -7805,7 +7778,7 @@ function populateSidebar(defaultSideLists, customSideLists) {
 	allListsArr.forEach((list) => {
 		const sideListButton = createSideListButton(list);
 		if (list.id === 2) defaultSideLists.prepend(sideListButton);
-		if (list.id <= 2) defaultSideLists.append(sideListButton);
+		if (list.id < 2) defaultSideLists.append(sideListButton);
 		if (list.id > 2) customSideLists.append(sideListButton);
 	});
 
@@ -7834,17 +7807,17 @@ function createAddListButton() {
 
 /***/ }),
 
-/***/ "./src/components/sidebar/interface/displaySidebar.js":
-/*!************************************************************!*\
-  !*** ./src/components/sidebar/interface/displaySidebar.js ***!
-  \************************************************************/
+/***/ "./src/components/sidebar/displaySidebar.js":
+/*!**************************************************!*\
+  !*** ./src/components/sidebar/displaySidebar.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ displaySidebar)
 /* harmony export */ });
-/* harmony import */ var _controller_controlSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../controller/controlSidebar */ "./src/components/sidebar/controller/controlSidebar.js");
+/* harmony import */ var _controlSidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controlSidebar */ "./src/components/sidebar/controlSidebar.js");
 
 
 function displaySidebar() {
@@ -7856,7 +7829,7 @@ function displaySidebar() {
 	const customSideLists = createCustomSideLists();
 	displaySidebar.append(customSideLists);
 
-	(0,_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_0__.populateSidebar)(defaultSideLists, customSideLists);
+	(0,_controlSidebar__WEBPACK_IMPORTED_MODULE_0__.populateSidebar)(defaultSideLists, customSideLists);
 
 	return displaySidebar;
 }
@@ -8053,7 +8026,6 @@ __webpack_require__.r(__webpack_exports__);
 function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
 		const target = event.target;
-		console.log(target);
 		const insideContainer = todoForm.contains(target);
 
 		if (!insideContainer || target.className === 'cancelForm') {
@@ -8104,10 +8076,10 @@ function controlForm(todoForm, callBack) {
 
 /***/ }),
 
-/***/ "./src/components/todo/createTodo.js":
-/*!*******************************************!*\
-  !*** ./src/components/todo/createTodo.js ***!
-  \*******************************************/
+/***/ "./src/components/todo/controller/createTodo.js":
+/*!******************************************************!*\
+  !*** ./src/components/todo/controller/createTodo.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -8310,10 +8282,6 @@ function displayEditCard(todo) {
 
 	const editPriority = createPrioritySelector(todo);
 	todoCardEdit.append(editPriority);
-
-
-	// console.log(todoCardEdit)
-	// console.log(todoCardEdit.elements['todoTitleEdit'])
 
 	setTimeout(() => {
 		(0,_controller_controlEditCard_js__WEBPACK_IMPORTED_MODULE_1__["default"])(
@@ -8586,7 +8554,9 @@ function createInboxOption(div) {
 }
 
 function populateListSelector(div, selectedId) {
-	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists.forEach((option) => {
+	const customLists = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists;
+
+	customLists.forEach((option) => {
 		const optionElement = new Option(option.title, option.id);
 		optionElement.selected = option.id === selectedId ? true : false;
 		div.append(optionElement);
@@ -8595,18 +8565,14 @@ function populateListSelector(div, selectedId) {
 
 // Priority Selector
 function createPrioritySelector(
-	withPlaceholder = true,
+	isSelected = true,
 	currentPriority = false
 ) {
 	// Div
 	const prioritySelector = document.createElement('select');
 
 	// Placeholder
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = withPlaceholder;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
+	const placeholderPriority = createPriorityPlaceholder(isSelected);
 	prioritySelector.append(placeholderPriority);
 
 	// Options
@@ -8618,18 +8584,25 @@ function createPrioritySelector(
 	];
 
 	// Append Options
-
 	priorityOptions.forEach((option) => {
 		const optionElement = new Option(option.text, option.value);
-
 		if (currentPriority) {
-			optionElement.selected = option.value === currentPriority ? true : false;
+			optionElement.selected = option.value === currentPriority;
 		}
-
 		prioritySelector.append(optionElement);
 	});
 
 	return prioritySelector;
+}
+
+function createPriorityPlaceholder(isSelected) {
+	const placeholderPriority = new Option('Priority', '');
+	placeholderPriority.className = 'placeholderPri';
+	placeholderPriority.selected = isSelected;
+	placeholderPriority.disabled = true;
+	placeholderPriority.hidden = true;
+
+	return placeholderPriority;
 }
 
 // Display Priority
@@ -8659,11 +8632,11 @@ function visualizePriority(card, priority = 'none') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   createTodo: () => (/* reexport safe */ _createTodo__WEBPACK_IMPORTED_MODULE_0__["default"]),
+/* harmony export */   createTodo: () => (/* reexport safe */ _controller_createTodo__WEBPACK_IMPORTED_MODULE_0__["default"]),
 /* harmony export */   createTodoCard: () => (/* binding */ createTodoCard),
 /* harmony export */   createTodoForm: () => (/* binding */ createTodoForm)
 /* harmony export */ });
-/* harmony import */ var _createTodo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTodo */ "./src/components/todo/createTodo.js");
+/* harmony import */ var _controller_createTodo__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controller/createTodo */ "./src/components/todo/controller/createTodo.js");
 /* harmony import */ var _interface_displayForm__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./interface/displayForm */ "./src/components/todo/interface/displayForm.js");
 /* harmony import */ var _controller_controlForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./controller/controlForm */ "./src/components/todo/controller/controlForm.js");
 /* harmony import */ var _interface_displayCard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interface/displayCard */ "./src/components/todo/interface/displayCard.js");
@@ -8699,38 +8672,6 @@ function createTodoCard(todo) {
 
 /***/ }),
 
-/***/ "./src/controlPage.js":
-/*!****************************!*\
-  !*** ./src/controlPage.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ controlPage)
-/* harmony export */ });
-/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./masterController */ "./src/masterController.js");
-/* harmony import */ var _components_list_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/list */ "./src/components/list/list.js");
-/* harmony import */ var _components_sidebar_interface_displaySidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/sidebar/interface/displaySidebar */ "./src/components/sidebar/interface/displaySidebar.js");
-/* harmony import */ var _components_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/sidebar/controller/controlSidebar */ "./src/components/sidebar/controller/controlSidebar.js");
-
-
-
-
-
-
-
-function controlPage(addTodoBtn, menuButton, container) {
-	addTodoBtn.onclick = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.createTodo;
-	menuButton.onclick = _components_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.toggleSidebar;
-
-	container.append((0,_components_sidebar_interface_displaySidebar__WEBPACK_IMPORTED_MODULE_2__["default"])());
-	container.append((0,_components_list_list__WEBPACK_IMPORTED_MODULE_1__.createListElement)(_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.inbox));
-}
-
-
-/***/ }),
-
 /***/ "./src/firstRun.js":
 /*!*************************!*\
   !*** ./src/firstRun.js ***!
@@ -8741,15 +8682,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   setupDefaultLists: () => (/* binding */ setupDefaultLists)
 /* harmony export */ });
-/* harmony import */ var _components_list_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/list/createList */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/list/controller/createList */ "./src/components/list/controller/createList.js");
 
 
 function setupDefaultLists(listsControl) {
-	const today = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('🌤️ Today', "Todos with today's date");
+	const today = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('🌤️ Today', "Todos with today's date");
 	today.id = 0;
-	const upcoming = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📆 Upcoming', 'Todos with future dates');
+	const upcoming = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📆 Upcoming', 'Todos with future dates');
 	upcoming.id = 1;
-	const inbox = (0,_components_list_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📥 Inbox', 'Default list');
+	const inbox = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📥 Inbox', 'Default list');
 	inbox.id = 2;
 
 	listsControl.addDefaultList(inbox);
@@ -8760,17 +8701,49 @@ function setupDefaultLists(listsControl) {
 
 /***/ }),
 
-/***/ "./src/mainPage.js":
-/*!*************************!*\
-  !*** ./src/mainPage.js ***!
-  \*************************/
+/***/ "./src/mainPage/controlPage.js":
+/*!*************************************!*\
+  !*** ./src/mainPage/controlPage.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ controlPage)
+/* harmony export */ });
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../masterController */ "./src/masterController.js");
+/* harmony import */ var _components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/list/interface/listElement */ "./src/components/list/interface/listElement.js");
+/* harmony import */ var _components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sidebar/displaySidebar */ "./src/components/sidebar/displaySidebar.js");
+/* harmony import */ var _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/sidebar/controlSidebar */ "./src/components/sidebar/controlSidebar.js");
+
+
+
+
+
+
+
+function controlPage(addTodoBtn, menuButton, container) {
+	addTodoBtn.onclick = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.createTodo;
+	menuButton.onclick = _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.toggleSidebar;
+
+	container.append((0,_components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_2__["default"])());
+	container.append((0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_1__["default"])(_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.inbox));
+}
+
+
+/***/ }),
+
+/***/ "./src/mainPage/mainPage.js":
+/*!**********************************!*\
+  !*** ./src/mainPage/mainPage.js ***!
+  \**********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ mainPage)
 /* harmony export */ });
-/* harmony import */ var _controlPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controlPage */ "./src/controlPage.js");
+/* harmony import */ var _controlPage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./controlPage */ "./src/mainPage/controlPage.js");
 
 
 function mainPage() {
@@ -8817,7 +8790,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
 /* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
 /* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
-/* harmony import */ var _components_list_createList_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/list/createList.js */ "./src/components/list/createList.js");
+/* harmony import */ var _components_list_controller_createList_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/list/controller/createList.js */ "./src/components/list/controller/createList.js");
 
 
 
@@ -8841,7 +8814,6 @@ function createMasterController() {
 	const upcoming = listsControl.defaultLists[2];
 
 	return {
-		screenControl,
 		listsControl,
 		// Defaults
 		get inbox() {
@@ -8865,11 +8837,11 @@ function createMasterController() {
 			if (dateList) {
 				dateList.addTodo(todo);
 				todo.dateListId = Number(dateList.id);
-				screenControl.refreshSubList(dateList);
+				screenControl.checkSubLists(dateList);
 			}
 
 			list.addTodo(todo);
-			screenControl.refreshSubList(list);
+			screenControl.checkSubLists(list);
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -8887,8 +8859,8 @@ function createMasterController() {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 			// Refresh
-			screenControl.refreshSubList(list);
-			if (dateList) screenControl.refreshSubList(dateList);
+			screenControl.checkSubLists(list);
+			if (dateList) screenControl.checkSubLists(dateList);
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
@@ -8896,7 +8868,7 @@ function createMasterController() {
 		},
 		//* Lists
 		addList() {
-			const newList = (0,_components_list_createList_js__WEBPACK_IMPORTED_MODULE_4__["default"])();
+			const newList = (0,_components_list_controller_createList_js__WEBPACK_IMPORTED_MODULE_4__["default"])();
 			listsControl.addList(newList);
 
 			screenControl.replaceCurrentList(newList);
@@ -8963,30 +8935,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./masterController */ "./src/masterController.js");
 /* harmony import */ var _components_todo_todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/todo/todo */ "./src/components/todo/todo.js");
 /* harmony import */ var _components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/list/interface/listElement */ "./src/components/list/interface/listElement.js");
-/* harmony import */ var _components_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/sidebar/controller/controlSidebar */ "./src/components/sidebar/controller/controlSidebar.js");
+/* harmony import */ var _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/sidebar/controlSidebar */ "./src/components/sidebar/controlSidebar.js");
+
+
+
 
 
 
 
 
 function createScreenController() {
-	function refreshSubList(list) {
-		const visibleList = document.querySelector('.list');
-		if (Number(visibleList.id) !== list.id) return;
-		list.sortList();
-		refreshActiveSub(list.activeTodos);
-		refreshCompletedSub(list.completedTodos);
-	}
-
 	return {
 		// List
 		replaceCurrentList(list) {
 			const currentList = document.querySelector('.list');
-			const newList = (0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_2__["default"])(list);
-			currentList.replaceWith(newList);
-			refreshSubList(list);
+			const newListElement = (0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_2__["default"])(list);
+			currentList.replaceWith(newListElement);
+
+			this.checkSubLists(list);
 		},
-		refreshSubList,
+		checkSubLists(list) {
+			const visibleList = document.querySelector('.list');
+			if (Number(visibleList.id) !== list.id) return;
+			list.sortList();
+			refreshSubList(list.activeTodos, 'activeTodos');
+			refreshSubList(list.completedTodos, 'completedTodos');
+		},
 		// Sidebar
 		updateSideList(list) {
 			const sideListSelector = `.sidebarButton#no${list.id}`;
@@ -9003,31 +8977,21 @@ function createScreenController() {
 	};
 }
 
+// Sub List
+function refreshSubList(subList, className) {
+	const newSubList = document.createElement('div');
+	newSubList.classList = className;
+
+	subList.forEach((todo) => newSubList.appendChild((0,_components_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodoCard)(todo)));
+
+	const oldSubList = document.querySelector(`.${className}`);
+	oldSubList.replaceWith(newSubList);
+}
+
 // Display changes
 function displayChange() {}
 
 //* Screen
-
-// Sub List
-function refreshActiveSub(subList) {
-	const activeSubList = document.createElement('div');
-	activeSubList.classList = 'activeTodos';
-
-	subList.forEach((todo) => activeSubList.appendChild((0,_components_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodoCard)(todo)));
-
-	const oldUl = document.querySelector('.activeTodos');
-	oldUl.replaceWith(activeSubList);
-}
-
-function refreshCompletedSub(subList) {
-	const completedSubList = document.createElement('div');
-	completedSubList.classList = 'completedTodos';
-
-	subList.forEach((todo) => completedSubList.appendChild((0,_components_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodoCard)(todo)));
-
-	const oldUl = document.querySelector('.completedTodos');
-	oldUl.replaceWith(completedSubList);
-}
 
 // Sidebar
 function freshCustomSideLists() {
@@ -9037,10 +9001,10 @@ function freshCustomSideLists() {
 	const customLists = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.customLists;
 
 	customLists.forEach((sideList) => {
-		freshSideList.append((0,_components_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.createSideListButton)(sideList));
+		freshSideList.append((0,_components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.createSideListButton)(sideList));
 	});
 
-	const addListButton = (0,_components_sidebar_controller_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.createAddListButton)();
+	const addListButton = (0,_components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.createAddListButton)();
 	addListButton.onclick = () => _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.addList();
 
 	freshSideList.append(addListButton);
@@ -9157,7 +9121,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _src_style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../src/style.css */ "./src/style.css");
 /* harmony import */ var flatpickr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! flatpickr */ "./node_modules/flatpickr/dist/esm/index.js");
 /* harmony import */ var flatpickr_dist_flatpickr_min_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! flatpickr/dist/flatpickr.min.css */ "./node_modules/flatpickr/dist/flatpickr.min.css");
-/* harmony import */ var _mainPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mainPage */ "./src/mainPage.js");
+/* harmony import */ var _mainPage_mainPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./mainPage/mainPage */ "./src/mainPage/mainPage.js");
 
 
 
@@ -9166,7 +9130,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_mainPage__WEBPACK_IMPORTED_MODULE_4__["default"])();
+(0,_mainPage_mainPage__WEBPACK_IMPORTED_MODULE_4__["default"])();
 
 })();
 
