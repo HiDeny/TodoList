@@ -29,9 +29,10 @@ export default function allListsController() {
 			setListIds();
 		},
 		// Update
-		updateList(oldList, list) {
-			_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
-		},
+		// updateList(oldList, list) {
+		// 	console.log(_customListsArr.indexOf(oldList));
+		// 	_customListsArr.splice(_customListsArr.indexOf(oldList), 1, list);
+		// },
 		// Remove
 		deleteList(list) {
 			const listIndex = _customListsArr.indexOf(list);

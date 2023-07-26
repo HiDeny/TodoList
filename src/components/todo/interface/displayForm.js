@@ -35,6 +35,7 @@ export default function createNewTodoForm() {
 
 function createTodoFormContainer() {
 	const todoForm = document.createElement('form');
+	todoForm.autocomplete = 'off';
 	todoForm.setAttribute('id', 'todoForm');
 	todoForm.setAttribute('tabindex', '1');
 

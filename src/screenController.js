@@ -1,6 +1,10 @@
 import { masterController } from './masterController';
 import { createTodoCard } from './components/todo/todo';
 import createListElement from './components/list/interface/listElement';
+import {
+	createAddListButton,
+	createSideListButton,
+} from './components/sidebar/controller/controlSidebar';
 
 export default function createScreenController() {
 	function refreshSubList(list) {
@@ -35,6 +39,9 @@ export default function createScreenController() {
 		},
 	};
 }
+
+// Display changes
+function displayChange() {}
 
 //* Screen
 
@@ -76,23 +83,4 @@ function freshCustomSideLists() {
 	freshSideList.append(addListButton);
 
 	return freshSideList;
-}
-
-function createSideListButton(sideList) {
-	const sideListButton = document.createElement('button');
-	sideListButton.className = 'sidebarButton';
-	sideListButton.setAttribute('id', `no${sideList.id}`);
-	sideListButton.textContent = sideList.title || `New List ${sideList.id - 2}`;
-	sideListButton.onclick = () => masterController.showList(sideList.id);
-
-	return sideListButton;
-}
-
-function createAddListButton() {
-	const addListButton = document.createElement('button');
-	addListButton.className = 'sidebarButton';
-	addListButton.setAttribute('id', 'addListButton');
-	addListButton.textContent = '+ New List';
-
-	return addListButton;
 }

@@ -1,12 +1,6 @@
-// import controlMainPage from '../controller/controlMainPage';
+import { masterController, inboxDisplay } from './masterController';
 
-import {
-	masterController,
-	sidebarDisplay,
-	inboxDisplay,
-	populateSidebar,
-} from './masterController';
-
+import displaySidebar from './components/sidebar/interface/displaySidebar';
 import { toggleSidebar } from './components/sidebar/controller/controlSidebar';
 
 export default function mainPage() {
@@ -40,6 +34,5 @@ export default function mainPage() {
 	container.append(inboxDisplay);
 
 	// Sidebar
-	container.append(sidebarDisplay);
-	populateSidebar();
+	container.append(displaySidebar());
 }

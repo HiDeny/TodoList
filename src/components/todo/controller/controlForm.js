@@ -3,6 +3,7 @@ import { visualizePriority } from '../interface/helperFunctions';
 export default function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
 		const target = event.target;
+		console.log(target);
 		const insideContainer = todoForm.contains(target);
 
 		if (!insideContainer || target.className === 'cancelForm') {

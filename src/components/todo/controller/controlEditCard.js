@@ -36,8 +36,8 @@ export default function controlEditCard(
 			const sameList = oldTodo.listId === todo.listId;
 			const sameDate = oldTodo.dueDate === todo.dueDate;
 
-			if (!sameDate || !sameDate) masterController.moveTodo(oldTodo, todo);
-			if (sameList) masterController.updateTodo(todo);
+			if (!sameList || !sameDate) masterController.moveTodo(oldTodo, todo);
+			if (sameList) masterController.saveTodo(todo);
 			removeCard();
 		}
 	};
@@ -45,10 +45,10 @@ export default function controlEditCard(
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
 		if (event.code === 'Enter' && !event.shiftKey)
-			masterController.updateTodo(todo);
+			masterController.saveTodo(todo);
 
 		if (event.code === 'Escape') {
-			masterController.updateTodo(todo);
+			masterController.saveTodo(todo);
 		}
 	};
 

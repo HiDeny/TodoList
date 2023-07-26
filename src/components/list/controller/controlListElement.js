@@ -6,8 +6,6 @@ export default function handleCustomDisplayList(
 	title,
 	description
 ) {
-	const oldList = { ...list };
-
 	// DeleteButton
 	deleteButton.addEventListener('click', () => {
 		masterController.deleteList(list);
@@ -16,12 +14,12 @@ export default function handleCustomDisplayList(
 	// Title
 	title.addEventListener('input', (event) => {
 		list.title = event.target.value;
-		masterController.updateList(oldList, list);
+		masterController.saveList(list);
 	});
 
 	// Description
 	description.addEventListener('input', (event) => {
 		list.description = event.target.value;
-		masterController.updateList(oldList, list);
+		masterController.saveList(list);
 	});
 }

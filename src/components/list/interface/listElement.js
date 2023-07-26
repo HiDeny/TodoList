@@ -78,7 +78,7 @@ function createCustomListHead(list) {
 
 	setTimeout(() => {
 		if (title.value === '') title.focus();
-	}, 100);
+	}, 10);
 
 	return headDiv;
 }

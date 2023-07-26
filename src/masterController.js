@@ -1,12 +1,10 @@
 import { isFuture, isToday } from 'date-fns';
 
 import setupDefaultLists from './firstRun.js';
-
 import allListsController from './components/list/controller/controlAllLists.js';
 import createScreenController from './screenController.js';
 
-import createTodo from './components/todo/createTodo.js';
-import { createTodoForm } from './components/todo/todo.js';
+import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/createList.js';
 import createListElement from './components/list/interface/listElement.js';
@@ -14,7 +12,6 @@ import createListElement from './components/list/interface/listElement.js';
 import displaySidebar from './components/sidebar/interface/displaySidebar.js';
 
 //* Master List
-
 export const masterController = createMasterController();
 
 function createMasterController() {
@@ -69,10 +66,9 @@ function createMasterController() {
 			todo.toggleDone();
 			this.addTodo(todo);
 		},
-		updateTodo(todo) {
+		saveTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
-
 			// Refresh
 			screenControl.refreshSubList(list);
 			if (dateList) screenControl.refreshSubList(dateList);
@@ -90,26 +86,19 @@ function createMasterController() {
 			screenControl.refreshSideBar();
 		},
 		deleteList(list) {
-			const check = confirm(
-				`Do you really want to delete ${list.title.toUpperCase()}?`
-			);
+			const listTitle = list.title.toUpperCase();
+			const check = confirm(`Do you want to delete ${listTitle}?`);
+
 			if (!check) return;
 
-			if (check) {
-				while (list.activeTodos.length > 0) {
-					this.removeTodo(list.activeTodos[0]);
-				}
-				while (list.completedTodos.length > 0) {
-					this.removeTodo(list.completedTodos[0]);
-				}
-				listsControl.deleteList(list);
-			}
+			clearSubList(list.activeTodos);
+			clearSubList(list.completedTodos);
+			listsControl.deleteList(list);
 
 			screenControl.refreshSideBar();
 			screenControl.replaceCurrentList(inbox);
 		},
-		updateList(oldList, list) {
-			listsControl.updateList(oldList, list);
+		saveList(list) {
 			screenControl.updateSideList(list);
 		},
 		showList(id) {
@@ -127,6 +116,11 @@ function handleFormReturn({ title, notes, dueDate, priority, listId }) {
 	masterController.addTodo(newTodo);
 }
 
+//* List
+function clearSubList(subList) {
+	while (subList.length > 0) masterController.removeTodo(subList[0]);
+}
+
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
@@ -138,43 +132,6 @@ function findDateList(dueDate) {
 
 export const inboxDisplay = createListElement(masterController.getInbox());
 export const sidebarDisplay = displaySidebar();
-
-export function populateSidebar() {
-	const defaultSideLists = document.querySelector('.defaultSideLists');
-	const customSideLists = document.querySelector('.customSideLists');
-
-	const addListButton = createAddListButton();
-	addListButton.onclick = () => masterController.addList();
-
-	const allListsArr = masterController.listsControl.allLists;
-
-	allListsArr.forEach((list) => {
-		const sideListButton = document.createElement('button');
-		sideListButton.className = 'sidebarButton';
-		sideListButton.setAttribute('id', `no${list.id}`);
-		sideListButton.textContent =
-			list.title || `New List ${arr.indexOf(list) - 2}`;
-		sideListButton.onclick = () => masterController.showList(list.id);
-		// console.log(list.id);
-		if (list.id <= 2) {
-			defaultSideLists.append(sideListButton);
-			if (list.id === 2) defaultSideLists.prepend(sideListButton);
-		} else {
-			customSideLists.append(sideListButton);
-		}
-	});
-
-	customSideLists.append(addListButton);
-}
-
-function createAddListButton() {
-	const addListButton = document.createElement('button');
-	addListButton.className = 'sidebarButton';
-	addListButton.setAttribute('id', 'addListButton');
-	addListButton.textContent = '+ New List';
-
-	return addListButton;
-}
 
 //* Memory
 

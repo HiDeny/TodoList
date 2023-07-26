@@ -1,3 +1,5 @@
+import { masterController } from '../../../masterController';
+
 export function toggleSidebar() {
 	const sidebar = document.querySelector('.sidebar');
 
@@ -8,10 +10,37 @@ export function toggleSidebar() {
 	}
 }
 
-// export function controlSideListButton(button) {
-// 	button.onclick = () => masterController.showList(button.id);
-// }
+export function populateSidebar(defaultSideLists, customSideLists) {
+	const allListsArr = masterController.listsControl.allLists;
 
-// export function controlAddListButton(button) {
-// 	addListButton.onclick = () => masterController.addList();
-// }
+	const addListButton = createAddListButton();
+	addListButton.onclick = () => masterController.addList();
+
+	allListsArr.forEach((list) => {
+		const sideListButton = createSideListButton(list);
+		if (list.id === 2) defaultSideLists.prepend(sideListButton);
+		if (list.id <= 2) defaultSideLists.append(sideListButton);
+		if (list.id > 2) customSideLists.append(sideListButton);
+	});
+
+	customSideLists.append(addListButton);
+}
+
+export function createSideListButton(list) {
+	const sideListButton = document.createElement('button');
+	sideListButton.className = 'sidebarButton';
+	sideListButton.setAttribute('id', `no${list.id}`);
+	sideListButton.textContent = list.title || `New List ${list.id - 2}`;
+	sideListButton.onclick = () => masterController.showList(list.id);
+
+	return sideListButton;
+}
+
+export function createAddListButton() {
+	const addListButton = document.createElement('button');
+	addListButton.className = 'sidebarButton';
+	addListButton.setAttribute('id', 'addListButton');
+	addListButton.textContent = '+ New List';
+
+	return addListButton;
+}

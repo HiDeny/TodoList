@@ -1,3 +1,5 @@
+import { populateSidebar } from '../controller/controlSidebar';
+
 export default function displaySidebar() {
 	const displaySidebar = createSidebar();
 
@@ -6,6 +8,8 @@ export default function displaySidebar() {
 
 	const customSideLists = createCustomSideLists();
 	displaySidebar.append(customSideLists);
+
+	populateSidebar(defaultSideLists, customSideLists);
 
 	return displaySidebar;
 }

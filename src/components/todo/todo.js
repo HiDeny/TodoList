@@ -1,8 +1,12 @@
+import createTodo from './createTodo';
+
 import createNewTodoForm from './interface/displayForm';
 import controlForm from './controller/controlForm';
 
 import displayCard from './interface/displayCard';
 import controlCard from './controller/controlCard';
+
+export { createTodo };
 
 export function createTodoForm(handleFormReturn) {
 	const container = document.querySelector('div.container');
