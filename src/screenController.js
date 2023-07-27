@@ -54,7 +54,14 @@ function refreshSubList(subList, className) {
 }
 
 // Display changes
-function displayChange() {}
+function displayChange(actualChange) {
+	const changeContainer = document.createElement('div');
+	changeContainer.textContent = actualChange;
+	changeContainer.classList.add('.show');
+	setTimeout(() => {
+		changeContainer.classList.remove('.show');
+	}, 5000);
+}
 
 //* Screen
 

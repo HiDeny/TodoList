@@ -7582,6 +7582,7 @@ function createList(title, description) {
 	};
 }
 
+// Should i give more weight to date or priority?
 function compareTodos(a, b) {
 	if (a.priority === b.priority) {
 		if (a.dueDate && !b.dueDate) return -1;
@@ -7804,11 +7805,11 @@ function iniAllLists(listsControl) {
 }
 
 // initLists
-function initList(listBase) {
-	const completeList = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])(listBase.title, listBase.description);
-	completeList.id = listBase.id;
-	if (listBase.activeTodos.length > 0) initSubList(listBase.activeTodos);
-	if (listBase.completedTodos.length > 0) initSubList(listBase.completedTodos);
+function initList({ id, title, description, activeTodos, completedTodos }) {
+	const completeList = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])(title, description);
+	completeList.id = id;
+	if (activeTodos.length > 0) initSubList(activeTodos);
+	if (completedTodos.length > 0) initSubList(completedTodos);
 
 	function initSubList(subList) {
 		subList.forEach((todo) => {
@@ -7821,7 +7822,6 @@ function initList(listBase) {
 }
 
 // initTodos
-// function initTodo({id, done, title, notes, dueDate, priority, listId, dateListId}) {
 function initTodo({
 	done,
 	title,
@@ -8126,6 +8126,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
+		// Do not cancel when click on calendar
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
 
@@ -8187,13 +8188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
 /* harmony export */ });
-// let id = parseInt(localStorage.getItem('todoId')) || 0;
 let id = 0;
-
-// function incrementAndStoreId() {
-// 	id++;
-// 	localStorage.setItem('todoId', id.toString());
-// }
 
 function createTodo(title, notes, dueDate, priority) {
 	let _todoId = id;
@@ -8275,6 +8270,7 @@ function displayCard(todo) {
 	todoCard.append(dueDate);
 
 	(0,_helperFunctions__WEBPACK_IMPORTED_MODULE_0__.visualizePriority)(todoCard, todo.priority);
+	// Refactor to so listeners can be removed
 	removeFlatpickrDiv();
 
 	return todoCard;
@@ -8569,6 +8565,7 @@ function createDateForm() {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
+	// Refactor to so listeners can be removed
 	flatpickr(formDate, {
 		minDate: 'today',
 		dateFormat: 'd M y',
@@ -8783,11 +8780,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ controlPage)
 /* harmony export */ });
 /* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../masterController */ "./src/masterController.js");
-/* harmony import */ var _components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/list/interface/listElement */ "./src/components/list/interface/listElement.js");
-/* harmony import */ var _components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sidebar/displaySidebar */ "./src/components/sidebar/displaySidebar.js");
-/* harmony import */ var _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/sidebar/controlSidebar */ "./src/components/sidebar/controlSidebar.js");
-
-
+/* harmony import */ var _components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/sidebar/displaySidebar */ "./src/components/sidebar/displaySidebar.js");
+/* harmony import */ var _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/sidebar/controlSidebar */ "./src/components/sidebar/controlSidebar.js");
 
 
 
@@ -8795,10 +8789,9 @@ __webpack_require__.r(__webpack_exports__);
 
 function controlPage(addTodoBtn, menuButton, container) {
 	addTodoBtn.onclick = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.createTodo;
-	menuButton.onclick = _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_3__.toggleSidebar;
+	menuButton.onclick = _components_sidebar_controlSidebar__WEBPACK_IMPORTED_MODULE_2__.toggleSidebar;
 
-	container.append((0,_components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_2__["default"])());
-	container.append((0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_1__["default"])(_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.inbox));
+	container.append((0,_components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_1__["default"])());
 	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(0);
 }
 
@@ -8839,6 +8832,11 @@ function mainPage() {
 	const container = document.createElement('div');
 	container.className = 'container';
 	document.body.appendChild(container);
+
+	// List
+	const listPlaceholder = document.createElement('div');
+	listPlaceholder.className = 'list';
+	container.append(listPlaceholder);
 
 	(0,_controlPage__WEBPACK_IMPORTED_MODULE_0__["default"])(addTodoBtn, menuButton, container);
 }
@@ -9080,7 +9078,14 @@ function refreshSubList(subList, className) {
 }
 
 // Display changes
-function displayChange() {}
+function displayChange(actualChange) {
+	const changeContainer = document.createElement('div');
+	changeContainer.textContent = actualChange;
+	changeContainer.classList.add('.show');
+	setTimeout(() => {
+		changeContainer.classList.remove('.show');
+	}, 5000);
+}
 
 //* Screen
 

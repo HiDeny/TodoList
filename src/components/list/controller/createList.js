@@ -64,6 +64,7 @@ export default function createList(title, description) {
 	};
 }
 
+// Should i give more weight to date or priority?
 function compareTodos(a, b) {
 	if (a.priority === b.priority) {
 		if (a.dueDate && !b.dueDate) return -1;

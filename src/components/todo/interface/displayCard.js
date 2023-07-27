@@ -23,6 +23,7 @@ export default function displayCard(todo) {
 	todoCard.append(dueDate);
 
 	visualizePriority(todoCard, todo.priority);
+	// Refactor to so listeners can be removed
 	removeFlatpickrDiv();
 
 	return todoCard;

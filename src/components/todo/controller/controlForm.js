@@ -2,6 +2,7 @@ import { visualizePriority } from '../interface/helperFunctions';
 
 export default function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
+		// Do not cancel when click on calendar
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
 

@@ -22,5 +22,10 @@ export default function mainPage() {
 	container.className = 'container';
 	document.body.appendChild(container);
 
+	// List
+	const listPlaceholder = document.createElement('div');
+	listPlaceholder.className = 'list';
+	container.append(listPlaceholder);
+
 	controlPage(addTodoBtn, menuButton, container);
 }

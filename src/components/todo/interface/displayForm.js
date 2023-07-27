@@ -84,6 +84,7 @@ function createDateForm() {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
+	// Refactor to so listeners can be removed
 	flatpickr(formDate, {
 		minDate: 'today',
 		dateFormat: 'd M y',

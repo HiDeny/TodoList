@@ -47,11 +47,11 @@ function iniAllLists(listsControl) {
 }
 
 // initLists
-function initList(listBase) {
-	const completeList = createList(listBase.title, listBase.description);
-	completeList.id = listBase.id;
-	if (listBase.activeTodos.length > 0) initSubList(listBase.activeTodos);
-	if (listBase.completedTodos.length > 0) initSubList(listBase.completedTodos);
+function initList({ id, title, description, activeTodos, completedTodos }) {
+	const completeList = createList(title, description);
+	completeList.id = id;
+	if (activeTodos.length > 0) initSubList(activeTodos);
+	if (completedTodos.length > 0) initSubList(completedTodos);
 
 	function initSubList(subList) {
 		subList.forEach((todo) => {
@@ -64,7 +64,6 @@ function initList(listBase) {
 }
 
 // initTodos
-// function initTodo({id, done, title, notes, dueDate, priority, listId, dateListId}) {
 function initTodo({
 	done,
 	title,
