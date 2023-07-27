@@ -70,7 +70,7 @@ function compareTodos(a, b) {
 		if (!a.dueDate && b.dueDate) return 1;
 		return new Date(a.dueDate) - new Date(b.dueDate);
 	} else {
-		const priorityOrder = ['high', 'medium', 'low', ''];
+		const priorityOrder = ['high', 'medium', 'low', 'none'];
 		const priorityA = priorityOrder.indexOf(a.priority);
 		const priorityB = priorityOrder.indexOf(b.priority);
 		return priorityA - priorityB;

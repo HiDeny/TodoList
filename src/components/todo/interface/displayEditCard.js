@@ -116,7 +116,7 @@ function createListSelector(todo) {
 }
 
 function createPrioritySelector(todo) {
-	const editPriority = prioritySelector(!todo.priority, todo.priority);
+	const editPriority = prioritySelector(todo.priority);
 	editPriority.className = 'todoPriorityEdit';
 
 	return editPriority;

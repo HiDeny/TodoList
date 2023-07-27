@@ -2,7 +2,7 @@ let id = parseInt(localStorage.getItem('todoId')) || 0;
 
 function incrementAndStoreId() {
 	id++;
-	// localStorage.setItem('listId', id.toString());
+	localStorage.setItem('todoId', id.toString());
 }
 
 export default function createTodo(title, notes, dueDate, priority) {

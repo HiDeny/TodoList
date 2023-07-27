@@ -8,6 +8,8 @@ import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/controller/createList.js';
 
+import { testingMemoryController } from './components/memory/storage.js';
+
 //* Master List
 export const masterController = createMasterController();
 
@@ -80,6 +82,8 @@ function createMasterController() {
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
+			testingMemoryController.uploadAllLists();
+			testingMemoryController.downloadAllLists();
 		},
 		deleteList(list) {
 			const listTitle = list.title.toUpperCase();

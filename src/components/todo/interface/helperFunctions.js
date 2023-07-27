@@ -28,15 +28,13 @@ function populateListSelector(div, selectedId) {
 }
 
 // Priority Selector
-export function createPrioritySelector(
-	isSelected = true,
-	currentPriority = false
-) {
+export function createPrioritySelector(currentPriority) {
 	// Div
 	const prioritySelector = document.createElement('select');
 
 	// Placeholder
-	const placeholderPriority = createPriorityPlaceholder(isSelected);
+	const withPlaceholder = currentPriority === 'none' || !currentPriority;
+	const placeholderPriority = createPriorityPlaceholder(withPlaceholder);
 	prioritySelector.append(placeholderPriority);
 
 	// Options
@@ -50,8 +48,9 @@ export function createPrioritySelector(
 	// Append Options
 	priorityOptions.forEach((option) => {
 		const optionElement = new Option(option.text, option.value);
-		if (currentPriority) {
-			optionElement.selected = option.value === currentPriority;
+		if (!withPlaceholder) {
+			const isSelected = option.value === currentPriority;
+			optionElement.selected = isSelected;
 		}
 		prioritySelector.append(optionElement);
 	});
@@ -59,12 +58,11 @@ export function createPrioritySelector(
 	return prioritySelector;
 }
 
-function createPriorityPlaceholder(isSelected) {
-	const placeholderPriority = new Option('Priority', '');
+function createPriorityPlaceholder(withPlaceholder) {
+	const placeholderPriority = new Option('Priority', 'none');
 	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = isSelected;
+	placeholderPriority.selected = withPlaceholder;
 	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
 
 	return placeholderPriority;
 }

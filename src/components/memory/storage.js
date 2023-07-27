@@ -1,51 +1,39 @@
-import { defaultListsArr, customListsArr } from '../list/createList';
+import { masterController } from '../../masterController';
 
-const combineLists = () => {
-	const completeArr = [];
+export const testingMemoryController = memoryController();
 
-	defaultListsArr.forEach((defaultList) => {
-		completeArr.push(defaultList);
-	});
+export default function memoryController() {
+	return {
+		uploadList(list) {
+			const listToJSON = JSON.stringify(list);
+			localStorage.setItem(list.id, listToJSON);
+		},
+		uploadAllLists() {
+			const allLists = masterController.listsControl.allLists;
+			freshStorage();
+			allLists.forEach((list) => this.uploadList(list));
+		},
+		downloadAllLists() {
+			const allLists = [];
+			localStorage.removeItem(localStorage.length)
+			const storedLists = Object.values(localStorage);
+			console.log(storedLists);
+			storedLists.forEach((list) => {
+				console.log(list === Number);
+				const listJSON = JSON.parse(list);
+				allLists.push(listJSON);
+			});
 
-	customListsArr.forEach((customList) => {
-		if (customList.id === 2) return;
-		completeArr.push(customList);
-	});
+			allLists.sort((a, b) => a.id - b.id);
 
-	return completeArr;
-};
+			console.log(allLists);
+			// return allLists;
+		},
+	};
+}
 
-function saveAllListsMemory() {
+function freshStorage() {
+	const todoId = parseInt(localStorage.getItem('todoId'));
 	localStorage.clear();
-	const allLists = combineLists();
-
-	for (let i = 0; i < allLists.length; i++) {
-		const list = JSON.stringify(allLists[i]);
-		localStorage.setItem(i, list);
-	}
+	localStorage.setItem('todoId', todoId.toString());
 }
-
-function updateListMemory(list) {
-	const allLists = combineLists();
-	const index = allLists.indexOf(list);
-	if (localStorage.length < 3) {
-		localStorage.setItem(0, JSON.stringify(allLists[0]));
-		localStorage.setItem(1, JSON.stringify(allLists[1]));
-		localStorage.setItem(2, JSON.stringify(allLists[2]));
-	}
-	if (index >= 0) localStorage.setItem(index, JSON.stringify(list));
-}
-
-function getLists() {
-	const allLists = [];
-	const storedLists = Object.values(localStorage);
-	storedLists.forEach((list) => {
-		const listJSON = JSON.parse(list);
-		allLists.push(listJSON);
-	});
-
-	allLists.sort((a, b) => a.id - b.id);
-	return allLists;
-}
-
-export { saveAllListsMemory, updateListMemory, getLists };
