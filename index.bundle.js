@@ -7588,7 +7588,7 @@ function compareTodos(a, b) {
 		if (!a.dueDate && b.dueDate) return 1;
 		return new Date(a.dueDate) - new Date(b.dueDate);
 	} else {
-		const priorityOrder = ['high', 'medium', 'low', ''];
+		const priorityOrder = ['high', 'medium', 'low', 'none'];
 		const priorityA = priorityOrder.indexOf(a.priority);
 		const priorityB = priorityOrder.indexOf(b.priority);
 		return priorityA - priorityB;
@@ -7738,6 +7738,61 @@ function createCompletedTodos() {
 	completedTodos.className = 'completedTodos';
 
 	return completedTodos;
+}
+
+
+/***/ }),
+
+/***/ "./src/components/memory/storage.js":
+/*!******************************************!*\
+  !*** ./src/components/memory/storage.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ memoryController),
+/* harmony export */   testingMemoryController: () => (/* binding */ testingMemoryController)
+/* harmony export */ });
+/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../masterController */ "./src/masterController.js");
+
+
+const testingMemoryController = memoryController();
+
+function memoryController() {
+	return {
+		uploadList(list) {
+			const listToJSON = JSON.stringify(list);
+			localStorage.setItem(list.id, listToJSON);
+		},
+		uploadAllLists() {
+			const allLists = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.allLists;
+			freshStorage();
+			allLists.forEach((list) => this.uploadList(list));
+		},
+		downloadAllLists() {
+			const allLists = [];
+			localStorage.removeItem(localStorage.length)
+			const storedLists = Object.values(localStorage);
+			console.log(storedLists);
+			storedLists.forEach((list) => {
+				console.log(list === Number);
+				const listJSON = JSON.parse(list);
+				allLists.push(listJSON);
+			});
+
+			allLists.sort((a, b) => a.id - b.id);
+
+			console.log(allLists);
+			// return allLists;
+		},
+	};
+}
+
+function freshStorage() {
+	const todoId = parseInt(localStorage.getItem('todoId'));
+	localStorage.clear();
+	localStorage.setItem('todoId', todoId.toString());
 }
 
 
@@ -8090,7 +8145,7 @@ let id = parseInt(localStorage.getItem('todoId')) || 0;
 
 function incrementAndStoreId() {
 	id++;
-	// localStorage.setItem('listId', id.toString());
+	localStorage.setItem('todoId', id.toString());
 }
 
 function createTodo(title, notes, dueDate, priority) {
@@ -8365,7 +8420,7 @@ function createListSelector(todo) {
 }
 
 function createPrioritySelector(todo) {
-	const editPriority = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createPrioritySelector)(!todo.priority, todo.priority);
+	const editPriority = (0,_helperFunctions_js__WEBPACK_IMPORTED_MODULE_0__.createPrioritySelector)(todo.priority);
 	editPriority.className = 'todoPriorityEdit';
 
 	return editPriority;
@@ -8564,15 +8619,13 @@ function populateListSelector(div, selectedId) {
 }
 
 // Priority Selector
-function createPrioritySelector(
-	isSelected = true,
-	currentPriority = false
-) {
+function createPrioritySelector(currentPriority) {
 	// Div
 	const prioritySelector = document.createElement('select');
 
 	// Placeholder
-	const placeholderPriority = createPriorityPlaceholder(isSelected);
+	const withPlaceholder = currentPriority === 'none' || !currentPriority;
+	const placeholderPriority = createPriorityPlaceholder(withPlaceholder);
 	prioritySelector.append(placeholderPriority);
 
 	// Options
@@ -8586,8 +8639,9 @@ function createPrioritySelector(
 	// Append Options
 	priorityOptions.forEach((option) => {
 		const optionElement = new Option(option.text, option.value);
-		if (currentPriority) {
-			optionElement.selected = option.value === currentPriority;
+		if (!withPlaceholder) {
+			const isSelected = option.value === currentPriority;
+			optionElement.selected = isSelected;
 		}
 		prioritySelector.append(optionElement);
 	});
@@ -8595,12 +8649,11 @@ function createPrioritySelector(
 	return prioritySelector;
 }
 
-function createPriorityPlaceholder(isSelected) {
-	const placeholderPriority = new Option('Priority', '');
+function createPriorityPlaceholder(withPlaceholder) {
+	const placeholderPriority = new Option('Priority', 'none');
 	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = isSelected;
+	placeholderPriority.selected = withPlaceholder;
 	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
 
 	return placeholderPriority;
 }
@@ -8784,13 +8837,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   masterController: () => (/* binding */ masterController)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
 /* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firstRun.js */ "./src/firstRun.js");
 /* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
 /* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
 /* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
 /* harmony import */ var _components_list_controller_createList_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/list/controller/createList.js */ "./src/components/list/controller/createList.js");
+/* harmony import */ var _components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/memory/storage.js */ "./src/components/memory/storage.js");
+
+
 
 
 
@@ -8873,6 +8929,8 @@ function createMasterController() {
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
+			_components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__.testingMemoryController.uploadAllLists();
+			_components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__.testingMemoryController.downloadAllLists();
 		},
 		deleteList(list) {
 			const listTitle = list.title.toUpperCase();
@@ -8913,8 +8971,8 @@ function clearSubList(subList) {
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dateToCheck)) return masterController.today;
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck)) return masterController.upcoming;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck)) return masterController.today;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_7__["default"])(dateToCheck)) return masterController.upcoming;
 }
 
 //* Memory
