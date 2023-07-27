@@ -7414,9 +7414,9 @@ module.exports = styleTagTransform;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ allListsController)
+/* harmony export */   "default": () => (/* binding */ createListsController)
 /* harmony export */ });
-function allListsController() {
+function createListsController() {
 	let _defaultListsArr = [];
 	let _customListsArr = [];
 
@@ -7751,48 +7751,94 @@ function createCompletedTodos() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ memoryController),
-/* harmony export */   testingMemoryController: () => (/* binding */ testingMemoryController)
+/* harmony export */   "default": () => (/* binding */ createStorageController)
 /* harmony export */ });
-/* harmony import */ var _masterController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../masterController */ "./src/masterController.js");
+/* harmony import */ var _list_controller_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../list/controller/createList */ "./src/components/list/controller/createList.js");
+/* harmony import */ var _todo_todo__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../todo/todo */ "./src/components/todo/todo.js");
 
 
-const testingMemoryController = memoryController();
 
-function memoryController() {
+function createStorageController(listsControl) {
+	//* First Run
+	if (localStorage.length < 2) createDefaults(listsControl);
+	if (localStorage.length > 2) iniAllLists(listsControl);
+
 	return {
 		uploadList(list) {
 			const listToJSON = JSON.stringify(list);
 			localStorage.setItem(list.id, listToJSON);
 		},
 		uploadAllLists() {
-			const allLists = _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.listsControl.allLists;
-			freshStorage();
+			localStorage.clear();
+			const allLists = listsControl.allLists;
 			allLists.forEach((list) => this.uploadList(list));
-		},
-		downloadAllLists() {
-			const allLists = [];
-			localStorage.removeItem(localStorage.length)
-			const storedLists = Object.values(localStorage);
-			console.log(storedLists);
-			storedLists.forEach((list) => {
-				console.log(list === Number);
-				const listJSON = JSON.parse(list);
-				allLists.push(listJSON);
-			});
-
-			allLists.sort((a, b) => a.id - b.id);
-
-			console.log(allLists);
-			// return allLists;
 		},
 	};
 }
 
-function freshStorage() {
-	const todoId = parseInt(localStorage.getItem('todoId'));
-	localStorage.clear();
-	localStorage.setItem('todoId', todoId.toString());
+// Create Default Lists
+function createDefaults(listsControl) {
+	const inbox = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📥 Inbox', 'Default list');
+	inbox.id = 0;
+	listsControl.addDefaultList(inbox);
+
+	const today = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('🌤️ Today', "Todos with today's date");
+	today.id = 1;
+	listsControl.addDefaultList(today);
+
+	const upcoming = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📆 Upcoming', 'Todos with future dates');
+	upcoming.id = 2;
+	listsControl.addDefaultList(upcoming);
+}
+
+// Initialize All Lists
+function iniAllLists(listsControl) {
+	for (let i = 0; i < localStorage.length; i++) {
+		const JSONlist = localStorage[i];
+		const ListBase = JSON.parse(JSONlist);
+		const completeList = initList(ListBase);
+
+		if (completeList.id <= 2) listsControl.addDefaultList(completeList);
+		if (completeList.id > 2) listsControl.addList(completeList);
+	}
+}
+
+// initLists
+function initList(listBase) {
+	const completeList = (0,_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])(listBase.title, listBase.description);
+	completeList.id = listBase.id;
+	if (listBase.activeTodos.length > 0) initSubList(listBase.activeTodos);
+	if (listBase.completedTodos.length > 0) initSubList(listBase.completedTodos);
+
+	function initSubList(subList) {
+		subList.forEach((todo) => {
+			const completeTodo = initTodo(todo);
+			completeList.addTodo(completeTodo);
+		});
+	}
+
+	return completeList;
+}
+
+// initTodos
+// function initTodo({id, done, title, notes, dueDate, priority, listId, dateListId}) {
+function initTodo({
+	done,
+	title,
+	notes,
+	dueDate,
+	priority,
+	listId,
+	dateListId,
+}) {
+	// console.log(todoBase);
+	const completeTodo = (0,_todo_todo__WEBPACK_IMPORTED_MODULE_1__.createTodo)(title, notes, dueDate, priority);
+	completeTodo.listId = listId;
+	completeTodo.dateListId = dateListId;
+
+	if (done) completeTodo.toggleDone();
+
+	return completeTodo;
 }
 
 
@@ -7832,8 +7878,8 @@ function populateSidebar(defaultSideLists, customSideLists) {
 
 	allListsArr.forEach((list) => {
 		const sideListButton = createSideListButton(list);
-		if (list.id === 2) defaultSideLists.prepend(sideListButton);
-		if (list.id < 2) defaultSideLists.append(sideListButton);
+		if (list.id === 0) defaultSideLists.prepend(sideListButton);
+		if (list.id <= 2) defaultSideLists.append(sideListButton);
 		if (list.id > 2) customSideLists.append(sideListButton);
 	});
 
@@ -7995,12 +8041,12 @@ function controlEditCard(
 
 			if (!isCheckbox && !isDeleteButton) return;
 			if (isCheckbox) {
-				if (oldTodo.listId !== todo.listId)
-					_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
-				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
-				editCard.remove();
-			}
+				const oldList = oldTodo.listId;
+				const currentList = todo.listId;
 
+				if (oldList !== currentList) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
+				_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
+			}
 			if (isDeleteButton) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(oldTodo);
 			removeCard();
 		}
@@ -8141,16 +8187,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ createTodo)
 /* harmony export */ });
-let id = parseInt(localStorage.getItem('todoId')) || 0;
+// let id = parseInt(localStorage.getItem('todoId')) || 0;
+let id = 0;
 
-function incrementAndStoreId() {
-	id++;
-	localStorage.setItem('todoId', id.toString());
-}
+// function incrementAndStoreId() {
+// 	id++;
+// 	localStorage.setItem('todoId', id.toString());
+// }
 
 function createTodo(title, notes, dueDate, priority) {
 	let _todoId = id;
-	incrementAndStoreId();
+	id++;
 	let _done = false;
 	let _dateListId = null;
 	let _listId = 0;
@@ -8725,35 +8772,6 @@ function createTodoCard(todo) {
 
 /***/ }),
 
-/***/ "./src/firstRun.js":
-/*!*************************!*\
-  !*** ./src/firstRun.js ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   setupDefaultLists: () => (/* binding */ setupDefaultLists)
-/* harmony export */ });
-/* harmony import */ var _components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/list/controller/createList */ "./src/components/list/controller/createList.js");
-
-
-function setupDefaultLists(listsControl) {
-	const today = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('🌤️ Today', "Todos with today's date");
-	today.id = 0;
-	const upcoming = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📆 Upcoming', 'Todos with future dates');
-	upcoming.id = 1;
-	const inbox = (0,_components_list_controller_createList__WEBPACK_IMPORTED_MODULE_0__["default"])('📥 Inbox', 'Default list');
-	inbox.id = 2;
-
-	listsControl.addDefaultList(inbox);
-	listsControl.addDefaultList(today);
-	listsControl.addDefaultList(upcoming);
-}
-
-
-/***/ }),
-
 /***/ "./src/mainPage/controlPage.js":
 /*!*************************************!*\
   !*** ./src/mainPage/controlPage.js ***!
@@ -8781,6 +8799,7 @@ function controlPage(addTodoBtn, menuButton, container) {
 
 	container.append((0,_components_sidebar_displaySidebar__WEBPACK_IMPORTED_MODULE_2__["default"])());
 	container.append((0,_components_list_interface_listElement__WEBPACK_IMPORTED_MODULE_1__["default"])(_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.inbox));
+	_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.showList(0);
 }
 
 
@@ -8837,16 +8856,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   masterController: () => (/* binding */ masterController)
 /* harmony export */ });
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
-/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
-/* harmony import */ var _firstRun_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./firstRun.js */ "./src/firstRun.js");
-/* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
-/* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isToday/index.js");
+/* harmony import */ var date_fns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! date-fns */ "./node_modules/date-fns/esm/isFuture/index.js");
+/* harmony import */ var _components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/list/controller/controlAllLists.js */ "./src/components/list/controller/controlAllLists.js");
+/* harmony import */ var _screenController_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./screenController.js */ "./src/screenController.js");
+/* harmony import */ var _components_memory_storage_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/memory/storage.js */ "./src/components/memory/storage.js");
 /* harmony import */ var _components_todo_todo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/todo/todo.js */ "./src/components/todo/todo.js");
 /* harmony import */ var _components_list_controller_createList_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/list/controller/createList.js */ "./src/components/list/controller/createList.js");
-/* harmony import */ var _components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/memory/storage.js */ "./src/components/memory/storage.js");
-
-
 
 
 
@@ -8858,16 +8874,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //* Master List
-const masterController = createMasterController();
-
-function createMasterController() {
-	const screenControl = (0,_screenController_js__WEBPACK_IMPORTED_MODULE_2__["default"])();
-	const listsControl = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
-	(0,_firstRun_js__WEBPACK_IMPORTED_MODULE_0__.setupDefaultLists)(listsControl);
+const masterController = (() => {
+	const screenControl = (0,_screenController_js__WEBPACK_IMPORTED_MODULE_1__["default"])();
+	const listsControl = (0,_components_list_controller_controlAllLists_js__WEBPACK_IMPORTED_MODULE_0__["default"])();
+	const storageControl = (0,_components_memory_storage_js__WEBPACK_IMPORTED_MODULE_2__["default"])(listsControl);
 
 	const inbox = listsControl.defaultLists[0];
+	storageControl.uploadList(inbox);
+
 	const today = listsControl.defaultLists[1];
+	storageControl.uploadList(today);
+
 	const upcoming = listsControl.defaultLists[2];
+	storageControl.uploadList(upcoming);
 
 	return {
 		listsControl,
@@ -8890,21 +8909,28 @@ function createMasterController() {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 
+			list.addTodo(todo);
+			screenControl.checkSubLists(list);
+			storageControl.uploadList(list);
+
 			if (dateList) {
 				dateList.addTodo(todo);
 				todo.dateListId = Number(dateList.id);
 				screenControl.checkSubLists(dateList);
+				storageControl.uploadList(dateList);
 			}
-
-			list.addTodo(todo);
-			screenControl.checkSubLists(list);
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 
-			if (dateList) dateList.removeTodo(todo);
 			list.removeTodo(todo);
+			storageControl.uploadList(list);
+
+			if (dateList) {
+				dateList.removeTodo(todo);
+				storageControl.uploadList(dateList);
+			}
 		},
 		completeTodo(todo) {
 			this.removeTodo(todo);
@@ -8914,9 +8940,14 @@ function createMasterController() {
 		saveTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
-			// Refresh
+
 			screenControl.checkSubLists(list);
-			if (dateList) screenControl.checkSubLists(dateList);
+			storageControl.uploadList(list);
+
+			if (dateList) {
+				screenControl.checkSubLists(dateList);
+				storageControl.uploadList(dateList);
+			}
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
@@ -8929,8 +8960,8 @@ function createMasterController() {
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
-			_components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__.testingMemoryController.uploadAllLists();
-			_components_memory_storage_js__WEBPACK_IMPORTED_MODULE_5__.testingMemoryController.downloadAllLists();
+
+			storageControl.uploadAllLists();
 		},
 		deleteList(list) {
 			const listTitle = list.title.toUpperCase();
@@ -8944,16 +8975,20 @@ function createMasterController() {
 
 			screenControl.refreshSideBar();
 			screenControl.replaceCurrentList(inbox);
+
+			storageControl.uploadAllLists();
 		},
 		saveList(list) {
 			screenControl.updateSideList(list);
+
+			storageControl.uploadList(list);
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
 			screenControl.replaceCurrentList(list);
 		},
 	};
-}
+})();
 
 //* Form
 function handleFormReturn({ title, notes, dueDate, priority, listId }) {
@@ -8971,11 +9006,9 @@ function clearSubList(subList) {
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck)) return masterController.today;
-	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_7__["default"])(dateToCheck)) return masterController.upcoming;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_5__["default"])(dateToCheck)) return masterController.today;
+	if ((0,date_fns__WEBPACK_IMPORTED_MODULE_6__["default"])(dateToCheck)) return masterController.upcoming;
 }
-
-//* Memory
 
 
 /***/ }),
