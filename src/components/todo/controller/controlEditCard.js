@@ -23,12 +23,12 @@ export default function controlEditCard(
 
 			if (!isCheckbox && !isDeleteButton) return;
 			if (isCheckbox) {
-				if (oldTodo.listId !== todo.listId)
-					masterController.moveTodo(oldTodo, todo);
-				masterController.completeTodo(todo);
-				editCard.remove();
-			}
+				const oldList = oldTodo.listId;
+				const currentList = todo.listId;
 
+				if (oldList !== currentList) masterController.moveTodo(oldTodo, todo);
+				masterController.completeTodo(todo);
+			}
 			if (isDeleteButton) masterController.removeTodo(oldTodo);
 			removeCard();
 		}

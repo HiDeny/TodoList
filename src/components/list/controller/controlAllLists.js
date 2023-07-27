@@ -1,4 +1,4 @@
-export default function allListsController() {
+export default function createListsController() {
 	let _defaultListsArr = [];
 	let _customListsArr = [];
 

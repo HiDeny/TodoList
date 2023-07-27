@@ -18,8 +18,8 @@ export function populateSidebar(defaultSideLists, customSideLists) {
 
 	allListsArr.forEach((list) => {
 		const sideListButton = createSideListButton(list);
-		if (list.id === 2) defaultSideLists.prepend(sideListButton);
-		if (list.id < 2) defaultSideLists.append(sideListButton);
+		if (list.id === 0) defaultSideLists.prepend(sideListButton);
+		if (list.id <= 2) defaultSideLists.append(sideListButton);
 		if (list.id > 2) customSideLists.append(sideListButton);
 	});
 

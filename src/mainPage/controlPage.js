@@ -11,4 +11,5 @@ export default function controlPage(addTodoBtn, menuButton, container) {
 
 	container.append(displaySidebar());
 	container.append(createListElement(masterController.inbox));
+	masterController.showList(0);
 }

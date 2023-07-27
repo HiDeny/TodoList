@@ -1,26 +1,27 @@
 import { isFuture, isToday } from 'date-fns';
 
-import { setupDefaultLists } from './firstRun.js';
-import allListsController from './components/list/controller/controlAllLists.js';
+import createListsController from './components/list/controller/controlAllLists.js';
 import createScreenController from './screenController.js';
+import createStorageController from './components/memory/storage.js';
 
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/controller/createList.js';
 
-import { testingMemoryController } from './components/memory/storage.js';
-
 //* Master List
-export const masterController = createMasterController();
-
-function createMasterController() {
+export const masterController = (() => {
 	const screenControl = createScreenController();
-	const listsControl = allListsController();
-	setupDefaultLists(listsControl);
+	const listsControl = createListsController();
+	const storageControl = createStorageController(listsControl);
 
 	const inbox = listsControl.defaultLists[0];
+	storageControl.uploadList(inbox);
+
 	const today = listsControl.defaultLists[1];
+	storageControl.uploadList(today);
+
 	const upcoming = listsControl.defaultLists[2];
+	storageControl.uploadList(upcoming);
 
 	return {
 		listsControl,
@@ -43,21 +44,28 @@ function createMasterController() {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 
+			list.addTodo(todo);
+			screenControl.checkSubLists(list);
+			storageControl.uploadList(list);
+
 			if (dateList) {
 				dateList.addTodo(todo);
 				todo.dateListId = Number(dateList.id);
 				screenControl.checkSubLists(dateList);
+				storageControl.uploadList(dateList);
 			}
-
-			list.addTodo(todo);
-			screenControl.checkSubLists(list);
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
 
-			if (dateList) dateList.removeTodo(todo);
 			list.removeTodo(todo);
+			storageControl.uploadList(list);
+
+			if (dateList) {
+				dateList.removeTodo(todo);
+				storageControl.uploadList(dateList);
+			}
 		},
 		completeTodo(todo) {
 			this.removeTodo(todo);
@@ -67,9 +75,14 @@ function createMasterController() {
 		saveTodo(todo) {
 			const list = listsControl.getList(todo.listId);
 			const dateList = findDateList(todo.dueDate);
-			// Refresh
+
 			screenControl.checkSubLists(list);
-			if (dateList) screenControl.checkSubLists(dateList);
+			storageControl.uploadList(list);
+
+			if (dateList) {
+				screenControl.checkSubLists(dateList);
+				storageControl.uploadList(dateList);
+			}
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
@@ -82,8 +95,8 @@ function createMasterController() {
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
-			testingMemoryController.uploadAllLists();
-			testingMemoryController.downloadAllLists();
+
+			storageControl.uploadAllLists();
 		},
 		deleteList(list) {
 			const listTitle = list.title.toUpperCase();
@@ -97,16 +110,20 @@ function createMasterController() {
 
 			screenControl.refreshSideBar();
 			screenControl.replaceCurrentList(inbox);
+
+			storageControl.uploadAllLists();
 		},
 		saveList(list) {
 			screenControl.updateSideList(list);
+
+			storageControl.uploadList(list);
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
 			screenControl.replaceCurrentList(list);
 		},
 	};
-}
+})();
 
 //* Form
 function handleFormReturn({ title, notes, dueDate, priority, listId }) {
@@ -127,5 +144,3 @@ function findDateList(dueDate) {
 	if (isToday(dateToCheck)) return masterController.today;
 	if (isFuture(dateToCheck)) return masterController.upcoming;
 }
-
-//* Memory
