@@ -73,7 +73,6 @@ function initTodo({
 	listId,
 	dateListId,
 }) {
-	// console.log(todoBase);
 	const completeTodo = createTodo(title, notes, dueDate, priority);
 	completeTodo.listId = listId;
 	completeTodo.dateListId = dateListId;

@@ -12,6 +12,13 @@ export default function controlEditCard(
 ) {
 	const oldTodo = { ...todo };
 
+	// Flatpickr
+	const fp = flatpickr(dueDate, {
+		minDate: 'today',
+		dateFormat: 'j M Y',
+	});
+	const flatpickrContainer = document.querySelector('.flatpickr-calendar');
+
 	//* Handle Mouse Event
 	const handleMouseClick = (event) => {
 		const target = event.target;
@@ -22,20 +29,29 @@ export default function controlEditCard(
 			const isDeleteButton = target.className === 'deleteTodoEdit';
 
 			if (!isCheckbox && !isDeleteButton) return;
+
 			if (isCheckbox) {
 				const oldList = oldTodo.listId;
 				const currentList = todo.listId;
 
+				//! Bug - sometimes it still closes when the calendar is loading
 				if (oldList !== currentList) masterController.moveTodo(oldTodo, todo);
 				masterController.completeTodo(todo);
+				removeCard();
 			}
-			if (isDeleteButton) masterController.removeTodo(oldTodo);
-			removeCard();
+
+			if (isDeleteButton) {
+				const deleteCheck = masterController.deleteCheck(todo.title);
+				if (!deleteCheck) return;
+				masterController.removeTodo(oldTodo);
+				removeCard();
+			}
 		}
 		if (!insideContainer) {
 			const sameList = oldTodo.listId === todo.listId;
 			const sameDate = oldTodo.dueDate === todo.dueDate;
 
+			if (flatpickrContainer.contains(target)) return;
 			if (!sameList || !sameDate) masterController.moveTodo(oldTodo, todo);
 			if (sameList) masterController.saveTodo(todo);
 			removeCard();
@@ -86,6 +102,7 @@ export default function controlEditCard(
 	function removeCard() {
 		document.removeEventListener('keydown', handleKeyDown);
 		document.removeEventListener('click', handleMouseClick);
+		fp.destroy();
 		editCard.remove();
 	}
 }

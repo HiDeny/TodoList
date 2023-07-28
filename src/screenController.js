@@ -53,18 +53,6 @@ function refreshSubList(subList, className) {
 	oldSubList.replaceWith(newSubList);
 }
 
-// Display changes
-function displayChange(actualChange) {
-	const changeContainer = document.createElement('div');
-	changeContainer.textContent = actualChange;
-	changeContainer.classList.add('.show');
-	setTimeout(() => {
-		changeContainer.classList.remove('.show');
-	}, 5000);
-}
-
-//* Screen
-
 // Sidebar
 function freshCustomSideLists() {
 	const freshSideList = document.createElement('div');
@@ -82,4 +70,15 @@ function freshCustomSideLists() {
 	freshSideList.append(addListButton);
 
 	return freshSideList;
+}
+
+
+// Display changes
+function displayChange(actualChange) {
+	const changeContainer = document.createElement('div');
+	changeContainer.textContent = actualChange;
+	changeContainer.classList.add('.show');
+	setTimeout(() => {
+		changeContainer.classList.remove('.show');
+	}, 5000);
 }

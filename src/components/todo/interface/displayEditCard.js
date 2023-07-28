@@ -8,6 +8,7 @@ import controlEditCard from '../controller/controlEditCard.js';
 
 export default function displayEditCard(todo) {
 	const todoCardEdit = createTodoCardEdit(todo);
+	todoCardEdit.classList.add(`card${todo.id}`);
 
 	const cancelButton = createCancelButton();
 	todoCardEdit.append(cancelButton);
@@ -100,10 +101,6 @@ function createDueDate(todo) {
 	editDate.setAttribute('type', 'text');
 	editDate.setAttribute('placeholder', 'Date');
 	editDate.value = todo.dueDate;
-	flatpickr(editDate, {
-		minDate: 'today',
-		dateFormat: 'j M Y',
-	});
 
 	return editDate;
 }

@@ -1,10 +1,10 @@
 import { format, isThisYear, isToday, isTomorrow } from 'date-fns';
 
-// import controlCard from '../controller/controlCard';
 import { visualizePriority } from './helperFunctions';
 
 export default function displayCard(todo) {
 	const todoCard = createCard();
+	todoCard.classList.add(`card${todo.id}`);
 
 	const removeButton = createRemoveButton();
 	todoCard.append(removeButton);
@@ -23,8 +23,6 @@ export default function displayCard(todo) {
 	todoCard.append(dueDate);
 
 	visualizePriority(todoCard, todo.priority);
-	// Refactor to so listeners can be removed
-	removeFlatpickrDiv();
 
 	return todoCard;
 }
@@ -79,10 +77,4 @@ function selectDateName(dueDate) {
 	if (isThisYear(dateToCheck)) return formattedDate;
 
 	return dueDate;
-}
-
-function removeFlatpickrDiv() {
-	const flatpickrDiv = document.querySelector('.flatpickr-calendar');
-	if (!flatpickrDiv) return;
-	flatpickrDiv.remove();
 }

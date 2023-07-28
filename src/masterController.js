@@ -7,6 +7,7 @@ import createStorageController from './components/memory/storage.js';
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/controller/createList.js';
+import { check } from 'prettier';
 
 //* Master List
 export const masterController = (() => {
@@ -37,6 +38,10 @@ export const masterController = (() => {
 		},
 
 		//* Todos
+		deleteCheck(toDeleteTitle) {
+			const check = confirm(`Do you want to delete ${toDeleteTitle}?`);
+			return check;
+		},
 		createTodo() {
 			createTodoForm(handleFormReturn);
 		},
@@ -99,11 +104,6 @@ export const masterController = (() => {
 			storageControl.uploadAllLists();
 		},
 		deleteList(list) {
-			const listTitle = list.title.toUpperCase();
-			const check = confirm(`Do you want to delete ${listTitle}?`);
-
-			if (!check) return;
-
 			clearSubList(list.activeTodos);
 			clearSubList(list.completedTodos);
 			listsControl.deleteList(list);

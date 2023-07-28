@@ -1,11 +1,19 @@
 import { visualizePriority } from '../interface/helperFunctions';
 
 export default function controlForm(todoForm, callBack) {
+	// Flatpickr
+	const fp = flatpickr(formDate, {
+		minDate: 'today',
+		dateFormat: 'j M Y',
+	});
+	const flatpickrContainer = document.querySelector('.flatpickr-calendar');
+
 	const handleMouseClick = (event) => {
-		// Do not cancel when click on calendar
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
-
+		
+		//! Bug - sometimes it still closes when the calendar is loading
+		if (flatpickrContainer.contains(target)) return;
 		if (!insideContainer || target.className === 'cancelForm') {
 			removeForm();
 		}
@@ -31,6 +39,7 @@ export default function controlForm(todoForm, callBack) {
 	function removeForm() {
 		document.removeEventListener('click', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
+		fp.destroy();
 		todoForm.remove();
 	}
 

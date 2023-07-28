@@ -8,6 +8,9 @@ export default function controlListElement(
 ) {
 	// DeleteButton
 	deleteButton.addEventListener('click', () => {
+		const listTitle = list.title.toUpperCase();
+		const deleteCheck = masterController.deleteCheck(listTitle);
+		if (!deleteCheck) return;
 		masterController.deleteList(list);
 	});
 
