@@ -39,6 +39,23 @@ export default function createScreenController() {
 
 			oldSideLists.replaceWith(freshSideList);
 		},
+		// Display changes
+		displayChange(occurringChange) {
+			const headerDiv = document.querySelector('header');
+			const changeAlert = document.createElement('div');
+			changeAlert.className = 'changeAlert';
+			headerDiv.append(changeAlert);
+
+			changeAlert.textContent = occurringChange;
+
+			setTimeout(() => {
+				changeAlert.classList.add('showChange');
+			}, 200);
+
+			setTimeout(() => {
+				changeAlert.classList.remove('showChange');
+			}, 2000);
+		},
 	};
 }
 
@@ -70,15 +87,4 @@ function freshCustomSideLists() {
 	freshSideList.append(addListButton);
 
 	return freshSideList;
-}
-
-
-// Display changes
-function displayChange(actualChange) {
-	const changeContainer = document.createElement('div');
-	changeContainer.textContent = actualChange;
-	changeContainer.classList.add('.show');
-	setTimeout(() => {
-		changeContainer.classList.remove('.show');
-	}, 5000);
 }

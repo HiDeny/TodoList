@@ -11,7 +11,7 @@ export default function controlForm(todoForm, callBack) {
 	const handleMouseClick = (event) => {
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
-		
+
 		//! Bug - sometimes it still closes when the calendar is loading
 		if (flatpickrContainer.contains(target)) return;
 		if (!insideContainer || target.className === 'cancelForm') {

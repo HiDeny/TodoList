@@ -110,10 +110,10 @@ header {
 
 	width: 200px;
 
-	position: fixed;
 	transition: transform 0.3s;
 	/* transform: translateX(-150%); */
 
+	position: fixed;
 	top: 6rem;
 	left: 4rem;
 	right: 0;
@@ -586,4 +586,19 @@ textarea {
 	border: 1px solid gray;
 	border-bottom: 5px solid #9f9b9bd1;
 	box-shadow: 5px 5px 12px 1px #80808057;
+}
+
+/* displayChange */
+.changeAlert {
+	background-color: black;
+	color: whitesmoke;
+	transform: translateY(-150%);
+	transition: transform 0.6s;
+	width: 200px;
+	z-index: 10;
+	position: fixed;
+}
+
+.showChange {
+	transform: translateY(150%);
 }

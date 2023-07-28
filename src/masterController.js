@@ -59,6 +59,8 @@ export const masterController = (() => {
 				screenControl.checkSubLists(dateList);
 				storageControl.uploadList(dateList);
 			}
+
+			screenControl.displayChange('TODO Added!');
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -71,11 +73,13 @@ export const masterController = (() => {
 				dateList.removeTodo(todo);
 				storageControl.uploadList(dateList);
 			}
+			screenControl.displayChange('TODO Removed!');
 		},
 		completeTodo(todo) {
 			this.removeTodo(todo);
 			todo.toggleDone();
 			this.addTodo(todo);
+			screenControl.displayChange('TODO Completed!');
 		},
 		saveTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -88,10 +92,12 @@ export const masterController = (() => {
 				screenControl.checkSubLists(dateList);
 				storageControl.uploadList(dateList);
 			}
+			screenControl.displayChange('TODO Saved!');
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
 			this.addTodo(todo);
+			screenControl.displayChange('TODO Moved!');
 		},
 		//* Lists
 		addList() {
@@ -102,6 +108,7 @@ export const masterController = (() => {
 			screenControl.refreshSideBar();
 
 			storageControl.uploadAllLists();
+			screenControl.displayChange('LIST Added!');
 		},
 		deleteList(list) {
 			clearSubList(list.activeTodos);
@@ -112,6 +119,7 @@ export const masterController = (() => {
 			screenControl.replaceCurrentList(inbox);
 
 			storageControl.uploadAllLists();
+			screenControl.displayChange('LIST Deleted!');
 		},
 		saveList(list) {
 			screenControl.updateSideList(list);

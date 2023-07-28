@@ -5,11 +5,6 @@ export default function mainPage() {
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
 
-	// changeAlert
-	const changeAlert = document.createElement('div');
-	changeAlert.className = 'changeAlert';
-	headerDiv.append(changeAlert);
-
 	// Add Todo Btn
 	const addTodoBtn = document.createElement('button');
 	addTodoBtn.className = 'addTodoBtn';
