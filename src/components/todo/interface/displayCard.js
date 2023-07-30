@@ -6,9 +6,6 @@ export default function displayCard(todo) {
 	const todoCard = createCard();
 	todoCard.classList.add(`card${todo.id}`);
 
-	const removeButton = createRemoveButton();
-	todoCard.append(removeButton);
-
 	const checkBox = createCheckBox();
 	todoCard.append(checkBox);
 	if (todo.done) {
@@ -16,11 +13,14 @@ export default function displayCard(todo) {
 		todoCard.classList.add('done');
 	}
 
+	const dueDate = createDueDate(todo);
+	todoCard.append(dueDate);
+
 	const title = createTitle(todo);
 	todoCard.append(title);
 
-	const dueDate = createDueDate(todo);
-	todoCard.append(dueDate);
+	const removeButton = createRemoveButton();
+	todoCard.append(removeButton);
 
 	visualizePriority(todoCard, todo.priority);
 

@@ -5,17 +5,17 @@ export default function mainPage() {
 	const headerDiv = document.createElement('header');
 	document.body.append(headerDiv);
 
-	// Add Todo Btn
-	const addTodoBtn = document.createElement('button');
-	addTodoBtn.className = 'addTodoBtn';
-	addTodoBtn.textContent = '+';
-	headerDiv.prepend(addTodoBtn);
-
 	// Menu Button
 	const menuButton = document.createElement('button');
 	menuButton.className = 'hamburger';
 	menuButton.textContent = 'MENU';
 	headerDiv.append(menuButton);
+
+	// Add Todo Btn
+	const addTodoBtn = document.createElement('button');
+	addTodoBtn.className = 'addTodoBtn';
+	addTodoBtn.textContent = '+';
+	headerDiv.append(addTodoBtn);
 
 	// Container
 	const container = document.createElement('div');

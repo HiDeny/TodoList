@@ -34,6 +34,7 @@ function createListHead(list) {
 //* Default List
 function createDefaultListHead(list) {
 	const headDiv = document.createElement('div');
+	headDiv.className = 'listHead';
 
 	const title = createDefaultListTitle(list);
 	title.className = 'listTitle';
@@ -63,9 +64,7 @@ function createDefaultListDescription(list) {
 //* Custom List
 function createCustomListHead(list) {
 	const headDiv = document.createElement('div');
-
-	const deleteButton = createDeleteButton(list);
-	headDiv.append(deleteButton);
+	headDiv.className = 'listHead';
 
 	const title = createCustomListTitle(list);
 	title.classList.add('listTitle');
@@ -73,6 +72,9 @@ function createCustomListHead(list) {
 
 	const description = createCustomListDescription(list);
 	headDiv.append(description);
+
+	const deleteButton = createDeleteButton(list);
+	headDiv.append(deleteButton);
 
 	controlListElement(list, deleteButton, title, description);
 
