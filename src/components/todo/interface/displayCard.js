@@ -38,7 +38,7 @@ function createCard() {
 function createRemoveButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
-	cancelButton.textContent = 'x';
+	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }
