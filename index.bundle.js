@@ -522,8 +522,6 @@ p {
 .cancelListForm {
 	width: 0.8rem;
 	height: 0.8rem;
-	align-items: center;
-	justify-self: center;
 
 	background-color: var(--base-higher-p, #fff);
 	border: 1px solid #dadadd;
@@ -817,13 +815,14 @@ p {
 	border-radius: 20px;
 	background: #e3e3e31c;
 	backdrop-filter: blur(20px);
-	text-overflow: ellipsis;
 
 	font-family: Inter, sans-serif;
 	color: #1c1c28;
 	font-style: normal;
 	font-weight: 400;
 	line-height: 1.5rem;
+
+	text-overflow: ellipsis;
 }
 
 .cancelForm {
@@ -883,39 +882,49 @@ textarea {
 .formList,
 .formPriority {
 	align-self: end;
-
 	padding: 10px 0px;
 }
 
 .formList {
 	grid-area: 4 / 1;
-	padding: 10px 20px;
+	justify-self: baseline;
 }
 
 #formList {
+	padding-left: 10px;
 	font-size: 1.1rem;
 	font-weight: 300;
 }
 
 .formDate {
 	grid-area: 4 / 2;
-	padding-right: 2rem;
+
+	display: flex;
+	justify-self: center;
+	justify-content: center;
 }
 
 #formDate {
+	display: flex;
+	align-content: center;
+
+	width: 70%;
+
+	text-align: center;
 	font-size: 1rem;
 	font-weight: 300;
 }
 
 .formPriority {
 	grid-area: 4 / 3;
-	padding-left: 2rem;
+	padding-right: 10px;
+
 	font-size: 1.1rem;
 	font-weight: 300;
 }
 
 #formPriority {
-	width: 100%;
+	text-align: right;
 }
 
 #formList,
@@ -924,111 +933,85 @@ textarea {
 	-webkit-appearance: none;
 }
 
-/* .placeholderPri {
-	color: gray;
-} */
-
 .submitButton {
 	position: absolute;
 	bottom: -2.5rem;
 
-	height: 1.8rem;
+	height: 2rem;
 	width: 6.5rem;
-
-	border: 1px solid #808080b8;
-	border-radius: 10px;
-	background: #b4b4b436;
-	backdrop-filter: blur(15px);
-	box-shadow: 5px 5px 12px 1px #80808057;
 
 	align-self: end;
 	justify-self: center;
+
+	background: #e3e3e31c;
+	backdrop-filter: blur(30px);
+	border: 1px solid #e4e4eb;
+	border-radius: 3.125rem;
+	box-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),
+		0px 0px 2px 0px rgba(40, 41, 61, 0.04);
+
+	font-family: Inter, sans-serif;
+	color: #1c1c28;
+	font-feature-settings: 'clig' off, 'liga' off;
+	font-size: 1.3rem;
+	font-style: normal;
+	font-weight: 300;
+
+	cursor: pointer;
 }
-
-
-/* Inline #1 | http://127.0.0.1:5500/dist/ */
-
-.formList {
-	/* padding: 10px 20px; */
-	padding: ;
-	justify-self: baseline;
-  }
-  
-  #formList {
-	padding: ;
-	padding-left: 10px;
-  }
-  
-  .formDate {
-	/* padding-right: 2rem; */
-	justify-self: center;
-	display: flex;
-	justify-content: center;
-  }
-  
-  #formDate {
-	/* display: 70%; */
-	align-content: center;
-	display: flex;
-	width: 70%;
-	text-align: center;
-  }
-  
-  .formPriority {
-	/* padding-left: 2rem; */
-	align-self: ;
-	padding-right: 10px;
-  }
-  
-  #formPriority {
-	/* width: 100%; */
-	text-align: right;
-  }
-  
 
 /* TODO CARD */
 
 .todoCard {
 	position: relative;
 
-	display: flex;
-	column-gap: 10px;
+	display: grid;
+	grid-template-columns: 1.5rem 3.8rem auto 5rem;
+	grid-template-rows: 1fr;
 
 	width: clamp(20rem, 35rem, 35rem);
 	height: 2.6875rem;
 
 	margin: 0.5rem 0.5rem 0rem;
-	padding: 10px 5px;
+	padding: 10px;
 
 	border-radius: 0.9375rem;
-	background-clip: padding-box;
-
-	box-shadow: 0px 8px 16px 0px rgba(96, 97, 112, 0.16),
-		0px 2px 4px 0px rgba(40, 41, 61, 0.04);
 
 	cursor: pointer;
 }
 
+/* Create custom checkbox */
 .todoCheck {
-	margin-left: 10px;
+	justify-self: baseline;
+}
+
+.todoTitle {
+	height: 1rem;
+	/* align-self: center; */
+
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	font-family: Inter, sans-serif;
+	color: #1c1c28;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 300;
 }
 
 .todoDate {
-	font-size: 0.7rem;
-	color: gray;
-	align-self: end;
+	align-self: center;
+
+	color: rgba(0, 0, 0, 0.4);
+	font-size: 0.625rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
 }
 
 .deleteTodo {
-	/* position: absolute;
-	top: 30%;
-	right: 10px; */
-}
-
-.todoCheck {
-	/* margin-left: 10px; */
-	grid-area: 1 / 1 / 3 / 2;
-	justify-self: center;
+	align-self: center;
+	justify-self: end;
 }
 
 /* TODO CARD - edit */
@@ -1037,25 +1020,59 @@ textarea {
 	position: relative;
 
 	display: grid;
-	grid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;
-	grid-template-rows: 1fr 1fr 1fr 1fr;
+	grid-template-rows: 1.5rem auto 1.5rem;
+	grid-template-columns: 1rem repeat(3, 1fr) 1rem;
 
-	width: 90%;
-	padding: 10px 5px;
+	width: clamp(20rem, 35rem, 35rem);
+	height: 8rem;
+
+	padding: 10px;
 	margin: 0.5rem 0.5rem 0rem;
 
 	border-radius: 20px;
-	border: 1px solid gray;
-	border-bottom: 5px solid #8080809c;
-	background: #b4b4b436;
-	backdrop-filter: blur(15px);
-	box-shadow: 3px 5px 12px 0px #00000042;
+
+	font-family: Inter, sans-serif;
+	color: #1c1c28;
+	font-style: normal;
+	font-weight: 400;
+
+	text-overflow: ellipsis;
 }
 
+/* Inline #1 | http://127.0.0.1:5500/dist/ */
+
 .deleteTodoEdit {
-	position: absolute;
-	right: 10px;
-	top: 10px;
+	/* grid-row: 3; */
+	grid-row: 2;
+	align-self: center;
+}
+
+.todoCheckEdit {
+	/* grid-row: 3; */
+	/* align-self: flex-start; */
+	grid-row: 2;
+	align-self: center;
+}
+
+.todoNotesEdit {
+	/* grid-row: 2 / span 2; */
+	/* width: 95%; */
+	grid-row: 2;
+}
+
+.todoDueDateEdit {
+	/* grid-row: 4; */
+	grid-row: 3;
+}
+
+.todoListEdit {
+	/* grid-row: 4; */
+	grid-row: 3;
+}
+
+.todoPriorityEdit {
+	/* grid-row: 4; */
+	grid-row: 3;
 }
 
 .todoTitleEdit,
@@ -1067,26 +1084,21 @@ textarea {
 	text-overflow: ellipsis;
 }
 
-.todoNotesEdit,
-.todoDueDateEdit,
-.todoPriorityEdit {
-	font-size: 0.8rem;
-}
-
-.todoTitle {
-	max-height: 1.1rem;
-	overflow: auto;
-	max-width: 75%;
+.deleteTodoEdit {
+	grid-row: 3;
+	grid-column: 5;
 }
 
 .todoCheckEdit {
-	grid-row: 1 / span 4;
+	grid-column: 1;
+	grid-row: 3;
 	align-self: flex-start;
 	margin-top: 10%;
 	border-radius: 10px;
 }
 
 .todoTitleEdit {
+	grid-row: 1;
 	grid-column: 2 / span 3;
 }
 
@@ -1183,7 +1195,7 @@ textarea {
 .showChange {
 	transform: translateY(150%);
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@font-face {\n\tfont-family: 'Inter';\n\tsrc: url('./assets/fonts/Inter/Inter-VariableFont_slnt\\,wght.ttf')\n\t\tformat('truetype');\n}\n\n:root {\n\t--stroke-soft: #f2f2f5;\n\t--base-higher-p: #fff;\n\t--base-white: #fff;\n\t--border-red: #ff3b3b;\n\t--border-orange: #ff8800;\n\t--border-blue: #3e7bfa;\n\t--gradient-red: linear-gradient(90deg, #ff3b3b, #cc00bb);\n\t--gradient-orange: linear-gradient(90deg, #ff8800, #ee5d5d);\n\t--gradient-blue: linear-gradient(90deg, #3e7bfa, #6600cc);\n}\n* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\t/* outline: 0.5px rgba(150, 150, 150, 0.23) solid; */\n\toutline: 1px solid #ebebf0;\n\tbox-shadow: 0px 0.5px 4px 0px rgba(96, 97, 112, 0.32) inset;\n\tborder-radius: 5px;\n}\n\nhtml {\n\tfont-family: 'Inter', sans-serif;\n\tfont-size: 16px;\n\tbackground: #fafafc;\n}\n\nheader {\n\tdisplay: flex;\n\tjustify-content: center;\n\n\tgap: 1.7rem;\n\tpadding-top: 2rem;\n}\n\n/* body {\n\theight: 100%;\n} */\n\np {\n\tmargin: 0;\n}\n\n.container {\n\tposition: relative;\n\theight: 100%;\n}\n\n/* .modal {\n\tposition: fixed;\n\tleft: 0;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100%;\n\toverflow: auto;\n\tbackground-color: rgb(0, 0, 0, 0.4);\n} */\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\t/* ! UPDATE COLOURS */\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\twidth: 0.8rem;\n\theight: 0.8rem;\n\talign-items: center;\n\tjustify-self: center;\n\n\tbackground-color: var(--base-higher-p, #fff);\n\tborder: 1px solid #dadadd;\n\tborder-radius: 100%;\n\tfilter: drop-shadow(0px 20px 32px rgba(96, 97, 112, 0.24))\n\t\tdrop-shadow(0px 2px 8px rgba(40, 41, 61, 0.08));\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\n\theight: 3.125rem;\n\twidth: 3.125rem;\n\tpadding-bottom: 0.4rem;\n\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tborder-radius: 3.125rem;\n\tbackground: var(--base-white, #fff);\n\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 2.25rem;\n\tfont-style: normal;\n\tfont-weight: 200;\n\tline-height: 1.5rem;\n\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\n\tdisplay: flex;\n\twidth: 6.25rem;\n\theight: 3.1875rem;\n\tjustify-content: center;\n\talign-items: center;\n\n\tborder-radius: 1.25rem;\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tbackground: var(--base-white, #fff);\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 1.2rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: 1.5rem;\n\n\tcursor: pointer;\n}\n\n.addTodoBtn:hover,\n.hamburger:hover {\n\tborder: 2px solid #ebebf0;\n}\n\n.addTodoBtn:active,\n.hamburger:active {\n\tborder: 3px solid #e4e4eb;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 11rem;\n\n\ttransition: transform 0.3s;\n\t/* transform: translateX(-150%); */\n\n\tposition: fixed;\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\t/* transform: translateX(0); */\n\ttransform: translateX(-150%);\n}\n\n.defaultSideLists,\n.customSideLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: flex-start;\n\n\twidth: 11rem;\n\tpadding: 0.625rem 1.375rem;\n\n\tborder-radius: 1.25rem;\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tbackground: var(--base-white, #fff);\n\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tpadding: 0.62rem 1.38rem;\n}\n\n.defaultSideLists {\n\theight: 8.75rem;\n}\n\n.defaultSideLists > .sidebarButton:last-child,\n.customSideLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\twidth: 8.25rem;\n\theight: 2.5rem;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #ebebf0;\n\tbackground: transparent;\n\n\ttext-align: left;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-size: 1rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: 1.5rem;\n\ttext-overflow: ellipsis;\n\n\tcursor: pointer;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n\n\t/* height: 100%; */\n\twidth: clamp(25rem, 40rem, 55rem);\n\tmargin: auto;\n\tmargin-top: 3.7rem;\n}\n\n.listHead {\n\twidth: 100%;\n\theight: 6.875rem;\n\talign-self: baseline;\n\tmargin: 0 2.4rem;\n}\n\n.listTitle,\n.customTitle {\n\t/* display: flex; */\n\tflex-direction: column;\n\tjustify-content: center;\n\n\theight: 50%;\n\n\tletter-spacing: 0.1rem;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: var(--dark-dark-0, #1c1c28);\n\tfont-size: 2.3rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: normal;\n\n\ttext-overflow: ellipsis;\n}\n\n.listDescription,\n.customDescription {\n\tdisplay: flex;\n\theight: 50%;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: rgba(28, 28, 40, 0.22);\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 1rem;\n\tfont-style: normal;\n\tfont-weight: 400;\n\tline-height: 1.5rem;\n\n\ttext-overflow: ellipsis;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\twidth: 85%;\n\n\tpadding: 0.4rem 0;\n\tborder-bottom: 1px solid rgba(185, 185, 185, 0.423);\n\n\tfont-size: 0.9rem;\n\tfont-family: Inter, sans-serif;\n\tcolor: rgba(28, 28, 40, 0.22);\n\tfont-weight: 300;\n\tletter-spacing: 0.5px;\n}\n\n.activeTodos,\n.completedTodos {\n\t/*  MASK OVERFLOW fade */\n\t--mask-image-content: linear-gradient(\n\t\tto bottom,\n\t\ttransparent,\n\t\tblack 32px,\n\t\tblack calc(100% - 32px),\n\t\ttransparent\n\t);\n\n\tmask-image: var(--mask-image-content);\n\tmask-repeat: no-repeat;\n\t/* Hide scrollbar */\n\t-ms-overflow-style: none;\n\tscrollbar-width: none;\n\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n\n\twidth: 100%;\n\n\tgap: 0.4rem;\n\n\tpadding-top: 10px;\n\tpadding-bottom: 32px;\n\n\toverflow-y: auto;\n}\n\n.activeTodos::-webkit-scrollbar,\n.completedTodos::-webkit-scrollbar {\n\tdisplay: none;\n}\n\n.activeTodos {\n\tmax-height: 50vh;\n}\n\n.completedTodos {\n\tmax-height: 20vh;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n/* Grey out background */\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 25%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 4rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: clamp(25rem, 40rem, 55rem);\n\theight: 18rem;\n\tmargin: auto;\n\tpadding: 15px 25px;\n\n\tborder-radius: 20px;\n\tbackground: #e3e3e31c;\n\tbackdrop-filter: blur(20px);\n\ttext-overflow: ellipsis;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-style: normal;\n\tfont-weight: 400;\n\tline-height: 1.5rem;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 10px;\n\tright: 10px;\n\tbackground: #bebebe1c;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px;\n\n\tborder: 0;\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 100%;\n\tpadding: 5px;\n\tfont-size: 1.5rem;\n\tborder-bottom: 1px solid #b5b4b43f;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 10px;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\n\tpadding: 10px 0px;\n}\n\n.formList {\n\tgrid-area: 4 / 1;\n\tpadding: 10px 20px;\n}\n\n#formList {\n\tfont-size: 1.1rem;\n\tfont-weight: 300;\n}\n\n.formDate {\n\tgrid-area: 4 / 2;\n\tpadding-right: 2rem;\n}\n\n#formDate {\n\tfont-size: 1rem;\n\tfont-weight: 300;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n\tpadding-left: 2rem;\n\tfont-size: 1.1rem;\n\tfont-weight: 300;\n}\n\n#formPriority {\n\twidth: 100%;\n}\n\n#formList,\n#formPriority {\n\t-moz-appearance: none;\n\t-webkit-appearance: none;\n}\n\n/* .placeholderPri {\n\tcolor: gray;\n} */\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 1.8rem;\n\twidth: 6.5rem;\n\n\tborder: 1px solid #808080b8;\n\tborder-radius: 10px;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 5px 5px 12px 1px #80808057;\n\n\talign-self: end;\n\tjustify-self: center;\n}\n\n\n/* Inline #1 | http://127.0.0.1:5500/dist/ */\n\n.formList {\n\t/* padding: 10px 20px; */\n\tpadding: ;\n\tjustify-self: baseline;\n  }\n  \n  #formList {\n\tpadding: ;\n\tpadding-left: 10px;\n  }\n  \n  .formDate {\n\t/* padding-right: 2rem; */\n\tjustify-self: center;\n\tdisplay: flex;\n\tjustify-content: center;\n  }\n  \n  #formDate {\n\t/* display: 70%; */\n\talign-content: center;\n\tdisplay: flex;\n\twidth: 70%;\n\ttext-align: center;\n  }\n  \n  .formPriority {\n\t/* padding-left: 2rem; */\n\talign-self: ;\n\tpadding-right: 10px;\n  }\n  \n  #formPriority {\n\t/* width: 100%; */\n\ttext-align: right;\n  }\n  \n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: flex;\n\tcolumn-gap: 10px;\n\n\twidth: clamp(20rem, 35rem, 35rem);\n\theight: 2.6875rem;\n\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px 5px;\n\n\tborder-radius: 0.9375rem;\n\tbackground-clip: padding-box;\n\n\tbox-shadow: 0px 8px 16px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 2px 4px 0px rgba(40, 41, 61, 0.04);\n\n\tcursor: pointer;\n}\n\n.todoCheck {\n\tmargin-left: 10px;\n}\n\n.todoDate {\n\tfont-size: 0.7rem;\n\tcolor: gray;\n\talign-self: end;\n}\n\n.deleteTodo {\n\t/* position: absolute;\n\ttop: 30%;\n\tright: 10px; */\n}\n\n.todoCheck {\n\t/* margin-left: 10px; */\n\tgrid-area: 1 / 1 / 3 / 2;\n\tjustify-self: center;\n}\n\n/* TODO CARD - edit */\n\n.editCard {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 0.1fr 0.5fr 0.5fr 0.5fr;\n\tgrid-template-rows: 1fr 1fr 1fr 1fr;\n\n\twidth: 90%;\n\tpadding: 10px 5px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\tborder: 1px solid gray;\n\tborder-bottom: 5px solid #8080809c;\n\tbackground: #b4b4b436;\n\tbackdrop-filter: blur(15px);\n\tbox-shadow: 3px 5px 12px 0px #00000042;\n}\n\n.deleteTodoEdit {\n\tposition: absolute;\n\tright: 10px;\n\ttop: 10px;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n\ttext-overflow: ellipsis;\n}\n\n.todoNotesEdit,\n.todoDueDateEdit,\n.todoPriorityEdit {\n\tfont-size: 0.8rem;\n}\n\n.todoTitle {\n\tmax-height: 1.1rem;\n\toverflow: auto;\n\tmax-width: 75%;\n}\n\n.todoCheckEdit {\n\tgrid-row: 1 / span 4;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-blue) border-box;\n\tborder: 1px solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(62, 123, 250, 0.35),\n\t\t0px 2px 4px 0px rgba(62, 123, 250, 0.37);\n}\n\n.medium {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-orange) border-box;\n\tborder: 0.1rem solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(255, 136, 0, 0.23),\n\t\t0px 2px 4px 0px rgba(255, 136, 0, 0.4);\n}\n\n.high {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-red) border-box;\n\tborder: 0.1rem solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(255, 59, 59, 0.35),\n\t\t0px 2px 4px 0px rgba(255, 59, 59, 0.69);\n}\n\n.none {\n\tbackground: var(--base-white, #fff);\n\tborder: 1px solid #e4e4eb;\n\n\tbox-shadow: 0px 8px 16px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 2px 4px 0px rgba(40, 41, 61, 0.04);\n}\n\n/* displayChange */\n.changeAlert {\n\tbackground-color: black;\n\tcolor: whitesmoke;\n\ttransform: translateY(-150%);\n\ttransition: transform 0.6s;\n\twidth: 200px;\n\tz-index: 10;\n\tposition: fixed;\n}\n\n.showChange {\n\ttransform: translateY(150%);\n}\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@font-face {\n\tfont-family: 'Inter';\n\tsrc: url('./assets/fonts/Inter/Inter-VariableFont_slnt\\,wght.ttf')\n\t\tformat('truetype');\n}\n\n:root {\n\t--stroke-soft: #f2f2f5;\n\t--base-higher-p: #fff;\n\t--base-white: #fff;\n\t--border-red: #ff3b3b;\n\t--border-orange: #ff8800;\n\t--border-blue: #3e7bfa;\n\t--gradient-red: linear-gradient(90deg, #ff3b3b, #cc00bb);\n\t--gradient-orange: linear-gradient(90deg, #ff8800, #ee5d5d);\n\t--gradient-blue: linear-gradient(90deg, #3e7bfa, #6600cc);\n}\n* {\n\tbox-sizing: border-box;\n}\n\n*:focus-visible {\n\t/* outline: 0.5px rgba(150, 150, 150, 0.23) solid; */\n\toutline: 1px solid #ebebf0;\n\tbox-shadow: 0px 0.5px 4px 0px rgba(96, 97, 112, 0.32) inset;\n\tborder-radius: 5px;\n}\n\nhtml {\n\tfont-family: 'Inter', sans-serif;\n\tfont-size: 16px;\n\tbackground: #fafafc;\n}\n\nheader {\n\tdisplay: flex;\n\tjustify-content: center;\n\n\tgap: 1.7rem;\n\tpadding-top: 2rem;\n}\n\n/* body {\n\theight: 100%;\n} */\n\np {\n\tmargin: 0;\n}\n\n.container {\n\tposition: relative;\n\theight: 100%;\n}\n\n/* .modal {\n\tposition: fixed;\n\tleft: 0;\n\ttop: 0;\n\twidth: 100%;\n\theight: 100%;\n\toverflow: auto;\n\tbackground-color: rgb(0, 0, 0, 0.4);\n} */\n\n/* Add TODO BTN */\n.cancelForm:hover,\n.deleteTodo:hover,\n.deleteTodoEdit:hover,\n.cancelListForm:hover {\n\t/* ! UPDATE COLOURS */\n\tbackground: #ff5d5d;\n\tcolor: #700;\n}\n\n.cancelForm,\n.deleteTodo,\n.deleteTodoEdit,\n.cancelListForm {\n\twidth: 0.8rem;\n\theight: 0.8rem;\n\n\tbackground-color: var(--base-higher-p, #fff);\n\tborder: 1px solid #dadadd;\n\tborder-radius: 100%;\n\tfilter: drop-shadow(0px 20px 32px rgba(96, 97, 112, 0.24))\n\t\tdrop-shadow(0px 2px 8px rgba(40, 41, 61, 0.08));\n\n\tfont-size: 0.6rem;\n\ttext-align: center;\n\tcolor: transparent;\n}\n\n.addTodoBtn {\n\tz-index: 10;\n\n\tdisplay: flex;\n\tjustify-content: center;\n\talign-items: center;\n\n\theight: 3.125rem;\n\twidth: 3.125rem;\n\tpadding-bottom: 0.4rem;\n\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tborder-radius: 3.125rem;\n\tbackground: var(--base-white, #fff);\n\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 2.25rem;\n\tfont-style: normal;\n\tfont-weight: 200;\n\tline-height: 1.5rem;\n\n\tcursor: pointer;\n}\n\n.hamburger {\n\tz-index: 10;\n\n\tdisplay: flex;\n\twidth: 6.25rem;\n\theight: 3.1875rem;\n\tjustify-content: center;\n\talign-items: center;\n\n\tborder-radius: 1.25rem;\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tbackground: var(--base-white, #fff);\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 1.2rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: 1.5rem;\n\n\tcursor: pointer;\n}\n\n.addTodoBtn:hover,\n.hamburger:hover {\n\tborder: 2px solid #ebebf0;\n}\n\n.addTodoBtn:active,\n.hamburger:active {\n\tborder: 3px solid #e4e4eb;\n}\n\n.sidebar {\n\tz-index: 10;\n\tdisplay: flex;\n\tflex-direction: column;\n\tgap: 30px;\n\n\twidth: 11rem;\n\n\ttransition: transform 0.3s;\n\t/* transform: translateX(-150%); */\n\n\tposition: fixed;\n\ttop: 6rem;\n\tleft: 4rem;\n\tright: 0;\n\tbottom: 0;\n}\n\n.showSidebar {\n\t/* transform: translateX(0); */\n\ttransform: translateX(-150%);\n}\n\n.defaultSideLists,\n.customSideLists {\n\tdisplay: flex;\n\tflex-direction: column;\n\tjustify-content: center;\n\talign-items: flex-start;\n\n\twidth: 11rem;\n\tpadding: 0.625rem 1.375rem;\n\n\tborder-radius: 1.25rem;\n\tborder: 1px solid var(--stroke-soft, #f2f2f5);\n\tbackground: var(--base-white, #fff);\n\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tpadding: 0.62rem 1.38rem;\n}\n\n.defaultSideLists {\n\theight: 8.75rem;\n}\n\n.defaultSideLists > .sidebarButton:last-child,\n.customSideLists > .sidebarButton:last-child {\n\tborder: 0;\n}\n\n.sidebarButton {\n\twidth: 8.25rem;\n\theight: 2.5rem;\n\n\tborder: 0;\n\tborder-bottom: 1px solid #ebebf0;\n\tbackground: transparent;\n\n\ttext-align: left;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-size: 1rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: 1.5rem;\n\ttext-overflow: ellipsis;\n\n\tcursor: pointer;\n}\n\n/** LIST */\n\n.list {\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n\n\t/* height: 100%; */\n\twidth: clamp(25rem, 40rem, 55rem);\n\tmargin: auto;\n\tmargin-top: 3.7rem;\n}\n\n.listHead {\n\twidth: 100%;\n\theight: 6.875rem;\n\talign-self: baseline;\n\tmargin: 0 2.4rem;\n}\n\n.listTitle,\n.customTitle {\n\t/* display: flex; */\n\tflex-direction: column;\n\tjustify-content: center;\n\n\theight: 50%;\n\n\tletter-spacing: 0.1rem;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: var(--dark-dark-0, #1c1c28);\n\tfont-size: 2.3rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\tline-height: normal;\n\n\ttext-overflow: ellipsis;\n}\n\n.listDescription,\n.customDescription {\n\tdisplay: flex;\n\theight: 50%;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: rgba(28, 28, 40, 0.22);\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 1rem;\n\tfont-style: normal;\n\tfont-weight: 400;\n\tline-height: 1.5rem;\n\n\ttext-overflow: ellipsis;\n}\n\n.customTitle,\n.customDescription {\n\tbackground: transparent;\n\tborder: 0;\n}\n\n.completedTodosTitle {\n\twidth: 85%;\n\n\tpadding: 0.4rem 0;\n\tborder-bottom: 1px solid rgba(185, 185, 185, 0.423);\n\n\tfont-size: 0.9rem;\n\tfont-family: Inter, sans-serif;\n\tcolor: rgba(28, 28, 40, 0.22);\n\tfont-weight: 300;\n\tletter-spacing: 0.5px;\n}\n\n.activeTodos,\n.completedTodos {\n\t/*  MASK OVERFLOW fade */\n\t--mask-image-content: linear-gradient(\n\t\tto bottom,\n\t\ttransparent,\n\t\tblack 32px,\n\t\tblack calc(100% - 32px),\n\t\ttransparent\n\t);\n\n\tmask-image: var(--mask-image-content);\n\tmask-repeat: no-repeat;\n\t/* Hide scrollbar */\n\t-ms-overflow-style: none;\n\tscrollbar-width: none;\n\n\tdisplay: flex;\n\tflex-direction: column;\n\talign-items: center;\n\n\twidth: 100%;\n\n\tgap: 0.4rem;\n\n\tpadding-top: 10px;\n\tpadding-bottom: 32px;\n\n\toverflow-y: auto;\n}\n\n.activeTodos::-webkit-scrollbar,\n.completedTodos::-webkit-scrollbar {\n\tdisplay: none;\n}\n\n.activeTodos {\n\tmax-height: 50vh;\n}\n\n.completedTodos {\n\tmax-height: 20vh;\n}\n\n/* TODO */\n\n/* TODO FORM */\n\n/* Grey out background */\n#todoForm {\n\tz-index: 1;\n\tposition: absolute;\n\ttop: 25%;\n\tleft: 50%;\n\ttransform: translate(-50%, -50%);\n\n\tdisplay: grid;\n\tgrid-template-rows: repeat(4, 4rem);\n\tgrid-template-columns: 1fr 1fr 1fr;\n\n\twidth: clamp(25rem, 40rem, 55rem);\n\theight: 18rem;\n\tmargin: auto;\n\tpadding: 15px 25px;\n\n\tborder-radius: 20px;\n\tbackground: #e3e3e31c;\n\tbackdrop-filter: blur(20px);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-style: normal;\n\tfont-weight: 400;\n\tline-height: 1.5rem;\n\n\ttext-overflow: ellipsis;\n}\n\n.cancelForm {\n\tposition: absolute;\n\ttop: 10px;\n\tright: 10px;\n\tbackground: #bebebe1c;\n}\n\n#formTitle,\n#formNotes,\n#formDate,\n#formList,\n#formPriority {\n\theight: 100%;\n\twidth: 100%;\n\tpadding: 5px;\n\n\tborder: 0;\n\tbackground: transparent;\n}\n\n.formTitle {\n\tgrid-area: 1 / 1 / 1 / 4;\n\talign-self: center;\n}\n\n#formTitle {\n\twidth: 100%;\n\tpadding: 5px;\n\tfont-size: 1.5rem;\n\tborder-bottom: 1px solid #b5b4b43f;\n}\n\n.formNotes {\n\tgrid-area: 2 / 1 / 4 / 4;\n\talign-self: center;\n\n\theight: 100%;\n\twidth: 100%;\n\tmargin-bottom: 3px;\n\n\tborder-radius: 10px;\n\tborder: 1px solid #a1a2a430;\n}\n\n#formNotes {\n\tpadding: 10px;\n}\n\ntextarea {\n\tresize: none;\n\toverflow: scroll;\n}\n\n.formDate,\n.formList,\n.formPriority {\n\talign-self: end;\n\tpadding: 10px 0px;\n}\n\n.formList {\n\tgrid-area: 4 / 1;\n\tjustify-self: baseline;\n}\n\n#formList {\n\tpadding-left: 10px;\n\tfont-size: 1.1rem;\n\tfont-weight: 300;\n}\n\n.formDate {\n\tgrid-area: 4 / 2;\n\n\tdisplay: flex;\n\tjustify-self: center;\n\tjustify-content: center;\n}\n\n#formDate {\n\tdisplay: flex;\n\talign-content: center;\n\n\twidth: 70%;\n\n\ttext-align: center;\n\tfont-size: 1rem;\n\tfont-weight: 300;\n}\n\n.formPriority {\n\tgrid-area: 4 / 3;\n\tpadding-right: 10px;\n\n\tfont-size: 1.1rem;\n\tfont-weight: 300;\n}\n\n#formPriority {\n\ttext-align: right;\n}\n\n#formList,\n#formPriority {\n\t-moz-appearance: none;\n\t-webkit-appearance: none;\n}\n\n.submitButton {\n\tposition: absolute;\n\tbottom: -2.5rem;\n\n\theight: 2rem;\n\twidth: 6.5rem;\n\n\talign-self: end;\n\tjustify-self: center;\n\n\tbackground: #e3e3e31c;\n\tbackdrop-filter: blur(30px);\n\tborder: 1px solid #e4e4eb;\n\tborder-radius: 3.125rem;\n\tbox-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 0px 2px 0px rgba(40, 41, 61, 0.04);\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-feature-settings: 'clig' off, 'liga' off;\n\tfont-size: 1.3rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n\n\tcursor: pointer;\n}\n\n/* TODO CARD */\n\n.todoCard {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-columns: 1.5rem 3.8rem auto 5rem;\n\tgrid-template-rows: 1fr;\n\n\twidth: clamp(20rem, 35rem, 35rem);\n\theight: 2.6875rem;\n\n\tmargin: 0.5rem 0.5rem 0rem;\n\tpadding: 10px;\n\n\tborder-radius: 0.9375rem;\n\n\tcursor: pointer;\n}\n\n/* Create custom checkbox */\n.todoCheck {\n\tjustify-self: baseline;\n}\n\n.todoTitle {\n\theight: 1rem;\n\t/* align-self: center; */\n\n\toverflow: hidden;\n\ttext-overflow: ellipsis;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-size: 1rem;\n\tfont-style: normal;\n\tfont-weight: 300;\n}\n\n.todoDate {\n\talign-self: center;\n\n\tcolor: rgba(0, 0, 0, 0.4);\n\tfont-size: 0.625rem;\n\tfont-style: normal;\n\tfont-weight: 400;\n\tline-height: normal;\n}\n\n.deleteTodo {\n\talign-self: center;\n\tjustify-self: end;\n}\n\n/* TODO CARD - edit */\n\n.editCard {\n\tposition: relative;\n\n\tdisplay: grid;\n\tgrid-template-rows: 1.5rem auto 1.5rem;\n\tgrid-template-columns: 1rem repeat(3, 1fr) 1rem;\n\n\twidth: clamp(20rem, 35rem, 35rem);\n\theight: 8rem;\n\n\tpadding: 10px;\n\tmargin: 0.5rem 0.5rem 0rem;\n\n\tborder-radius: 20px;\n\n\tfont-family: Inter, sans-serif;\n\tcolor: #1c1c28;\n\tfont-style: normal;\n\tfont-weight: 400;\n\n\ttext-overflow: ellipsis;\n}\n\n/* Inline #1 | http://127.0.0.1:5500/dist/ */\n\n.deleteTodoEdit {\n\t/* grid-row: 3; */\n\tgrid-row: 2;\n\talign-self: center;\n}\n\n.todoCheckEdit {\n\t/* grid-row: 3; */\n\t/* align-self: flex-start; */\n\tgrid-row: 2;\n\talign-self: center;\n}\n\n.todoNotesEdit {\n\t/* grid-row: 2 / span 2; */\n\t/* width: 95%; */\n\tgrid-row: 2;\n}\n\n.todoDueDateEdit {\n\t/* grid-row: 4; */\n\tgrid-row: 3;\n}\n\n.todoListEdit {\n\t/* grid-row: 4; */\n\tgrid-row: 3;\n}\n\n.todoPriorityEdit {\n\t/* grid-row: 4; */\n\tgrid-row: 3;\n}\n\n.todoTitleEdit,\n.todoDueDateEdit,\n.todoNotesEdit,\n.todoPriorityEdit {\n\tbackground: transparent;\n\tborder: 0;\n\ttext-overflow: ellipsis;\n}\n\n.deleteTodoEdit {\n\tgrid-row: 3;\n\tgrid-column: 5;\n}\n\n.todoCheckEdit {\n\tgrid-column: 1;\n\tgrid-row: 3;\n\talign-self: flex-start;\n\tmargin-top: 10%;\n\tborder-radius: 10px;\n}\n\n.todoTitleEdit {\n\tgrid-row: 1;\n\tgrid-column: 2 / span 3;\n}\n\n.todoNotesEdit {\n\tgrid-column: 2 / span 3;\n\tgrid-row: 2 / span 2;\n\twidth: 95%;\n}\n\n.todoDueDateEdit {\n\tgrid-column: 2;\n\tgrid-row: 4;\n\n\tjustify-self: start;\n\twidth: 70%;\n}\n\n.todoListEdit {\n\tgrid-column: 3;\n\tgrid-row: 4;\n\tjustify-self: start;\n\n\tborder: 0;\n\tbackground: transparent;\n\n\tfont-size: 0.9rem;\n}\n\n.todoPriorityEdit {\n\tgrid-column: 4;\n\tgrid-row: 4;\n\talign-self: end;\n\tjustify-self: start;\n\n\twidth: 85%;\n}\n\n.done > * {\n\tcolor: #8080807d;\n\ttext-decoration: line-through;\n\tcolor: rgba(128, 128, 128, 0.64);\n}\n\n/* Priority */\n.low {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-blue) border-box;\n\tborder: 1px solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(62, 123, 250, 0.35),\n\t\t0px 2px 4px 0px rgba(62, 123, 250, 0.37);\n}\n\n.medium {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-orange) border-box;\n\tborder: 0.1rem solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(255, 136, 0, 0.23),\n\t\t0px 2px 4px 0px rgba(255, 136, 0, 0.4);\n}\n\n.high {\n\tbackground: linear-gradient(var(--base-white), var(--base-white)) padding-box,\n\t\tvar(--gradient-red) border-box;\n\tborder: 0.1rem solid;\n\tborder-bottom: 2px solid;\n\tborder-color: transparent;\n\tbox-shadow: 0px 8px 16px 0px rgba(255, 59, 59, 0.35),\n\t\t0px 2px 4px 0px rgba(255, 59, 59, 0.69);\n}\n\n.none {\n\tbackground: var(--base-white, #fff);\n\tborder: 1px solid #e4e4eb;\n\n\tbox-shadow: 0px 8px 16px 0px rgba(96, 97, 112, 0.16),\n\t\t0px 2px 4px 0px rgba(40, 41, 61, 0.04);\n}\n\n/* displayChange */\n.changeAlert {\n\tbackground-color: black;\n\tcolor: whitesmoke;\n\ttransform: translateY(-150%);\n\ttransition: transform 0.6s;\n\twidth: 200px;\n\tz-index: 10;\n\tposition: fixed;\n}\n\n.showChange {\n\ttransform: translateY(150%);\n}\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8715,7 +8727,7 @@ function createCard() {
 function createRemoveButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
-	cancelButton.textContent = 'x';
+	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }
@@ -8833,7 +8845,7 @@ function createTodoCardEdit(todo) {
 function createCancelButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodoEdit';
-	cancelButton.textContent = 'x';
+	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }
@@ -8947,7 +8959,7 @@ function createTodoFormContainer() {
 function createCancelButtonForm() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
-	cancelButton.textContent = 'x';
+	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }
