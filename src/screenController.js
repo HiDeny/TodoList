@@ -41,7 +41,6 @@ export default function createScreenController() {
 		},
 		// Display changes
 		displayChange(occurringChange) {
-			
 			const containerDiv = document.querySelector('.container');
 			const changeAlert = document.createElement('div');
 			changeAlert.className = 'changeAlert';
@@ -56,6 +55,10 @@ export default function createScreenController() {
 			setTimeout(() => {
 				changeAlert.classList.remove('showChange');
 			}, 2000);
+
+			setTimeout(() => {
+				changeAlert.remove();
+			}, 2200);
 		},
 	};
 }

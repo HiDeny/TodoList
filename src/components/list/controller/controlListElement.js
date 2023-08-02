@@ -1,6 +1,6 @@
 import { masterController } from '../../../masterController';
 
-export default function controlListElement(
+export default function controlCustomListElement(
 	list,
 	deleteButton,
 	title,
@@ -8,8 +8,8 @@ export default function controlListElement(
 ) {
 	// DeleteButton
 	deleteButton.addEventListener('click', () => {
-		const listTitle = list.title.toUpperCase();
-		const deleteCheck = masterController.deleteCheck(listTitle);
+		const checkPrompt = `Do you want to delete ${list.title.toUpperCase()}?`;
+		const deleteCheck = masterController.deleteCheck(checkPrompt);
 		if (!deleteCheck) return;
 		masterController.deleteList(list);
 	});
@@ -29,4 +29,13 @@ export default function controlListElement(
 	setTimeout(() => {
 		if (!title.value) title.focus();
 	}, 50);
+}
+
+export function controlEmptyComplete(list, emptyButton) {
+	emptyButton.addEventListener('click', () => {
+		const checkPrompt = `Do you want to empty completed?`;
+		const deleteCheck = masterController.deleteCheck(checkPrompt);
+		if (!deleteCheck) return;
+		masterController.emptyCompleted(list);
+	});
 }

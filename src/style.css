@@ -296,12 +296,15 @@ p {
 }
 
 .completedTodosTitle {
+	display: flex;
+	align-items: center;
+
 	width: 85%;
-
-	padding: 0.4rem 0;
+	height: 2rem;
 	border-bottom: 1px solid rgba(185, 185, 185, 0.423);
+	margin-top: 0.3rem;
 
-	font-size: 0.9rem;
+	font-size: 0.8rem;
 	font-family: Inter, sans-serif;
 	color: rgba(28, 28, 40, 0.22);
 	font-weight: 300;
@@ -314,8 +317,8 @@ p {
 	--mask-image-content: linear-gradient(
 		to bottom,
 		transparent,
-		black 32px,
-		black calc(100% - 32px),
+		black 2rem,
+		black calc(100% - 2rem),
 		transparent
 	);
 
@@ -331,10 +334,7 @@ p {
 
 	width: 100%;
 
-	gap: 0.4rem;
-
-	padding-top: 10px;
-	padding-bottom: 32px;
+	padding-top: 0.5rem;
 
 	overflow-y: auto;
 }
@@ -345,11 +345,40 @@ p {
 }
 
 .activeTodos {
-	max-height: 50%;
+	height: 50%;
 }
 
 .completedTodos {
-	max-height: 25%;
+	height: 25%;
+}
+
+.emptyCompletedButton {
+	z-index: 10;
+
+	position: absolute;
+	bottom: 1rem;
+
+	display: flex;
+
+	height: 2rem;
+	padding: 0.25rem 0.5rem;
+
+	justify-content: center;
+	align-items: center;
+	border-radius: 0.75rem;
+	border: 1px solid var(--stroke-soft, #f2f2f5);
+	background: var(--base-white, #fff);
+	box-shadow: 0px 0.5px 2px 0px rgba(96, 97, 112, 0.16),
+		0px 0px 1px 0px rgba(40, 41, 61, 0.08);
+	font-family: Inter, sans-serif;
+	color: #c7c9d9;
+	font-feature-settings: 'clig' off, 'liga' off;
+	font-size: 0.7rem;
+	font-style: normal;
+	font-weight: 300;
+	line-height: 1.5rem;
+
+	cursor: pointer;
 }
 
 /* TODO */
@@ -533,7 +562,7 @@ textarea {
 	width: clamp(20rem, 35rem, 35rem);
 	height: 2.6875rem;
 
-	margin: 0.5rem 0.5rem 0rem;
+	margin: 0.5rem;
 	padding: 10px;
 
 	border-radius: 0.9375rem;

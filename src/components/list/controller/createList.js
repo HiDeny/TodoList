@@ -51,7 +51,8 @@ export default function createList(title, description) {
 		// Add
 		addTodo(todo) {
 			const subList = getSubList(todo);
-			subList.push(todo);
+			if (!todo.done) subList.push(todo);
+			if (todo.done) subList.unshift(todo);
 		},
 		// Remove
 		removeTodo(todo) {

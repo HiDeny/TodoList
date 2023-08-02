@@ -38,8 +38,8 @@ export const masterController = (() => {
 		},
 
 		//* Todos
-		deleteCheck(toDeleteTitle) {
-			const check = confirm(`Do you want to delete ${toDeleteTitle}?`);
+		deleteCheck(checkPrompt) {
+			const check = confirm(checkPrompt);
 			return check;
 		},
 		createTodo() {
@@ -99,6 +99,7 @@ export const masterController = (() => {
 			this.addTodo(todo);
 			screenControl.displayChange('TO-DO Moved!');
 		},
+
 		//* Lists
 		addList() {
 			const newList = createList();
@@ -123,8 +124,13 @@ export const masterController = (() => {
 		},
 		saveList(list) {
 			screenControl.updateSideList(list);
-
 			storageControl.uploadList(list);
+		},
+		emptyCompleted(list) {
+			clearSubList(list.completedTodos);
+			storageControl.uploadList(list);
+			screenControl.checkSubLists(list);
+			screenControl.displayChange('Completed is empty');
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
