@@ -41,10 +41,11 @@ export default function createScreenController() {
 		},
 		// Display changes
 		displayChange(occurringChange) {
-			const headerDiv = document.querySelector('header');
+			
+			const containerDiv = document.querySelector('.container');
 			const changeAlert = document.createElement('div');
 			changeAlert.className = 'changeAlert';
-			headerDiv.append(changeAlert);
+			containerDiv.append(changeAlert);
 
 			changeAlert.textContent = occurringChange;
 
