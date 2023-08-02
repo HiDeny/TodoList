@@ -103,8 +103,7 @@ function createCustomListDescription(list) {
 
 function createDeleteButton() {
 	const deleteButton = document.createElement('button');
-	deleteButton.setAttribute('id', 'deleteListButton');
-	deleteButton.textContent = 'Delete';
+	deleteButton.classList.add('deleteList');
 
 	return deleteButton;
 }

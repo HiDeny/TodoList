@@ -70,7 +70,8 @@ p {
 .cancelForm:hover,
 .deleteTodo:hover,
 .deleteTodoEdit:hover,
-.cancelListForm:hover {
+.cancelListForm:hover,
+.deleteList:hover {
 	/* ! UPDATE COLOURS */
 	background: #ff5d5d;
 	color: #700;
@@ -79,7 +80,7 @@ p {
 .cancelForm,
 .deleteTodo,
 .deleteTodoEdit,
-.cancelListForm {
+.deleteList {
 	width: 0.8rem;
 	height: 0.8rem;
 
@@ -242,17 +243,24 @@ p {
 	align-self: baseline;
 
 	display: grid;
-	grid-template-rows: 3rem 3rem;
+	grid-template-rows: 3rem 0.5rem 3rem;
+	grid-template-columns: 2.4rem auto 2.4rem;
 
-	width: 88%;
+	width: 100%;
 	height: 6.875rem;
-	margin: 0 2.4rem;
+}
+
+.deleteList {
+	grid-row: 2;
+	justify-self: flex-start;
+	align-self: center;
 }
 
 .listTitle,
 .customTitle {
 	grid-row: 1;
-	align-self: center;
+	align-self: end;
+	grid-column: 2;
 
 	font-family: Inter, sans-serif;
 	color: var(--dark-dark-0, #1c1c28);
@@ -267,7 +275,8 @@ p {
 
 .listDescription,
 .customDescription {
-	grid-row: 2;
+	grid-row: 3;
+	grid-column: 2;
 
 	font-family: Inter, sans-serif;
 	color: rgba(28, 28, 40, 0.22);
@@ -742,11 +751,18 @@ textarea {
 	z-index: 80;
 
 	position: fixed;
+	left: 32.3%;
+	bottom: 0vh;
+	left: 50%;
 
-	/* transform: translateY(-150%); */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	transform: translateX(-50%) translateY(150%);
 	transition: transform 0.6s;
 
-	width: clamp(20rem, 35rem, 35rem);
+	/* width: clamp(20rem, 35rem, 35rem); */
 	height: 3.4375rem;
 	padding: 0 1rem;
 	border-radius: 0.5rem;
@@ -763,24 +779,8 @@ textarea {
 	font-weight: 700;
 	line-height: 2rem; /* 133.333% */
 	text-transform: uppercase;
-
-	left: 32.3%;
-	bottom: 0vh;
-	left: 50%;
-	transform: translate(-50%);
-	display: flex;
-	align-items: center;
 }
 
 .showChange {
-	transform: translateY(150%);
-}
-
-/* Inline #2 | http://127.0.0.1:5500/dist/ */
-
-.changeAlert {
-	/* padding: 0rem 1.125rem 0rem 1rem; */
-	/* top: 5vh; */
-	/* transform: translate(-50%) translateX(-150%); */
-	/* transform: translateY(-150%); */
+	transform: translate(-50%) translateX(0%);
 }

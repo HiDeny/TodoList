@@ -60,7 +60,7 @@ export const masterController = (() => {
 				storageControl.uploadList(dateList);
 			}
 
-			screenControl.displayChange('TODO Added!');
+			screenControl.displayChange('TO-DO Added!');
 		},
 		removeTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -73,13 +73,13 @@ export const masterController = (() => {
 				dateList.removeTodo(todo);
 				storageControl.uploadList(dateList);
 			}
-			screenControl.displayChange('TODO Removed!');
+			screenControl.displayChange('TO-DO Removed!');
 		},
 		completeTodo(todo) {
 			this.removeTodo(todo);
 			todo.toggleDone();
 			this.addTodo(todo);
-			screenControl.displayChange('TODO Completed!');
+			screenControl.displayChange('TO-DO Completed!');
 		},
 		saveTodo(todo) {
 			const list = listsControl.getList(todo.listId);
@@ -92,12 +92,12 @@ export const masterController = (() => {
 				screenControl.checkSubLists(dateList);
 				storageControl.uploadList(dateList);
 			}
-			screenControl.displayChange('TODO Saved!');
+			screenControl.displayChange('TO-DO Saved!');
 		},
 		moveTodo(oldTodo, todo) {
 			this.removeTodo(oldTodo);
 			this.addTodo(todo);
-			screenControl.displayChange('TODO Moved!');
+			screenControl.displayChange('TO-DO Moved!');
 		},
 		//* Lists
 		addList() {

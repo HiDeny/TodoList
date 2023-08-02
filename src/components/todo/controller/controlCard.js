@@ -18,8 +18,10 @@ export default function controlCard(todo, todoCard) {
 
 			if (target.type === 'checkbox') masterController.completeTodo(todo);
 			if (target.className === 'deleteTodo') {
-				const deleteCheck = masterController.deleteCheck(todo.title);
-				if (!deleteCheck) return;
+				if (todo.title !== '' || todo.notes !== '') {
+					const deleteCheck = masterController.deleteCheck(todo.title);
+					if (!deleteCheck) return;
+				}
 				masterController.removeTodo(todo);
 				todoCard.remove();
 			}
