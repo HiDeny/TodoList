@@ -27,6 +27,14 @@ export default function createScreenController() {
 			refreshSubList(list.completedTodos, 'completedTodos');
 		},
 		// Sidebar
+		showActiveSideButton(list) {
+			const currentlyActive = document.querySelector('.activeSideButton');
+			if (currentlyActive) currentlyActive.classList.remove('activeSideButton');
+
+			const sideListSelector = `.sidebarButton#no${list.id}`;
+			const buttonToUpdate = document.querySelector(sideListSelector);
+			if (buttonToUpdate) buttonToUpdate.classList.add('activeSideButton');
+		},
 		updateSideList(list) {
 			const sideListSelector = `.sidebarButton#no${list.id}`;
 			const buttonToUpdate = document.querySelector(sideListSelector);

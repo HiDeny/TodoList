@@ -107,6 +107,7 @@ export const masterController = (() => {
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
+			screenControl.showActiveSideButton(newList);
 
 			storageControl.uploadAllLists();
 			screenControl.displayChange('LIST Added!');
@@ -118,6 +119,7 @@ export const masterController = (() => {
 
 			screenControl.refreshSideBar();
 			screenControl.replaceCurrentList(inbox);
+			screenControl.showActiveSideButton(inbox);
 
 			storageControl.uploadAllLists();
 			screenControl.displayChange('LIST Deleted!');
@@ -134,6 +136,7 @@ export const masterController = (() => {
 		},
 		showList(id) {
 			const list = listsControl.getList(id);
+			screenControl.showActiveSideButton(list);
 			screenControl.replaceCurrentList(list);
 		},
 	};
