@@ -73,13 +73,28 @@ export default function createScreenController() {
 
 // Sub List
 function refreshSubList(subList, className) {
-	const newSubList = document.createElement('div');
-	newSubList.classList = className;
+	let newSubList = document.createElement('div');
+	newSubList.className = className;
 
 	subList.forEach((todo) => newSubList.appendChild(createTodoCard(todo)));
 
+	if (subList.length === 0) newSubList = emptyListMessage(className);
+
 	const oldSubList = document.querySelector(`.${className}`);
 	oldSubList.replaceWith(newSubList);
+}
+
+function emptyListMessage(classList) {
+	const emptyList = document.createElement('div');
+	emptyList.className = classList;
+	emptyList.classList.add('emptySubList');
+
+	let message;
+	if (classList === 'activeTodos') message = 'Add to-do by pressing +';
+	if (classList === 'completedTodos') message = 'No completed to-dos, yet!';
+	emptyList.textContent = message;
+
+	return emptyList;
 }
 
 // Sidebar

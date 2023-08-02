@@ -226,7 +226,7 @@ p {
 }
 
 .activeSideButton {
-	color: #3568D4;
+	color: #3568d4;
 	font-weight: 700;
 }
 
@@ -342,6 +342,12 @@ p {
 	padding-top: 0.5rem;
 
 	overflow-y: auto;
+}
+
+.emptySubList {
+	padding-top: 2rem;
+	font-size: 1rem;
+	color: #E4E4EB;
 }
 
 .activeTodos::-webkit-scrollbar,
