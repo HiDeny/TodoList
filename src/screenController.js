@@ -13,11 +13,23 @@ export default function createScreenController() {
 	return {
 		// List
 		replaceCurrentList(list) {
-			const currentList = document.querySelector('.list');
-			const newListElement = createListElement(list);
-			currentList.replaceWith(newListElement);
+			slideListAnimation(list);
+			// const currentList = document.querySelector('.list');
+			// currentList.classList.remove(
+			// 	'slide-Up-Middle',
+			// 	'slide-Middle-Up',
+			// 	'slide-Middle-Down',
+			// 	'slide-Down-Middle'
+			// );
+			// currentList.classList.add('slide-Middle-Up');
+			// setTimeout(() => {
+			// 	const newListElement = createListElement(list);
+			// 	currentList.replaceWith(newListElement);
 
-			this.checkSubLists(list);
+			// 	newListElement.classList.add('slide-Down-Middle');
+
+			// 	this.checkSubLists(list);
+			// }, 400);
 		},
 		checkSubLists(list) {
 			const visibleList = document.querySelector('.list');
@@ -113,4 +125,57 @@ function freshCustomSideLists() {
 	freshSideList.append(addListButton);
 
 	return freshSideList;
+}
+
+function slideListAnimation(newList) {
+	const currentList = document.querySelector('.list');
+
+	const emptyCompletedButton = document.querySelector('.emptyCompletedButton');
+	if (emptyCompletedButton)
+		emptyCompletedButton.classList.remove('slide-bottom-middle');
+
+	const currentListId = currentList.id;
+	currentList.classList.remove(
+		'slide-top-middle',
+		'slide-middle-top',
+		'slide-middle-bottom',
+		'slide-bottom-middle'
+	);
+
+	const newListElement = createListElement(newList);
+	const newListId = newListElement.id;
+
+	if (currentListId === '') currentList.replaceWith(newListElement);
+	if (Number(currentListId) < Number(newListId)) {
+		currentList.classList.add('slide-middle-top');
+		emptyCompletedButton.classList.add('slide-middle-bottom');
+		setTimeout(() => {
+			currentList.replaceWith(newListElement);
+
+			const emptyCompletedButton = document.querySelector(
+				'.emptyCompletedButton'
+			);
+			emptyCompletedButton.classList.add('slide-bottom-middle');
+			newListElement.classList.add('slide-bottom-middle');
+
+			// checkSubLists(newList);
+		}, 800);
+	}
+
+	if (Number(currentListId) > Number(newListId)) {
+		currentList.classList.add('slide-middle-bottom');
+		emptyCompletedButton.classList.add('slide-middle-bottom');
+		setTimeout(() => {
+			currentList.replaceWith(newListElement);
+
+			const emptyCompletedButton = document.querySelector(
+				'.emptyCompletedButton'
+			);
+			emptyCompletedButton.classList.add('slide-bottom-middle');
+
+			newListElement.classList.add('slide-top-middle');
+
+			// checkSubLists(newList);
+		}, 800);
+	}
 }

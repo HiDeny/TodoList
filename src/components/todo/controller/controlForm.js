@@ -37,12 +37,11 @@ export default function controlForm(todoForm, callBack) {
 	}
 
 	function removeForm() {
-		todoForm.classList.remove('showForm');
-		todoForm.classList.add('removeForm');
-
 		document.removeEventListener('click', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
 		fp.destroy();
+
+		todoForm.classList.add('removeForm');
 
 		setTimeout(() => {
 			todoForm.remove();

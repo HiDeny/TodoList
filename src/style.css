@@ -230,6 +230,59 @@ p {
 	/* overflow: hidden; */
 }
 
+.slide-top-middle {
+	animation: slideTopMiddle 1s;
+}
+
+.slide-middle-top {
+	animation: slideMiddleTop 1s;
+}
+
+.slide-middle-bottom {
+	animation: slideMiddleBottom 1s;
+}
+
+.slide-bottom-middle {
+	animation: slideBottomMiddle 1s;
+}
+
+@keyframes slideTopMiddle {
+	from {
+		transform: translateY(-120%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideMiddleTop {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-120%);
+	}
+}
+
+@keyframes slideMiddleBottom {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(120%);
+	}
+}
+
+@keyframes slideBottomMiddle {
+	from {
+		transform: translateY(120%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
+}
+
 .listHead {
 	align-self: baseline;
 
@@ -430,10 +483,11 @@ p {
 }
 
 @keyframes showForm {
-	0% {
+	from {
 		top: -200%;
 	}
-	100% {
+
+	to {
 		top: 25%;
 	}
 }
@@ -444,14 +498,15 @@ p {
 }
 
 @keyframes removeForm {
-	0% {
+	from {
 		top: 25%;
 	}
 
 	25% {
 		top: -200%;
 	}
-	100% {
+
+	to {
 		top: -200%;
 	}
 }
