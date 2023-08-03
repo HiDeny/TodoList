@@ -56,16 +56,6 @@ p {
 	height: 90vh;
 }
 
-/* .modal {
-	position: fixed;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	overflow: auto;
-	background-color: rgb(0, 0, 0, 0.4);
-} */
-
 /* Add TODO BTN */
 .cancelForm:hover,
 .deleteTodo:hover,
@@ -96,8 +86,6 @@ p {
 }
 
 .addTodoBtn {
-	z-index: 10;
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -125,8 +113,6 @@ p {
 }
 
 .hamburger {
-	z-index: 10;
-
 	display: flex;
 	width: 5rem;
 	height: 2.5rem;
@@ -161,7 +147,7 @@ p {
 }
 
 .sidebar {
-	z-index: 10;
+	z-index: 1;
 	display: flex;
 	flex-direction: column;
 	gap: 30px;
@@ -345,9 +331,10 @@ p {
 }
 
 .emptySubList {
+	z-index: 1;
 	padding-top: 2rem;
 	font-size: 1rem;
-	color: #E4E4EB;
+	color: #e4e4eb;
 }
 
 .activeTodos::-webkit-scrollbar,
@@ -364,7 +351,7 @@ p {
 }
 
 .emptyCompletedButton {
-	z-index: 10;
+	z-index: 1;
 
 	position: absolute;
 	bottom: 1rem;
@@ -398,7 +385,7 @@ p {
 
 /* Grey out background */
 #todoForm {
-	z-index: 1;
+	z-index: 3;
 	position: absolute;
 	top: 25%;
 	left: 50%;
@@ -424,6 +411,49 @@ p {
 	line-height: 1.5rem;
 
 	text-overflow: ellipsis;
+}
+
+.darkBgd {
+	position: absolute;
+	top: -0.3%;
+	left: -0.3%;
+	box-shadow: 0px 0 200px 999px #84848454;
+	border-radius: 23px;
+	height: 102%;
+	width: 100.7%;
+	pointer-events: none;
+}
+
+.showForm {
+	animation-name: showForm;
+	animation-duration: 800ms;
+}
+
+@keyframes showForm {
+	0% {
+		top: -200%;
+	}
+	100% {
+		top: 25%;
+	}
+}
+
+.removeForm {
+	animation-name: removeForm;
+	animation-duration: 1.5s;
+}
+
+@keyframes removeForm {
+	0% {
+		top: 25%;
+	}
+
+	25% {
+		top: -200%;
+	}
+	100% {
+		top: -200%;
+	}
 }
 
 .cancelForm {
@@ -535,8 +565,9 @@ textarea {
 }
 
 .submitButton {
+	z-index: 3;
 	position: absolute;
-	bottom: -2.5rem;
+	bottom: -3rem;
 
 	height: 2rem;
 	width: 6.5rem;
@@ -544,8 +575,8 @@ textarea {
 	align-self: end;
 	justify-self: center;
 
-	background: #e3e3e31c;
-	backdrop-filter: blur(30px);
+	background: #e3e3e3;
+	backdrop-filter: blur(20px);
 	border: 1px solid #e4e4eb;
 	border-radius: 3.125rem;
 	box-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),
@@ -554,7 +585,7 @@ textarea {
 	font-family: Inter, sans-serif;
 	color: #1c1c28;
 	font-feature-settings: 'clig' off, 'liga' off;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 300;
 
@@ -617,6 +648,7 @@ textarea {
 /* TODO CARD - edit */
 
 .editCard {
+	z-index: 3;
 	position: relative;
 
 	display: grid;
@@ -680,7 +712,7 @@ textarea {
 	grid-column: 2 / span 3;
 	grid-row: 2;
 
-	height: 4rem;
+	height: 95%;
 	padding: 4px;
 	border-radius: 0.25rem;
 	border: 1px solid #a1a2a430;
@@ -791,18 +823,16 @@ textarea {
 	z-index: 80;
 
 	position: fixed;
-	left: 32.3%;
-	bottom: 0vh;
+	bottom: -10%;
 	left: 50%;
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
 
-	transform: translateX(-50%) translateY(150%);
+	transform: translateX(-50%) translateY(0%);
 	transition: transform 0.6s;
 
-	/* width: clamp(20rem, 35rem, 35rem); */
 	height: 3.4375rem;
 	padding: 0 1rem;
 	border-radius: 0.5rem;
@@ -819,8 +849,21 @@ textarea {
 	font-weight: 700;
 	line-height: 2rem; /* 133.333% */
 	text-transform: uppercase;
+
+	animation: showChangeAnimation 2.5s;
 }
 
-.showChange {
-	transform: translate(-50%) translateX(0%);
+@keyframes showChangeAnimation {
+	0% {
+		bottom: -10rem;
+	}
+	25% {
+		bottom: 0rem;
+	}
+	75% {
+		bottom: 0rem;
+	}
+	100% {
+		bottom: -10rem;
+	}
 }

@@ -41,7 +41,8 @@ export default function controlEditCard(
 			}
 
 			if (isDeleteButton) {
-				const deleteCheck = masterController.deleteCheck(todo.title);
+				const checkPrompt = `Do you want to delete ${todo.title}?`;
+				const deleteCheck = masterController.deleteCheck(checkPrompt);
 				if (!deleteCheck) return;
 				masterController.removeTodo(oldTodo);
 				removeCard();
@@ -68,7 +69,7 @@ export default function controlEditCard(
 		}
 	};
 
-	//! Add Listeners
+	//* Add Listeners
 	// Title
 	title.addEventListener('input', (event) => {
 		todo.title = event.target.value;

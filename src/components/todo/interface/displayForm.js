@@ -45,7 +45,6 @@ function createTodoFormContainer() {
 function createCancelButtonForm() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
-	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }

@@ -57,16 +57,15 @@ export default function createScreenController() {
 			changeAlert.textContent = occurringChange;
 
 			setTimeout(() => {
-				changeAlert.classList.add('showChange');
-			}, 200);
-
-			setTimeout(() => {
-				changeAlert.classList.remove('showChange');
-			}, 2000);
-
-			setTimeout(() => {
 				changeAlert.remove();
-			}, 2200);
+			}, 4000);
+		},
+		hideBgd() {
+			const activeForm = document.querySelector('#todoForm');
+			const darkBackground = document.createElement('div');
+			darkBackground.classList.add('darkBgd');
+
+			activeForm.append(darkBackground);
 		},
 	};
 }

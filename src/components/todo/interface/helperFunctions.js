@@ -82,9 +82,3 @@ export function visualizePriority(card, priority = 'none') {
 		card.classList.add(priorityClass);
 	}
 }
-
-// export function createDarkBackground() {
-// 	const darkBackground = document.createElement('div');
-// 	darkBackground.className = 'modal';
-// 	return darkBackground;
-// }

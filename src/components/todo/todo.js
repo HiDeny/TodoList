@@ -14,6 +14,7 @@ export function createTodoForm(handleFormReturn) {
 	if (activeForm) return;
 
 	const newTaskForm = createNewTodoForm();
+	newTaskForm.classList.add('showForm');
 	container.appendChild(newTaskForm);
 
 	controlForm(newTaskForm, handleFormReturn);

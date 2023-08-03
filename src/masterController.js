@@ -7,7 +7,6 @@ import createStorageController from './components/memory/storage.js';
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
 import createList from './components/list/controller/createList.js';
-import { check } from 'prettier';
 
 //* Master List
 export const masterController = (() => {
@@ -44,6 +43,7 @@ export const masterController = (() => {
 		},
 		createTodo() {
 			createTodoForm(handleFormReturn);
+			screenControl.hideBgd();
 		},
 		addTodo(todo) {
 			const list = listsControl.getList(todo.listId);
