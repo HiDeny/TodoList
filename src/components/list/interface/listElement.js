@@ -1,6 +1,4 @@
-import controlCustomListElement, {
-	controlEmptyComplete,
-} from '../controller/controlListElement';
+import controlCustomListElement from '../controller/controlListElement';
 
 export default function createListElement(list) {
 	const listElement = createListDiv(list);
@@ -17,8 +15,8 @@ export default function createListElement(list) {
 	const completedTodos = createCompletedTodos();
 	listElement.append(completedTodos);
 
-	const emptyCompletedTodos = createEmptyCompleted(list);
-	listElement.append(emptyCompletedTodos);
+	// const emptyCompletedTodos = createEmptyCompleted(list);
+	// listElement.append(emptyCompletedTodos);
 
 	return listElement;
 }
@@ -135,12 +133,12 @@ function createCompletedTodos() {
 	return completedTodos;
 }
 
-function createEmptyCompleted(list) {
-	const emptyCompletedTodos = document.createElement('button');
-	emptyCompletedTodos.classList.add('emptyCompletedButton');
-	emptyCompletedTodos.textContent = 'Empty Completed';
+// function createEmptyCompleted(list) {
+// 	const emptyCompletedTodos = document.createElement('button');
+// 	emptyCompletedTodos.classList.add('emptyCompletedButton');
+// 	emptyCompletedTodos.textContent = 'Empty Completed';
 
-	controlEmptyComplete(list, emptyCompletedTodos);
+// 	controlEmptyComplete(list, emptyCompletedTodos);
 
-	return emptyCompletedTodos;
-}
+// 	return emptyCompletedTodos;
+// }

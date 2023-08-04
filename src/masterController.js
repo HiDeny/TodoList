@@ -128,7 +128,13 @@ export const masterController = (() => {
 			screenControl.updateSideList(list);
 			storageControl.uploadList(list);
 		},
-		emptyCompleted(list) {
+		emptyCompleted(currentListId) {
+			const list = listsControl.getList(currentListId);
+
+			const checkPrompt = `Do you want to empty completed of ${list.title}?`;
+			const deleteCheck = this.deleteCheck(checkPrompt);
+			if (!deleteCheck) return;
+
 			clearSubList(list.completedTodos);
 			storageControl.uploadList(list);
 			screenControl.checkSubLists(list);

@@ -31,11 +31,3 @@ export default function controlCustomListElement(
 	}, 50);
 }
 
-export function controlEmptyComplete(list, emptyButton) {
-	emptyButton.addEventListener('click', () => {
-		const checkPrompt = `Do you want to empty completed?`;
-		const deleteCheck = masterController.deleteCheck(checkPrompt);
-		if (!deleteCheck) return;
-		masterController.emptyCompleted(list);
-	});
-}

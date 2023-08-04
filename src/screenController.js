@@ -12,24 +12,43 @@ import {
 export default function createScreenController() {
 	return {
 		// List
-		replaceCurrentList(list) {
-			slideListAnimation(list);
-			// const currentList = document.querySelector('.list');
-			// currentList.classList.remove(
-			// 	'slide-Up-Middle',
-			// 	'slide-Middle-Up',
-			// 	'slide-Middle-Down',
-			// 	'slide-Down-Middle'
-			// );
-			// currentList.classList.add('slide-Middle-Up');
-			// setTimeout(() => {
-			// 	const newListElement = createListElement(list);
-			// 	currentList.replaceWith(newListElement);
+		replaceCurrentList(newList) {
+			const currentList = document.querySelector('.list');
+			const currentListId = currentList.id;
+			removeAnimations(currentList);
 
-			// 	newListElement.classList.add('slide-Down-Middle');
+			const newListElement = createListElement(newList);
+			const newListId = newListElement.id;
 
-			// 	this.checkSubLists(list);
-			// }, 400);
+			const slideCurrent = slideListAnimationCurrent(currentListId, newListId);
+			const slideNew = slideListAnimationNew(currentListId, newListId);
+
+			const emptyCompletedButton = document.querySelector(
+				'.emptyCompletedButton'
+			);
+
+			if (currentListId === '') {
+				currentList.replaceWith(newListElement);
+				emptyCompletedButton.classList.add('slide-bottom-middle');
+				emptyCompletedButton.onclick = () =>
+					masterController.emptyCompleted(newListId);
+				this.checkSubLists(newList);
+				return;
+			}
+
+			currentList.classList.add(slideCurrent);
+			emptyCompletedButtonAnimation(emptyCompletedButton);
+
+			setTimeout(() => {
+				currentList.replaceWith(newListElement);
+				newListElement.classList.add(slideNew);
+
+				emptyCompletedButton.classList.add('slide-bottom-middle');
+				emptyCompletedButton.onclick = () =>
+					masterController.emptyCompleted(newListId);
+
+				this.checkSubLists(newList);
+			}, 250);
 		},
 		checkSubLists(list) {
 			const visibleList = document.querySelector('.list');
@@ -127,55 +146,26 @@ function freshCustomSideLists() {
 	return freshSideList;
 }
 
-function slideListAnimation(newList) {
-	const currentList = document.querySelector('.list');
-
-	const emptyCompletedButton = document.querySelector('.emptyCompletedButton');
-	if (emptyCompletedButton)
-		emptyCompletedButton.classList.remove('slide-bottom-middle');
-
-	const currentListId = currentList.id;
-	currentList.classList.remove(
+function removeAnimations(list) {
+	list.classList.remove(
 		'slide-top-middle',
 		'slide-middle-top',
 		'slide-middle-bottom',
 		'slide-bottom-middle'
 	);
+}
 
-	const newListElement = createListElement(newList);
-	const newListId = newListElement.id;
+function slideListAnimationCurrent(currentListId, newListId) {
+	if (Number(currentListId) < Number(newListId)) return 'slide-middle-top';
+	if (Number(currentListId) > Number(newListId)) return 'slide-middle-bottom';
+}
 
-	if (currentListId === '') currentList.replaceWith(newListElement);
-	if (Number(currentListId) < Number(newListId)) {
-		currentList.classList.add('slide-middle-top');
-		emptyCompletedButton.classList.add('slide-middle-bottom');
-		setTimeout(() => {
-			currentList.replaceWith(newListElement);
+function slideListAnimationNew(currentListId, newListId) {
+	if (Number(currentListId) < Number(newListId)) return 'slide-bottom-middle';
+	if (Number(currentListId) > Number(newListId)) return 'slide-top-middle';
+}
 
-			const emptyCompletedButton = document.querySelector(
-				'.emptyCompletedButton'
-			);
-			emptyCompletedButton.classList.add('slide-bottom-middle');
-			newListElement.classList.add('slide-bottom-middle');
-
-			// checkSubLists(newList);
-		}, 800);
-	}
-
-	if (Number(currentListId) > Number(newListId)) {
-		currentList.classList.add('slide-middle-bottom');
-		emptyCompletedButton.classList.add('slide-middle-bottom');
-		setTimeout(() => {
-			currentList.replaceWith(newListElement);
-
-			const emptyCompletedButton = document.querySelector(
-				'.emptyCompletedButton'
-			);
-			emptyCompletedButton.classList.add('slide-bottom-middle');
-
-			newListElement.classList.add('slide-top-middle');
-
-			// checkSubLists(newList);
-		}, 800);
-	}
+function emptyCompletedButtonAnimation(emptyCompletedButton) {
+	emptyCompletedButton.classList.remove('slide-bottom-middle');
+	emptyCompletedButton.classList.add('slide-middle-bottom');
 }

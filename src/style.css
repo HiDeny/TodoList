@@ -38,12 +38,15 @@ header {
 	justify-content: center;
 	z-index: 1;
 
+	position: fixed;
+	top: 0;
+
+	margin-top: 3vh;
+	width: 100%;
 	gap: 1.7rem;
 
-	position: fixed;
-	top: 5vh;
-	left: 50%;
-	transform: translate(-50%, -50%);
+
+	animation: slideTopMiddle 1.5s;
 }
 
 p {
@@ -230,59 +233,6 @@ p {
 	/* overflow: hidden; */
 }
 
-.slide-top-middle {
-	animation: slideTopMiddle 1s;
-}
-
-.slide-middle-top {
-	animation: slideMiddleTop 1s;
-}
-
-.slide-middle-bottom {
-	animation: slideMiddleBottom 1s;
-}
-
-.slide-bottom-middle {
-	animation: slideBottomMiddle 1s;
-}
-
-@keyframes slideTopMiddle {
-	from {
-		transform: translateY(-120%);
-	}
-	to {
-		transform: translateY(0);
-	}
-}
-
-@keyframes slideMiddleTop {
-	from {
-		transform: translateY(0);
-	}
-	to {
-		transform: translateY(-120%);
-	}
-}
-
-@keyframes slideMiddleBottom {
-	from {
-		transform: translateY(0);
-	}
-	to {
-		transform: translateY(120%);
-	}
-}
-
-@keyframes slideBottomMiddle {
-	from {
-		transform: translateY(120%);
-	}
-
-	to {
-		transform: translateY(0);
-	}
-}
-
 .listHead {
 	align-self: baseline;
 
@@ -406,7 +356,7 @@ p {
 .emptyCompletedButton {
 	z-index: 1;
 
-	position: absolute;
+	position: fixed;
 	bottom: 1rem;
 
 	display: flex;
@@ -430,6 +380,59 @@ p {
 	line-height: 1.5rem;
 
 	cursor: pointer;
+}
+
+.slide-top-middle {
+	animation: slideTopMiddle 300ms;
+}
+
+.slide-middle-top {
+	animation: slideMiddleTop 300ms;
+}
+
+.slide-middle-bottom {
+	animation: slideMiddleBottom 300ms;
+}
+
+.slide-bottom-middle {
+	animation: slideBottomMiddle 300ms;
+}
+
+@keyframes slideTopMiddle {
+	from {
+		transform: translateY(-200%);
+	}
+	to {
+		transform: translateY(0);
+	}
+}
+
+@keyframes slideMiddleTop {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(-200%);
+	}
+}
+
+@keyframes slideMiddleBottom {
+	from {
+		transform: translateY(0);
+	}
+	to {
+		transform: translateY(200%);
+	}
+}
+
+@keyframes slideBottomMiddle {
+	from {
+		transform: translateY(200%);
+	}
+
+	to {
+		transform: translateY(0);
+	}
 }
 
 /* TODO */
@@ -921,4 +924,11 @@ textarea {
 	100% {
 		bottom: -10rem;
 	}
+}
+
+footer {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
