@@ -61,11 +61,14 @@ export default function controlEditCard(
 
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey)
+		if (event.code === 'Enter' && !event.shiftKey) {
 			masterController.saveTodo(todo);
+			removeCard();
+		}
 
 		if (event.code === 'Escape') {
 			masterController.saveTodo(todo);
+			removeCard();
 		}
 	};
 

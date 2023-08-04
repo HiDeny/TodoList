@@ -45,7 +45,6 @@ header {
 	width: 100%;
 	gap: 1.7rem;
 
-
 	animation: slideTopMiddle 1.5s;
 }
 
@@ -439,7 +438,6 @@ p {
 
 /* TODO FORM */
 
-/* Grey out background */
 #todoForm {
 	z-index: 3;
 	position: absolute;
@@ -459,6 +457,7 @@ p {
 	border-radius: 20px;
 	background: #e3e3e31c;
 	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
 
 	font-family: Inter, sans-serif;
 	color: #1c1c28;
@@ -473,7 +472,7 @@ p {
 	position: absolute;
 	top: -0.3%;
 	left: -0.3%;
-	box-shadow: 0px 0 200px 999px #84848454;
+	box-shadow: 0px 0 300px 999px #84848454;
 	border-radius: 23px;
 	height: 102%;
 	width: 100.7%;
@@ -482,7 +481,7 @@ p {
 
 .showForm {
 	animation-name: showForm;
-	animation-duration: 800ms;
+	animation-duration: 900ms;
 }
 
 @keyframes showForm {
@@ -497,7 +496,7 @@ p {
 
 .removeForm {
 	animation-name: removeForm;
-	animation-duration: 1.5s;
+	animation-duration: 1s;
 }
 
 @keyframes removeForm {
@@ -635,6 +634,7 @@ textarea {
 
 	background: #e3e3e3;
 	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
 	border: 1px solid #e4e4eb;
 	border-radius: 3.125rem;
 	box-shadow: 0px 4px 8px 0px rgba(96, 97, 112, 0.16),
@@ -656,39 +656,69 @@ textarea {
 	position: relative;
 
 	display: grid;
-	grid-template-columns: 1.5rem 3.8rem auto 5rem;
-	grid-template-rows: 1fr;
+	grid-template-columns: 1rem auto 4rem 1rem;
+	grid-template-rows: 1.15rem;
+	gap: 0.25rem;
+	overflow: clip;
 
 	width: clamp(20rem, 35rem, 35rem);
+	min-height: 2.6875rem;
 	height: 2.6875rem;
 
 	margin: 0.5rem;
-	padding: 10px;
+	padding: 0.5rem;
 
 	border-radius: 0.9375rem;
 
 	cursor: pointer;
 }
 
+.todoCardExtra {
+	grid-template-rows: 1.5rem auto;
+
+	transition: min-height 1s;
+}
+
+.todoCardExtra:hover {
+	min-height: 10rem;
+}
+
 /* Create custom checkbox */
 .todoCheck {
+	grid-area: 1 / 1;
 	justify-self: baseline;
+	align-self: center;
 }
 
 .todoTitle {
+	grid-area: 1 / 2 / 1 / 4;
 	height: 100%;
 
-	overflow: hidden;
+	/* overflow: hidden; */
 	text-overflow: ellipsis;
 
 	font-family: Inter, sans-serif;
 	color: #1c1c28;
-	font-size: 1rem;
+	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 300;
+
+	padding: 0.25rem;
+	height: 100%;
+}
+
+.todoNotes {
+	grid-area: 2 / 2 / 2 / 4;
+	padding: 4px;
+	border-radius: 0.25rem;
+	border: 1px solid #a1a2a430;
+	font-size: 0.75rem;
+	font-weight: 300;
+	overflow: scroll;
 }
 
 .todoDate {
+	grid-area: 1 / 3;
 	align-self: center;
 
 	color: rgba(0, 0, 0, 0.4);
@@ -699,6 +729,7 @@ textarea {
 }
 
 .deleteTodo {
+	grid-area: 1 / 4;
 	align-self: center;
 	justify-self: end;
 }
@@ -714,7 +745,7 @@ textarea {
 	grid-template-columns: 1rem repeat(3, 1fr) 1rem;
 
 	width: clamp(20rem, 35rem, 35rem);
-	height: 10rem;
+	min-height: 10rem;
 
 	padding: 0.5rem;
 	margin: 0.5rem 0.5rem 0rem;
@@ -738,27 +769,26 @@ textarea {
 }
 
 .deleteTodoEdit {
-	align-self: center;
-	grid-row: 2;
+	grid-row: 1;
 	grid-column: 5;
+
+	align-self: center;
+	justify-self: end;
 }
 
 .todoCheckEdit {
 	grid-column: 1;
-	grid-row: 2;
+	grid-row: 1;
 
-	margin-top: 10%;
 	align-self: center;
-	/* border-radius: 10px; */
+	justify-self: baseline;
 }
 
 .todoTitleEdit {
-	grid-row: 1;
-	grid-column: 2 / span 3;
+	grid-row: 1 / 2 / 1 / 4;
 
 	height: 100%;
 	padding: 0.25rem;
-	border-bottom: 1px solid #b5b4b43f;
 
 	font-size: 1.1rem;
 	font-weight: 300;

@@ -45,7 +45,7 @@ export default function controlForm(todoForm, callBack) {
 
 		setTimeout(() => {
 			todoForm.remove();
-		}, 1400);
+		}, 300);
 	}
 
 	setTimeout(() => {

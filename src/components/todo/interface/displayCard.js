@@ -19,6 +19,9 @@ export default function displayCard(todo) {
 	const title = createTitle(todo);
 	todoCard.append(title);
 
+	const notes = createNotes(todo)
+	todoCard.append(notes);
+
 	const removeButton = createRemoveButton();
 	todoCard.append(removeButton);
 
@@ -57,6 +60,14 @@ function createTitle(todo) {
 	title.className = 'todoTitle';
 
 	return title;
+}
+
+function createNotes(todo) {
+	const notes = document.createElement('p');
+	notes.textContent = todo.notes;
+	notes.className = 'todoNotes';
+
+	return notes;
 }
 
 function createDueDate(todo) {
