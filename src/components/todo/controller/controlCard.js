@@ -4,7 +4,6 @@ import displayEditCard from '../interface/displayEditCard.js';
 
 export default function controlCard(todo, todoCard) {
 	if (todo.notes) todoCard.classList.add('todoCardExtra');
-	console.log(todo.notes);
 
 	const todoCardClick = (event) => {
 		const target = event.target;

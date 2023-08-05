@@ -20,7 +20,7 @@ export default function controlForm(todoForm, callBack) {
 	};
 
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) handleSubmit();
+		// if (event.code === 'Enter' && !event.shiftKey) handleSubmit();
 		if (event.code === 'Escape') removeForm();
 	};
 

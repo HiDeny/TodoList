@@ -15,9 +15,6 @@ export default function createListElement(list) {
 	const completedTodos = createCompletedTodos();
 	listElement.append(completedTodos);
 
-	// const emptyCompletedTodos = createEmptyCompleted(list);
-	// listElement.append(emptyCompletedTodos);
-
 	return listElement;
 }
 
@@ -89,7 +86,7 @@ function createCustomListTitle(list) {
 	listTitle.className = 'customTitle';
 	listTitle.setAttribute('type', 'text');
 	listTitle.setAttribute('placeholder', 'New List');
-	listTitle.value = list.title;
+	listTitle.value = list.title === 'New List' ? '' : list.title;
 
 	return listTitle;
 }

@@ -1,3 +1,5 @@
+import createList from './createList';
+
 export default function createListsController() {
 	let _defaultListsArr = [];
 	let _customListsArr = [];
@@ -18,6 +20,14 @@ export default function createListsController() {
 		},
 		get allLists() {
 			return [..._defaultListsArr, ..._customListsArr];
+		},
+		// Create
+		createNewList() {
+			const newList = createList('New List');
+			_customListsArr.push(newList);
+			setListIds();
+
+			return newList;
 		},
 		// Add
 		addDefaultList(list) {

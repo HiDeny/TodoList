@@ -41,6 +41,7 @@ export default function createScreenController() {
 
 			setTimeout(() => {
 				currentList.replaceWith(newListElement);
+
 				newListElement.classList.add(slideNew);
 
 				emptyCompletedButton.classList.add('slide-bottom-middle');
@@ -48,6 +49,11 @@ export default function createScreenController() {
 					masterController.emptyCompleted(newListId);
 
 				this.checkSubLists(newList);
+
+				setTimeout(() => {
+					const listTitle = document.querySelector('.listTitle');
+					if (listTitle.value === '') listTitle.focus();
+				}, 100);
 			}, 250);
 		},
 		checkSubLists(list) {

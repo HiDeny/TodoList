@@ -30,7 +30,7 @@ export function createSideListButton(list) {
 	const sideListButton = document.createElement('button');
 	sideListButton.className = 'sidebarButton';
 	sideListButton.setAttribute('id', `no${list.id}`);
-	sideListButton.textContent = list.title || `New List ${list.id - 2}`;
+	sideListButton.textContent = list.title;
 	sideListButton.onclick = () => masterController.showList(list.id);
 
 	return sideListButton;

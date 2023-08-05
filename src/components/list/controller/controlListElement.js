@@ -26,8 +26,6 @@ export default function controlCustomListElement(
 		masterController.saveList(list);
 	});
 
-	setTimeout(() => {
-		if (!title.value) title.focus();
-	}, 50);
+
 }
 

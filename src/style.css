@@ -19,8 +19,8 @@
 	box-sizing: border-box;
 }
 
-*:focus-visible {
-	/* outline: 0.5px rgba(150, 150, 150, 0.23) solid; */
+input:focus-visible,
+textarea:focus-visible {
 	outline: 1px solid #ebebf0;
 	box-shadow: 0px 0.5px 4px 0px rgba(96, 97, 112, 0.32) inset;
 	border-radius: 5px;
@@ -657,8 +657,9 @@ textarea {
 
 	display: grid;
 	grid-template-columns: 1rem auto 4rem 1rem;
-	grid-template-rows: 1.15rem;
+	grid-template-rows: 1.5rem;
 	gap: 0.25rem;
+	row-gap: 0.5rem;
 	overflow: clip;
 
 	width: clamp(20rem, 35rem, 35rem);
@@ -702,8 +703,10 @@ textarea {
 	font-size: 1.1rem;
 	font-style: normal;
 	font-weight: 300;
+	line-height: 1;
 
 	padding: 0.25rem;
+	margin: 0;
 	height: 100%;
 }
 
@@ -743,6 +746,8 @@ textarea {
 	display: grid;
 	grid-template-rows: 1.5rem auto 1.5rem;
 	grid-template-columns: 1rem repeat(3, 1fr) 1rem;
+	gap: 0.25rem;
+	row-gap: 0.5rem;
 
 	width: clamp(20rem, 35rem, 35rem);
 	min-height: 10rem;
@@ -756,7 +761,6 @@ textarea {
 	font-style: normal;
 	font-weight: 400;
 	text-overflow: ellipsis;
-	gap: 0.25rem;
 }
 
 .todoTitleEdit,
@@ -777,15 +781,14 @@ textarea {
 }
 
 .todoCheckEdit {
-	grid-column: 1;
-	grid-row: 1;
+	grid-area: 1 / 1 / 1 / 1;
 
 	align-self: center;
 	justify-self: baseline;
 }
 
 .todoTitleEdit {
-	grid-row: 1 / 2 / 1 / 4;
+	grid-area: 1 / 2 / 1 / 5;
 
 	height: 100%;
 	padding: 0.25rem;
@@ -800,8 +803,8 @@ textarea {
 	grid-column: 2 / span 3;
 	grid-row: 2;
 
-	height: 95%;
-	padding: 4px;
+	height: 100%;
+	padding: 0.25rem;
 	border-radius: 0.25rem;
 	border: 1px solid #a1a2a430;
 

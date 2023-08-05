@@ -6,8 +6,6 @@ import createStorageController from './components/memory/storage.js';
 
 import { createTodoForm, createTodo } from './components/todo/todo.js';
 
-import createList from './components/list/controller/createList.js';
-
 //* Master List
 export const masterController = (() => {
 	const screenControl = createScreenController();
@@ -102,8 +100,7 @@ export const masterController = (() => {
 
 		//* Lists
 		addList() {
-			const newList = createList();
-			listsControl.addList(newList);
+			const newList = listsControl.createNewList();
 
 			screenControl.replaceCurrentList(newList);
 			screenControl.refreshSideBar();
@@ -164,6 +161,7 @@ function clearSubList(subList) {
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
+	console.log(dateToCheck);
 	if (isToday(dateToCheck)) return masterController.today;
 	if (isFuture(dateToCheck)) return masterController.upcoming;
 }

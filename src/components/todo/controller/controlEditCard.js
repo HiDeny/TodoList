@@ -23,6 +23,7 @@ export default function controlEditCard(
 	const handleMouseClick = (event) => {
 		const target = event.target;
 		const insideContainer = editCard.contains(target);
+		console.log(target);
 
 		if (insideContainer) {
 			const isCheckbox = target.type === 'checkbox';
@@ -54,7 +55,7 @@ export default function controlEditCard(
 
 			if (flatpickrContainer.contains(target)) return;
 			if (!sameList || !sameDate) masterController.moveTodo(oldTodo, todo);
-			if (sameList) masterController.saveTodo(todo);
+			if (sameList && sameDate) masterController.saveTodo(todo);
 			removeCard();
 		}
 	};
@@ -86,6 +87,7 @@ export default function controlEditCard(
 	// Date
 	dueDate.addEventListener('input', (event) => {
 		todo.dueDate = event.target.value;
+		todo.dateListId = null;
 	});
 
 	// List
