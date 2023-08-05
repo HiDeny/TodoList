@@ -8525,13 +8525,15 @@ function controlEditCard(
 
 	//* Handle Key Event
 	const handleKeyDown = (event) => {
-		if (event.code === 'Enter' && !event.shiftKey) {
-			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.saveTodo(todo);
-			removeCard();
-		}
+		if (
+			(event.code === 'Enter' && !event.shiftKey) ||
+			event.code === 'Escape'
+		) {
+			const sameList = oldTodo.listId === todo.listId;
+			const sameDate = oldTodo.dueDate === todo.dueDate;
 
-		if (event.code === 'Escape') {
-			_masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.saveTodo(todo);
+			if (!sameList || !sameDate) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.moveTodo(oldTodo, todo);
+			if (sameList && sameDate) _masterController__WEBPACK_IMPORTED_MODULE_0__.masterController.saveTodo(todo);
 			removeCard();
 		}
 	};
@@ -8564,13 +8566,15 @@ function controlEditCard(
 		(0,_interface_helperFunctions__WEBPACK_IMPORTED_MODULE_1__.visualizePriority)(editCard, todo.priority);
 	});
 
-	document.addEventListener('click', handleMouseClick);
-	document.addEventListener('keydown', handleKeyDown);
+	setTimeout(() => {
+		document.addEventListener('mousedown', handleMouseClick);
+		document.addEventListener('keydown', handleKeyDown);
+	}, 100);
 
 	// Remove Listeners
 	function removeCard() {
+		document.removeEventListener('mousedown', handleMouseClick);
 		document.removeEventListener('keydown', handleKeyDown);
-		document.removeEventListener('click', handleMouseClick);
 		fp.destroy();
 		editCard.remove();
 	}
