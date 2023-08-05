@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/components/todo/todoForm.js
 import createTodo from './createTodo';
 import { ListsArr } from '../list/createList';
 
@@ -8,6 +9,18 @@ export default function todoForm(callback) {
 	const todoForm = createTodoForm();
 
 	const cancelButtonForm = createCancelButtonForm(todoForm);
+=======
+import {
+	createListSelector,
+	createPrioritySelector,
+	visualizePriority,
+} from './helperFunctions';
+
+export default function createNewTodoForm() {
+	const todoForm = createTodoFormContainer();
+
+	const cancelButtonForm = createCancelButtonForm();
+>>>>>>> memory2:src/components/todo/interface/displayForm.js
 	todoForm.append(cancelButtonForm);
 
 	const titleForm = createTitleForm();
@@ -28,34 +41,23 @@ export default function todoForm(callback) {
 	const submitButton = createSubmitButton();
 	todoForm.append(submitButton);
 
-	todoForm.addEventListener('submit', (e) => {
-		e.preventDefault();
-		handleSubmit(callback, todoForm);
-	});
-
-	todoForm.addEventListener('keydown', (event) => {
-		handleEnterKey(event, todoForm, callback);
-		handleEscapeKey(event, todoForm);
-	});
+	visualizePriority(todoForm);
 
 	return todoForm;
 }
 
-function createTodoForm() {
+function createTodoFormContainer() {
 	const todoForm = document.createElement('form');
+	todoForm.autocomplete = 'off';
 	todoForm.setAttribute('id', 'todoForm');
 	todoForm.setAttribute('tabindex', '1');
 
 	return todoForm;
 }
 
-function createCancelButtonForm(form) {
+function createCancelButtonForm() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'cancelForm';
-	cancelButton.textContent = 'x';
-	cancelButton.addEventListener('click', () => {
-		form.remove();
-	});
 
 	return cancelButton;
 }
@@ -94,24 +96,21 @@ function createDateForm() {
 	formDate.setAttribute('type', 'text');
 	formDate.setAttribute('placeholder', 'Date');
 
-	flatpickr(formDate, {
-		minDate: 'today',
-		dateFormat: 'd M y',
-	});
-
 	formDateLabel.append(formDate);
 	return formDateLabel;
 }
 
 function createListsForm() {
 	const formListLabel = createLabel('formList');
+	const visibleList = document.querySelector('.list');
 
-	const formList = document.createElement('select');
+	const formList = createListSelector(Number(visibleList.id));
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
 	const visibleList = getVisibleId();
 
+<<<<<<< HEAD:src/components/todo/todoForm.js
 	ListsArr.forEach((option) => {
 		if (option.id < 2) return;
 		const optionElement = new Option(option.title, option.id);
@@ -119,6 +118,8 @@ function createListsForm() {
 		formList.append(optionElement);
 	});
 
+=======
+>>>>>>> memory2:src/components/todo/interface/displayForm.js
 	formListLabel.append(formList);
 	return formListLabel;
 }
@@ -132,29 +133,10 @@ function getVisibleId() {
 function createPriorityForm() {
 	const formPriorityLabel = createLabel('formPriority');
 
-	const formPriority = document.createElement('select');
+	const formPriority = createPrioritySelector();
 	formPriority.setAttribute('id', 'formPriority');
 	formPriority.setAttribute('name', 'formPriority');
 	formPriority.className = 'formPriority';
-
-	const placeholderPriority = new Option('Priority', '');
-	placeholderPriority.className = 'placeholderPri';
-	placeholderPriority.selected = true;
-	placeholderPriority.disabled = true;
-	placeholderPriority.hidden = true;
-	formPriority.append(placeholderPriority);
-
-	const priorityOptions = [
-		{ value: 'high', text: 'High' },
-		{ value: 'medium', text: 'Medium' },
-		{ value: 'low', text: 'Low' },
-		{ value: '', text: 'None' },
-	];
-
-	priorityOptions.forEach((option) => {
-		const optionElement = new Option(option.text, option.value);
-		formPriority.append(optionElement);
-	});
 
 	formPriorityLabel.append(formPriority);
 	return formPriorityLabel;
@@ -175,31 +157,4 @@ function createLabel(name) {
 	label.setAttribute('for', name);
 
 	return label;
-}
-
-function handleSubmit(callback, formDiv) {
-	const title = formDiv.elements['formTitle'].value;
-	const notes = formDiv.elements['formNotes'].value;
-	const dueDate = formDiv.elements['formDate'].value;
-	const priority = formDiv.elements['formPriority'].value;
-	const listId = Number(formDiv.elements['formList'].value);
-
-	const newTodo = createTodo(title, notes, dueDate, priority, listId);
-
-	callback(newTodo);
-	formDiv.remove();
-}
-
-function handleEnterKey(event, div, callback) {
-	if (event.code === 'Enter') {
-		handleSubmit(callback, div);
-		div.removeEventListener('keydown', handleEnterKey);
-	}
-}
-
-function handleEscapeKey(event, div) {
-	if (event.code === 'Escape') {
-		div.remove();
-		div.removeEventListener('keydown', handleEscapeKey);
-	}
 }

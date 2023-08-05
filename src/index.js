@@ -1,3 +1,9 @@
-import generalController from './controller/controller';
+import 'normalize.css';
+import '../src/style.css';
 
-generalController();
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
+
+import mainPage from './mainPage/mainPage';
+
+mainPage();
