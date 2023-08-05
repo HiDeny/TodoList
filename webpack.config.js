@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 
 module.exports = {
 	mode: 'development',
@@ -11,6 +12,7 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Todo List',
 		}),
+		new FaviconsWebpackPlugin('./src/assets/img/icons8-bullet-list-deco-96.png'),
 	],
 	output: {
 		filename: '[name].bundle.js',

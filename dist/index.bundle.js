@@ -7971,7 +7971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ createList)
 /* harmony export */ });
 function createList(title, description) {
-	let listTitle = title || '';
+	let listTitle = title;
 	let listDescription = description || '';
 	let _activeTodos = [];
 	let _completedTodos = [];
@@ -8462,7 +8462,8 @@ function controlCard(todo, todoCard) {
 			if (target.type === 'checkbox') _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.completeTodo(todo);
 			if (target.className === 'deleteTodo') {
 				if (todo.title !== '' || todo.notes !== '') {
-					const deleteCheck = _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.deleteCheck(todo.title);
+					const checkPrompt = `Do you want to delete ${todo.title}?`;
+					const deleteCheck = _masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.deleteCheck(checkPrompt);
 					if (!deleteCheck) return;
 				}
 				_masterController_js__WEBPACK_IMPORTED_MODULE_0__.masterController.removeTodo(todo);
@@ -8643,7 +8644,6 @@ function controlForm(todoForm, callBack) {
 	};
 
 	const handleKeyDown = (event) => {
-		// if (event.code === 'Enter' && !event.shiftKey) handleSubmit();
 		if (event.code === 'Escape') removeForm();
 	};
 

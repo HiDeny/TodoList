@@ -20,6 +20,8 @@
 	"homepage": "https://github.com/HiDeny/TodoList#readme",
 	"devDependencies": {
 		"css-loader": "^6.8.1",
+		"favicons": "^7.1.4",
+		"favicons-webpack-plugin": "^6.0.0",
 		"html-webpack-plugin": "^5.5.3",
 		"prettier": "^2.8.8",
 		"style-loader": "^3.3.3",

@@ -1,5 +1,5 @@
 export default function createList(title, description) {
-	let listTitle = title || '';
+	let listTitle = title;
 	let listDescription = description || '';
 	let _activeTodos = [];
 	let _completedTodos = [];
