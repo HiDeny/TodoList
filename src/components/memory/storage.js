@@ -3,7 +3,7 @@ import { createTodo } from '../todo/todo';
 
 export default function createStorageController(listsControl) {
 	//* First Run
-	if (localStorage.length < 2) createDefaults(listsControl);
+	if (localStorage.length <= 2) createDefaults(listsControl);
 	if (localStorage.length > 2) iniAllLists(listsControl);
 
 	return {
@@ -12,9 +12,12 @@ export default function createStorageController(listsControl) {
 			localStorage.setItem(list.id, listToJSON);
 		},
 		uploadAllLists() {
+			const todoId = localStorage['todoId'];
+			console.log(todoId);
 			localStorage.clear();
 			const allLists = listsControl.allLists;
 			allLists.forEach((list) => this.uploadList(list));
+			localStorage['todoId'] = todoId;
 		},
 	};
 }
@@ -38,6 +41,8 @@ function createDefaults(listsControl) {
 function iniAllLists(listsControl) {
 	for (let i = 0; i < localStorage.length; i++) {
 		const JSONlist = localStorage[i];
+		if (JSONlist === undefined) return;
+
 		const ListBase = JSON.parse(JSONlist);
 		const completeList = initList(ListBase);
 
@@ -72,8 +77,9 @@ function initTodo({
 	priority,
 	listId,
 	dateListId,
+	id,
 }) {
-	const completeTodo = createTodo(title, notes, dueDate, priority);
+	const completeTodo = createTodo(title, notes, dueDate, priority, id);
 	completeTodo.listId = listId;
 	completeTodo.dateListId = dateListId;
 

@@ -23,7 +23,6 @@ export default function controlEditCard(
 	const handleMouseClick = (event) => {
 		const target = event.target;
 		const insideContainer = editCard.contains(target);
-		console.log(target);
 
 		if (insideContainer) {
 			const isCheckbox = target.type === 'checkbox';

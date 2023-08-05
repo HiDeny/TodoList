@@ -20,10 +20,11 @@
 }
 
 input:focus-visible,
-textarea:focus-visible {
+textarea:focus-visible,
+select:focus-visible {
 	outline: 1px solid #ebebf0;
 	box-shadow: 0px 0.5px 4px 0px rgba(96, 97, 112, 0.32) inset;
-	border-radius: 5px;
+	border-radius: 0.25rem;
 }
 
 html {
@@ -246,7 +247,6 @@ p {
 .deleteList {
 	grid-row: 2;
 	justify-self: flex-start;
-	align-self: center;
 }
 
 .listTitle,
@@ -274,12 +274,19 @@ p {
 	font-family: Inter, sans-serif;
 	color: rgba(28, 28, 40, 0.22);
 	font-feature-settings: 'clig' off, 'liga' off;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	font-style: normal;
-	font-weight: 400;
+	font-weight: 300;
 	line-height: 1.5rem;
 
 	text-overflow: ellipsis;
+}
+
+.customDescription::placeholder {
+	color: rgba(28, 28, 40, 0.18);
+	font-size: 0.9rem;
+	font-style: normal;
+	font-weight: 300;
 }
 
 .customTitle,
@@ -294,14 +301,16 @@ p {
 
 	width: 85%;
 	height: 2rem;
-	border-bottom: 1px solid rgba(185, 185, 185, 0.423);
+	border-bottom: 1px solid rgba(185, 185, 185, 0.1);
 	margin-top: 0.3rem;
 
 	font-size: 0.8rem;
 	font-family: Inter, sans-serif;
-	color: rgba(28, 28, 40, 0.22);
+	color: rgba(28, 28, 40, 0.2);
 	font-weight: 300;
 	letter-spacing: 0.5px;
+
+	animation: fadeIn ease-in 1.5s;
 }
 
 .activeTodos,
@@ -382,19 +391,19 @@ p {
 }
 
 .slide-top-middle {
-	animation: slideTopMiddle 300ms;
+	animation: slideTopMiddle 450ms;
 }
 
 .slide-middle-top {
-	animation: slideMiddleTop 300ms;
+	animation: slideMiddleTop 450ms;
 }
 
 .slide-middle-bottom {
-	animation: slideMiddleBottom 300ms;
+	animation: slideMiddleBottom 450ms;
 }
 
 .slide-bottom-middle {
-	animation: slideBottomMiddle 300ms;
+	animation: slideBottomMiddle 450ms;
 }
 
 @keyframes slideTopMiddle {
@@ -431,6 +440,20 @@ p {
 
 	to {
 		transform: translateY(0);
+	}
+}
+
+.fadeIn {
+	animation: fadeIn ease-in 1s;
+}
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
 	}
 }
 
@@ -527,7 +550,7 @@ p {
 #formPriority {
 	height: 100%;
 	width: 100%;
-	padding: 5px;
+	padding: 0.25rem;
 
 	border: 0;
 	background: transparent;
@@ -540,7 +563,7 @@ p {
 
 #formTitle {
 	width: 100%;
-	padding: 5px;
+	padding: 0.25rem;
 	font-size: 1.5rem;
 	border-bottom: 1px solid #b5b4b43f;
 }
@@ -551,9 +574,9 @@ p {
 
 	height: 100%;
 	width: 100%;
-	margin-bottom: 3px;
+	margin-bottom: 0.25rem;
 
-	border-radius: 10px;
+	border-radius: 0.25rem;
 	border: 1px solid #a1a2a430;
 }
 
@@ -576,6 +599,7 @@ textarea {
 .formList {
 	grid-area: 4 / 1;
 	justify-self: baseline;
+	width: 100%;
 }
 
 #formList {
@@ -687,7 +711,6 @@ textarea {
 /* Create custom checkbox */
 .todoCheck {
 	grid-area: 1 / 1;
-	justify-self: baseline;
 	align-self: center;
 }
 
@@ -713,8 +736,11 @@ textarea {
 .todoNotes {
 	grid-area: 2 / 2 / 2 / 4;
 	padding: 4px;
+	margin: 0;
 	border-radius: 0.25rem;
 	border: 1px solid #a1a2a430;
+
+	font-family: Inter, sans-serif;
 	font-size: 0.75rem;
 	font-weight: 300;
 	overflow: scroll;
@@ -734,7 +760,6 @@ textarea {
 .deleteTodo {
 	grid-area: 1 / 4;
 	align-self: center;
-	justify-self: end;
 }
 
 /* TODO CARD - edit */
@@ -777,14 +802,12 @@ textarea {
 	grid-column: 5;
 
 	align-self: center;
-	justify-self: end;
 }
 
 .todoCheckEdit {
 	grid-area: 1 / 1 / 1 / 1;
 
 	align-self: center;
-	justify-self: baseline;
 }
 
 .todoTitleEdit {

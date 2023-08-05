@@ -45,6 +45,7 @@ export default function createScreenController() {
 				newListElement.classList.add(slideNew);
 
 				emptyCompletedButton.classList.add('slide-bottom-middle');
+
 				emptyCompletedButton.onclick = () =>
 					masterController.emptyCompleted(newListId);
 
@@ -53,8 +54,8 @@ export default function createScreenController() {
 				setTimeout(() => {
 					const listTitle = document.querySelector('.listTitle');
 					if (listTitle.value === '') listTitle.focus();
-				}, 100);
-			}, 250);
+				}, 800);
+			}, 425);
 		},
 		checkSubLists(list) {
 			const visibleList = document.querySelector('.list');

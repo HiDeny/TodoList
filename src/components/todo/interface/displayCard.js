@@ -19,8 +19,8 @@ export default function displayCard(todo) {
 	const title = createTitle(todo);
 	todoCard.append(title);
 
-	const notes = createNotes(todo)
-	todoCard.append(notes);
+	const notes = createNotes(todo);
+	if (todo.notes) todoCard.append(notes);
 
 	const removeButton = createRemoveButton();
 	todoCard.append(removeButton);
@@ -41,7 +41,6 @@ function createCard() {
 function createRemoveButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodo';
-	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }
@@ -63,7 +62,7 @@ function createTitle(todo) {
 }
 
 function createNotes(todo) {
-	const notes = document.createElement('p');
+	const notes = document.createElement('pre');
 	notes.textContent = todo.notes;
 	notes.className = 'todoNotes';
 

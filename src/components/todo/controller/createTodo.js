@@ -1,8 +1,18 @@
-let id = 0;
+let id = parseInt(localStorage.getItem('todoId')) || 0;
 
-export default function createTodo(title, notes, dueDate, priority) {
-	let _todoId = id;
+function incrementAndStoreId() {
 	id++;
+	localStorage.setItem('todoId', id.toString());
+}
+
+export default function createTodo(title, notes, dueDate, priority, _id) {
+	let _todoId;
+	if (!_id) {
+		_todoId = id;
+		incrementAndStoreId();
+	}
+	if (_id) _todoId = _id;
+
 	let _done = false;
 	let _dateListId = null;
 	let _listId = 0;

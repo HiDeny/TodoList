@@ -161,7 +161,6 @@ function clearSubList(subList) {
 //* Date List
 function findDateList(dueDate) {
 	const dateToCheck = new Date(dueDate);
-	console.log(dateToCheck);
 	if (isToday(dateToCheck)) return masterController.today;
 	if (isFuture(dateToCheck)) return masterController.upcoming;
 }

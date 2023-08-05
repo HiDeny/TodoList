@@ -63,7 +63,6 @@ function createTodoCardEdit(todo) {
 function createCancelButton() {
 	const cancelButton = document.createElement('button');
 	cancelButton.classList = 'deleteTodoEdit';
-	// cancelButton.textContent = 'x';
 
 	return cancelButton;
 }

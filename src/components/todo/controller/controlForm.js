@@ -8,11 +8,10 @@ export default function controlForm(todoForm, callBack) {
 	});
 	const flatpickrContainer = document.querySelector('.flatpickr-calendar');
 
-	const handleMouseClick = (event) => {
+	const handleMouseDown = (event) => {
 		const target = event.target;
 		const insideContainer = todoForm.contains(target);
 
-		//! Bug - sometimes it still closes when the calendar is loading
 		if (flatpickrContainer.contains(target)) return;
 		if (!insideContainer || target.className === 'cancelForm') {
 			removeForm();
@@ -37,7 +36,7 @@ export default function controlForm(todoForm, callBack) {
 	}
 
 	function removeForm() {
-		document.removeEventListener('click', handleMouseClick);
+		document.removeEventListener('mousedown', handleMouseDown);
 		document.removeEventListener('keydown', handleKeyDown);
 		fp.destroy();
 
@@ -49,7 +48,7 @@ export default function controlForm(todoForm, callBack) {
 	}
 
 	setTimeout(() => {
-		document.addEventListener('click', handleMouseClick);
+		document.addEventListener('mousedown', handleMouseDown);
 		document.addEventListener('keydown', handleKeyDown);
 	}, 10);
 
