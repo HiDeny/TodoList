@@ -1,5 +1,17 @@
 # TodoList
 
+![TodoList Project](/src/assets/img/TodoAppHome.png)
+
+## Table of Contents
+
+
+- [TodoList](#todolist)
+  - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Features](#features)
+  - [Technologies Used](#technologies-used)
+  - [License](#license)
+
 ## Description
 
 The TodoList project is a simple web application that allows you to keep track of your tasks and stay organized. With this app, you can create, manage, and prioritize your to-do items efficiently. Whether it's for personal use or work-related tasks, this TodoList application can help you stay productive and focused.
@@ -17,7 +29,7 @@ The TodoList project is a simple web application that allows you to keep track o
 - CSS3
 - JavaScript (ES6+)
 - Webpack
-- LocalStorage (optional, if data persistence is implemented)
+- LocalStorage
 
 ## License
 
