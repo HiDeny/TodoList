@@ -12,7 +12,9 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			title: 'Todo List',
 		}),
-		new FaviconsWebpackPlugin('./src/assets/img/icons8-bullet-list-deco-96.png'),
+		new FaviconsWebpackPlugin(
+			'./src/assets/img/icons8-checklist-isometric-32.png'
+		),
 	],
 	output: {
 		filename: '[name].bundle.js',

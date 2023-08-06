@@ -129,13 +129,3 @@ function createCompletedTodos() {
 
 	return completedTodos;
 }
-
-// function createEmptyCompleted(list) {
-// 	const emptyCompletedTodos = document.createElement('button');
-// 	emptyCompletedTodos.classList.add('emptyCompletedButton');
-// 	emptyCompletedTodos.textContent = 'Empty Completed';
-
-// 	controlEmptyComplete(list, emptyCompletedTodos);
-
-// 	return emptyCompletedTodos;
-// }

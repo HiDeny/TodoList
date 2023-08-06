@@ -1,4 +1,4 @@
-import { masterController } from '../../masterController';
+import masterController from "../../controllers/masterController";
 
 export function toggleSidebar() {
 	const sidebar = document.querySelector('.sidebar');

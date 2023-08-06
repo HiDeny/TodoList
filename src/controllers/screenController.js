@@ -1,13 +1,13 @@
-import { masterController } from './masterController';
+import masterController from './masterController';
 
-import { createTodoCard } from './components/todo/todo';
+import { createTodoCard } from '../components/todo/todo';
 
-import createListElement from './components/list/interface/listElement';
+import createListElement from '../components/list/interface/listElement';
 
 import {
 	createAddListButton,
 	createSideListButton,
-} from './components/sidebar/controlSidebar';
+} from '../components/sidebar/controlSidebar';
 
 export default function createScreenController() {
 	return {

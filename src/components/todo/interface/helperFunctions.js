@@ -1,4 +1,4 @@
-import { masterController } from '../../../masterController';
+import masterController from "../../../controllers/masterController";
 
 // List Selector
 // selectedId - displayed List ID / todo List ID

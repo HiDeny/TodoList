@@ -37,5 +37,5 @@ export default function mainPage() {
 	emptyCompletedTodos.textContent = 'Empty Completed';
 	footerDiv.append(emptyCompletedTodos);
 
-	controlPage(addTodoBtn, menuButton, container, emptyCompletedTodos);
+	controlPage(addTodoBtn, menuButton, container);
 }

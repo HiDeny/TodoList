@@ -1,4 +1,4 @@
-import { masterController } from '../../../masterController';
+import masterController from '../../../controllers/masterController';
 import { visualizePriority } from '../interface/helperFunctions';
 
 export default function controlEditCard(
@@ -20,7 +20,7 @@ export default function controlEditCard(
 	const flatpickrContainer = document.querySelector('.flatpickr-calendar');
 
 	//* Handle Mouse Event
-	const handleMouseClick = (event) => {
+	const handleMouseDown = (event) => {
 		const target = event.target;
 		const insideContainer = editCard.contains(target);
 
@@ -34,7 +34,6 @@ export default function controlEditCard(
 				const oldList = oldTodo.listId;
 				const currentList = todo.listId;
 
-				//! Bug - sometimes it still closes when the calendar is loading
 				if (oldList !== currentList) masterController.moveTodo(oldTodo, todo);
 				masterController.completeTodo(todo);
 				removeCard();
@@ -102,14 +101,12 @@ export default function controlEditCard(
 		visualizePriority(editCard, todo.priority);
 	});
 
-	setTimeout(() => {
-		document.addEventListener('mousedown', handleMouseClick);
-		document.addEventListener('keydown', handleKeyDown);
-	}, 100);
+	document.addEventListener('mousedown', handleMouseDown);
+	document.addEventListener('keydown', handleKeyDown);
 
 	// Remove Listeners
 	function removeCard() {
-		document.removeEventListener('mousedown', handleMouseClick);
+		document.removeEventListener('mousedown', handleMouseDown);
 		document.removeEventListener('keydown', handleKeyDown);
 		fp.destroy();
 		editCard.remove();

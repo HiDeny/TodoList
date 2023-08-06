@@ -1,6 +1,6 @@
 @font-face {
 	font-family: 'Inter';
-	src: url('./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf')
+	src: url('./assets/fonts/Inter-VariableFont_slnt\,wght.ttf')
 		format('truetype');
 }
 
@@ -65,9 +65,7 @@ p {
 .deleteTodoEdit:hover,
 .cancelListForm:hover,
 .deleteList:hover {
-	/* ! UPDATE COLOURS */
-	background: #ff5d5d;
-	color: #700;
+	background: #ff3b3b;
 }
 
 .cancelForm,

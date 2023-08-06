@@ -1,4 +1,4 @@
-import { masterController } from '../../../masterController.js';
+import masterController from '../../../controllers/masterController.js';
 
 import displayEditCard from '../interface/displayEditCard.js';
 

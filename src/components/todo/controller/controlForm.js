@@ -52,6 +52,7 @@ export default function controlForm(todoForm, callBack) {
 	}, 10);
 
 	todoForm.elements['formTitle'].focus();
+	
 	// Visualize priority on change.
 	todoForm.elements['formPriority'].addEventListener('input', (event) => {
 		visualizePriority(todoForm, event.target.value);

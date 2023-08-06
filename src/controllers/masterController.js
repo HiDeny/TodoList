@@ -1,13 +1,13 @@
 import { isFuture, isToday } from 'date-fns';
 
-import createListsController from './components/list/controller/controlAllLists.js';
+import createListsController from '../components/list/controller/controlAllLists.js';
 import createScreenController from './screenController.js';
-import createStorageController from './components/memory/storage.js';
+import createStorageController from '../components/memory/storage.js';
 
-import { createTodoForm, createTodo } from './components/todo/todo.js';
+import { createTodoForm, createTodo } from '../components/todo/todo.js';
 
 //* Master List
-export const masterController = (() => {
+const masterController = (() => {
 	const screenControl = createScreenController();
 	const listsControl = createListsController();
 	const storageControl = createStorageController(listsControl);
@@ -144,6 +144,8 @@ export const masterController = (() => {
 		},
 	};
 })();
+
+export default masterController;
 
 //* Form
 function handleFormReturn({ title, notes, dueDate, priority, listId }) {

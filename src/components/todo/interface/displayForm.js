@@ -1,15 +1,3 @@
-<<<<<<< HEAD:src/components/todo/todoForm.js
-import createTodo from './createTodo';
-import { ListsArr } from '../list/createList';
-
-import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
-
-export default function todoForm(callback) {
-	const todoForm = createTodoForm();
-
-	const cancelButtonForm = createCancelButtonForm(todoForm);
-=======
 import {
 	createListSelector,
 	createPrioritySelector,
@@ -20,7 +8,7 @@ export default function createNewTodoForm() {
 	const todoForm = createTodoFormContainer();
 
 	const cancelButtonForm = createCancelButtonForm();
->>>>>>> memory2:src/components/todo/interface/displayForm.js
+
 	todoForm.append(cancelButtonForm);
 
 	const titleForm = createTitleForm();
@@ -108,18 +96,7 @@ function createListsForm() {
 	formList.setAttribute('id', 'formList');
 	formList.setAttribute('name', 'formList');
 	formList.className = 'formList';
-	const visibleList = getVisibleId();
 
-<<<<<<< HEAD:src/components/todo/todoForm.js
-	ListsArr.forEach((option) => {
-		if (option.id < 2) return;
-		const optionElement = new Option(option.title, option.id);
-		optionElement.selected = option.id === Number(visibleList) ? true : false;
-		formList.append(optionElement);
-	});
-
-=======
->>>>>>> memory2:src/components/todo/interface/displayForm.js
 	formListLabel.append(formList);
 	return formListLabel;
 }

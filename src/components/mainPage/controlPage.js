@@ -1,7 +1,7 @@
-import { masterController } from '../masterController';
+import masterController from '../../controllers/masterController';
 
-import displaySidebar from '../components/sidebar/displaySidebar';
-import { toggleSidebar } from '../components/sidebar/controlSidebar';
+import displaySidebar from '../sidebar/displaySidebar';
+import { toggleSidebar } from '../sidebar/controlSidebar';
 
 export default function controlPage(addTodoBtn, menuButton, container) {
 	addTodoBtn.onclick = masterController.createTodo;
