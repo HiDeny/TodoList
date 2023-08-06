@@ -2,10 +2,14 @@
 
 ![TodoList Project](/src/assets/img/TodoAppHome.png)
 
+## Live Demo
+
+👉🏻 [Here](https://hideny.github.io/TodoList/) !
+
 ## Table of Contents
 
-
 - [TodoList](#todolist)
+  - [Live Demo](#live-demo)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Features](#features)
